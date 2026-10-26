@@ -3,6 +3,7 @@ import { resolve, relative, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { generate, buildArtifacts } from './build-tokens.mjs';
 import { contrastMatrix } from './contrast.mjs';
+import { validateMetadata } from '../components/metadata.js';
 
 const requiredComponents = ['button', 'input', 'select', 'checkbox', 'tag', 'tabs', 'table', 'modal', 'toast', 'tooltip', 'popover'];
 const rawColor = /#[\da-f]{3,8}\b|\brgba?\s*\(|\bhsla?\s*\(/i;
@@ -73,6 +74,8 @@ export async function checkProject(root = fileURLToPath(new URL('../', import.me
         if (!(await exists(join(root, path)))) errors.push(`${path}: registered component file is missing.`);
       }
     }
+    const { registry } = await import(`${pathToFileURL(join(root, 'components/registry.js')).href}?check=${Date.now()}`);
+    errors.push(...validateMetadata(registry));
   } catch (error) { errors.push(`Component registry: ${error.message}`); }
   return errors;
 }

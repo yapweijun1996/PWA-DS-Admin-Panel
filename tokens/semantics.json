@@ -1,5 +1,13 @@
 {
   "Color": {
+    "series-1": { "light": "#00689d", "dark": "#56b4e9" },
+    "series-2": { "light": "#a45000", "dark": "#e69f00" },
+    "series-3": { "light": "#007b59", "dark": "#00b989" },
+    "series-4": { "light": "#a34580", "dark": "#e48abd" },
+    "series-5": { "light": "#6950a1", "dark": "#b9a0ef" },
+    "series-6": { "light": "#ab4824", "dark": "#ff996f" },
+    "series-7": { "light": "#657000", "dark": "#ced650" },
+    "series-8": { "light": "#526274", "dark": "#b3c2d4" },
     "bg": {
       "light": "{color.slate.50}",
       "dark": "{color.slate.950}"

@@ -1,4 +1,12 @@
 :root {
+  --series-1: #00689d;
+  --series-2: #a45000;
+  --series-3: #007b59;
+  --series-4: #a34580;
+  --series-5: #6950a1;
+  --series-6: #ab4824;
+  --series-7: #657000;
+  --series-8: #526274;
   --bg: #f8fafc;
   --surface: #ffffff;
   --surface-soft: #f1f5f9;
@@ -91,6 +99,14 @@
   --ambient-end: var(--bg);
 }
 [data-theme=dark] {
+  --series-1: #56b4e9;
+  --series-2: #e69f00;
+  --series-3: #00b989;
+  --series-4: #e48abd;
+  --series-5: #b9a0ef;
+  --series-6: #ff996f;
+  --series-7: #ced650;
+  --series-8: #b3c2d4;
   --bg: #020617;
   --surface: #0f172a;
   --surface-soft: #1e293b;

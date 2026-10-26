@@ -52,3 +52,22 @@
 - Liquid uses `.68` light / `.72` dark chrome and `.80` / `.82` cards over a palette mesh. Cards share one content-column blur instead of allocating a blur per card; top bar, sidebar and content form the three large base layers. Floating overlays replace base blur layers; dense text, tables and forms remain opaque.
 - Liquid foregrounds use slate 700/200 muted text and palette 950/200 accent text to retain contrast at the lower opacity. The matrix retains conservative black/white backdrops and adds mesh extrema and saturated composites; thresholds remain 4.5:1 text and 3:1 control boundaries/focus.
 - Kit semantic overrides resolve after the selected palette, while palette scales remain the hue source; generated CSS and contrast resolution use the same precedence.
+
+## Phase 2b
+
+- Categorical series use eight semantic light/dark colours, independent of the accent palette; blue/orange/green/magenta/purple/vermillion/olive/slate marks use distinct line markers and dashes because colour alone cannot guarantee differentiation for every colour-vision condition.
+- Series colours are validated at ≥3:1 against solid `--surface`; chart plots remain solid even in Liquid rather than weakening contrast for a translucent backdrop.
+- Combobox uses the manual Popover API top layer while keeping DOM ownership inside Modal/Drawer; captured Escape closes the list, then clears a clearable selection, before dismissing its dialog.
+- PageUp/PageDown move five enabled results; closing discards uncommitted search; `setValue` is silent, deduplicates known values and applies the multi-selection limit.
+- Mock delay is explicitly local; creatable options belong to one controller; searchable country labels preserve existing region-code values and required form defaults.
+- Charts include zero in axis domains; zero-only data uses 0–1; signed stacks separate positive and negative baselines; missing values remain gaps rather than fabricated zeroes.
+- Donut treats the first series as labelled slices; numbered slices match its ordered legend; negative data shows guidance and retains the unmodified source table.
+- Guide demos reuse real playground previews, not duplicate implementations; expandable usage contains metadata-derived props tables and snippets. Masonry is documented as an L5 layout under Data display.
+- Guide contrast previews resolve current computed CSS, including local overrides; build-time validation remains authoritative for the complete theme × palette × kit matrix.
+
+## Phase 2b visual/quality fix round 1
+
+- Legend glyphs describe chart geometry: filled rounded squares for bar/stacked/area/donut, line plus marker only for line/sparkline; donut keys retain slice numbering and add formatted values without changing mark patterns.
+- Guidelines compose existing shared primitives rather than registry playgrounds or duplicate controls; mock interactions are local, and every pattern includes a usage sentence.
+- Learn reuses page-subtitle/component-field conventions and spacing tokens for title, tabs, toolbar, count and grid; chart-choice guidance uses token-coloured SVG type icons with bold names.
+- Legend regression renders all six types, including updates and donut formatting; visible Chrome evidence covers all Learn tabs and charts in three kits, both themes and both requested widths.

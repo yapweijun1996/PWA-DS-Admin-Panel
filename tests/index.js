@@ -6,3 +6,5 @@ import './contracts.test.mjs';
 import './tooling.test.mjs';
 import './kits.test.mjs';
 import './components.test.mjs';
+import './phase2b.test.mjs';
+import './chart.test.mjs';

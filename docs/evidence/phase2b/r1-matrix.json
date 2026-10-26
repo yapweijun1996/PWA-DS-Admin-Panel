@@ -1,0 +1,1514 @@
+[
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 1440,
+    "page": "components",
+    "file": "r1-enterprise-light-1440-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 1440,
+    "page": "tokens",
+    "file": "r1-enterprise-light-1440-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 1440,
+    "page": "guidelines",
+    "file": "r1-enterprise-light-1440-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 1440,
+    "page": "chart",
+    "file": "r1-enterprise-light-1440-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 390,
+    "page": "components",
+    "file": "r1-enterprise-light-390-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 390,
+    "page": "tokens",
+    "file": "r1-enterprise-light-390-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 390,
+    "page": "guidelines",
+    "file": "r1-enterprise-light-390-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 390,
+    "page": "chart",
+    "file": "r1-enterprise-light-390-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 1440,
+    "page": "components",
+    "file": "r1-enterprise-dark-1440-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 1440,
+    "page": "tokens",
+    "file": "r1-enterprise-dark-1440-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 1440,
+    "page": "guidelines",
+    "file": "r1-enterprise-dark-1440-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 1440,
+    "page": "chart",
+    "file": "r1-enterprise-dark-1440-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 390,
+    "page": "components",
+    "file": "r1-enterprise-dark-390-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 390,
+    "page": "tokens",
+    "file": "r1-enterprise-dark-390-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 390,
+    "page": "guidelines",
+    "file": "r1-enterprise-dark-390-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 390,
+    "page": "chart",
+    "file": "r1-enterprise-dark-390-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 1440,
+    "page": "components",
+    "file": "r1-liquid-light-1440-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 1440,
+    "page": "tokens",
+    "file": "r1-liquid-light-1440-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 1440,
+    "page": "guidelines",
+    "file": "r1-liquid-light-1440-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 1440,
+    "page": "chart",
+    "file": "r1-liquid-light-1440-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 390,
+    "page": "components",
+    "file": "r1-liquid-light-390-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 390,
+    "page": "tokens",
+    "file": "r1-liquid-light-390-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 390,
+    "page": "guidelines",
+    "file": "r1-liquid-light-390-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 390,
+    "page": "chart",
+    "file": "r1-liquid-light-390-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 1440,
+    "page": "components",
+    "file": "r1-liquid-dark-1440-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 1440,
+    "page": "tokens",
+    "file": "r1-liquid-dark-1440-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 1440,
+    "page": "guidelines",
+    "file": "r1-liquid-dark-1440-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 1440,
+    "page": "chart",
+    "file": "r1-liquid-dark-1440-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 390,
+    "page": "components",
+    "file": "r1-liquid-dark-390-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 390,
+    "page": "tokens",
+    "file": "r1-liquid-dark-390-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 390,
+    "page": "guidelines",
+    "file": "r1-liquid-dark-390-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 390,
+    "page": "chart",
+    "file": "r1-liquid-dark-390-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 1440,
+    "page": "components",
+    "file": "r1-ops-light-1440-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 1440,
+    "page": "tokens",
+    "file": "r1-ops-light-1440-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 1440,
+    "page": "guidelines",
+    "file": "r1-ops-light-1440-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 1440,
+    "page": "chart",
+    "file": "r1-ops-light-1440-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 390,
+    "page": "components",
+    "file": "r1-ops-light-390-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 390,
+    "page": "tokens",
+    "file": "r1-ops-light-390-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 390,
+    "page": "guidelines",
+    "file": "r1-ops-light-390-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 390,
+    "page": "chart",
+    "file": "r1-ops-light-390-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 1440,
+    "page": "components",
+    "file": "r1-ops-dark-1440-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 1440,
+    "page": "tokens",
+    "file": "r1-ops-dark-1440-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 1440,
+    "page": "guidelines",
+    "file": "r1-ops-dark-1440-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 1440,
+    "page": "chart",
+    "file": "r1-ops-dark-1440-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 390,
+    "page": "components",
+    "file": "r1-ops-dark-390-components.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 390,
+    "page": "tokens",
+    "file": "r1-ops-dark-390-tokens.png",
+    "overflow": false,
+    "charts": []
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 390,
+    "page": "guidelines",
+    "file": "r1-ops-dark-390-guidelines.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      }
+    ]
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 390,
+    "page": "chart",
+    "file": "r1-ops-dark-390-chart.png",
+    "overflow": false,
+    "charts": [
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "bar",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "stacked",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "area",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "donut",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled",
+          "ds-chart-swatch ds-chart-swatch-filled"
+        ]
+      },
+      {
+        "type": "sparkline",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": [
+          "ds-chart-swatch ds-chart-swatch-line",
+          "ds-chart-swatch ds-chart-swatch-line"
+        ]
+      },
+      {
+        "type": "line",
+        "swatches": []
+      }
+    ]
+  }
+]
