@@ -12,11 +12,12 @@ export async function renderExampleRoute(container, route) {
   const domain = route.params.domain;
   const module = domain ? await ({ erp: () => import('./examples/erp/index.js'), crm: () => import('./examples/crm/index.js'), school: () => import('./examples/school/index.js') }[domain])() : await import('./examples/index.js');
   if (!container.isConnected || location.hash.replace(/^#/, '').replace(/\/$/, '') !== route.path) return;
-  if (domain && !document.querySelector(`link[data-example-style="${domain}"]`)) {
+  for (const style of domain ? ['common', domain] : []) {
+    if (document.querySelector(`link[data-example-style="${style}"]`)) continue;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = new URL(`../css/examples/${domain}.css`, import.meta.url).href;
-    link.dataset.exampleStyle = domain;
+    link.href = new URL(`../css/examples/${style}.css`, import.meta.url).href;
+    link.dataset.exampleStyle = style;
     document.head.append(link);
   }
   module.render(container, { screen: route.params.screen, id: route.params.id });

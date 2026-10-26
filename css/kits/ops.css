@@ -17,7 +17,7 @@
   font-variant-numeric: tabular-nums slashed-zero;
 }
 [data-kit="ops"] :is(table, .ds-table) { font-variant-numeric: tabular-nums; }
-[data-kit="ops"][data-panel="collapsed"] :is(.context-panel, .sidebar) :is(.context-label, .nav-label, .nav-count, .nested-nav) { display: none; }
+[data-kit="ops"][data-panel="collapsed"] :is(.context-panel, .sidebar) :is(.context-label, .nav-count, .nested-nav) { display: none; }
 [data-kit="ops"][data-panel="collapsed"] .context-content { padding-inline: var(--space-1); }
 [data-kit="ops"][data-panel="collapsed"] .context-link { justify-content: center; padding-inline: var(--space-1); }
 [data-kit="ops"][data-panel="collapsed"] .context-bottom { padding-inline: var(--space-1); justify-content: center; }

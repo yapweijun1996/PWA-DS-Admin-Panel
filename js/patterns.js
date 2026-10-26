@@ -165,7 +165,7 @@ export function renderPatterns(container) {
     } });
     all.indeterminate = visible.some(row => selected.has(row.id)) && !visible.every(row => selected.has(row.id));
     const header = el('tr', {}, el('th', { scope: 'col' }, all), ...shownColumns.map(column => el('th', { scope: 'col' }, column.label)));
-    const body = el('tbody', {}, ...visible.map(row => el('tr', { 'aria-label': `Edit ${row.name} mock customer`, 'aria-selected': String(selected.has(row.id)) },
+    const body = el('tbody', {}, ...visible.map(row => el('tr', { 'aria-selected': String(selected.has(row.id)) },
       el('td', {}, el('input', { type: 'checkbox', className: 'ds-checkbox', 'aria-label': `Select ${row.name}`, checked: selected.has(row.id), onchange(event) { event.target.checked ? selected.add(row.id) : selected.delete(row.id); draw(); } })),
       ...shownColumns.map(column => el('td', {}, column.key === 'status' ? createPill({ label: row.status, tone: row.status === 'Active' ? 'success' : 'neutral', size: 'small' }) : row[column.key])))));
     if (!visible.length) body.append(el('tr', {}, el('td', { colspan: shownColumns.length + 1 }, 'No mock customers match. Clear search or remove filter conditions.')));

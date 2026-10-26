@@ -34,7 +34,7 @@ export function render(container) {
   const statusLabels = { all: text('All statuses', '全部状态'), active: text('Active', '启用'), invited: text('Invited', '已邀请'), inactive: text('Inactive', '停用') };
   const roleLabels = { all: text('All roles', '全部角色'), admin: text('Admin', '管理员'), editor: text('Editor', '编辑者'), viewer: text('Viewer', '查看者') };
   const wrapper = element('div', { className: 'ds-table-demo' });
-  const heading = element('div', { className: 'ds-table-heading' }, element('div', {}, element('h4', {}, text('Team members', '团队成员')), element('p', {}, text('32 mock members · Click any row for details', '32 位模拟成员 · 点击任意行查看详情'))), element('span', { className: 'ds-tag ds-tag-neutral' }, text('Mock data', '模拟数据')));
+  const heading = element('div', { className: 'ds-table-heading' }, element('div', {}, element('h3', {}, text('Team members', '团队成员')), element('p', {}, text('32 mock members · Click any row for details', '32 位模拟成员 · 点击任意行查看详情'))), element('span', { className: 'ds-tag ds-tag-neutral' }, text('Mock data', '模拟数据')));
   const search = element('input', { type: 'search', className: 'ds-input', placeholder: text('Search name, email, or role…', '搜索姓名、邮箱或角色…'), 'aria-label': text('Search mock members', '搜索模拟成员'), oninput: event => { props.query = event.target.value; props.page = 1; updateTable(); } });
   const clear = button(text('Clear', '清除'), () => { props.query = ''; search.value = ''; props.page = 1; updateTable(); search.focus(); });
   const statusFilter = customSelect({ label: text('Filter by status', '按状态筛选'), value: 'all', options: Object.entries(statusLabels).map(([value, label]) => ({ value, label })), onChange(value) { props.status = value; props.page = 1; updateTable(); } });
@@ -86,7 +86,7 @@ export function render(container) {
       const body = element('tbody');
       for (const row of visible) {
         const tone = row.status === 'active' ? 'accent' : 'neutral';
-        const tr = element('tr', { 'aria-label': text(`View mock member ${row.name}`, `查看模拟成员 ${row.name}`) },
+        const tr = element('tr', {},
           element('td', {}, element('div', { className: 'ds-table-member' }, element('span', { className: 'ds-table-avatar', 'aria-hidden': 'true' }, row.name.split(' ').map(part => part[0]).join('')), element('div', {}, element('strong', {}, row.name), props.showEmail ? element('small', {}, row.email) : null))),
           element('td', {}, roleLabels[row.role]),
           element('td', {}, element('span', { className: `ds-tag ds-pill ds-tag-${tone}` }, element('span', { className: 'ds-tag-dot', 'aria-hidden': 'true' }), statusLabels[row.status])),

@@ -48,7 +48,7 @@ export function demo(container, { showDetail = true } = {}) {
     summary.textContent = `${filtered.length} mock customers · activate a row for its detail drawer.`;
     pagination.setState({ total: filtered.length, page: currentPage });
     const header = element('tr', {}, ...['Company', 'Contact', 'Status'].map(label => element('th', { scope: 'col' }, label)));
-    const body = element('tbody', {}, ...visible.map(row => element('tr', { 'aria-label': `View mock customer ${row.company}` }, element('td', {}, row.company), element('td', {}, row.name), element('td', {}, createBadge({ label: row.status, tone: row.status === 'Customer' ? 'success' : 'info' })))));
+    const body = element('tbody', {}, ...visible.map(row => element('tr', {}, element('td', {}, row.company), element('td', {}, row.name), element('td', {}, createBadge({ label: row.status, tone: row.status === 'Customer' ? 'success' : 'info' })))));
     table.replaceChildren(visible.length ? createTable({ caption: 'Mock customer directory', header, body, onRowActivate: index => { const row = visible[index]; openDrawer({ title: `${row.company} (mock)`, content: describe(row), actions: [{ label: 'Close details', onClick: close => close() }] }); } }) : createEmptyState({ title: 'No mock customers found', description: 'Try another name or clear your search.', actionLabel: 'Clear search', onAction: () => { query = ''; search.value = ''; currentPage = 1; update(); search.focus(); } }));
   }
   const layout = createListingLayout({

@@ -1,8 +1,8 @@
-# Roadmap — Enterprise Admin Panel SSOT Design System (owner spec "v1.0.0 Proposed")
+# Roadmap — delivered phases and owner direction
 
-Source: owner-provided "Enterprise Admin Panel — SSOT Design System" (14 sections: tokens, layouts, ~70 components,
-IDP extension, SSOT architecture, AI-agent governance, quality gates). Phase 1 (`docs/SPEC.md`) stays the foundation;
-this file maps the rest of the owner spec onto later phases.
+Forma is an SSOT design system and mock-data admin reference app for ERP, CRM and School systems, with no backend. The implementation contracts use **Phase 1, 2a, 2b, 3, 4 and 5**. The original owner-provided "Enterprise Admin Panel — SSOT Design System" ("v1.0.0 Proposed", 14 sections) used different proposed numbering; it is historical direction, not a delivered release or the current implementation schedule.
+
+Use the implementation map below for delivery status. The conflict table and owner decisions log are preserved as history: later explicit decisions supersede earlier choices. Current architecture and appearance rules are in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md); implementation interpretations are in [DECISIONS.md](DECISIONS.md).
 
 ## Decisions on conflicts (recorded, change on owner request)
 | Topic | Owner spec | Phase 1 spec (KB standard + addendum v2.1) | Decision |
@@ -15,25 +15,36 @@ this file maps the rest of the owner spec onto later phases.
 | Framework | "adapt to existing framework" | vanilla ES Modules | Stay vanilla (matches owner spec 10.1 note). Revisit React only on owner request. |
 | Mobile nav | accessible drawer | bottom tab bar + More sheet | Keep owner-approved bottom tab bar (addendum); drawer for tablets if needed. |
 
-## Phases
-- **Phase 1 (running)**: tokens SSOT, app shell, 10 core components, token editor, PWA + updates, check ratchet, tests.
-- **Phase 2 — Foundation completion**: split tokens (colors/typography/spacing/radius/shadows/breakpoints/layout), light + dark semantic themes,
-  Inter + CJK fallback stack (open-licence fonts only), contrast validator script in `check.mjs`, `docs/DESIGN_SYSTEM.md`,
-  `COMPONENT_REGISTRY.md`, `GOVERNANCE.md`, `ACCESSIBILITY.md`, agent workflow rules (spec 11).
-- **Phase 3 — Components**: remaining navigation / action / form / data / feedback components from spec section 5
-  (Breadcrumbs, Pagination, CommandPalette, Combobox, MultiSelect, DatePicker, FormField, FormSection, StatusBadge, KpiCard,
-  DescriptionList, Timeline, Alert, Drawer, ConfirmDialog, Skeleton, EmptyState, ErrorState, PermissionState...). Each with the
-  12-point component spec (section 6) rendered on its docs page.
-- **Phase 4 — Layouts and patterns**: Dashboard, Listing, Form, Detail, Master-Detail, Workspace templates; search-and-filter,
-  create-and-edit, bulk-actions, import-export patterns; enterprise components (PermissionGate, UnsavedChangesGuard, SavedViewSelector...).
-- **Phase 5 — IDP extension**: three-pane document review workspace (20/45/35, resizable, persisted), evidence highlight, confidence indicator
-  (never implies correctness), multi-document model. UI + mock data only, no backend.
-- **Phase 6 — Quality and premium polish**: Playwright-free visual regression via screenshot script, axe-style manual a11y checklist,
-  keyboard audit, performance checks, design-direction review with screenshots, migration guide, production-readiness report.
+## Implementation phases
+
+| Phase | Contract | Delivery and evidence |
+|---|---|---|
+| **1 — Foundation** | [SPEC.md](SPEC.md) | **Delivered:** token editor, initial shared components, app shell, PWA/offline and explicit updates, source ratchet and tests. [SUMMARY-phase1.md](SUMMARY-phase1.md). Later shell/token decisions supersede the original defaults. |
+| **2a — Mockup alignment and three Design Kits** | [SPEC-phase2a.md](SPEC-phase2a.md) | **Delivered:** grouped sidebar, independent appearance axes, split token sources, eight palettes, Enterprise/Liquid/Ops and shared reference screens. [SUMMARY-phase2a.md](SUMMARY-phase2a.md). |
+| **2b — Combobox, charts and Guide** | [SPEC-phase2b.md](SPEC-phase2b.md) | **Delivered:** searchable single/multi Combobox, six SVG chart types with source tables, registry-driven Guide, choosing guidance and live examples. [SUMMARY-phase2b.md](SUMMARY-phase2b.md). |
+| **3 — Components, layouts and patterns** | [SPEC-phase3.md](SPEC-phase3.md) | **Delivered (0.4.0):** remaining controls and enterprise workflows, reusable layout slots/resizing, shared CommandPalette, labelled registry metadata and working patterns. [SUMMARY-phase3.md](SUMMARY-phase3.md). |
+| **4 — ERP, CRM and School extensions** | [SPEC-phase4.md](SPEC-phase4.md) | **Delivered (0.5.0):** three L7 mock-data workspaces, Kanban, Calendar and Data grid; session-local actions, validation, exports and guarded edits. Product imports stay behind the route-registration boundary. [SUMMARY-phase4.md](SUMMARY-phase4.md). |
+| **5 — PWA robustness, export, docs and polish** | [SPEC-phase5.md](SPEC-phase5.md) | **Delivered (0.6.0):** CDN-safe cache-busted precache/build-identity rejection, guarded unknown-route update recovery, versioned static kit exports/consumer demos, generated component reference/adoption docs, compact demo disclosures, shared spacing/table tokens, distinct navigation icons and more-contrast support. [SUMMARY-phase5.md](SUMMARY-phase5.md) records local verification, screenshots and limits. |
+
+"Delivered" describes implemented scope, not a claim that every browser/device or accessibility check passed. Each summary records exercised checks and limitations. Phase 5 has local real-Chrome render, screenshot, offline and update evidence; live deployment, physical-device and screen-reader checks remain outside that evidence.
+
+### Phase 5 adoption and documentation
+
+- [USAGE.md](USAGE.md) explains `scripts/export-kit.mjs --kit <enterprise|liquid|ops> [--palette blue] [--out dist-kit]`, embedding and safe upgrades. `npm run export:kits` writes all three bundles to `dist-kits/`; exports contain both themes, only the chosen kit/palette, relative runtime dependencies and no consumer service worker.
+- [COMPONENT_REGISTRY.md](COMPONENT_REGISTRY.md) is generated from `components/registry.js` by `npm run docs:registry`, also part of `npm run build`; `npm run check` rejects stale documentation. The live Guide uses the same canonical metadata and real component renderers.
+- [GOVERNANCE.md](GOVERNANCE.md), [ACCESSIBILITY.md](ACCESSIBILITY.md) and [DEPLOYMENT.md](DEPLOYMENT.md) retain the contribution, quality and PWA/subpath contracts. [DECISIONS.md](DECISIONS.md) records interpretations; [SUMMARY-phase5.md](SUMMARY-phase5.md) records evidence rather than promises.
+
+## Historical proposed phases — not implementation numbering
+
+The original proposal described Phase 2 foundation completion, Phase 3 components, Phase 4 layouts/patterns, Phase 5 IDP and Phase 6 quality/premium polish. Those capabilities were subsequently split across implementation phases 2a/2b/3/4/5 above. References to "Phase 2", "Phase 4" or "Phase 6" inside the unchanged owner log below retain that historical meaning.
+
+- **Optional IDP:** document review/evidence/confidence workflows are not a delivered product extension. The owner selected ERP/CRM/School as the core targets; IDP remains optional, with UI/mock data only if commissioned. A shared three-pane Workspace layout is not an implemented IDP product.
+- **Future premium direction:** the supplied mockups in `docs/design/` guide the existing kits. Further owner mockups may drive a separate visual direction; no new premium redesign is promised as delivered. Phase 5 D is limited to the specified low-risk polish, not the historical whole "Phase 6".
+- **Quality is continuous:** verify and real-browser checks are release gates, not work deferred until a hypothetical final phase. Kit export, previously proposed for "Phase 6", was delivered as implementation Phase 5 B.
 
 ## Definition of done (owner)
-Independent agents can build ERP / CRM / IDP pages from the same tokens, components, patterns without inconsistency;
-working, documented, tested, versioned — not mockups.
+Independent agents can build ERP / CRM / IDP pages from the same tokens, components and patterns without inconsistency;
+working, documented, tested and versioned — not mockups. IDP in this original goal remains optional; the current repository provides no backend and its product examples explicitly use mock data.
 
 ## Owner decisions log
 - 2026-10-26: Owner approved NO React and NO Vite. Stack stays vanilla HTML/CSS/ES Modules. Manager has authority on remaining open choices.

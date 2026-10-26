@@ -26,7 +26,7 @@ export function createDashboardLayout({ header, metrics, content, footer, varian
 }
 
 export function demo(container, { variant = 'grid', showMetrics = true } = {}) {
-  const trend = createCard({ title: 'Customer growth (mock)', description: 'Mock monthly totals, not live analytics.', content: createChart({ type: 'line', title: 'Mock customer growth', labels: ['Jul', 'Aug', 'Sep', 'Oct'], series: [{ name: 'Customers', values: [12, 18, 21, 28] }] }) });
+  const trend = createCard({ title: 'Customer growth (mock)', description: 'Mock monthly totals, not live analytics.', content: createChart({ headingLevel: 4, type: 'line', title: 'Mock customer growth', labels: ['Jul', 'Aug', 'Sep', 'Oct'], series: [{ name: 'Customers', values: [12, 18, 21, 28] }] }) });
   const activity = createCard({ title: 'Recent activity (mock)', content: createTimeline({ label: 'Mock workspace activity', items: [{ title: 'Mock account created', time: '09:30', description: 'A local demonstration record.' }, { title: 'Mock review completed', time: '10:15', description: 'No server writes.' }] }) });
   const layout = createDashboardLayout({
     variant,

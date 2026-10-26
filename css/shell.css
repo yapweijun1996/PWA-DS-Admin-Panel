@@ -22,8 +22,9 @@
 [data-panel="collapsed"] .context-content { padding-inline: var(--space-2, 8px); overflow: visible; }
 [data-panel="collapsed"] .context-panel .nested-nav, [data-panel="collapsed"] .context-panel .context-label, [data-panel="collapsed"] .context-panel .nav-count, [data-panel="collapsed"] .context-bottom .nav-label { display: none; }
 [data-panel="collapsed"] .context-panel .context-link { position: relative; justify-content: center; padding-inline: 0; }
-[data-panel="collapsed"] .context-panel .context-link .nav-label { position: absolute; left: 100%; visibility: hidden; white-space: nowrap; background: var(--surface); color: var(--text); border: 1px solid var(--color-border-subtle); padding: var(--space-2, 8px); z-index: 40; border-radius: var(--radius); }
-[data-panel="collapsed"] .context-panel .context-link:hover .nav-label, [data-panel="collapsed"] .context-panel .context-link:focus-visible .nav-label { visibility: visible; }
+/* Keep collapsed labels in the accessibility tree; reveal the tooltip on focus. */
+[data-panel="collapsed"] .context-panel .context-link .nav-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+[data-panel="collapsed"] .context-panel .context-link:hover .nav-label, [data-panel="collapsed"] .context-panel .context-link:focus-visible .nav-label { width: auto; height: auto; overflow: visible; clip-path: none; left: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--color-border-subtle); padding: var(--space-2, 8px); z-index: 40; border-radius: var(--radius); }
 [data-panel="collapsed"] .context-bottom { padding: var(--space-2, 8px); }
 #notification-menu { position: relative; }
 #notification-count { position: absolute; right: 0; top: 0; background: var(--accent); color: var(--accent-contrast); border-radius: var(--radius-pill, 999px); min-width: 16px; font-size: 10px; }

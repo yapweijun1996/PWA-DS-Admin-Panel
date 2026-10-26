@@ -1,7 +1,7 @@
 .ds-card { width: 100%; min-width: 0; overflow-wrap: anywhere; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm, var(--shadow)); }
 .ds-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); padding: var(--space-5); }
 .ds-card-heading { min-width: 0; }
-.ds-card-heading h3 { margin: 0; font-size: var(--font-size); line-height: 1.5; font-weight: 600; text-transform: none; letter-spacing: normal; }
+.ds-card-heading :is(h1, h2, h3, h4, h5, h6) { margin: 0; font-size: var(--font-size); line-height: 1.5; font-weight: 600; text-transform: none; letter-spacing: normal; }
 .ds-card-heading p { margin: var(--space-1) 0 0; color: var(--muted); font-size: var(--font-size); }
 .ds-card-content { padding: var(--space-5); }
 .ds-card-header + .ds-card-content { padding-top: 0; }

@@ -128,7 +128,7 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
   function kpis() {
     const total = customers.length; const members = customers.reduce((sum, row) => sum + row.members, 0); const active = customers.filter(row => row.status === 'Customer').length;
     return element('div', { className: 'showcase-kpis' },
-      createKpiCard({ label: 'Total customers', value: String(total), trend: `${state.imported} imported this session`, trendTone: 'neutral', content: createChart({ type: 'sparkline', title: 'Mock customer trend', labels: ['Jan', 'Feb', 'Mar', 'Apr'], series: [{ name: 'Mock customers', values: [5, 8, 9, total] }] }), menuItems: [{ label: 'How this is calculated', action: () => showMetric('Total customers', total, 'Count of every customer in the mock workspace.') }] }),
+      createKpiCard({ label: 'Total customers', value: String(total), trend: `${state.imported} imported this session`, trendTone: 'neutral', content: createChart({ headingLevel: 4, type: 'sparkline', title: 'Mock customer trend', labels: ['Jan', 'Feb', 'Mar', 'Apr'], series: [{ name: 'Mock customers', values: [5, 8, 9, total] }] }), menuItems: [{ label: 'How this is calculated', action: () => showMetric('Total customers', total, 'Count of every customer in the mock workspace.') }] }),
       createKpiCard({ label: 'Team members', value: String(members), trend: 'Across all mock accounts', trendTone: 'info', menuItems: [{ label: 'How this is calculated', action: () => showMetric('Team members', members, 'Sum of the member counts on all mock accounts.') }] }),
       createKpiCard({ label: 'Active accounts', value: String(active), trend: `${Math.round(active / Math.max(1, total) * 100)}% of customers`, trendTone: 'success', content: createAvatarStack({ users: team, max: 4 }), menuItems: [{ label: 'How this is calculated', action: () => showMetric('Active accounts', active, 'Customers whose status is Customer, excluding Churned accounts.') }] }));
   }
@@ -143,9 +143,9 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
       metrics: kpis(),
       content: { element: element('div', { className: 'showcase-stack' },
         element('div', { className: 'showcase-dashboard-grid' },
-          createCard({ title: 'Customer trend', description: 'Mock monthly counts; not historical account data.', content: createChart({ type: 'line', title: 'Mock monthly customers', labels: ['Jan', 'Feb', 'Mar', 'Apr'], series: [{ name: 'Customers', values: [5, 8, 9, 12] }, { name: 'Trials', values: [2, 4, 3, 6] }] }) }),
-          createCard({ title: 'Customer status', description: 'Current mock workspace.', content: createChart({ type: 'donut', title: 'Mock customer status', labels: ['Customer', 'Churned'], series: [{ name: 'Customers', values: ['Customer', 'Churned'].map(status => customers.filter(row => row.status === status).length) }] }) }),
-          createCard({ title: 'Plan usage', description: 'Current mock workspace.', content: createChart({ type: 'bar', title: 'Mock plan usage', labels: ['Business', 'Enterprise'], series: [{ name: 'Accounts', values: ['Business', 'Enterprise'].map(plan => customers.filter(row => row.plan === plan).length) }] }) })),
+          createCard({ title: 'Customer trend', description: 'Mock monthly counts; not historical account data.', content: createChart({ headingLevel: 4, type: 'line', title: 'Mock monthly customers', labels: ['Jan', 'Feb', 'Mar', 'Apr'], series: [{ name: 'Customers', values: [5, 8, 9, 12] }, { name: 'Trials', values: [2, 4, 3, 6] }] }) }),
+          createCard({ title: 'Customer status', description: 'Current mock workspace.', content: createChart({ headingLevel: 4, type: 'donut', title: 'Mock customer status', labels: ['Customer', 'Churned'], series: [{ name: 'Customers', values: ['Customer', 'Churned'].map(status => customers.filter(row => row.status === status).length) }] }) }),
+          createCard({ title: 'Plan usage', description: 'Current mock workspace.', content: createChart({ headingLevel: 4, type: 'bar', title: 'Mock plan usage', labels: ['Business', 'Enterprise'], series: [{ name: 'Accounts', values: ['Business', 'Enterprise'].map(plan => customers.filter(row => row.plan === plan).length) }] }) })),
         element('div', { className: 'showcase-dashboard-grid' }, createCard({ title: 'Recent activity', description: 'Actions performed in this mock workspace.', content: recent }),
           createCard({ title: 'Customer accounts', description: 'Open an account to inspect its details.', content: accountList }))), span: 12 },
       footer: createCard({ title: state.imported ? 'Your import is ready' : 'Bring your customers together', content: element('div', { className: 'showcase-empty' }, element('span', { className: 'showcase-empty-symbol', 'aria-hidden': 'true' }, '↥'), element('h3', {}, state.imported ? `${state.imported} mock customers imported` : 'No imported customers yet'), element('p', {}, 'Import a CSV to explore a real local workflow. Your file stays in this browser session; nothing is uploaded.'), button('Import customers', openImport, 'secondary')) })
@@ -211,7 +211,7 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
       const body = element('tbody', {}, ...visible.map(row => {
         const checkbox = element('input', { type: 'checkbox', className: 'ds-checkbox', checked: state.selected.has(row.id), 'aria-label': `Select ${row.company}`, onchange: event => { event.target.checked ? state.selected.add(row.id) : state.selected.delete(row.id); update(); } });
         const checkCell = element('td', {}, element('label', { className: 'showcase-checkbox-target' }, checkbox));
-        return element('tr', { className: state.selected.has(row.id) ? 'showcase-row-selected' : '', 'aria-label': `View ${row.company} mock customer details` }, checkCell,
+        return element('tr', { className: state.selected.has(row.id) ? 'showcase-row-selected' : '' }, checkCell,
           element('td', {}, element('div', { className: 'ds-table-member' }, createAvatar({ name: row.company }), element('div', {}, element('strong', {}, row.company), element('small', {}, row.domain)))),
           element('td', {}, createBadge({ label: row.status, tone: row.status === 'Customer' ? 'success' : 'neutral', pill: true, dot: true })),
           element('td', {}, element('strong', { className: 'showcase-about-title' }, row.about), element('small', { className: 'showcase-about-description' }, row.description)),
@@ -281,7 +281,7 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
       return field.element;
     }
     const region = createCombobox({ label: 'Region', clearable: false, required: true, value: state.draft.region, options: regionOptions, onChange: value => { state.draft.region = value; markDirty(); updateFormStatus(); } });
-    const plan = customSelect({ label: 'Customer plan', value: state.draft.plan, options: ['Starter', 'Business', 'Enterprise'].map(value => ({ value, label: value })), onChange: value => { state.draft.plan = value; markDirty(); updateFormStatus(); } });
+    const plan = customSelect({ label: 'Plan', value: state.draft.plan, options: ['Starter', 'Business', 'Enterprise'].map(value => ({ value, label: value })), onChange: value => { state.draft.plan = value; markDirty(); updateFormStatus(); } });
     const formStatus = element('p', { className: 'showcase-form-status', role: 'status', 'aria-live': 'polite' });
     const validationSummary = element('div', { className: 'showcase-validation-summary', role: 'alert', hidden: true, tabindex: '-1' });
     const save = button('Save customer', null, 'primary', { type: 'submit', form: id });

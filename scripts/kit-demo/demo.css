@@ -1,0 +1,10 @@
+.kit-demo { max-width: var(--content-max-width); margin-inline: auto; padding: var(--content-gap); line-height: var(--line-height); }
+.kit-demo-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--content-gap); margin-block-end: var(--content-gap); }
+.kit-demo-stack { display: grid; gap: var(--space-4); min-width: 0; }
+.kit-demo h1 { font-size: var(--font-size-3xl); }
+.kit-demo h2 { font-size: var(--font-size-lg); }
+.kit-demo-meta, .kit-demo header p, #demo-status { color: var(--muted); }
+#demo-status { margin-block-end: var(--content-gap); }
+.kit-demo-card { background: var(--surface-card, var(--surface)); border: var(--border-width) solid var(--color-border-subtle); border-radius: var(--radius); padding: var(--content-gap); }
+.kit-demo-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--control-height) * 6)), 1fr)); gap: var(--content-gap); align-items: start; }
+.kit-demo .component-field { margin: 0; }

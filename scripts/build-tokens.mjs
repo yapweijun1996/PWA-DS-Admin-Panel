@@ -3,6 +3,13 @@ import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const themes = ['light', 'dark'];
+export const highContrastTokens = {
+  text: 'var(--contrast-text)', muted: 'var(--contrast-muted)',
+  border: 'var(--contrast-border)', 'border-subtle': 'var(--contrast-border)',
+  'surface-alpha': '1', 'card-alpha': '1',
+  'surface-glass': 'var(--surface)', 'surface-card': 'var(--surface)',
+  'ambient-start': 'var(--bg)', 'ambient-end': 'var(--bg)',
+};
 
 function resolveValue(value, primitives) {
   if (typeof value !== 'string') throw new Error('Token values must be strings.');
@@ -96,9 +103,10 @@ export function generateAppearance(sources) {
     }));
     if (Object.keys(dark).length) rules.push(block(`${selector}[data-theme="dark"]`, dark));
   }
-  rules.push(block(':root[data-density="comfortable"]', { space: 'var(--space-4)', 'content-gap': 'var(--space-6)', 'control-height': '44px', 'table-cell-padding': 'var(--space-4)' }));
-  rules.push(block(':root[data-density="compact"]', { space: 'var(--space-3)', 'content-gap': 'var(--space-4)', 'control-height': '36px', 'table-cell-padding': 'var(--space-2)' }));
+  rules.push(block(':root[data-density="comfortable"]', { space: 'var(--space-4)', 'content-gap': 'var(--space-6)', 'control-height': '44px', 'table-cell-padding': 'var(--space-4)', 'table-cell-padding-block': 'var(--space-4)', 'table-header-padding-block': 'var(--space-3)' }));
+  rules.push(block(':root[data-density="compact"]', { space: 'var(--space-3)', 'content-gap': 'var(--space-4)', 'control-height': '36px', 'table-cell-padding': 'var(--space-2)', 'table-cell-padding-block': 'var(--space-2)', 'table-header-padding-block': 'var(--space-2)' }));
   rules.push('@media (max-width: 767px) {\n  :root[data-density] { --control-height: 44px; }\n}');
+  rules.push(`@media (prefers-contrast: more) {\n${block(':root[data-kit][data-theme]', highContrastTokens)}\n}`);
   return rules.join('\n') + '\n';
 }
 

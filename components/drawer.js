@@ -10,7 +10,7 @@ export function openDrawer(options = {}) {
 
 export function createDetailPanel({ title, content, onClose } = {}) {
   const id = uniqueId('detail-title');
-  return element('section', { className: 'ds-detail-panel', 'aria-labelledby': id }, element('header', { className: 'ds-detail-panel-header' }, element('h3', { id }, title), onClose ? button('×', onClose, 'ghost', { 'aria-label': text('Close details', '关闭详情') }) : null), element('div', { className: 'ds-detail-panel-body' }, content));
+  return element('section', { className: 'ds-detail-panel', 'aria-labelledby': id }, element('header', { className: 'ds-detail-panel-header' }, element('h3', { id }, title), onClose ? button(element('span', { 'aria-hidden': 'true' }, '×'), onClose, 'ghost', { 'aria-label': text('Close details', '关闭详情') }) : null), element('div', { className: 'ds-detail-panel-body' }, content));
 }
 
 export function render(container) {

@@ -5,10 +5,12 @@
   "type": "module",
   "engines": { "node": ">=20" },
   "scripts": {
-    "build": "node scripts/build-tokens.mjs && node scripts/build-icons.mjs && node scripts/stamp-build.mjs",
+    "build": "node scripts/build-tokens.mjs && node scripts/build-icons.mjs && node scripts/build-registry-doc.mjs && node scripts/stamp-build.mjs",
     "serve": "node scripts/serve.mjs",
     "check": "node scripts/check.mjs",
     "test": "node --test tests/",
-    "verify": "npm run build && npm run check && npm test"
+    "verify": "npm run build && npm run check && npm test",
+    "export:kits": "node scripts/export-kit.mjs --all",
+    "docs:registry": "node scripts/build-registry-doc.mjs"
   }
 }

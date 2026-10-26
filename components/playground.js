@@ -58,24 +58,24 @@ export function playground(container, { title, description }) {
   } }, text('Copy HTML', '复制 HTML'));
   const section = element('section', { className: 'component-playground' },
     element('header', { className: 'component-heading' }, element('h2', {}, title), element('p', {}, description)),
-    element('section', { className: 'component-panel' }, element('h3', {}, text('Live preview', '实时预览')), preview),
-    element('section', { className: 'component-panel' }, element('h3', {}, text('Playground props', '属性设置')), controls),
-    element('section', { className: 'component-panel' }, element('h3', {}, text('States', '状态')), states),
-    element('section', { className: 'component-panel' }, element('div', { className: 'component-code-heading' }, element('h3', {}, text('HTML snippet', 'HTML 代码')), copy), element('pre', { className: 'component-code', tabindex: '0' }, code), copyStatus)
+    element('section', { className: 'component-panel' }, element('h2', {}, text('Live preview', '实时预览')), preview),
+    element('section', { className: 'component-panel' }, element('h2', {}, text('Playground props', '属性设置')), controls),
+    element('section', { className: 'component-panel' }, element('h2', {}, text('States', '状态')), states),
+    element('section', { className: 'component-panel' }, element('div', { className: 'component-code-heading' }, element('h2', {}, text('HTML snippet', 'HTML 代码')), copy), element('pre', { className: 'component-code', tabindex: '0' }, code), copyStatus)
   );
   container.replaceChildren(section);
   return { preview, controls, states, section, setSnippet(value) { code.textContent = value; copyStatus.textContent = ''; } };
 }
 
-export function renderGuide(guide) {
-  const section = element('section', { className: 'component-panel component-guide' }, element('h3', {}, text('Usage guide', '使用指南')), element('p', {}, guide.purpose));
+export function renderGuide(guide, { headingLevel = 3 } = {}) {
+  const section = element('section', { className: 'component-panel component-guide' }, element(`h${headingLevel}`, {}, text('Usage guide', '使用指南')), element('p', {}, guide.purpose));
   const labels = { props: text('Props / API', '属性 / API'), variants: text('Variants', '样式'), tokens: text('Tokens', '设计令牌'), states: text('States', '状态'), keyboard: text('Keyboard', '键盘操作'), accessibility: text('Accessibility', '无障碍'), responsive: text('Responsive rules', '响应式规则'), do: text('Do', '推荐'), dont: text('Avoid', '避免') };
   const grid = element('div', { className: 'component-guide-grid' });
   for (const [key, label] of Object.entries(labels)) {
     const values = Array.isArray(guide[key]) ? guide[key] : [guide[key]];
-    grid.append(element('section', {}, element('h4', {}, label), element('ul', {}, ...values.filter(Boolean).map(value => element('li', {}, value)))));
+    grid.append(element('section', {}, element(`h${Math.min(6, headingLevel + 1)}`, {}, label), element('ul', {}, ...values.filter(Boolean).map(value => element('li', {}, value)))));
   }
-  section.append(grid, element('h4', {}, text('Example', '示例')), element('pre', { className: 'component-code', tabindex: '0' }, element('code', {}, guide.example)));
+  section.append(grid, element(`h${Math.min(6, headingLevel + 1)}`, {}, text('Example', '示例')), element('pre', { className: 'component-code', tabindex: '0' }, element('code', {}, guide.example)));
   return section;
 }
 
@@ -113,6 +113,7 @@ export function toggleControl(label, checked, onChange) {
 
 export function choiceControl(label, value, options, onChange) {
   const choice = customSelect({ label, value, options, onChange });
+  choice.trigger.setAttribute('aria-labelledby', `${choice.id}-label ${choice.id}-value`);
   return element('div', { className: 'component-field' }, element('span', { className: 'component-field-label', id: `${choice.id}-label` }, label), choice.element);
 }
 
@@ -122,7 +123,7 @@ export function customSelect({ label, value, options, onChange = () => {}, disab
   let isDisabled = disabled;
   let activeIndex = Math.max(0, options.findIndex(option => option.value === value));
   const list = element('div', { className: 'ds-select-options', id: `${id}-list`, role: 'listbox', 'aria-label': label, hidden: true });
-  const trigger = element('button', { type: 'button', id, className: 'ds-select-trigger', 'aria-label': label, 'aria-haspopup': 'listbox', 'aria-expanded': 'false', 'aria-controls': list.id, 'aria-invalid': String(error), disabled });
+  const trigger = element('button', { type: 'button', id, className: 'ds-select-trigger', 'aria-haspopup': 'listbox', 'aria-expanded': 'false', 'aria-controls': list.id, 'aria-invalid': String(error), disabled });
   const root = element('div', { className: 'ds-select' }, trigger, list);
   const optionButtons = options.map((option, index) => {
     const button = element('button', { type: 'button', className: 'ds-select-option', role: 'option', tabindex: '-1', 'aria-selected': String(option.value === currentValue), onclick: () => choose(index) }, option.label);
@@ -130,7 +131,9 @@ export function customSelect({ label, value, options, onChange = () => {}, disab
     return button;
   });
   function refresh() {
-    trigger.textContent = options.find(option => option.value === currentValue)?.label || text('Choose an option', '请选择');
+    const selectedLabel = options.find(option => option.value === currentValue)?.label || text('Choose an option', '请选择');
+    trigger.replaceChildren(element('span', { id: `${id}-value` }, selectedLabel));
+    trigger.setAttribute('aria-label', `${label}: ${selectedLabel}`);
     optionButtons.forEach((button, index) => button.setAttribute('aria-selected', String(options[index].value === currentValue)));
   }
   function close(returnFocus = false) {

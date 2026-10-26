@@ -120,3 +120,14 @@
 - CRM date navigation only browses; Add activity opens the event editor. Calendar's built-in view controls are canonical, with the current view retained when filters rebuild the calendar.
 - Late counts as attended; missing grades are excluded from averages and unrounded ties share competition ranks (1, 1, 3). Gradebook computed results use an adjacent shared Table.
 - The attendance guard's Save changes decision already confirms persistence; its callback saves directly rather than stacking a second confirmation modal.
+
+## Phase 5
+
+- Precache validates the fetched build module before writing canonical, query-free cache entries; no optional per-file hash manifest is added. A failed candidate cannot replace the active worker/cache, and CDN cache-busting applies to every asset.
+- Automatic update checks share registration/in-flight work and a ten-minute throttle; unknown routes and explicit Settings checks bypass it. A recovery click waits for an installing worker and reuses the existing dirty guard, overlay and one-reload activation path.
+- Kit export defaults to blue regardless of kit, emits only the chosen palette/kit plus both themes, and copies the shared component dependency closure without the documentation app, product modules or service worker. Load tokens → component styles → appearance so axis overrides win.
+- Export manifests hash every shipped file except themselves and omit timestamps; re-exporting the same stamped source is deterministic. Existing output must be an unmodified, owned export; unknown additions, consumer edits and symlink paths are refused rather than deleted.
+- Registry Markdown is generated in canonical registry order using English labels and API/accessibility metadata; the standalone check rejects missing or stale output and the normal build regenerates it.
+- Demo disclosures are example-layer composition, not a new foundational component. Session keys are `forma-example-demo-controls-${domain}`; blocked storage falls back to in-memory state, and toggles never rerender product editors.
+- Shared page-rhythm and density-aware table padding tokens replace local header spacing; sortable headers keep their 44px button target while plain headers get their own padding.
+- More-contrast overrides apply after kit/theme tokens, strengthen primary/muted text and both border roles, and make Liquid surfaces opaque; the same override map is checked across all 96 appearance/preference combinations without lowering thresholds.

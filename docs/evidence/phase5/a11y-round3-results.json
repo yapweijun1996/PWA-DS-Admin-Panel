@@ -1,0 +1,4428 @@
+{
+  "routes": [
+    {
+      "route": "/overview",
+      "hash": "#/overview",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/tokens",
+      "hash": "#/tokens",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components",
+      "hash": "#/components",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Button Explore playground\" does not contain visible label \"Get started Button Explore playground\".",
+          "text": "Get started ButtonExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Input Explore playground\" does not contain visible label \"Your content here Input Explore playground\".",
+          "text": "Your content hereInputExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Select Explore playground\" does not contain visible label \"Your content here Select Explore playground\".",
+          "text": "Your content hereSelectExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Checkbox Explore playground\" does not contain visible label \"Keep it consistent Checkbox Explore playground\".",
+          "text": "Keep it consistentCheckboxExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Tag Explore playground\" does not contain visible label \"Published Tag Explore playground\".",
+          "text": "PublishedTagExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Pill Explore playground\" does not contain visible label \"Published Pill Explore playground\".",
+          "text": "PublishedPillExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Tabs Explore playground\" does not contain visible label \"Overview Settings Tabs Explore playground\".",
+          "text": "OverviewSettingsTabsExplore playground"
+        }
+      ]
+    },
+    {
+      "route": "/settings/general",
+      "hash": "#/settings/general",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/appearance",
+      "hash": "#/settings/appearance",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/about",
+      "hash": "#/settings/about",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/pwa",
+      "hash": "#/settings/pwa",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/kits",
+      "hash": "#/kits",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Catalog Catalog catalog.example Customer\" does not contain visible label \"C Catalog catalog.example Customer\".",
+          "text": "CCatalogcatalog.exampleCustomer"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Circoole Circoole circoole.example Churned\" does not contain visible label \"C Circoole circoole.example Churned\".",
+          "text": "CCircoolecircoole.exampleChurned"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Command Command command.example Customer\" does not contain visible label \"C Command command.example Customer\".",
+          "text": "CCommandcommand.exampleCustomer"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Hourglass Hourglass hourglass.example Customer\" does not contain visible label \"H Hourglass hourglass.example Customer\".",
+          "text": "HHourglasshourglass.exampleCustomer"
+        }
+      ]
+    },
+    {
+      "route": "/learn",
+      "hash": "#/learn",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Choose file Current Mock CSV source\" does not contain visible label \"1 Choose file Current Mock CSV source\".",
+          "text": "1Choose fileCurrentMock CSV source"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Map columns Upcoming Match fields\" does not contain visible label \"2 Map columns Upcoming Match fields\".",
+          "text": "2Map columnsUpcomingMatch fields"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Review Upcoming Check before importing\" does not contain visible label \"3 Review Upcoming Check before importing\".",
+          "text": "3ReviewUpcomingCheck before importing"
+        }
+      ]
+    },
+    {
+      "route": "/examples",
+      "hash": "#/examples",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp",
+      "hash": "#/examples/erp",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/orders",
+      "hash": "#/examples/erp/orders",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/order/SO-1042",
+      "hash": "#/examples/erp/order/SO-1042",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/inventory",
+      "hash": "#/examples/erp/inventory",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/invoice",
+      "hash": "#/examples/erp/invoice",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm",
+      "hash": "#/examples/crm",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/customers",
+      "hash": "#/examples/crm/customers",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/customer/CRM-001",
+      "hash": "#/examples/crm/customer/CRM-001",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/pipeline",
+      "hash": "#/examples/crm/pipeline",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/calendar",
+      "hash": "#/examples/crm/calendar",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school",
+      "hash": "#/examples/school",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/students",
+      "hash": "#/examples/school/students",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/student/STU-001",
+      "hash": "#/examples/school/student/STU-001",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/attendance",
+      "hash": "#/examples/school/attendance",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/gradebook",
+      "hash": "#/examples/school/gradebook",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/timetable",
+      "hash": "#/examples/school/timetable",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/kanban",
+      "hash": "#/components/kanban",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/calendar",
+      "hash": "#/components/calendar",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/data-grid",
+      "hash": "#/components/data-grid",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/dashboard-layout",
+      "hash": "#/components/dashboard-layout",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/listing-layout",
+      "hash": "#/components/listing-layout",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-layout",
+      "hash": "#/components/form-layout",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/detail-layout",
+      "hash": "#/components/detail-layout",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/master-detail-layout",
+      "hash": "#/components/master-detail-layout",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/workspace-layout",
+      "hash": "#/components/workspace-layout",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/filter-builder",
+      "hash": "#/components/filter-builder",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/import-wizard",
+      "hash": "#/components/import-wizard",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/export-dialog",
+      "hash": "#/components/export-dialog",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/permission-gate",
+      "hash": "#/components/permission-gate",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/unsaved-changes-guard",
+      "hash": "#/components/unsaved-changes-guard",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/bulk-action-toolbar",
+      "hash": "#/components/bulk-action-toolbar",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/column-visibility-menu",
+      "hash": "#/components/column-visibility-menu",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/saved-view-selector",
+      "hash": "#/components/saved-view-selector",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/timeline",
+      "hash": "#/components/timeline",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/audit-timeline",
+      "hash": "#/components/audit-timeline",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tree-view",
+      "hash": "#/components/tree-view",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/stepper",
+      "hash": "#/components/stepper",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Choose file Current Mock CSV source\" does not contain visible label \"1 Choose file Current Mock CSV source\".",
+          "text": "1Choose fileCurrentMock CSV source"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Map columns Upcoming Match fields\" does not contain visible label \"2 Map columns Upcoming Match fields\".",
+          "text": "2Map columnsUpcomingMatch fields"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Review Upcoming Check before importing\" does not contain visible label \"3 Review Upcoming Check before importing\".",
+          "text": "3ReviewUpcomingCheck before importing"
+        }
+      ]
+    },
+    {
+      "route": "/components/confirm-dialog",
+      "hash": "#/components/confirm-dialog",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/skeleton",
+      "hash": "#/components/skeleton",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/spinner",
+      "hash": "#/components/spinner",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/empty-state",
+      "hash": "#/components/empty-state",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/error-state",
+      "hash": "#/components/error-state",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/permission-state",
+      "hash": "#/components/permission-state",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/command-palette",
+      "hash": "#/components/command-palette",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/icon-button",
+      "hash": "#/components/icon-button",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/button-group",
+      "hash": "#/components/button-group",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/split-button",
+      "hash": "#/components/split-button",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/dropdown-button",
+      "hash": "#/components/dropdown-button",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/date-picker",
+      "hash": "#/components/date-picker",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/date-range-picker",
+      "hash": "#/components/date-range-picker",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/textarea",
+      "hash": "#/components/textarea",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/number-input",
+      "hash": "#/components/number-input",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/currency-input",
+      "hash": "#/components/currency-input",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/radio-group",
+      "hash": "#/components/radio-group",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-field",
+      "hash": "#/components/form-field",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-section",
+      "hash": "#/components/form-section",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/file-upload",
+      "hash": "#/components/file-upload",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/drag-drop-zone",
+      "hash": "#/components/drag-drop-zone",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/combobox",
+      "hash": "#/components/combobox",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/chart",
+      "hash": "#/components/chart",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/masonry",
+      "hash": "#/components/masonry",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/button",
+      "hash": "#/components/button",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/input",
+      "hash": "#/components/input",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/select",
+      "hash": "#/components/select",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/checkbox",
+      "hash": "#/components/checkbox",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/switch",
+      "hash": "#/components/switch",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tag",
+      "hash": "#/components/tag",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/pill",
+      "hash": "#/components/pill",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tabs",
+      "hash": "#/components/tabs",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/table",
+      "hash": "#/components/table",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/modal",
+      "hash": "#/components/modal",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/toast",
+      "hash": "#/components/toast",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tooltip",
+      "hash": "#/components/tooltip",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/popover",
+      "hash": "#/components/popover",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/breadcrumbs",
+      "hash": "#/components/breadcrumbs",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/card",
+      "hash": "#/components/card",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/kpi-card",
+      "hash": "#/components/kpi-card",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/badge",
+      "hash": "#/components/badge",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/filter-chip",
+      "hash": "#/components/filter-chip",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/avatar",
+      "hash": "#/components/avatar",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/avatar-stack",
+      "hash": "#/components/avatar-stack",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/progress-bar",
+      "hash": "#/components/progress-bar",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/alert",
+      "hash": "#/components/alert",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/drawer",
+      "hash": "#/components/drawer",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/detail-panel",
+      "hash": "#/components/detail-panel",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/description-list",
+      "hash": "#/components/description-list",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/pagination",
+      "hash": "#/components/pagination",
+      "kit": "enterprise",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/overview",
+      "hash": "#/overview",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/tokens",
+      "hash": "#/tokens",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components",
+      "hash": "#/components",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Button Explore playground\" does not contain visible label \"Get started Button Explore playground\".",
+          "text": "Get started ButtonExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Input Explore playground\" does not contain visible label \"Your content here Input Explore playground\".",
+          "text": "Your content hereInputExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Select Explore playground\" does not contain visible label \"Your content here Select Explore playground\".",
+          "text": "Your content hereSelectExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Checkbox Explore playground\" does not contain visible label \"Keep it consistent Checkbox Explore playground\".",
+          "text": "Keep it consistentCheckboxExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Tag Explore playground\" does not contain visible label \"Published Tag Explore playground\".",
+          "text": "PublishedTagExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Pill Explore playground\" does not contain visible label \"Published Pill Explore playground\".",
+          "text": "PublishedPillExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Tabs Explore playground\" does not contain visible label \"Overview Settings Tabs Explore playground\".",
+          "text": "OverviewSettingsTabsExplore playground"
+        }
+      ]
+    },
+    {
+      "route": "/settings/general",
+      "hash": "#/settings/general",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/appearance",
+      "hash": "#/settings/appearance",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/about",
+      "hash": "#/settings/about",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/pwa",
+      "hash": "#/settings/pwa",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/kits",
+      "hash": "#/kits",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Catalog Catalog catalog.example Customer\" does not contain visible label \"C Catalog catalog.example Customer\".",
+          "text": "CCatalogcatalog.exampleCustomer"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Circoole Circoole circoole.example Churned\" does not contain visible label \"C Circoole circoole.example Churned\".",
+          "text": "CCircoolecircoole.exampleChurned"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Command Command command.example Customer\" does not contain visible label \"C Command command.example Customer\".",
+          "text": "CCommandcommand.exampleCustomer"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Hourglass Hourglass hourglass.example Customer\" does not contain visible label \"H Hourglass hourglass.example Customer\".",
+          "text": "HHourglasshourglass.exampleCustomer"
+        }
+      ]
+    },
+    {
+      "route": "/learn",
+      "hash": "#/learn",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Choose file Current Mock CSV source\" does not contain visible label \"1 Choose file Current Mock CSV source\".",
+          "text": "1Choose fileCurrentMock CSV source"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Map columns Upcoming Match fields\" does not contain visible label \"2 Map columns Upcoming Match fields\".",
+          "text": "2Map columnsUpcomingMatch fields"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Review Upcoming Check before importing\" does not contain visible label \"3 Review Upcoming Check before importing\".",
+          "text": "3ReviewUpcomingCheck before importing"
+        }
+      ]
+    },
+    {
+      "route": "/examples",
+      "hash": "#/examples",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp",
+      "hash": "#/examples/erp",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/orders",
+      "hash": "#/examples/erp/orders",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/order/SO-1042",
+      "hash": "#/examples/erp/order/SO-1042",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/inventory",
+      "hash": "#/examples/erp/inventory",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/invoice",
+      "hash": "#/examples/erp/invoice",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm",
+      "hash": "#/examples/crm",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/customers",
+      "hash": "#/examples/crm/customers",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/customer/CRM-001",
+      "hash": "#/examples/crm/customer/CRM-001",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/pipeline",
+      "hash": "#/examples/crm/pipeline",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/calendar",
+      "hash": "#/examples/crm/calendar",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school",
+      "hash": "#/examples/school",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/students",
+      "hash": "#/examples/school/students",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/student/STU-001",
+      "hash": "#/examples/school/student/STU-001",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/attendance",
+      "hash": "#/examples/school/attendance",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/gradebook",
+      "hash": "#/examples/school/gradebook",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/timetable",
+      "hash": "#/examples/school/timetable",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/kanban",
+      "hash": "#/components/kanban",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/calendar",
+      "hash": "#/components/calendar",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/data-grid",
+      "hash": "#/components/data-grid",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/dashboard-layout",
+      "hash": "#/components/dashboard-layout",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/listing-layout",
+      "hash": "#/components/listing-layout",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-layout",
+      "hash": "#/components/form-layout",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/detail-layout",
+      "hash": "#/components/detail-layout",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/master-detail-layout",
+      "hash": "#/components/master-detail-layout",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/workspace-layout",
+      "hash": "#/components/workspace-layout",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/filter-builder",
+      "hash": "#/components/filter-builder",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/import-wizard",
+      "hash": "#/components/import-wizard",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/export-dialog",
+      "hash": "#/components/export-dialog",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/permission-gate",
+      "hash": "#/components/permission-gate",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/unsaved-changes-guard",
+      "hash": "#/components/unsaved-changes-guard",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/bulk-action-toolbar",
+      "hash": "#/components/bulk-action-toolbar",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/column-visibility-menu",
+      "hash": "#/components/column-visibility-menu",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/saved-view-selector",
+      "hash": "#/components/saved-view-selector",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/timeline",
+      "hash": "#/components/timeline",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/audit-timeline",
+      "hash": "#/components/audit-timeline",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tree-view",
+      "hash": "#/components/tree-view",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/stepper",
+      "hash": "#/components/stepper",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Choose file Current Mock CSV source\" does not contain visible label \"1 Choose file Current Mock CSV source\".",
+          "text": "1Choose fileCurrentMock CSV source"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Map columns Upcoming Match fields\" does not contain visible label \"2 Map columns Upcoming Match fields\".",
+          "text": "2Map columnsUpcomingMatch fields"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Review Upcoming Check before importing\" does not contain visible label \"3 Review Upcoming Check before importing\".",
+          "text": "3ReviewUpcomingCheck before importing"
+        }
+      ]
+    },
+    {
+      "route": "/components/confirm-dialog",
+      "hash": "#/components/confirm-dialog",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/skeleton",
+      "hash": "#/components/skeleton",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/spinner",
+      "hash": "#/components/spinner",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/empty-state",
+      "hash": "#/components/empty-state",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/error-state",
+      "hash": "#/components/error-state",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/permission-state",
+      "hash": "#/components/permission-state",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/command-palette",
+      "hash": "#/components/command-palette",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/icon-button",
+      "hash": "#/components/icon-button",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/button-group",
+      "hash": "#/components/button-group",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/split-button",
+      "hash": "#/components/split-button",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/dropdown-button",
+      "hash": "#/components/dropdown-button",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/date-picker",
+      "hash": "#/components/date-picker",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/date-range-picker",
+      "hash": "#/components/date-range-picker",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/textarea",
+      "hash": "#/components/textarea",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/number-input",
+      "hash": "#/components/number-input",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/currency-input",
+      "hash": "#/components/currency-input",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/radio-group",
+      "hash": "#/components/radio-group",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-field",
+      "hash": "#/components/form-field",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-section",
+      "hash": "#/components/form-section",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/file-upload",
+      "hash": "#/components/file-upload",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/drag-drop-zone",
+      "hash": "#/components/drag-drop-zone",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/combobox",
+      "hash": "#/components/combobox",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/chart",
+      "hash": "#/components/chart",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/masonry",
+      "hash": "#/components/masonry",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/button",
+      "hash": "#/components/button",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/input",
+      "hash": "#/components/input",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/select",
+      "hash": "#/components/select",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/checkbox",
+      "hash": "#/components/checkbox",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/switch",
+      "hash": "#/components/switch",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tag",
+      "hash": "#/components/tag",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/pill",
+      "hash": "#/components/pill",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tabs",
+      "hash": "#/components/tabs",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/table",
+      "hash": "#/components/table",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/modal",
+      "hash": "#/components/modal",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/toast",
+      "hash": "#/components/toast",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tooltip",
+      "hash": "#/components/tooltip",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/popover",
+      "hash": "#/components/popover",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/breadcrumbs",
+      "hash": "#/components/breadcrumbs",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/card",
+      "hash": "#/components/card",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/kpi-card",
+      "hash": "#/components/kpi-card",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/badge",
+      "hash": "#/components/badge",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/filter-chip",
+      "hash": "#/components/filter-chip",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/avatar",
+      "hash": "#/components/avatar",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/avatar-stack",
+      "hash": "#/components/avatar-stack",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/progress-bar",
+      "hash": "#/components/progress-bar",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/alert",
+      "hash": "#/components/alert",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/drawer",
+      "hash": "#/components/drawer",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/detail-panel",
+      "hash": "#/components/detail-panel",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/description-list",
+      "hash": "#/components/description-list",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/pagination",
+      "hash": "#/components/pagination",
+      "kit": "liquid",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/overview",
+      "hash": "#/overview",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/tokens",
+      "hash": "#/tokens",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components",
+      "hash": "#/components",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Button Explore playground\" does not contain visible label \"Get started Button Explore playground\".",
+          "text": "Get started ButtonExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Input Explore playground\" does not contain visible label \"Your content here Input Explore playground\".",
+          "text": "Your content hereInputExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Select Explore playground\" does not contain visible label \"Your content here Select Explore playground\".",
+          "text": "Your content hereSelectExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Checkbox Explore playground\" does not contain visible label \"Keep it consistent Checkbox Explore playground\".",
+          "text": "Keep it consistentCheckboxExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Tag Explore playground\" does not contain visible label \"Published Tag Explore playground\".",
+          "text": "PublishedTagExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Pill Explore playground\" does not contain visible label \"Published Pill Explore playground\".",
+          "text": "PublishedPillExplore playground"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Tabs Explore playground\" does not contain visible label \"Overview Settings Tabs Explore playground\".",
+          "text": "OverviewSettingsTabsExplore playground"
+        }
+      ]
+    },
+    {
+      "route": "/settings/general",
+      "hash": "#/settings/general",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/appearance",
+      "hash": "#/settings/appearance",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/about",
+      "hash": "#/settings/about",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/settings/pwa",
+      "hash": "#/settings/pwa",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/kits",
+      "hash": "#/kits",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Catalog Catalog catalog.example Customer\" does not contain visible label \"C Catalog catalog.example Customer\".",
+          "text": "CCatalogcatalog.exampleCustomer"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Circoole Circoole circoole.example Churned\" does not contain visible label \"C Circoole circoole.example Churned\".",
+          "text": "CCircoolecircoole.exampleChurned"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Command Command command.example Customer\" does not contain visible label \"C Command command.example Customer\".",
+          "text": "CCommandcommand.exampleCustomer"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Hourglass Hourglass hourglass.example Customer\" does not contain visible label \"H Hourglass hourglass.example Customer\".",
+          "text": "HHourglasshourglass.exampleCustomer"
+        }
+      ]
+    },
+    {
+      "route": "/learn",
+      "hash": "#/learn",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Choose file Current Mock CSV source\" does not contain visible label \"1 Choose file Current Mock CSV source\".",
+          "text": "1Choose fileCurrentMock CSV source"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Map columns Upcoming Match fields\" does not contain visible label \"2 Map columns Upcoming Match fields\".",
+          "text": "2Map columnsUpcomingMatch fields"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Review Upcoming Check before importing\" does not contain visible label \"3 Review Upcoming Check before importing\".",
+          "text": "3ReviewUpcomingCheck before importing"
+        }
+      ]
+    },
+    {
+      "route": "/examples",
+      "hash": "#/examples",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp",
+      "hash": "#/examples/erp",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/orders",
+      "hash": "#/examples/erp/orders",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/order/SO-1042",
+      "hash": "#/examples/erp/order/SO-1042",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/inventory",
+      "hash": "#/examples/erp/inventory",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/erp/invoice",
+      "hash": "#/examples/erp/invoice",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm",
+      "hash": "#/examples/crm",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/customers",
+      "hash": "#/examples/crm/customers",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/customer/CRM-001",
+      "hash": "#/examples/crm/customer/CRM-001",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/pipeline",
+      "hash": "#/examples/crm/pipeline",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/crm/calendar",
+      "hash": "#/examples/crm/calendar",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school",
+      "hash": "#/examples/school",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/students",
+      "hash": "#/examples/school/students",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/student/STU-001",
+      "hash": "#/examples/school/student/STU-001",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/attendance",
+      "hash": "#/examples/school/attendance",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/gradebook",
+      "hash": "#/examples/school/gradebook",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/examples/school/timetable",
+      "hash": "#/examples/school/timetable",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/kanban",
+      "hash": "#/components/kanban",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/calendar",
+      "hash": "#/components/calendar",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/data-grid",
+      "hash": "#/components/data-grid",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/dashboard-layout",
+      "hash": "#/components/dashboard-layout",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/listing-layout",
+      "hash": "#/components/listing-layout",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-layout",
+      "hash": "#/components/form-layout",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/detail-layout",
+      "hash": "#/components/detail-layout",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/master-detail-layout",
+      "hash": "#/components/master-detail-layout",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/workspace-layout",
+      "hash": "#/components/workspace-layout",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/filter-builder",
+      "hash": "#/components/filter-builder",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/import-wizard",
+      "hash": "#/components/import-wizard",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/export-dialog",
+      "hash": "#/components/export-dialog",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/permission-gate",
+      "hash": "#/components/permission-gate",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/unsaved-changes-guard",
+      "hash": "#/components/unsaved-changes-guard",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/bulk-action-toolbar",
+      "hash": "#/components/bulk-action-toolbar",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/column-visibility-menu",
+      "hash": "#/components/column-visibility-menu",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/saved-view-selector",
+      "hash": "#/components/saved-view-selector",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/timeline",
+      "hash": "#/components/timeline",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/audit-timeline",
+      "hash": "#/components/audit-timeline",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tree-view",
+      "hash": "#/components/tree-view",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/stepper",
+      "hash": "#/components/stepper",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Choose file Current Mock CSV source\" does not contain visible label \"1 Choose file Current Mock CSV source\".",
+          "text": "1Choose fileCurrentMock CSV source"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Map columns Upcoming Match fields\" does not contain visible label \"2 Map columns Upcoming Match fields\".",
+          "text": "2Map columnsUpcomingMatch fields"
+        },
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Review Upcoming Check before importing\" does not contain visible label \"3 Review Upcoming Check before importing\".",
+          "text": "3ReviewUpcomingCheck before importing"
+        }
+      ]
+    },
+    {
+      "route": "/components/confirm-dialog",
+      "hash": "#/components/confirm-dialog",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/skeleton",
+      "hash": "#/components/skeleton",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/spinner",
+      "hash": "#/components/spinner",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/empty-state",
+      "hash": "#/components/empty-state",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/error-state",
+      "hash": "#/components/error-state",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/permission-state",
+      "hash": "#/components/permission-state",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/command-palette",
+      "hash": "#/components/command-palette",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/icon-button",
+      "hash": "#/components/icon-button",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/button-group",
+      "hash": "#/components/button-group",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/split-button",
+      "hash": "#/components/split-button",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/dropdown-button",
+      "hash": "#/components/dropdown-button",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/date-picker",
+      "hash": "#/components/date-picker",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/date-range-picker",
+      "hash": "#/components/date-range-picker",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/textarea",
+      "hash": "#/components/textarea",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/number-input",
+      "hash": "#/components/number-input",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/currency-input",
+      "hash": "#/components/currency-input",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/radio-group",
+      "hash": "#/components/radio-group",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-field",
+      "hash": "#/components/form-field",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/form-section",
+      "hash": "#/components/form-section",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/file-upload",
+      "hash": "#/components/file-upload",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/drag-drop-zone",
+      "hash": "#/components/drag-drop-zone",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/combobox",
+      "hash": "#/components/combobox",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/chart",
+      "hash": "#/components/chart",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/masonry",
+      "hash": "#/components/masonry",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/button",
+      "hash": "#/components/button",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/input",
+      "hash": "#/components/input",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/select",
+      "hash": "#/components/select",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/checkbox",
+      "hash": "#/components/checkbox",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/switch",
+      "hash": "#/components/switch",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tag",
+      "hash": "#/components/tag",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/pill",
+      "hash": "#/components/pill",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tabs",
+      "hash": "#/components/tabs",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/table",
+      "hash": "#/components/table",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/modal",
+      "hash": "#/components/modal",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/toast",
+      "hash": "#/components/toast",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/tooltip",
+      "hash": "#/components/tooltip",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/popover",
+      "hash": "#/components/popover",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/breadcrumbs",
+      "hash": "#/components/breadcrumbs",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/card",
+      "hash": "#/components/card",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/kpi-card",
+      "hash": "#/components/kpi-card",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/badge",
+      "hash": "#/components/badge",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/filter-chip",
+      "hash": "#/components/filter-chip",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/avatar",
+      "hash": "#/components/avatar",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/avatar-stack",
+      "hash": "#/components/avatar-stack",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/progress-bar",
+      "hash": "#/components/progress-bar",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/alert",
+      "hash": "#/components/alert",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/drawer",
+      "hash": "#/components/drawer",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/detail-panel",
+      "hash": "#/components/detail-panel",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/description-list",
+      "hash": "#/components/description-list",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "route": "/components/pagination",
+      "hash": "#/components/pagination",
+      "kit": "ops",
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\".",
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "openGrids": [
+    {
+      "kit": "enterprise",
+      "route": "#/examples/crm/calendar",
+      "view": "month",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "27",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "29",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "2",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "enterprise",
+      "route": "#/examples/crm/calendar",
+      "view": "week",
+      "days": 7,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "27",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "29",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "enterprise",
+      "route": "#/components/calendar",
+      "view": "month",
+      "days": 91,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "enterprise",
+      "route": "#/components/calendar",
+      "view": "week",
+      "days": 56,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "enterprise",
+      "route": "#/components/date-picker",
+      "view": "open",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "enterprise",
+      "route": "#/components/date-range-picker",
+      "view": "open",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "liquid",
+      "route": "#/examples/crm/calendar",
+      "view": "month",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "27",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "29",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "2",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "liquid",
+      "route": "#/examples/crm/calendar",
+      "view": "week",
+      "days": 7,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "27",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "29",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "liquid",
+      "route": "#/components/calendar",
+      "view": "month",
+      "days": 91,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "liquid",
+      "route": "#/components/calendar",
+      "view": "week",
+      "days": 56,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "liquid",
+      "route": "#/components/date-picker",
+      "view": "open",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "liquid",
+      "route": "#/components/date-range-picker",
+      "view": "open",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "ops",
+      "route": "#/examples/crm/calendar",
+      "view": "month",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "27",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "29",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "2",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "ops",
+      "route": "#/examples/crm/calendar",
+      "view": "week",
+      "days": 7,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "27",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "29",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "ops",
+      "route": "#/components/calendar",
+      "view": "month",
+      "days": 91,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "ops",
+      "route": "#/components/calendar",
+      "view": "week",
+      "days": 56,
+      "invalidDays": [],
+      "counts": [
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "26",
+          "count": "2",
+          "generated": "\"2\" / \"\""
+        },
+        {
+          "text": "28",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "30",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        },
+        {
+          "text": "1",
+          "count": "1",
+          "generated": "\"1\" / \"\""
+        }
+      ],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "ops",
+      "route": "#/components/date-picker",
+      "view": "open",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    },
+    {
+      "kit": "ops",
+      "route": "#/components/date-range-picker",
+      "view": "open",
+      "days": 42,
+      "invalidDays": [],
+      "counts": [],
+      "violations": [
+        {
+          "rule": "label-in-name",
+          "message": "Accessible name \"Global search\" does not contain visible label \"⌘ K\"."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "routeChecks": 291,
+    "routeViolations": 342,
+    "gridChecks": 18,
+    "invalidDays": 0
+  }
+}

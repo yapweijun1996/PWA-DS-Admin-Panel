@@ -65,13 +65,13 @@ function seriesStyle(index) { return `--chart-series: var(--series-${index % 8 +
 
 /** A DOM element with update(nextOptions) and idempotent destroy() lifecycle methods. */
 export function createChart(options = {}) {
-  let props = { type: 'line', labels: [], series: [], formatValue: defaultFormat, loading: false, title: text('Chart', '图表'), ...options };
+  let props = { type: 'line', labels: [], series: [], formatValue: defaultFormat, loading: false, title: text('Chart', '图表'), headingLevel: 3, ...options };
   let hidden = new Set();
   let width = 600;
   let destroyed = false;
   let tooltipTarget;
   const id = uniqueId('chart');
-  const heading = element('h4', { className: 'ds-chart-title', id: `${id}-title` });
+  let heading = element(`h${props.headingLevel}`, { className: 'ds-chart-title', id: `${id}-title` });
   const plot = element('div', { className: 'ds-chart-plot' });
   const legend = element('div', { className: 'ds-chart-legend', role: 'group', 'aria-label': text('Chart legend; toggle visibility', '图例；切换可见性') });
   const tooltip = element('div', { className: 'ds-chart-tooltip', role: 'tooltip', id: `${id}-tooltip`, hidden: true });
@@ -298,6 +298,11 @@ export function createChart(options = {}) {
   }
   function refresh() {
     if (destroyed) return;
+    if (heading.tagName.toLowerCase() !== `h${props.headingLevel}`) {
+      const nextHeading = element(`h${props.headingLevel}`, { className: 'ds-chart-title', id: heading.id });
+      heading.replaceWith(nextHeading);
+      heading = nextHeading;
+    }
     heading.textContent = props.title;
     const { labels, series } = data();
     updateLegend(labels, series);
@@ -351,7 +356,7 @@ export function render(container) {
 
 export const guide = {
   purpose: 'Visualize trends, comparisons and shares with dependency-free SVG charts and a complete accessible table alternative.',
-  props: ['createChart({type, labels, series:[{name,values}], formatValue, loading, title}) returns a DOM element with update(nextOptions) and destroy().', 'Values are finite numbers; missing values are gaps. Donut uses the first series with labels as slices, requires non-negative values, and its legend toggles slices and displays formatted slice values.', 'formatValue(number) formats ticks, tooltips, summaries, donut legend values and table cells. destroy() is automatic on DOM removal; call it explicitly when disposing an unmounted chart.'],
+  props: ['createChart({type, labels, series:[{name,values}], formatValue, loading, title, headingLevel=3}) returns a DOM element with update(nextOptions) and destroy(). Set headingLevel (1–6) to follow the containing section.', 'Values are finite numbers; missing values are gaps. Donut uses the first series with labels as slices, requires non-negative values, and its legend toggles slices and displays formatted slice values.', 'formatValue(number) formats ticks, tooltips, summaries, donut legend values and table cells. destroy() is automatic on DOM removal; call it explicitly when disposing an unmounted chart.'],
   variants: ['line: trends with multiple series and line-and-marker legend swatches.', 'bar: grouped category comparisons with filled rounded-square legend swatches.', 'stacked: positive and negative totals are stacked separately; filled rounded-square legend swatches.', 'area: volume over time from a zero baseline with filled rounded-square legend swatches.', 'donut: share of a whole; numbered slices match the ordered legend, filled rounded-square swatches and formatted values.', 'sparkline: compact trend without axis labels; retains line-and-marker legend and table access.'],
   tokens: ['--series-1 through --series-8, --color-border-subtle, --surface, --text, --muted, --focus-ring.'],
   states: ['Default, hovered or focused point, hidden series/slice, empty, zero-only, loading, expanded data table.'],

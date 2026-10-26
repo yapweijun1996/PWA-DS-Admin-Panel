@@ -46,7 +46,7 @@ export function render(container) {
   let root;
   function update() {
     if (props.disableLast && props.active === 2) props.active = 0;
-    root = createTabs({ items: items.map((item, index) => ({ label: item.label, content: [element('h4', {}, item.title), element('p', {}, item.description)], disabled: props.disableLast && index === 2 })), label: text('Mock workspace sections', '模拟工作区分区'), ...props, onChange: index => { props.active = index; describe(); } });
+    root = createTabs({ items: items.map((item, index) => ({ label: item.label, content: [element('h3', {}, item.title), element('p', {}, item.description)], disabled: props.disableLast && index === 2 })), label: text('Mock workspace sections', '模拟工作区分区'), ...props, onChange: index => { props.active = index; describe(); } });
     page.preview.replaceChildren(root, feedback);
     describe();
   }

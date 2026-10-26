@@ -22,7 +22,7 @@ function statusTone(status) {
   return { confirmed: 'success', completed: 'success', pending: 'warning', tentative: 'warning', cancelled: 'danger', overdue: 'danger', scheduled: 'info' }[value] || 'neutral';
 }
 
-export function createCalendar({ date = '2026-10-26', view = 'month', events = [], locale = 'en-GB', onSelectDate = () => {}, onSelectEvent = () => {} } = {}) {
+export function createCalendar({ date = '2026-10-26', view = 'month', events = [], locale = 'en-GB', headingLevel = 3, onSelectDate = () => {}, onSelectEvent = () => {} } = {}) {
   const id = uniqueId('calendar');
   let selected = parseISODate(date) ? date : '2026-10-26';
   let currentView = view === 'week' ? 'week' : 'month';
@@ -34,7 +34,7 @@ export function createCalendar({ date = '2026-10-26', view = 'month', events = [
   const weekdayShort = format({ weekday: 'short' });
   const weekdayLong = format({ weekday: 'long' });
   const number = new Intl.NumberFormat(locale, { useGrouping: false });
-  const heading = element('h3', { id: `${id}-heading`, className: 'ds-calendar-heading', 'aria-live': 'polite', 'aria-atomic': 'true' });
+  const heading = element(`h${headingLevel}`, { id: `${id}-heading`, className: 'ds-calendar-heading', 'aria-live': 'polite', 'aria-atomic': 'true' });
   const help = element('p', { id: `${id}-help`, className: 'ds-calendar-help' }, 'Arrows: day/week · Home/End: week boundaries · Page Up/Down: previous/next view period · Shift + Page Up/Down: year. Select a day to read its events; Tab reaches every event.');
   const announcement = element('p', { className: 'ds-calendar-sr-only', role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true' });
   const previous = button('', () => choose(shiftCalendarDate(selected, -1, currentView)), 'secondary', { className: 'ds-button ds-button-secondary ds-calendar-nav' });
@@ -48,7 +48,7 @@ export function createCalendar({ date = '2026-10-26', view = 'month', events = [
   const weekdays = Array.from({ length: 7 }, (_, index) => dateObject(addDays('2026-10-25', (weekStart + index) % 7)));
   const body = element('tbody');
   const grid = element('table', { className: 'ds-calendar-grid', role: 'grid', 'aria-labelledby': heading.id, 'aria-describedby': help.id }, element('thead', {}, element('tr', { role: 'row' }, ...weekdays.map(day => element('th', { role: 'columnheader', scope: 'col', abbr: weekdayLong.format(day) }, weekdayShort.format(day))))), body);
-  const agendaHeading = element('h4', { id: `${id}-agenda-heading`, className: 'ds-calendar-agenda-heading' });
+  const agendaHeading = element(`h${Math.min(6, headingLevel + 1)}`, { id: `${id}-agenda-heading`, className: 'ds-calendar-agenda-heading' });
   const agendaBody = element('div', { className: 'ds-calendar-agenda-body' });
   const agenda = element('section', { className: 'ds-calendar-agenda', 'aria-labelledby': agendaHeading.id }, agendaHeading, agendaBody);
   const root = element('section', { className: 'ds-calendar', 'aria-labelledby': heading.id },
@@ -77,10 +77,10 @@ export function createCalendar({ date = '2026-10-26', view = 'month', events = [
     if (target) choose(target, true);
   }
   function eventItem(event) {
-    const label = `${event.time || 'All day'} · ${event.title}${event.status ? ` · ${event.status}` : ''}`;
-    const control = button('', () => onSelectEvent(event), 'ghost', { className: 'ds-button ds-button-ghost ds-calendar-event', 'data-event-id': event.id, 'aria-label': `${formatted(event.date)} · ${label}` });
-    control.append(element('span', { className: 'ds-calendar-event-time' }, event.time || 'All day'), element('span', { className: 'ds-calendar-event-title' }, event.title));
-    if (event.status) control.append(createTag({ label: event.status, tone: statusTone(event.status), dot: true, pill: true, size: 'small' }));
+    const label = `${event.time || 'All day'} ${event.title}${event.status ? ` ${event.status}` : ''}`;
+    const control = button('', () => onSelectEvent(event), 'ghost', { className: 'ds-button ds-button-ghost ds-calendar-event', 'data-event-id': event.id, 'aria-label': `${label}, ${formatted(event.date)}` });
+    control.append(element('span', { className: 'ds-calendar-event-time' }, event.time || 'All day'), ' ', element('span', { className: 'ds-calendar-event-title' }, event.title));
+    if (event.status) control.append(' ', createTag({ label: event.status, tone: statusTone(event.status), dot: true, pill: true, size: 'small' }));
     return element('li', {}, control);
   }
   function refresh() {
@@ -101,8 +101,8 @@ export function createCalendar({ date = '2026-10-26', view = 'month', events = [
       rows.push(element('tr', { role: 'row' }, ...days.slice(index, index + 7).map(day => {
         if (!day.date) return element('td', { role: 'gridcell', 'aria-disabled': 'true' });
         const isSelected = day.date === selected;
-        const dayButton = button('', () => choose(day.date, true), 'ghost', { className: 'ds-calendar-day', 'data-date': day.date, 'data-outside': String(!day.inMonth), 'data-selected': String(isSelected), tabindex: isSelected ? '0' : '-1', 'aria-current': day.date === todayDate ? 'date' : undefined, 'aria-label': `${formatted(day.date, true)}${day.date === todayDate ? ', today' : ''}, ${day.events.length} ${day.events.length === 1 ? 'event' : 'events'}` });
-        dayButton.append(element('span', { className: 'ds-calendar-day-number' }, number.format(day.day)), element('span', { className: 'ds-calendar-day-count', 'aria-hidden': 'true' }, day.events.length ? `${number.format(day.events.length)} ·` : ''));
+        const dayButton = button('', () => choose(day.date, true), 'ghost', { className: 'ds-calendar-day', 'data-date': day.date, 'data-outside': String(!day.inMonth), 'data-selected': String(isSelected), tabindex: isSelected ? '0' : '-1', 'aria-current': day.date === todayDate ? 'date' : undefined, 'aria-label': `${number.format(day.day)}, ${formatted(day.date, true)}${day.date === todayDate ? ', today' : ''}, ${number.format(day.events.length)} ${day.events.length === 1 ? 'event' : 'events'}` });
+        dayButton.append(element('span', { className: 'ds-calendar-day-number' }, number.format(day.day)), element('span', { className: 'ds-calendar-day-count', 'aria-hidden': 'true', 'data-count': day.events.length ? number.format(day.events.length) : '' }));
         dayButton.addEventListener('keydown', event => dayKey(event, day.date));
         return element('td', { role: 'gridcell', 'aria-selected': String(isSelected) }, dayButton);
       })));
@@ -111,7 +111,7 @@ export function createCalendar({ date = '2026-10-26', view = 'month', events = [
     agendaHeading.textContent = currentView === 'month' ? `Events · ${formatted(selected, true)}` : 'Events this week';
     const agendaDays = currentView === 'month' ? days.filter(day => day.date === selected) : validDays;
     const eventGroups = agendaDays.filter(day => day.events.length).map(day => element('section', { className: 'ds-calendar-event-group', 'data-selected': String(day.date === selected) },
-      currentView === 'week' ? element('h5', { className: 'ds-calendar-event-date' }, formatted(day.date, true)) : null,
+      currentView === 'week' ? element(`h${Math.min(6, headingLevel + 2)}`, { className: 'ds-calendar-event-date' }, formatted(day.date, true)) : null,
       element('ul', { className: 'ds-calendar-events', 'aria-label': `Events for ${formatted(day.date)}` }, ...day.events.map(eventItem))));
     agendaBody.replaceChildren(...(eventGroups.length ? eventGroups : [element('p', { className: 'ds-calendar-empty' }, currentView === 'month' ? 'No events on this date.' : 'No events this week.')]));
     if (hadDayFocus) focusDay();
@@ -141,7 +141,7 @@ export function createCalendar({ date = '2026-10-26', view = 'month', events = [
 
 export const guide = {
   purpose: 'Browse date-only schedules in locale-aligned month and week views, with a complete keyboard model and accessible event lists.',
-  props: ['createCalendar({date="2026-10-26", view="month", events=[], locale="en-GB", onSelectDate, onSelectEvent}) returns {element, setEvents, getDate, setDate, setView, getView, destroy}.', 'Events are {id, title, date, time?, status?}; dates use ISO YYYY-MM-DD and optional times use HH:mm labels without timezone conversion. All-day events sort first, followed by time; equal times retain input order. Callbacks receive the selected ISO date or original event object.', 'setEvents replaces records. setDate and setView update silently and return false for invalid input. Date selection, arrow navigation and period controls call onSelectDate.'],
+  props: ['createCalendar({date="2026-10-26", view="month", events=[], locale="en-GB", headingLevel=3, onSelectDate, onSelectEvent}) returns {element, setEvents, getDate, setDate, setView, getView, destroy}. Set headingLevel (1–6) for the containing section; agenda/date headings follow it.', 'Events are {id, title, date, time?, status?}; dates use ISO YYYY-MM-DD and optional times use HH:mm labels without timezone conversion. All-day events sort first, followed by time; equal times retain input order. Callbacks receive the selected ISO date or original event object.', 'setEvents replaces records. setDate and setView update silently and return false for invalid input. Date selection, arrow navigation and period controls call onSelectDate.'],
   variants: ['Month: stable six-week grid with counts and selected-date agenda. Week: seven-day grid and all events across the displayed week. Locale defines the first day of the week.'],
   states: ['Selected date, today marker, adjacent-month day, populated agenda, empty date/week and previous/next date boundary. Status chips display their text with semantic token colours.'],
   keyboard: ['Left/Right selects the previous/next day; Up/Down selects the previous/next week. Home/End selects locale week boundaries. Page Up/Down moves one displayed period, and Shift + Page Up/Down moves a year with day clamping.', 'Enter/Space activates a day or event. One date is in the tab sequence; Tab reaches every event in the agenda and all view/period controls. Selection follows date-key navigation.'],

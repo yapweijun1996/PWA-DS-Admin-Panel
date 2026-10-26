@@ -5,9 +5,9 @@ import { parseNumber, normalizeNumber, stepNumber, validateNumber } from '../js/
 export function createNumberInput({ label = 'Quantity', value = null, min, max, step = 1, precision, disabled = false, required = false, hint = '', onChange = () => {} } = {}) {
   const options = { min, max, step, precision };
   const input = element('input', { type: 'text', inputmode: precision === 0 ? 'numeric' : 'decimal', className: 'ds-input', role: 'spinbutton', 'aria-valuemin': min, 'aria-valuemax': max, disabled, required });
-  const minus = button('−', () => adjust(-1), 'secondary', { 'aria-label': `Decrease ${label}`, disabled });
+  const minus = button(element('span', { 'aria-hidden': 'true' }, '−'), () => adjust(-1), 'secondary', { 'aria-label': `Decrease ${label}`, disabled });
   input.required = required;
-  const plus = button('+', () => adjust(1), 'secondary', { 'aria-label': `Increase ${label}`, disabled });
+  const plus = button(element('span', { 'aria-hidden': 'true' }, '+'), () => adjust(1), 'secondary', { 'aria-label': `Increase ${label}`, disabled });
   const root = element('div', { className: 'ds-number-input' }, minus, input, plus);
   const field = createFormField({ label, control: input, hint: hint || `Step ${step}${min === undefined ? '' : `; minimum ${min}`}${max === undefined ? '' : `; maximum ${max}`}${precision === undefined ? '' : `; ${precision} decimal places`}.`, required });
   input.replaceWith(root); root.append(input, plus);

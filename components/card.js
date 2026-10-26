@@ -1,9 +1,9 @@
 import { element, text, playground, textControl, toggleControl, statePreview, statusMessage, button, uniqueId } from './playground.js';
 
-export function createCard({ title, description, content, actions, footer } = {}) {
+export function createCard({ title, description, content, actions, footer, headingLevel = 3 } = {}) {
   const id = uniqueId('card-title');
   const card = element('section', { className: 'ds-card', 'aria-labelledby': title ? id : undefined });
-  if (title || description || actions) card.append(element('header', { className: 'ds-card-header' }, element('div', { className: 'ds-card-heading' }, title ? element('h3', { id }, title) : null, description ? element('p', {}, description) : null), actions ? element('div', { className: 'ds-card-actions' }, actions) : null));
+  if (title || description || actions) card.append(element('header', { className: 'ds-card-header' }, element('div', { className: 'ds-card-heading' }, title ? element(`h${headingLevel}`, { id }, title) : null, description ? element('p', {}, description) : null), actions ? element('div', { className: 'ds-card-actions' }, actions) : null));
   if (content !== undefined) card.append(element('div', { className: 'ds-card-content' }, content));
   if (footer !== undefined) card.append(element('footer', { className: 'ds-card-footer' }, footer));
   return card;

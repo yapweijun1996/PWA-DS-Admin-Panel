@@ -1,15 +1,15 @@
 import { element, uniqueId, playground, textControl } from './playground.js';
 import { createFormField } from './form-field.js';
 
-export function createFormSection({ title, description = '', content = [] }) {
+export function createFormSection({ title, description = '', content = [], headingLevel = 3 }) {
   const id = uniqueId('form-section');
   return element('section', { className: 'ds-form-section', 'aria-labelledby': id },
-    element('header', {}, element('h3', { id }, title), description ? element('p', {}, description) : null),
+    element('header', {}, element(`h${headingLevel}`, { id }, title), description ? element('p', {}, description) : null),
     element('div', { className: 'ds-form-section-content' }, ...(Array.isArray(content) ? content : [content])));
 }
 export const guide = {
   purpose: 'Group related fields into a named, readable form section.',
-  props: ['createFormSection({title, description, content}) returns a section DOM node; content is a node or array of nodes.'],
+  props: ['createFormSection({title, description, content, headingLevel=3}) returns a section DOM node; content is a node or array of nodes. Set headingLevel (1–6) to follow the containing section.'],
   variants: ['With or without a description.'], states: ['Static section; controls retain their own states.'],
   keyboard: ['No additional tab stops; native document and field order is preserved.'],
   accessibility: ['A visible heading labels the semantic section through aria-labelledby.'],

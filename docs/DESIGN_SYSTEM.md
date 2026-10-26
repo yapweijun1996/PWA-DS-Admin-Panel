@@ -1,14 +1,14 @@
 # Design System
 
-Single source of truth (SSOT) for the PWA Design System Admin Panel. Targets ERP, CRM and School systems.
-Stack: vanilla HTML, CSS custom properties, ES Modules. No framework, no bundler, no runtime dependency (owner decision, see `ROADMAP.md`).
+Single source of truth (SSOT) for Forma, the PWA Design System Admin Panel. Targets ERP, CRM and School systems.
+Stack: vanilla HTML, CSS custom properties, ES Modules. No framework, bundler or runtime dependency (owner decisions in [ROADMAP.md](ROADMAP.md)). The reference app has no backend; product records and permissions are explicitly mock, with session-local record changes rather than server persistence.
 
 ## Principles
 1. **Consistency**: one canonical implementation per component, one stylesheet per component.
 2. **Clarity**: predictable layouts, explicit states, no inert controls.
 3. **Efficiency**: dense, keyboard-friendly workflows.
 4. **Scalability**: tokens and components work for a small admin and a large ERP.
-5. **Accessibility**: WCAG 2.2 AA target, verified with real browser checks.
+5. **Accessibility**: WCAG 2.2 AA target; use the [accessibility requirements](ACCESSIBILITY.md) and record actual browser/device evidence, not an assumed certification.
 6. **SSOT compliance**: no raw colour, spacing or radius values outside tokens.
 7. **Data integrity**: destructive and financial actions are explicit and reviewable.
 
@@ -38,8 +38,12 @@ Tokens, then themes, then core components, then layouts, then patterns, then pro
 Lower layers never import from higher layers.
 
 ## Quality gate
-`npm run verify` = build tokens + `scripts/check.mjs` (ratchet) + `npm test`. A change is not done until it passes, and UI changes are
-also checked in a real browser at 390, 768 and 1440px in light and dark.
+
+`npm run verify` runs `npm run build`, `npm run check` and `npm test` in order. Build generates tokens/appearance CSS, PNG icons and `docs/COMPONENT_REGISTRY.md`, then stamps build identity and the PWA precache. The check gate enforces source contracts, registry metadata, generated-file sync (including stale registry documentation), product import direction and the 48 theme × palette × kit contrast matrix. Tests run through `node --test tests/`.
+
+A change is not done until the relevant gates pass. UI changes also require real-browser checks across all three kits, both themes and 390, 768 and 1440px, with keyboard flows and affected accessibility preferences exercised. PWA changes require offline reload and explicit guarded-update checks; exported bundles require a plain static-server/subpath consumer check. These are requirements, not claims that every current change has been verified.
+
+Follow [GOVERNANCE.md](GOVERNANCE.md) for admission/release authority and [ACCESSIBILITY.md](ACCESSIBILITY.md) for keyboard, focus, contrast and assistive-technology requirements. Phase summaries record commands, browser evidence and limitations; [SUMMARY-phase5.md](SUMMARY-phase5.md) is the current Phase 5 authority, including any pending polish or unverified matrix coverage.
 
 ## Terminology
 | Term | Meaning in this project |
@@ -70,7 +74,7 @@ Cross-cutting           documentation (DS Guide), governance, quality gates, PWA
 - Liquid: palette-derived ambient backdrop and glass chrome, menus, dialogs, drawers and toasts; dense content stays solid. Glass falls back to solid under reduced transparency or missing backdrop-filter support, and large overlays suspend chrome blur.
 - Ops: compact dark-first operations preset, teal default, 56px rail, 48px top bar, tabular monospaced values. Light remains supported.
 - Kit defaults apply only to axes without an explicit user selection. Kit changes never require component JavaScript branches.
-- `scripts/contrast.mjs` checks all 48 theme × palette × kit combinations: primary/muted/accent/status text ≥4.5, white accent-button labels ≥4.5, control borders/focus rings ≥3, including worst-case glass backdrop checks. Decorative `--color-border-subtle` lines are excluded from control-boundary requirements; thresholds are never lowered.
+- `scripts/contrast.mjs` checks 96 theme × palette × kit × contrast-preference combinations: primary/muted/accent/status text ≥4.5, white accent-button labels ≥4.5, control borders/focus rings ≥3, including worst-case glass backdrop checks. Small navigation counts use opaque primary text on normal, hovered and active surfaces; neutral/accent/status badges and notification counts have explicit ≥4.5 text checks. Decorative `--color-border-subtle` lines are excluded from normal control-boundary requirements; thresholds are never lowered. The `more` preference strengthens text and both border roles through semantic tokens and makes Liquid surfaces opaque.
 - Color literals are confined to token sources and generated outputs. Use `--accent` for fills, `--accent-text` for foreground text, `--accent-contrast` for button labels and status `*-text` roles for status text.
 
 ## Required components (owner)
@@ -145,3 +149,40 @@ The registry now has 71 components/layouts. Kanban, Calendar and Data grid expos
 `#/examples` composes the three L7 workspaces from shared components/layouts/patterns. Product code lives in `js/examples/{erp,crm,school}/`, styles in `css/examples/`; only `js/example-routes.js` imports product modules for dispatch. `scripts/check.mjs` rejects reverse product imports, including dynamic imports and CSS imports. Domain models live under `js/logic/`, so tests do not bypass the boundary.
 
 ERP uses integer-cent, per-line half-up tax math and maps existing Settings mock customer capabilities to labelled order/invoice actions. CRM activity times are local demonstration labels, not timezone-aware timestamps. School treats Late as attended, excludes missing scores from averages and uses competition rank on unrounded averages (1, 1, 3). Gradebook calculations appear in an adjacent shared Table rather than inventing a second grid implementation. Product records are fictional and session-local; confirmed reset restores seeds without erasing saved view preferences.
+
+## Adoption and generated documentation (Phase 5, 0.6.0)
+
+`components/registry.js` remains the canonical catalog for names, human labels, categories, purpose, props, variants, states, keyboard/a11y guidance and live renderers. The live Guide uses that metadata and the real components. [COMPONENT_REGISTRY.md](COMPONENT_REGISTRY.md) is a generated reference, not a second hand-maintained source: `scripts/build-registry-doc.mjs` emits names, labels, categories, purpose, props and accessibility summaries. Regenerate it with `npm run docs:registry` or `npm run build`; `npm run check` fails when it is stale. Edit the registry to change component documentation, never the generated Markdown.
+
+For a new application, follow [USAGE.md](USAGE.md). After `npm run build`, export a selected look:
+
+```sh
+node scripts/export-kit.mjs --kit enterprise --palette blue --out dist-kit
+npm run export:kits
+```
+
+The single export defaults to palette `blue` and output `dist-kit/`; the all-kits command writes `dist-kits/enterprise/`, `dist-kits/liquid/` and `dist-kits/ops/`. These outputs are git-ignored. Each bundle includes only the selected kit/palette with both light and dark themes, the canonical component modules and their relative runtime dependency closure, icons, shared styles, pre-paint boot assets, a ten-line quick start, a `kit-manifest.json` with version/build/kit/palette/file hashes, and a standalone `demo.html` with Button, Input, Combobox, Table and Chart.
+
+Preserve the whole bundle's directory structure. Run `boot.js` before styles to resolve theme before paint; load `tokens.css`, `components.css`, then `appearance.css`. Set the exported `data-kit` and `data-palette` and resolved `data-theme` on the document root; density remains independent. The bundle is not a runtime kit/palette chooser. Consumers compose the same semantic tokens and shared APIs as the Guide rather than editing generated files or adding kit-specific behavior.
+
+Upgrade as one versioned bundle, not mixed files from different builds. Read `../CHANGELOG.md` migration notes and compare the manifest. The exporter refuses unrelated/added files, modified hashed files and symlink destinations rather than overwriting consumer work. Keep consumer application code outside the generated bundle; permissions, data services, form ownership and persistence remain the consumer's responsibilities.
+
+## PWA and application boundaries
+
+The documentation/admin app owns `manifest.webmanifest`, `sw.js`, routing and PWA update UI. The exported kit does **not** register a service worker or import the app shell, product examples or router. A consumer that needs offline support must own its own cache lifecycle and update policy; exporting a kit does not provide a backend or make it a complete production application.
+
+After the app's first successful online load and worker installation, shell, token editing, component documentation and session-local examples work offline. Initial installation/update checks need connectivity; cache eviction or clearing requires another successful online load. Browser-local appearance, token overrides/history and other preferences are not server writes; mock permissions are not authorization. Never put sensitive records or secrets in demo storage.
+
+The worker precaches with `?v=<BUILD>` and `cache: 'reload'` to mitigate briefly mixed GitHub Pages CDN versions. Before candidate cache writes, fetched `js/build-info.js` must declare the worker's exact build; missing, malformed, mismatched or failed fetches reject installation, leaving the active version available. Cached asset URLs are canonical and query-free, and lookups ignore search. This is a build-identity check, not a per-file cryptographic integrity guarantee.
+
+App startup and visible-tab update checks share a ten-minute throttle. Unknown routes force a check and offer the shared update flow when a waiting/installing worker is available; otherwise normal not-found search and Home navigation remain. Only explicit **Update now** activates the worker, after all dirty owners resolve Save/Discard/Cancel, with the loader and single controller-change reload. No automatic activation is introduced.
+
+All runtime URLs remain relative for GitHub Pages and consumer subpaths. [DEPLOYMENT.md](DEPLOYMENT.md) documents deployment and CDN safeguards; [DECISIONS.md](DECISIONS.md) records interpretations. See [SUMMARY-phase5.md](SUMMARY-phase5.md) for observed evidence and verification limits.
+
+## Phase 5 low-risk polish
+
+- ERP/CRM/School compose a custom **Demo controls** disclosure immediately after the page header. Demo-state selectors and confirmed reset actions stay separate from real search, filters and primary actions. It starts collapsed, stores only open/closed state per domain in sessionStorage, and falls back to memory when storage is blocked. Toggling never rebuilds editors or loses dirty drafts.
+- `--page-header-gap`, `--page-subtitle-gap`, `--page-section-gap` and `--page-toolbar-gap` provide shared Guide/Kits/Examples rhythm. Shared tables consume density-aware `--table-cell-padding`, `--table-cell-padding-block` and `--table-header-padding-block`; plain headers retain padding without relying on sort buttons for height.
+- Guide, Design kits and Examples use distinct icons in `js/icons.js`, preserving the icon SSOT.
+- `prefers-contrast: more` resolves `--contrast-text`, `--contrast-muted` and `--contrast-border` after kit overrides, strengthens decorative boundaries too, and uses opaque surface tokens for Liquid. The same mapping drives generated appearance CSS and the expanded contrast gate; exported bundles inherit it.
+

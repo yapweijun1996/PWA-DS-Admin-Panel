@@ -160,7 +160,7 @@ export function createDateControl({ label = 'Date', value = null, locale = 'en-U
         const isEnd = range && cell.date === selected.end;
         const inRange = range && selected.end && cell.date >= selected.start && cell.date <= selected.end;
         const isSelected = range ? Boolean(isStart || isEnd || inRange) : cell.date === selected;
-        const dateButton = button(number.format(cell.day), () => choose(cell.date), 'ghost', { className: 'ds-date-picker-day', tabindex: cell.date === active ? '0' : '-1', 'data-date': cell.date, 'data-outside': String(!cell.inMonth), 'data-selected': String(isSelected), 'data-endpoint': String(range ? isStart || isEnd : isSelected), 'aria-disabled': String(cell.disabled), 'aria-current': cell.date === today ? 'date' : undefined, 'aria-label': `${formatted(cell.date, true)}${isStart ? ', range start' : ''}${isEnd ? ', range end' : ''}` });
+        const dateButton = button(number.format(cell.day), () => choose(cell.date), 'ghost', { className: 'ds-date-picker-day', tabindex: cell.date === active ? '0' : '-1', 'data-date': cell.date, 'data-outside': String(!cell.inMonth), 'data-selected': String(isSelected), 'data-endpoint': String(range ? isStart || isEnd : isSelected), 'aria-disabled': String(cell.disabled), 'aria-current': cell.date === today ? 'date' : undefined, 'aria-label': `${number.format(cell.day)}, ${formatted(cell.date, true)}${isStart ? ', range start' : ''}${isEnd ? ', range end' : ''}` });
         dateButton.addEventListener('focus', () => {
           active = cell.date;
           grid.querySelectorAll('.ds-date-picker-day').forEach(node => { node.tabIndex = node === dateButton ? 0 : -1; });

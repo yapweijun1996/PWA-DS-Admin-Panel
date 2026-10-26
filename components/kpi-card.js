@@ -4,7 +4,7 @@ import { createBadge } from './badge.js';
 import { createMenu } from './popover.js';
 import { icon } from '../js/icons.js';
 
-export function createKpiCard({ label, value, trend, trendTone = 'success', menuItems = [], content } = {}) {
+export function createKpiCard({ label, value, trend, trendTone = 'success', menuItems = [], content, headingLevel = 3 } = {}) {
   let menu;
   if (menuItems.length) {
     menu = createMenu({ label: text(`Actions for ${label}`, `${label}的操作`), items: menuItems });
@@ -13,7 +13,7 @@ export function createKpiCard({ label, value, trend, trendTone = 'success', menu
     menu.trigger.innerHTML = icon('more');
   }
   const body = element('div', { className: 'ds-kpi-value-row' }, element('strong', { className: 'ds-kpi-value' }, value), trend ? createBadge({ label: trend, tone: trendTone, pill: true }) : null);
-  const card = createCard({ title: label, actions: menu?.element, content: [body, content ? element('div', { className: 'ds-kpi-extra' }, content) : null] });
+  const card = createCard({ title: label, headingLevel, actions: menu?.element, content: [body, content ? element('div', { className: 'ds-kpi-extra' }, content) : null] });
   card.classList.add('ds-kpi-card');
   return card;
 }

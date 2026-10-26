@@ -17,14 +17,24 @@ function workerHarness() {
   let skipped = 0;
   let claimed = 0;
   let offline = false;
+  let fetchedBuild = BUILD;
+  let failedPath = '';
+  const requests = [];
   const key = request => typeof request === 'string' ? new URL(request, scope).href : request.url;
   const caches = {
     async open(name) {
       if (!stores.has(name)) stores.set(name, new Map());
       const entries = stores.get(name);
       return {
-        async addAll(paths) { for (const path of paths) entries.set(key(path), new Response(`cached ${path}`)); },
-        async match(request) { return entries.get(key(request))?.clone(); },
+        async match(request, { ignoreSearch = false } = {}) {
+          const requested = new URL(key(request));
+          if (ignoreSearch) requested.search = '';
+          for (const [url, response] of entries) {
+            const candidate = new URL(url);
+            if (ignoreSearch) candidate.search = '';
+            if (candidate.href === requested.href) return response.clone();
+          }
+        },
         async put(request, response) { entries.set(key(request), response); },
       };
     },
@@ -38,8 +48,16 @@ function workerHarness() {
     addEventListener(type, listener) { handlers.set(type, listener); },
   };
   runInNewContext(workerSource, {
-    self, caches, URL, Response, Set,
-    fetch: async () => { if (offline) throw new TypeError('Offline'); return new Response('network'); },
+    self, caches, URL, Response, Request, Set,
+    fetch: async request => {
+      if (offline) throw new TypeError('Offline');
+      if (!(request instanceof Request)) return new Response('network');
+      requests.push(request);
+      const path = new URL(request.url).pathname;
+      if (failedPath && path.endsWith(failedPath)) return new Response('Unavailable', { status: 503 });
+      if (path.endsWith('/js/build-info.js')) return new Response(`export const BUILD = "${fetchedBuild}";\n`);
+      return new Response(`cached ${path}`);
+    },
   });
   async function event(type, properties = {}) {
     let pending;
@@ -48,7 +66,13 @@ function workerHarness() {
     await pending;
     return response ? await response : undefined;
   }
-  return { handlers, stores, caches, event, scope, get skipped() { return skipped; }, get claimed() { return claimed; }, setOffline(value) { offline = value; } };
+  return {
+    handlers, stores, caches, event, scope, requests,
+    get skipped() { return skipped; }, get claimed() { return claimed; },
+    setOffline(value) { offline = value; },
+    setFetchedBuild(value) { fetchedBuild = value; },
+    failPath(value) { failedPath = value; },
+  };
 }
 
 test('manifest has standalone scope, theme tokens and complete install icons', async () => {
@@ -104,6 +128,44 @@ test('worker precaches complete shell without docs, tests or tooling', async () 
   assert.equal(harness.skipped, 0, 'install must not auto-activate an update');
   assert.ok(harness.stores.size > 0);
   assert.equal([...harness.stores.values()][0].size, paths.length);
+});
+
+test('precache reloads build-busted requests and serves query variants offline', async () => {
+  const harness = workerHarness();
+  await harness.event('install');
+  assert.ok(harness.requests.every(request => request.cache === 'reload' && new URL(request.url).searchParams.get('v') === BUILD));
+  harness.setOffline(true);
+  const request = { url: `${harness.scope}js/router.js?v=older-client`, method: 'GET', mode: 'cors' };
+  assert.equal(await (await harness.event('fetch', { request })).text(), 'cached /admin/js/router.js');
+});
+
+test('mixed-version install fails closed, retains old offline shell, and permits a clean retry', async () => {
+  const harness = workerHarness();
+  const oldName = 'ds-admin-/admin/-previous';
+  const oldCache = await harness.caches.open(oldName);
+  await oldCache.put(`${harness.scope}index.html`, new Response('old working shell'));
+  harness.setFetchedBuild('stale-cdn-build');
+  await assert.rejects(harness.event('install'), /build mismatch/);
+  assert.deepEqual(await harness.caches.keys(), [oldName]);
+  assert.equal(await (await oldCache.match(`${harness.scope}index.html`)).text(), 'old working shell');
+  assert.equal(harness.claimed, 0);
+  assert.equal(harness.skipped, 0);
+  harness.setFetchedBuild(BUILD);
+  await harness.event('install');
+  assert.equal(harness.stores.size, 2);
+  assert.equal(await (await oldCache.match(`${harness.scope}index.html`)).text(), 'old working shell');
+  await harness.event('activate');
+  assert.ok(!harness.stores.has(oldName));
+  harness.setOffline(true);
+  assert.equal(await (await harness.event('fetch', { request: { url: `${harness.scope}index.html`, method: 'GET', mode: 'navigate' } })).text(), 'cached /admin/index.html');
+});
+
+test('failed asset fetch rejects installation without replacing the previous cache', async () => {
+  const harness = workerHarness();
+  await harness.caches.open('ds-admin-/admin/-previous');
+  harness.failPath('/js/router.js');
+  await assert.rejects(harness.event('install'), /Precache failed/);
+  assert.deepEqual(await harness.caches.keys(), ['ds-admin-/admin/-previous']);
 });
 
 test('worker activation cleans only obsolete caches in this application scope', async () => {
