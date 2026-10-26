@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadTokenSources, resolveTokens, themes } from './build-tokens.mjs';
+import { loadTokenSources, resolveTokens, themes, highContrastTokens } from './build-tokens.mjs';
 
 export function parseColor(value) {
   const match = /^#([\da-f]{3}|[\da-f]{6})$/i.exec(value.trim());
@@ -55,13 +55,13 @@ export function contrastMatrix(sources) {
     const ratio = contrastRatio(foreground, background);
     const row = { ...appearance, pair: label, ratio, minimum, pass: ratio >= minimum };
     results.push(row);
-    if (!row.pass) errors.push(`Contrast ${appearance.theme}/${appearance.palette}/${appearance.kit}: ${label} ${ratio.toFixed(2)}:1 < ${minimum}:1.`);
+    if (!row.pass) errors.push(`Contrast ${appearance.theme}/${appearance.palette}/${appearance.kit}/${appearance.contrast}: ${label} ${ratio.toFixed(2)}:1 < ${minimum}:1.`);
   };
-  for (const theme of themes) {
+  for (const contrast of ['normal', 'more']) for (const theme of themes) {
     for (const palette of Object.keys(sources.palettes)) {
       for (const kit of sources.kits) {
-        const appearance = { theme, palette, kit: kit.id };
-        const tokens = resolveTokens(sources, theme, palette, kit.id);
+        const appearance = { theme, palette, kit: kit.id, contrast };
+        const tokens = { ...resolveTokens(sources, theme, palette, kit.id), ...(contrast === 'more' ? highContrastTokens : {}) };
         const color = name => colorToken(tokens, name);
         combinations++;
         const backgrounds = ['surface', 'surface-soft', 'bg'].map(name => [name, color(name)]);
@@ -94,6 +94,7 @@ export function contrastMatrix(sources) {
         }
         for (const [backgroundName, background] of backgrounds) {
           for (const foreground of ['text', 'muted', 'accent-text']) add(appearance, color(foreground), background, 4.5, `${foreground} on ${backgroundName}`);
+          add(appearance, color('text'), background, 4.5, `small nav-count on ${backgroundName}`);
           for (const foreground of ['focus-ring', 'border']) add(appearance, color(foreground), background, 3, `${foreground} against ${backgroundName}`);
         }
         for (let index = 1; index <= 8; index++) {
@@ -102,8 +103,15 @@ export function contrastMatrix(sources) {
         add(appearance, sources.primitives.color.white, color('accent'), 4.5, 'white label on accent button');
         add(appearance, color('accent-contrast'), color('accent'), 4.5, 'accent-contrast label on accent button');
         add(appearance, color('accent-text'), color('accent-soft'), 4.5, 'accent-text on accent-soft');
+        // Counts and badges remain normal-sized text even when their labels are bold.
+        // Navigation covers transparent/hover surfaces above and active accent-soft here.
+        add(appearance, color('text'), color('accent-soft'), 4.5, 'small nav-count on active accent-soft');
+        add(appearance, color('muted'), color('bg'), 4.5, 'small neutral badge on bg');
+        add(appearance, color('accent-text'), color('accent-soft'), 4.5, 'small accent badge on accent-soft');
+        add(appearance, color('accent-contrast'), color('accent'), 4.5, 'small notification count on accent');
         for (const status of ['success', 'warning', 'danger', 'info']) {
           add(appearance, color(`${status}-text`), color(`${status}-soft`), 4.5, `${status}-text on ${status}-soft`);
+          add(appearance, color(`${status}-text`), color(`${status}-soft`), 4.5, `small ${status} badge on ${status}-soft`);
         }
       }
     }
@@ -120,5 +128,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (report.errors.length) {
     for (const error of report.errors) console.error(error);
     process.exitCode = 1;
-  } else console.log(`Contrast passed: ${report.combinations} theme × palette × kit combinations, ${report.results.length} pairs (including worst-case glass backdrops).`);
+  } else console.log(`Contrast passed: ${report.combinations} theme × palette × kit × contrast combinations, ${report.results.length} pairs (including worst-case glass backdrops).`);
 }

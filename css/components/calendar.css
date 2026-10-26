@@ -16,6 +16,8 @@
 .ds-calendar-day-number { display: inline-flex; align-items: center; justify-content: center; min-width: var(--space-6); line-height: 1.5; }
 .ds-calendar-day[aria-current="date"] .ds-calendar-day-number { border-bottom: 2px solid currentColor; }
 .ds-calendar-day-count { min-height: 1em; color: var(--accent-text); font-size: var(--font-size-xs); font-weight: 600; line-height: 1; }
+.ds-calendar-day-count::after { content: attr(data-count) / ""; }
+.ds-calendar-day-count[data-count]:not([data-count=""])::before { content: ""; display: inline-block; width: var(--space-1); height: var(--space-1); margin-inline-end: var(--space-1); border-radius: 50%; background: currentColor; vertical-align: middle; }
 .ds-calendar-help { margin: 0; color: var(--muted); font-size: var(--font-size-sm); line-height: 1.5; overflow-wrap: anywhere; }
 .ds-calendar-agenda { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
 .ds-calendar-agenda-heading { margin: 0; font-size: var(--font-size-sm); overflow-wrap: anywhere; }

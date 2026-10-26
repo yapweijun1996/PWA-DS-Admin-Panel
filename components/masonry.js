@@ -14,7 +14,7 @@ const mockNotes = [
 ];
 
 function note(title, content) {
-  return element('article', { className: 'ds-masonry-card' }, element('span', { className: 'ds-masonry-eyebrow' }, text('Mock note', '模拟笔记')), element('h4', {}, title), element('p', {}, content));
+  return element('article', { className: 'ds-masonry-card' }, element('span', { className: 'ds-masonry-eyebrow' }, text('Mock note', '模拟笔记')), element('h3', {}, title), element('p', {}, content));
 }
 
 export function demo(container) {

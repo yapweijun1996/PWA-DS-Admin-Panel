@@ -2,6 +2,24 @@
 
 All notable changes are documented here. Format follows Keep a Changelog; versions follow semantic versioning.
 
+## [0.6.0] — Phase 5
+### Added
+- Dependency-free kit export CLI (`--kit`, `--palette`, `--out`) and `npm run export:kits`, with selected axes, both themes, shared component modules/styles, icons, pre-paint boot snippet, deterministic SHA-256 manifest and standalone consumer demo.
+- `docs/USAGE.md` adoption/upgrade guide and generated `docs/COMPONENT_REGISTRY.md`; `npm run docs:registry` regenerates the reference and `check.mjs` rejects stale output.
+- `prefers-contrast: more` semantic tokens and an expanded 96-combination contrast gate.
+- Dependency-free current-DOM accessibility self-check, Settings/About results list, and pure naming/heading rule tests.
+### Fixed
+- Precache requests bypass stale HTTP caches with `?v=BUILD` and reload semantics; mismatched or missing fetched build identity rejects installation and retains the previous worker/cache.
+- Unknown routes force update discovery and offer the shared explicit Update now flow for waiting/installing workers, retaining search and Home when current. Startup and visible-tab checks share a ten-minute automatic throttle.
+- Example demo-state/reset controls move into a session-remembered, initially collapsed disclosure after page headers; toggles preserve editor drafts.
+- Shared density-aware table header/cell padding, page-rhythm tokens and distinct Guide/Design kits/Examples navigation icons.
+- Accessible names preserve visible labels, selected values and counts; contextual component heading levels eliminate skipped headings in playgrounds, Guide and examples.
+- Navigation counts use opaque text contrast; small count/badge pairs are gated at 4.5:1. Standalone demo and app suppress implicit favicon requests with an inline empty icon.
+- Counted sidebar links derive names from content, collapsed labels remain in the accessibility tree, and picker day names begin with their visible number. Label-in-name checks strip punctuation/symbols, exclude hidden decorations and reject numeric substring collisions with date years.
+### Migration
+- Replace exported bundles as one unit after reading this changelog; do not mix builds. Exporter preserves unrelated files and refuses overwriting modified exports. Consumers own their persistence and service-worker lifecycle.
+- Version remains sourced from `version.json`; rebuild generated assets and registry docs. Verification and browser evidence: `docs/SUMMARY-phase5.md`.
+
 ## [0.5.0] — Phase 4
 ### Added
 - Shared Kanban board with pointer drag/drop, keyboard pickup/move/drop/cancel, per-card move menus, WIP counts, value totals and phone column tabs.

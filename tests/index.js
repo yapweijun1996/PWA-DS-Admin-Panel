@@ -17,3 +17,6 @@ import './phase4-school.test.mjs';
 import './phase4-erp.test.mjs';
 import './phase4-crm.test.mjs';
 import './phase4-grid.test.mjs';
+import './phase5-update.test.mjs';
+import './phase5-export.test.mjs';
+import './phase5-a11y.test.mjs';

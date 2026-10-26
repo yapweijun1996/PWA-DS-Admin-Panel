@@ -1,0 +1,1461 @@
+{
+  "method": "Installed Google Chrome, fresh document per route, service worker bypassed; Enterprise/Liquid light and Ops dark; 97 routes per kit.",
+  "checks": 291,
+  "rows": [
+    {
+      "path": "/overview",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/tokens",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/settings/general",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/settings/appearance",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/settings/about",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/settings/pwa",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/kits",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/learn",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/orders",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/order/SO-1042",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/inventory",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/invoice",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/customers",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/customer/CRM-001",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/pipeline",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/calendar",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/school",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/students",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/student/STU-001",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/attendance",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/gradebook",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/timetable",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/kanban",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/calendar",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/data-grid",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/dashboard-layout",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/listing-layout",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/form-layout",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/detail-layout",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/master-detail-layout",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/workspace-layout",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/filter-builder",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/import-wizard",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/export-dialog",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/permission-gate",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/unsaved-changes-guard",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/bulk-action-toolbar",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/column-visibility-menu",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/saved-view-selector",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/timeline",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/audit-timeline",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/tree-view",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/stepper",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/confirm-dialog",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/skeleton",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/spinner",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/empty-state",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/error-state",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/permission-state",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/command-palette",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/icon-button",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/button-group",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/split-button",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/dropdown-button",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/date-picker",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/date-range-picker",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/textarea",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/number-input",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/currency-input",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/radio-group",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/form-field",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/form-section",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/file-upload",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/drag-drop-zone",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/combobox",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/chart",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/masonry",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/button",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/input",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/select",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/checkbox",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/switch",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/tag",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/pill",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/tabs",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/table",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/modal",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/toast",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/tooltip",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/popover",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/breadcrumbs",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/card",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/kpi-card",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/badge",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/filter-chip",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/avatar",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/avatar-stack",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/progress-bar",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/alert",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/drawer",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/detail-panel",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/description-list",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/components/pagination",
+      "kit": "enterprise",
+      "violations": []
+    },
+    {
+      "path": "/overview",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/tokens",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/settings/general",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/settings/appearance",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/settings/about",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/settings/pwa",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/kits",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/learn",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/orders",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/order/SO-1042",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/inventory",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/invoice",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/customers",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/customer/CRM-001",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/pipeline",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/calendar",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/school",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/students",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/student/STU-001",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/attendance",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/gradebook",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/timetable",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/kanban",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/calendar",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/data-grid",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/dashboard-layout",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/listing-layout",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/form-layout",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/detail-layout",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/master-detail-layout",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/workspace-layout",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/filter-builder",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/import-wizard",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/export-dialog",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/permission-gate",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/unsaved-changes-guard",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/bulk-action-toolbar",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/column-visibility-menu",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/saved-view-selector",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/timeline",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/audit-timeline",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/tree-view",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/stepper",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/confirm-dialog",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/skeleton",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/spinner",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/empty-state",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/error-state",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/permission-state",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/command-palette",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/icon-button",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/button-group",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/split-button",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/dropdown-button",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/date-picker",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/date-range-picker",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/textarea",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/number-input",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/currency-input",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/radio-group",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/form-field",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/form-section",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/file-upload",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/drag-drop-zone",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/combobox",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/chart",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/masonry",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/button",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/input",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/select",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/checkbox",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/switch",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/tag",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/pill",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/tabs",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/table",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/modal",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/toast",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/tooltip",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/popover",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/breadcrumbs",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/card",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/kpi-card",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/badge",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/filter-chip",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/avatar",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/avatar-stack",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/progress-bar",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/alert",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/drawer",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/detail-panel",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/description-list",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/components/pagination",
+      "kit": "liquid",
+      "violations": []
+    },
+    {
+      "path": "/overview",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/tokens",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/settings/general",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/settings/appearance",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/settings/about",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/settings/pwa",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/kits",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/learn",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/orders",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/order/SO-1042",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/inventory",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/erp/invoice",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/customers",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/customer/CRM-001",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/pipeline",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/crm/calendar",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/school",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/students",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/student/STU-001",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/attendance",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/gradebook",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/examples/school/timetable",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/kanban",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/calendar",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/data-grid",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/dashboard-layout",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/listing-layout",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/form-layout",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/detail-layout",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/master-detail-layout",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/workspace-layout",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/filter-builder",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/import-wizard",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/export-dialog",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/permission-gate",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/unsaved-changes-guard",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/bulk-action-toolbar",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/column-visibility-menu",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/saved-view-selector",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/timeline",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/audit-timeline",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/tree-view",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/stepper",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/confirm-dialog",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/skeleton",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/spinner",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/empty-state",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/error-state",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/permission-state",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/command-palette",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/icon-button",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/button-group",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/split-button",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/dropdown-button",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/date-picker",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/date-range-picker",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/textarea",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/number-input",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/currency-input",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/radio-group",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/form-field",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/form-section",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/file-upload",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/drag-drop-zone",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/combobox",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/chart",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/masonry",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/button",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/input",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/select",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/checkbox",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/switch",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/tag",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/pill",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/tabs",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/table",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/modal",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/toast",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/tooltip",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/popover",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/breadcrumbs",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/card",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/kpi-card",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/badge",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/filter-chip",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/avatar",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/avatar-stack",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/progress-bar",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/alert",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/drawer",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/detail-panel",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/description-list",
+      "kit": "ops",
+      "violations": []
+    },
+    {
+      "path": "/components/pagination",
+      "kit": "ops",
+      "violations": []
+    }
+  ]
+}

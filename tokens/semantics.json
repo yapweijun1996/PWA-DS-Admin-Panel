@@ -36,6 +36,9 @@
       "light": "{color.slate.200}",
       "dark": "{color.slate.700}"
     },
+    "contrast-text": { "light": "{color.slate.950}", "dark": "{color.white}" },
+    "contrast-muted": { "light": "{color.slate.800}", "dark": "{color.slate.100}" },
+    "contrast-border": { "light": "{color.slate.700}", "dark": "{color.slate.200}" },
     "accent": {
       "light": "{color.blue.600}",
       "dark": "{color.blue.600}"
@@ -326,6 +329,13 @@
       "light": "{spacing.6}",
       "dark": "{spacing.6}"
     },
+    "page-header-gap": { "light": "{spacing.4}", "dark": "{spacing.4}" },
+    "page-subtitle-gap": { "light": "{spacing.2}", "dark": "{spacing.2}" },
+    "page-section-gap": { "light": "{spacing.6}", "dark": "{spacing.6}" },
+    "page-toolbar-gap": { "light": "{spacing.3}", "dark": "{spacing.3}" },
+    "table-cell-padding": { "light": "{spacing.4}", "dark": "{spacing.4}" },
+    "table-cell-padding-block": { "light": "{spacing.4}", "dark": "{spacing.4}" },
+    "table-header-padding-block": { "light": "{spacing.3}", "dark": "{spacing.3}" },
     "control-height": {
       "light": "44px",
       "dark": "44px"

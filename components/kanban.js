@@ -2,7 +2,7 @@ import { element, button, playground, statusMessage, toggleControl, choiceContro
 import { createMenu } from './popover.js';
 import { snapshotKanbanCards, moveKanbanCard, beginKanbanMove, updateKanbanMove, finishKanbanMove, summarizeKanbanColumns } from '../js/logic/kanban.js';
 
-export function createKanban({ columns = [], cards = [], onChange = () => {}, label = 'Kanban board', showTotals = true, formatValue = value => new Intl.NumberFormat().format(value), loading = false, error = '', onRetry } = {}) {
+export function createKanban({ columns = [], cards = [], onChange = () => {}, label = 'Kanban board', showTotals = true, formatValue = value => new Intl.NumberFormat().format(value), loading = false, error = '', onRetry, headingLevel = 3 } = {}) {
   const stages = columns.map(column => ({ ...column }));
   let committed = snapshotKanbanCards(cards, stages);
   let move = null;
@@ -58,7 +58,7 @@ export function createKanban({ columns = [], cards = [], onChange = () => {}, la
     const count = element('span', { className: 'ds-kanban-count' });
     const total = element('p', { className: 'ds-kanban-total' });
     const list = element('ol', { className: 'ds-kanban-list', 'aria-label': `${stage.label} cards` });
-    const panel = element('section', { id: `${id}-column-${index}`, className: 'ds-kanban-column', 'data-column-id': stage.id }, element('header', { className: 'ds-kanban-column-header' }, element('h3', { id: `${id}-heading-${index}` }, stage.label), count), total, list);
+    const panel = element('section', { id: `${id}-column-${index}`, className: 'ds-kanban-column', 'data-column-id': stage.id }, element('header', { className: 'ds-kanban-column-header' }, element(`h${headingLevel}`, { id: `${id}-heading-${index}` }, stage.label), count), total, list);
     tabButtons.push(tab); panels.push(panel); counts.push(count); totals.push(total); lists.push(list);
     tabs.append(tab); board.append(panel);
   });
@@ -81,7 +81,7 @@ export function createKanban({ columns = [], cards = [], onChange = () => {}, la
           selectColumn(destination.id); draw(card.id);
           announce(`Moved ${describe(card.id)}.`); onChange(snapshotKanbanCards(committed, stages));
         } })) });
-        menu.trigger.setAttribute('aria-label', `Move ${card.title} to another column`);
+        menu.trigger.setAttribute('aria-label', `Move to… another column for ${card.title}`);
         menu.trigger.disabled = Boolean(move);
         menus.push(menu);
         return element('li', { className: 'ds-kanban-card', 'data-card-id': card.id, 'data-moving': String(picked) }, handle, ...(card.value !== undefined ? [element('p', { className: 'ds-kanban-card-value' }, formatValue(card.value))] : []), menu.element);
@@ -196,7 +196,7 @@ export function createKanban({ columns = [], cards = [], onChange = () => {}, la
 
 export const guide = {
   purpose: 'Organize work into ordered columns with equivalent pointer, keyboard, and Move to menu interactions.',
-  props: ['createKanban({columns:[{id,label}],cards:[{id,column,title,value?}],onChange(cards),label="Kanban board",showTotals=true,formatValue,loading=false,error="",onRetry}) returns {element,getCards,setCards,destroy}. IDs are unique strings and every card references a known column. Values are finite numbers.', 'getCards returns a snapshot of committed cards. setCards replaces cards without calling onChange and cancels a move in progress. onChange receives a snapshot only after a changed drop or menu move. Array order determines order within a column. formatValue(number) formats card values and optional column totals. Loading/error are initial display states; replace the controller when loading completes.'],
+  props: ['createKanban({columns:[{id,label}],cards:[{id,column,title,value?}],onChange(cards),label="Kanban board",showTotals=true,formatValue,loading=false,error="",onRetry,headingLevel=3}) returns {element,getCards,setCards,destroy}. Set headingLevel (1–6) for column headings. IDs are unique strings and every card references a known column. Values are finite numbers.', 'getCards returns a snapshot of committed cards. setCards replaces cards without calling onChange and cancels a move in progress. onChange receives a snapshot only after a changed drop or menu move. Array order determines order within a column. formatValue(number) formats card values and optional column totals. Loading/error are initial display states; replace the controller when loading completes.'],
   variants: ['Work columns with WIP counts; value-bearing cards with optional column totals; phone column tabs.'],
   states: ['Ready, empty column, empty board, loading, error with optional Retry, focused card, picked up, moving preview, dropped, cancelled, column boundary.'],
   keyboard: ['Tab focuses each card pickup button or its Move to menu. Space picks up; Left/Right move between columns, Up/Down reorder; Space drops; Escape restores the original board. Tab cancels before leaving a picked-up card.', 'Move to menus support arrows, Home/End, Enter/Space, Escape and focus return. Phone column tabs support Left/Right, Home and End.'],

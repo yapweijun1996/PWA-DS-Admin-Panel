@@ -1,4 +1,4 @@
-import { text, renderGuide } from './playground.js';
+import { element, text, renderGuide } from './playground.js';
 import { render as renderButton } from './button.js';
 import { render as renderInput } from './input.js';
 import { render as renderSelect } from './select.js';
@@ -231,7 +231,7 @@ const guides = {
   },
   card: {
     purpose: 'Group related information under an optional heading, actions, and footer.',
-    props: ['createCard({title, description, content, actions, footer}) returns a section. Content/actions/footer accept DOM nodes or arrays.'],
+    props: ['createCard({title, description, content, actions, footer, headingLevel=3}) returns a section. Set headingLevel (1–6) to follow the containing section. Content/actions/footer accept DOM nodes or arrays.'],
     variants: ['Header/content/footer; content-only; empty-state composition.'],
     states: ['Static content; action states belong to the composed controls.'],
     keyboard: ['The card itself is not focusable; embedded actions follow their native keyboard behavior.'],
@@ -242,7 +242,7 @@ const guides = {
   },
   'kpi-card': {
     purpose: 'Present a labelled metric, optional trend, and real contextual actions.',
-    props: ['createKpiCard({label, value, trend, trendTone, menuItems, content}) returns a Card. menuItems use the shared Popover item API.'],
+    props: ['createKpiCard({label, value, trend, trendTone, menuItems, content, headingLevel=3}) returns a Card. Set headingLevel (1–6) to follow the containing section. menuItems use the shared Popover item API.'],
     variants: ['Positive, warning, negative, neutral trend; optional supporting content such as AvatarStack.'],
     states: ['Metric displayed, menu open, action feedback.'],
     keyboard: ['Tab reaches the menu trigger; shared Popover keyboard navigation applies.'],
@@ -457,12 +457,12 @@ for (const entry of registry) {
     const staging = document.createElement('div');
     render(staging);
     const preview = staging.querySelector('.component-preview');
-    container.append(...(preview ? [...preview.childNodes] : [...staging.childNodes]));
+    container.append(element('h3', {}, text('Live preview', '实时预览')), ...(preview ? [...preview.childNodes] : [...staging.childNodes]));
   };
   const render = entry.render;
   entry.render = container => {
     render(container);
-    (container.querySelector('.component-playground') || container).append(renderGuide(entry.guide));
+    (container.querySelector('.component-playground') || container).append(renderGuide(entry.guide, { headingLevel: 2 }));
   };
 }
 

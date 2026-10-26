@@ -6,7 +6,7 @@ export function createAlert({ title, message, tone = 'info', onDismiss } = {}) {
   const symbol = element('span', { className: 'ds-alert-icon', 'aria-hidden': 'true' });
   symbol.innerHTML = icon(kind === 'success' ? 'check' : 'info');
   const alert = element('div', { className: `ds-alert ds-alert-${kind}`, role: kind === 'danger' ? 'alert' : 'status' }, symbol, element('div', { className: 'ds-alert-content' }, title ? element('strong', {}, title) : null, message ? element('p', {}, message) : null));
-  if (onDismiss) alert.append(button('×', () => { alert.remove(); onDismiss(); }, 'ghost', { className: 'ds-button ds-button-ghost ds-alert-dismiss', 'aria-label': text('Dismiss alert', '关闭提示') }));
+  if (onDismiss) alert.append(button(element('span', { 'aria-hidden': 'true' }, '×'), () => { alert.remove(); onDismiss(); }, 'ghost', { className: 'ds-button ds-button-ghost ds-alert-dismiss', 'aria-label': text('Dismiss alert', '关闭提示') }));
   return alert;
 }
 

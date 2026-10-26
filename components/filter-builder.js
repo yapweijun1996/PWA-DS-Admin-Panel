@@ -17,7 +17,7 @@ export function createFilterBuilder({ fields = defaultFields, value = [], match 
   const rows = element('div', { className: 'ds-filter-rows' });
   const summary = statusMessage();
   summary.classList.add('ds-filter-summary');
-  const matchChoice = customSelect({ label: 'Match conditions', value: mode, disabled, options: [{ value: 'all', label: 'Match all conditions (AND)' }, { value: 'any', label: 'Match any condition (OR)' }], onChange(next) { mode = next; refresh(true); } });
+  const matchChoice = customSelect({ label: 'Combine conditions', value: mode, disabled, options: [{ value: 'all', label: 'Match all conditions (AND)' }, { value: 'any', label: 'Match any condition (OR)' }], onChange(next) { mode = next; refresh(true); } });
   const add = button('Add condition', () => {
     conditions.push({ field: fields[0].key, operator: 'contains', value: '' });
     drawRows(); refresh(true);
@@ -95,7 +95,7 @@ export function render(container) {
   const results = element('div', { className: 'ds-filter-results' });
   function show(predicate) {
     const visible = data.filter(predicate);
-    results.replaceChildren(element('h4', {}, `${visible.length} of ${data.length} mock customers`), visible.length ? element('ul', {}, ...visible.map(row => element('li', {}, `${row.name} · ${row.status} · ${row.seats} seats`))) : element('p', {}, 'No mock customers match these conditions.'));
+    results.replaceChildren(element('h3', {}, `${visible.length} of ${data.length} mock customers`), visible.length ? element('ul', {}, ...visible.map(row => element('li', {}, `${row.name} · ${row.status} · ${row.seats} seats`))) : element('p', {}, 'No mock customers match these conditions.'));
   }
   const builder = createFilterBuilder({ value: [{ field: 'status', operator: 'equals', value: 'Active' }], onChange: (_, predicate) => show(predicate) });
   page.preview.append(builder.element, results); show(builder.predicate);

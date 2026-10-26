@@ -1,5 +1,5 @@
 .ds-form-section { display: grid; gap: var(--space-4); width: 100%; min-width: 0; padding-block: var(--space-4); border-block-end: 1px solid var(--border-subtle); }
 .ds-form-section header { display: grid; gap: var(--space-2); }
-.ds-form-section h3, .ds-form-section p { margin: 0; }
+.ds-form-section :is(h1, h2, h3, h4, h5, h6), .ds-form-section p { margin: 0; }
 .ds-form-section p { color: var(--muted); }
 .ds-form-section-content { display: grid; gap: var(--space-4); min-width: 0; }

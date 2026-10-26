@@ -8,10 +8,17 @@ const state = {
   version: VERSION, build: BUILD, installedBuild: '', installAvailable: false,
 };
 let registration;
+let registrationPromise;
+let checkPromise;
+let lastCheckAt;
+const updateCheckInterval = 10 * 60 * 1000;
 let initialized = false;
 let installPrompt;
 let updateRequested = false;
 let reloaded = false;
+let resolvingUpdate = false;
+let reloadPending = false;
+let updatingWorker;
 let updateTimer;
 let banner;
 let overlay;
@@ -156,73 +163,107 @@ async function activeBuild() {
   publish();
 }
 
+function updateWorker() {
+  return [registration?.waiting, registration?.installing].find(worker => worker && ['installing', 'installed'].includes(worker.state));
+}
+
+function continueUpdate(worker) {
+  if (!state.updating || worker !== updatingWorker) return;
+  if (worker.state === 'redundant' || (!updateRequested && ['activating', 'activated'].includes(worker.state))) {
+    failUpdate();
+  } else if (worker.state === 'installed' && !updateRequested) {
+    updateRequested = true;
+    try { worker.postMessage({ type: 'SKIP_WAITING' }); }
+    catch { failUpdate(); }
+  }
+}
+
 function observeRegistration(value) {
   registration = value;
-  state.updateAvailable = Boolean(value.waiting && navigator.serviceWorker.controller);
+  const watched = new WeakSet();
   function watch(worker) {
-    if (!worker) return;
+    if (!worker || watched.has(worker)) return;
+    watched.add(worker);
     worker.addEventListener('statechange', () => {
-      if (worker.state === 'installed') {
-        state.updateAvailable = Boolean(value.waiting && navigator.serviceWorker.controller);
-        publish();
-      }
-      if (worker.state === 'redundant' && state.updating) failUpdate();
+      state.updateAvailable = Boolean(updateWorker() && navigator.serviceWorker.controller);
+      continueUpdate(worker);
+      publish();
     });
   }
+  watch(value.waiting);
   watch(value.installing);
-  value.addEventListener('updatefound', () => watch(value.installing));
+  value.addEventListener('updatefound', () => {
+    watch(value.installing);
+    state.updateAvailable = Boolean(updateWorker() && navigator.serviceWorker.controller);
+    publish();
+  });
+  state.updateAvailable = Boolean(updateWorker() && navigator.serviceWorker.controller);
   publish();
   activeBuild();
 }
 
 async function registerWorker() {
+  if (registration) return registration;
+  if (registrationPromise) return registrationPromise;
   state.error = '';
-  try {
-    observeRegistration(await navigator.serviceWorker.register(new URL('../sw.js', import.meta.url), { updateViaCache: 'none' }));
-  } catch {
-    state.error = text('registrationFailed');
-    publish();
-  }
+  registrationPromise = navigator.serviceWorker.register(new URL('../sw.js', import.meta.url), { updateViaCache: 'none' })
+    .then(value => { observeRegistration(value); return value; })
+    .catch(() => { state.error = text('registrationFailed'); publish(); })
+    .finally(() => { registrationPromise = undefined; });
+  return registrationPromise;
 }
 
 function failUpdate() {
   clearTimeout(updateTimer);
   state.updating = false;
+  updateRequested = false;
+  updatingWorker = undefined;
   state.error = text('failed');
   showOverlay(true);
   publish();
 }
 
-async function applyUpdate() {
-  if (state.updating || !(await resolveEdits())) return;
-  if (!registration?.waiting) {
-    await checkForUpdates();
-    if (!registration?.waiting) return;
-  }
-  state.updating = true;
-  state.error = '';
-  updateRequested = true;
-  showOverlay();
-  publish();
-  updateTimer = setTimeout(failUpdate, 20000);
-  try { registration.waiting.postMessage({ type: 'SKIP_WAITING' }); }
-  catch { failUpdate(); }
+export async function applyUpdate() {
+  if (state.updating || resolvingUpdate) return;
+  resolvingUpdate = true;
+  try {
+    if (!(await resolveEdits())) return;
+    if (!updateWorker()) await checkForUpdates();
+    const worker = updateWorker();
+    if (!worker || !navigator.serviceWorker.controller) return;
+    state.updating = true;
+    state.error = '';
+    updateRequested = false;
+    updatingWorker = worker;
+    showOverlay();
+    publish();
+    updateTimer = setTimeout(failUpdate, 20000);
+    continueUpdate(worker);
+  } finally { resolvingUpdate = false; }
 }
 
-async function checkForUpdates() {
-  if (state.checking) return;
+export async function checkForUpdates({ force = true } = {}) {
+  if (!state.supported) return getPWAState();
+  if (checkPromise) return checkPromise;
+  const now = Date.now();
+  if (!force && lastCheckAt !== undefined && now - lastCheckAt < updateCheckInterval) return getPWAState();
+  lastCheckAt = now;
   state.checking = true;
   state.error = '';
   state.message = '';
+  checkPromise = Promise.resolve().then(async () => {
+    try {
+      if (!registration) await registerWorker();
+      if (!registration) throw new Error('No service worker registration');
+      await registration.update();
+      state.updateAvailable = Boolean(updateWorker() && navigator.serviceWorker.controller);
+      if (!state.updateAvailable && !registration.installing) state.message = text('current');
+    } catch { state.error = text('checkFailed'); }
+    finally { checkPromise = undefined; state.checking = false; publish(); }
+    return getPWAState();
+  });
   publish();
-  try {
-    if (!registration) await registerWorker();
-    if (!registration) throw new Error('No service worker registration');
-    await registration.update();
-    state.updateAvailable = Boolean(registration.waiting && navigator.serviceWorker.controller);
-    if (!state.updateAvailable && !registration.installing) state.message = text('current');
-  } catch { state.error = text('checkFailed'); }
-  finally { state.checking = false; publish(); }
+  return checkPromise;
 }
 
 async function clearOfflineCache() {
@@ -280,14 +321,28 @@ export function initPWA() {
   });
   if (state.supported) {
     navigator.serviceWorker.addEventListener('controllerchange', async () => {
-      if (updateRequested && !reloaded) {
-        if (!(await resolveEdits())) { clearTimeout(updateTimer); state.updating = false; if (overlay) overlay.hidden = true; publish(); return; }
-        reloaded = true;
-        clearTimeout(updateTimer);
-        location.reload();
-      } else activeBuild();
+      if (updateRequested && !reloaded && !reloadPending) {
+        reloadPending = true;
+        try {
+          if (!(await resolveEdits())) {
+            clearTimeout(updateTimer);
+            updateRequested = false;
+            updatingWorker = undefined;
+            state.updating = false;
+            if (overlay) overlay.hidden = true;
+            publish();
+            return;
+          }
+          reloaded = true;
+          clearTimeout(updateTimer);
+          location.reload();
+        } finally { reloadPending = false; }
+      } else if (!reloadPending && !reloaded) activeBuild();
     });
-    registerWorker();
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') checkForUpdates({ force: false });
+    });
+    checkForUpdates({ force: false });
   }
   publish();
   return getPWAState();

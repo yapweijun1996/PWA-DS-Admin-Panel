@@ -1,0 +1,52 @@
+.example-page-header {
+  display: grid;
+  gap: var(--page-header-gap);
+  min-width: 0;
+}
+.example-demo-controls {
+  min-width: 0;
+}
+.example-demo-trigger {
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--muted);
+}
+.example-demo-chevron {
+  display: inline-flex;
+}
+.example-demo-trigger[aria-expanded="true"] .example-demo-chevron {
+  transform: rotate(180deg);
+}
+.example-demo-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--page-toolbar-gap);
+  padding: var(--space-3);
+  margin-block-start: var(--page-toolbar-gap);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.example-demo-panel[hidden] {
+  display: none !important;
+}
+.example-demo-panel > .ds-combobox,
+.example-demo-panel > .ds-form-field {
+  flex: 0 1 20rem;
+  min-width: 0;
+  max-width: 100%;
+}
+@media (max-width: 767px) {
+  .example-demo-panel > .ds-combobox,
+  .example-demo-panel > .ds-form-field {
+    flex-basis: 100%;
+    width: 100%;
+  }
+}
+:is(.erp-example, .crm-example, .school-example) :is(.ds-listing-layout, .ds-detail-layout, .ds-dashboard-layout, .ds-form-layout) {
+  gap: var(--page-section-gap);
+}
+:is(.erp-example, .crm-example, .school-example) :is(.ds-listing-layout-toolbar, .ds-form-layout-actions) {
+  gap: var(--page-toolbar-gap);
+}

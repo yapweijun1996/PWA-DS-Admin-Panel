@@ -21,6 +21,7 @@ import { createEmptyState } from '../../../components/empty-state.js';
 import { createErrorState } from '../../../components/error-state.js';
 import { createSpinner } from '../../../components/spinner.js';
 import { attendanceStatuses, attendanceSummary, validateGrade, gradeAverage, rankGrades, gradeDistribution } from '../../logic/school.js';
+import { createDemoControls } from '../demo-controls.js';
 
 const classes = ['7A', '7B', '8A'];
 const assignments = ['assignment1', 'assignment2', 'assignment3'];
@@ -63,8 +64,10 @@ function table(caption, labels, rows, onRowActivate) {
 function classChoice(label, value, onChange, all = false) {
   return createCombobox({ label, value, clearable: false, options: [...(all ? [{ value: 'all', label: 'All classes' }] : []), ...classes.map(item => ({ value: item, label: `Class ${item}` }))], onChange });
 }
-function pageHeader(title, description, actions) {
-  return element('header', { className: 'school-page-heading' }, element('div', {}, element('h1', { className: 'page-title' }, title), element('p', { className: 'page-subtitle' }, description)), toolbar(createPill({ label: 'Mock data', tone: 'info', dot: true }), actions));
+function pageHeader(title, description, actions, reset, demo) {
+  return element('div', { className: 'example-page-header' },
+    element('header', { className: 'school-page-heading' }, element('div', {}, element('h1', { className: 'page-title' }, title), element('p', { className: 'page-subtitle' }, description)), toolbar(createPill({ label: 'Mock data', tone: 'info', dot: true }), actions)),
+    createDemoControls({ domain: 'school', reset, state: demo }));
 }
 /** Each dataset has deliberately selectable local loading/empty/error states. */
 function stateDemo(label, onChange) {
@@ -72,12 +75,12 @@ function stateDemo(label, onChange) {
   return choice;
 }
 function datasetState(mode, label, restore) {
-  if (mode === 'loading') return createCard({ content: stack(createSpinner({ label: `Loading mock ${label}…` }), element('p', {}, 'Deliberate demo state. No network request is running.'), button('Finish mock loading', restore)) });
-  if (mode === 'error') return createErrorState({ title: `Mock ${label} could not load`, description: 'Simulated failure. Retry restores the local dataset without changing saved data.', onRetry: restore });
-  return createEmptyState({ title: `No ${label}`, description: 'No mock records match this view. Restore the dataset or adjust the filters.', actionLabel: 'Restore mock view', onAction: restore });
+  if (mode === 'loading') return createCard({ headingLevel: 2, content: stack(createSpinner({ label: `Loading mock ${label}…` }), element('p', {}, 'Deliberate demo state. No network request is running.'), button('Finish mock loading', restore)) });
+  if (mode === 'error') return createErrorState({ headingLevel: 2, title: `Mock ${label} could not load`, description: 'Simulated failure. Retry restores the local dataset without changing saved data.', onRetry: restore });
+  return createEmptyState({ headingLevel: 2, title: `No ${label}`, description: 'No mock records match this view. Restore the dataset or adjust the filters.', actionLabel: 'Restore mock view', onAction: restore });
 }
 
-function renderStudents() {
+function renderStudents(reset) {
   let query = '', selectedClass = 'all', mode = 'normal', page = 1;
   const results = element('div');
   const summary = statusMessage();
@@ -93,13 +96,13 @@ function renderStudents() {
     pager.setState({ total: mode === 'normal' ? matching.length : 0, page, disabled: mode !== 'normal' });
     results.replaceChildren(mode !== 'normal' || !matching.length ? datasetState(mode, 'students', restore) : table('Mock student directory. Activate a student row for their profile.', ['Student', 'Student ID', 'Class', 'Status', 'Guardian'], visible.map(student => [element('a', { href: `#/examples/school/student/${student.id}` }, student.name), student.id, student.className, createPill({ label: student.status, tone: student.status === 'Active' ? 'success' : 'warning', dot: true }), student.guardian]), index => { location.hash = `/examples/school/student/${visible[index].id}`; }));
   }
-  const layout = createListingLayout({ header: pageHeader('Students', 'A searchable, local student directory. No real student records or server writes.'), summary, toolbar: toolbar(createFormField({ label: 'Search students', control: search }).element, classFilter.element, demo.element, button('Clear filters', restore)), table: results, pagination: pager.element });
+  const layout = createListingLayout({ header: pageHeader('Students', 'A searchable, local student directory. No real student records or server writes.', undefined, reset, demo), summary, toolbar: toolbar(createFormField({ label: 'Search students', control: search }).element, classFilter.element, button('Clear filters', restore)), table: results, pagination: pager.element });
   update(); return layout;
 }
 
-function renderStudent(id) {
+function renderStudent(id, reset) {
   const student = students.find(item => item.id === id);
-  if (!student) return createEmptyState({ title: 'Mock student not found', description: 'Choose an existing student from the directory.', actionLabel: 'View students', onAction: () => { location.hash = '/examples/school/students'; } });
+  if (!student) return stack(pageHeader('Student not found', 'This mock student does not exist in the current session.', undefined, reset), createEmptyState({ headingLevel: 2, title: 'Mock student not found', description: 'Choose an existing student from the directory.', actionLabel: 'View students', onAction: () => { location.hash = '/examples/school/students'; } }));
   const gradeValues = savedGrades[student.id];
   const history = [
     { date: '2026-10-19', status: 'present' }, { date: '2026-10-20', status: 'present' },
@@ -110,21 +113,21 @@ function renderStudent(id) {
   const demo = stateDemo('Student profile records', value => { mode = value; update(); });
   function update() {
     records.replaceChildren(mode !== 'normal' ? datasetState(mode, 'student records', () => { mode = 'normal'; demo.setValue('normal'); update(); }) : createTabs({ label: `${student.name} profile sections`, items: [
-      { label: 'Profile', content: stack(createDescriptionList({ items: [{ term: 'Student ID', value: student.id }, { term: 'Class', value: student.className }, { term: 'School email (mock)', value: student.email }, { term: 'Enrollment', value: '2026 academic year' }] }), createCard({ title: 'Guardian contacts', content: table('Mock guardian contacts', ['Name', 'Relationship', 'Email', 'Telephone'], [[student.guardian, 'Guardian', element('a', { href: `mailto:${student.guardianEmail}` }, student.guardianEmail), student.phone]]) })) },
-      { label: 'Attendance', content: stack(createChart({ type: 'sparkline', title: 'Mock daily attendance · 100 = present/late, 0 = absent', labels: history.map(item => item.date), series: [{ name: 'Attended (%)', values: history.map(item => item.status === 'absent' ? 0 : 100) }], formatValue: value => `${value}%` }), table('Mock attendance history', ['Date', 'Status'], history.map(item => [item.date, createPill({ label: titleCase(item.status), tone: item.status === 'present' ? 'success' : item.status === 'late' ? 'warning' : 'danger' })]))) },
-      { label: 'Grades', content: stack(createChart({ type: 'line', title: 'Mock Mathematics grades', labels: assignmentLabels, series: [{ name: 'Score / 100', values: gradeValues }] }), table('Mock assignment results', ['Assignment', 'Score / 100'], assignmentLabels.map((label, index) => [label, formatScore(gradeValues[index])])), element('p', {}, `Average: ${formatScore(gradeAverage(gradeValues))} / 100`)) }
+      { label: 'Profile', content: stack(createDescriptionList({ items: [{ term: 'Student ID', value: student.id }, { term: 'Class', value: student.className }, { term: 'School email (mock)', value: student.email }, { term: 'Enrollment', value: '2026 academic year' }] }), createCard({ headingLevel: 2, title: 'Guardian contacts', content: table('Mock guardian contacts', ['Name', 'Relationship', 'Email', 'Telephone'], [[student.guardian, 'Guardian', element('a', { href: `mailto:${student.guardianEmail}` }, student.guardianEmail), student.phone]]) })) },
+      { label: 'Attendance', content: stack(createChart({ headingLevel: 2, type: 'sparkline', title: 'Mock daily attendance · 100 = present/late, 0 = absent', labels: history.map(item => item.date), series: [{ name: 'Attended (%)', values: history.map(item => item.status === 'absent' ? 0 : 100) }], formatValue: value => `${value}%` }), table('Mock attendance history', ['Date', 'Status'], history.map(item => [item.date, createPill({ label: titleCase(item.status), tone: item.status === 'present' ? 'success' : item.status === 'late' ? 'warning' : 'danger' })]))) },
+      { label: 'Grades', content: stack(createChart({ headingLevel: 2, type: 'line', title: 'Mock Mathematics grades', labels: assignmentLabels, series: [{ name: 'Score / 100', values: gradeValues }] }), table('Mock assignment results', ['Assignment', 'Score / 100'], assignmentLabels.map((label, index) => [label, formatScore(gradeValues[index])])), element('p', {}, `Average: ${formatScore(gradeAverage(gradeValues))} / 100`)) }
     ] }));
   }
   update();
-  return createDetailLayout({ header: pageHeader(student.name, `${student.id} · Class ${student.className} · Mock student profile`, createPill({ label: student.status, tone: student.status === 'Active' ? 'success' : 'warning' })), summary: demo.element, tabs: records, sidePanel: createCard({ title: 'School context', content: createDescriptionList({ items: [{ term: 'Academic year', value: '2026' }, { term: 'Class tutor', value: 'Ms Rivera (mock)' }, { term: 'Privacy', value: 'Fictional records. Changes remain in this browser session.' }] }) }) });
+  return createDetailLayout({ header: pageHeader(student.name, `${student.id} · Class ${student.className} · Mock student profile`, createPill({ label: student.status, tone: student.status === 'Active' ? 'success' : 'warning' }), reset, demo), tabs: records, sidePanel: createCard({ headingLevel: 2, title: 'School context', content: createDescriptionList({ items: [{ term: 'Academic year', value: '2026' }, { term: 'Class tutor', value: 'Ms Rivera (mock)' }, { term: 'Privacy', value: 'Fictional records. Changes remain in this browser session.' }] }) }) });
 }
 
-function renderAttendance() {
+function renderAttendance(reset) {
   let selectedClass = '7A', date = '2026-10-26', mode = 'normal', dirty = false;
   let roster = [], draft = {}, saved = {};
   const content = element('div');
   const notice = statusMessage('Choose statuses, then save the mock attendance sheet.');
-  const chart = createChart({ type: 'donut', title: 'Mock attendance summary', labels: ['Present', 'Absent', 'Late', 'Unmarked'], series: [{ name: 'Students', values: [] }] });
+  const chart = createChart({ headingLevel: 2, type: 'donut', title: 'Mock attendance summary', labels: ['Present', 'Absent', 'Late', 'Unmarked'], series: [{ name: 'Students', values: [] }] });
   let radios = [];
   function key() { return `${selectedClass}:${date}`; }
   function load() {
@@ -163,16 +166,16 @@ function renderAttendance() {
     radios = roster.map(student => ({ student, control: createRadioGroup({ label: `${student.name} · ${student.id}`, value: draft[student.id], required: true, options: attendanceStatuses.map(value => ({ value, label: titleCase(value) })), onChange: value => { draft[student.id] = value; sync(); } }) }));
     content.replaceChildren(table(`Mock attendance roster · Class ${selectedClass} · ${date}`, ['Student', 'Attendance status'], radios.map(({ student, control }) => [element('a', { href: `#/examples/school/student/${student.id}` }, student.name), control.element])));
   }
-  const layout = createListingLayout({ header: pageHeader('Attendance sheet', 'Mark the class roster for a chosen date. Present and Late both count as attended.', save), summary: notice, toolbar: toolbar(classFilter.element, datePicker.element, demo.element, markAll), table: content, detail: chart });
+  const layout = createListingLayout({ header: pageHeader('Attendance sheet', 'Mark the class roster for a chosen date. Present and Late both count as attended.', save, reset, demo), summary: notice, toolbar: toolbar(classFilter.element, datePicker.element, markAll), table: content, detail: chart });
   load(); onDetach(layout, guard.destroy); return layout;
 }
 
-function renderGradebook() {
+function renderGradebook(reset) {
   let selectedClass = '7A', mode = 'normal', grid, dirty = false;
   const gridHost = element('div');
   const summaryHost = element('div');
   const notice = statusMessage();
-  const distribution = createChart({ type: 'bar', title: 'Mock class grade distribution', labels: [], series: [] });
+  const distribution = createChart({ headingLevel: 2, type: 'bar', title: 'Mock class grade distribution', labels: [], series: [] });
   const exportButton = button('Export CSV', () => {
     if (!grid.isValid()) { notice.textContent = 'Correct invalid scores before exporting.'; return; }
     const rows = compute().map(row => ({ student: row.name, id: row.id, className: selectedClass, ...Object.fromEntries(assignments.map((key, index) => [key, row.grades[index]])), average: row.average, rank: row.rank }));
@@ -212,15 +215,15 @@ function renderGradebook() {
     ], rows: students.filter(student => student.className === selectedClass).map(student => ({ id: student.id, student: student.name, ...Object.fromEntries(assignments.map((key, index) => [key, savedGrades[student.id][index]])) })), onChange: () => { if (grid) sync(); }, onDirtyChange: value => { dirty = value; if (grid) sync(); } });
     gridHost.replaceChildren(grid.element); show();
   }
-  const layout = createListingLayout({ header: pageHeader('Gradebook', 'Mathematics · Three equally weighted assignments. Edit cells with Enter; Escape cancels an edit.', toolbar(exportButton, save)), summary: notice, toolbar: toolbar(classFilter.element, demo.element), table: stack(gridHost, stateHost, createCard({ title: 'Computed averages and ranks', content: summaryHost }), distribution) });
+  const layout = createListingLayout({ header: pageHeader('Gradebook', 'Mathematics · Three equally weighted assignments. Edit cells with Enter; Escape cancels an edit.', toolbar(exportButton, save), reset, demo), summary: notice, toolbar: toolbar(classFilter.element), table: stack(gridHost, stateHost, createCard({ headingLevel: 2, title: 'Computed averages and ranks', content: summaryHost }), distribution) });
   load(); onDetach(layout, guard.destroy); return layout;
 }
 
-function renderTimetable() {
+function renderTimetable(reset) {
   let selectedClass = 'all', teacher = 'all', mode = 'normal';
   const notice = statusMessage('Mock lessons for the week beginning 26 October 2026.');
   const content = element('div');
-  const calendar = createCalendar({ date: '2026-10-26', view: 'week', locale: 'en-GB', events: lessonData, onSelectDate: value => { notice.textContent = `Selected ${value}. Lessons are mock and read-only.`; }, onSelectEvent: event => { const lesson = lessonData.find(item => item.id === event.id); if (!lesson) return; openModal({ title: `${lesson.subject} · Class ${lesson.className} (mock)`, content: createDescriptionList({ items: [{ term: 'Date', value: lesson.date }, { term: 'Time', value: lesson.time }, { term: 'Teacher', value: lesson.teacher }, { term: 'Room', value: lesson.room }] }), actions: [{ label: 'Close lesson', onClick: close => close() }] }); } });
+  const calendar = createCalendar({ headingLevel: 2, date: '2026-10-26', view: 'week', locale: 'en-GB', events: lessonData, onSelectDate: value => { notice.textContent = `Selected ${value}. Lessons are mock and read-only.`; }, onSelectEvent: event => { const lesson = lessonData.find(item => item.id === event.id); if (!lesson) return; openModal({ title: `${lesson.subject} · Class ${lesson.className} (mock)`, content: createDescriptionList({ items: [{ term: 'Date', value: lesson.date }, { term: 'Time', value: lesson.time }, { term: 'Teacher', value: lesson.teacher }, { term: 'Room', value: lesson.room }] }), actions: [{ label: 'Close lesson', onClick: close => close() }] }); } });
   const classFilter = classChoice('Timetable class', selectedClass, value => { selectedClass = value; update(); }, true);
   const teacherFilter = createCombobox({ label: 'Teacher', value: teacher, clearable: false, options: [{ value: 'all', label: 'All teachers' }, ...[...new Set(lessonData.map(item => item.teacher))].map(value => ({ value, label: value }))], onChange: value => { teacher = value; update(); } });
   const demo = stateDemo('Timetable lessons', value => { mode = value; update(); });
@@ -234,7 +237,7 @@ function renderTimetable() {
     notice.textContent = `${mode === 'normal' ? events.length : 0} matching mock lessons · Class: ${selectedClass === 'all' ? 'All' : selectedClass} · Teacher: ${teacher === 'all' ? 'All' : teacher}. Calendar navigation changes the displayed week.`;
   }
   content.append(calendar.element, element('div', { 'data-school-timetable-state': '' }));
-  update(); return createListingLayout({ header: pageHeader('Timetable', 'Weekly mock lessons. Filter by class and teacher; activate a lesson for its room and details.'), summary: notice, toolbar: toolbar(classFilter.element, teacherFilter.element, demo.element, button('Clear filters', restore)), table: content });
+  update(); return createListingLayout({ header: pageHeader('Timetable', 'Weekly mock lessons. Filter by class and teacher; activate a lesson for its room and details.', undefined, reset, demo), summary: notice, toolbar: toolbar(classFilter.element, teacherFilter.element, button('Clear filters', restore)), table: content });
 }
 
 export function render(container, { screen = 'students', id } = {}) {
@@ -246,9 +249,9 @@ export function render(container, { screen = 'students', id } = {}) {
   const notice = element('p', { className: 'school-mock-notice' }, 'Mock data · Fictional students and lessons. All saved changes are session-only; reload restores defaults.');
   const body = element('div');
   const reset = button('Reset demo data', () => openConfirmDialog({ title: 'Reset all School demo data?', description: 'Discard unsaved edits and restore every mock attendance sheet and grade to the original values. This affects only the School example in this browser session.', destructive: true, confirmLabel: 'Reset School data', onConfirm: () => { savedGrades = initialGrades(); savedAttendance = {}; render(container, { screen: current, id }); } }));
-  root.append(toolbar(nav, reset), notice, body);
+  root.append(nav, notice, body);
   container.replaceChildren(root);
-  const screens = { students: renderStudents, student: () => renderStudent(id || 'STU-001'), attendance: renderAttendance, gradebook: renderGradebook, timetable: renderTimetable };
-  body.append((screens[current] || renderStudents)());
+  const screens = { students: renderStudents, student: resetControl => renderStudent(id || 'STU-001', resetControl), attendance: renderAttendance, gradebook: renderGradebook, timetable: renderTimetable };
+  body.append((screens[current] || renderStudents)(reset));
   return root;
 }

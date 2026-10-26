@@ -1,6 +1,6 @@
 import { registry } from '../components/registry.js';
 import { categories } from '../components/metadata.js';
-import { initPWA, renderPWA, getPWAState } from './pwa.js';
+import { initPWA, renderPWA, getPWAState, checkForUpdates, applyUpdate } from './pwa.js';
 import { VERSION, BUILD } from './build-info.js';
 import { createRouter } from './router.js';
 import { t, setLanguage, getLanguage } from './i18n.js';
@@ -12,6 +12,7 @@ import { createCommandPalette } from '../components/command-palette.js';
 import { MOCK_PERMISSIONS, getMockPermissions, setMockPermissions } from '../components/permission-gate.js';
 import { exampleRoutes, renderExampleRoute } from './example-routes.js';
 import { createButtonGroup } from '../components/button-group.js';
+import { checkAccessibility } from './a11y-selfcheck.js';
 
 const storage = {
   read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
@@ -226,6 +227,10 @@ function navLink(module, mobile = false) {
 function renderShell() {
   root.innerHTML = `<header class="topbar"><a class="brand" href="#/overview"><span class="brand-mark">${icon('logo')}</span><span>Forma</span></a><div class="breadcrumbs"></div><div class="global-search"><label class="search-field">${icon('search')}<input id="global-search" type="search" placeholder="Search pages, components, tokens" aria-label="Global search" aria-haspopup="dialog" autocomplete="off"><kbd>⌘ K</kbd></label></div><div class="topbar-actions"><button class="icon-button" id="notification-menu" aria-label="Notifications" aria-haspopup="menu" aria-expanded="false">${icon('bell')}<span id="notification-count"></span></button><button class="language-button" id="language-toggle" aria-label="${escape(t('language'))}">${icon('globe')}<span>${getLanguage() === 'en' ? 'EN' : '中文'}</span></button><button class="icon-button" id="theme-menu" aria-label="${escape(t('theme'))}" aria-haspopup="menu" aria-expanded="false">${icon(prefs.theme === 'dark' ? 'moon' : 'sun')}</button><button class="avatar" id="account-menu" aria-label="${escape(t('account'))}" aria-haspopup="menu" aria-expanded="false">DS</button></div></header>
     <div class="workspace"><aside class="context-panel" aria-label="${escape(t('contextNavigation'))}"></aside><div class="main-column"><main id="main-content" tabindex="-1"></main><footer class="workspace-footer"><span>Forma · ${t('workspace')}</span><span>v${escape(VERSION)}</span></footer></div></div><nav class="bottom-nav" aria-label="${escape(t('navigation'))}">${modules.slice(0, 3).map(module => navLink(module, true)).join('')}<button class="bottom-tab" id="mobile-more" aria-haspopup="dialog">${icon('more')}<span>${t('more')}</span></button></nav>`;
+  const languageToggle = root.querySelector('#language-toggle');
+  languageToggle.setAttribute('aria-label', `${languageToggle.textContent.trim()}, ${t('language')}`);
+  root.querySelector('#account-menu').setAttribute('aria-label', `DS, ${t('account')}`);
+  root.querySelector('.global-search kbd').setAttribute('aria-hidden', 'true');
   document.querySelector('.skip-link').textContent = t('skip');
   document.querySelector('#language-toggle').onclick = async () => {
     if (!(await window.resolveDirty())) return;
@@ -297,11 +302,11 @@ function renderContext() {
     }).join('');
   }
   if (current === 'settings') links = settingsSections.map(section => `<a class="context-link ${route.section === section ? 'active' : ''}" href="#/settings/${section}">${icon(section === 'pwa' ? 'download' : section === 'about' ? 'info' : section === 'appearance' ? 'sun' : 'settings')}${t(section)}</a>`).join('');
-  const section = (title, names) => `<div class="context-label">${title}</div>${names.map(name => `<a class="context-link ${current === name ? 'active' : ''}" href="${name === 'settings' ? '#/settings/general' : `#/${name}`}" aria-label="${escape(name === 'kits' ? 'Design kits' : t(name))}">${icon(name === 'kits' ? 'components' : name)}<span class="nav-label">${name === 'kits' ? 'Design kits' : t(name)}</span>${name === 'components' ? `<span class="nav-count">${registry.length}</span>` : ''}</a>${current === name ? `<div class="nested-nav">${links}</div>` : ''}`).join('')}`;
+  const section = (title, names) => `<div class="context-label">${title}</div>${names.map(name => `<a class="context-link ${current === name ? 'active' : ''}" href="${name === 'settings' ? '#/settings/general' : `#/${name}`}">${icon(name)}<span class="nav-label">${name === 'kits' ? 'Design kits' : t(name)}</span>${name === 'components' ? `<span class="nav-count">${registry.length}</span>` : ''}</a>${current === name ? `<div class="nested-nav">${links}</div>` : ''}`).join('')}`;
   document.querySelector('.context-panel').innerHTML = `<button class="icon-button" id="sidebar-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button><div class="context-content">${section('Main', ['overview', 'tokens', 'components', 'kits'])}${section('System', ['settings'])}</div><button class="context-bottom" id="sidebar-account"><span class="avatar">DS</span><span class="nav-label"><strong>${t('localWorkspace')}</strong><small>${t('localData')}</small></span></button>`;
-  const guideLink = document.createElement('a'); guideLink.className = `context-link${current === 'learn' ? ' active' : ''}`; guideLink.href = '#/learn'; guideLink.setAttribute('aria-label', 'Guide'); guideLink.innerHTML = `${icon('components')}<span class="nav-label">Guide</span>`; document.querySelector('.context-content .context-label')?.after(guideLink);
+  const guideLink = document.createElement('a'); guideLink.className = `context-link${current === 'learn' ? ' active' : ''}`; guideLink.href = '#/learn'; guideLink.innerHTML = `${icon('learn')}<span class="nav-label">Guide</span>`; document.querySelector('.context-content .context-label')?.after(guideLink);
   const examplesNav = document.createElement('div');
-  examplesNav.innerHTML = `<a class="context-link ${current === 'examples' ? 'active' : ''}" href="#/examples" aria-label="Examples">${icon('components')}<span class="nav-label">Examples</span></a>` + ['erp', 'crm', 'school'].map((domain, index) => {
+  examplesNav.innerHTML = `<a class="context-link ${current === 'examples' ? 'active' : ''}" href="#/examples">${icon('examples')}<span class="nav-label">Examples</span></a>` + ['erp', 'crm', 'school'].map((domain, index) => {
     const expanded = route.params.domain === domain;
     return `<div class="component-nav-group"><button class="context-link component-nav-toggle" aria-expanded="${expanded}" aria-controls="example-group-${index}">${icon('chevronRight')}<span>${domain === 'school' ? 'School' : domain.toUpperCase()}</span></button><div id="example-group-${index}"${expanded ? '' : ' hidden'}>${exampleRoutes.filter(entry => entry.path.startsWith(`/examples/${domain}/`)).map(entry => `<a class="context-link${route.path === entry.path ? ' active' : ''}" href="#${entry.path}"><span>${escape(entry.title.split(' / ')[1])}</span></a>`).join('')}</div></div>`;
   }).join('');
@@ -338,7 +343,7 @@ function renderOverview(main) {
   const state = getPWAState();
   main.innerHTML = `${pageHeader(t('overview'), t('overviewDescription'))}<section class="welcome-card"><div class="welcome-copy"><span class="eyebrow">${t('designFoundation')}</span><h2>${t('welcome')}</h2><p>${t('quickStartDescription')}</p><a class="button button-primary" href="#/tokens">${t('exploreTokens')}${icon('arrowRight')}</a></div><div class="foundation-art" aria-hidden="true"><div class="art-grid"><span></span><span></span><span></span><span></span></div><div class="art-label">Aa <span>↗</span></div><div class="art-line"></div></div></section><section class="metric-grid" aria-label="${escape(t('workspaceOverview'))}">${[{ name: 'tokenCount', value: tokenEntries().length, description: 'tokenMetric', icon: 'tokens' }, { name: 'componentCount', value: registry.length, description: 'componentMetric', icon: 'components' }, { name: 'editCount', value: changeLog.length, description: 'editMetric', icon: 'clock' }, { name: 'version', value: VERSION, description: 'versionMetric', icon: 'code' }].map(metric => `<article class="card metric"><div class="metric-top"><span>${t(metric.name)}</span><span class="metric-icon">${icon(metric.icon)}</span></div><strong>${escape(metric.value)}</strong><small>${t(metric.description)}</small></article>`).join('')}</section><div class="overview-grid"><section class="card recent-card"><div class="card-heading"><h2>${t('recentEdits')}</h2><a href="#/tokens">${t('viewAll')}${icon('arrowRight')}</a></div>${changeLog.length ? `<div class="recent-list">${changeLog.slice(0, 5).map(item => `<div class="recent-item"><span class="recent-icon">${icon('edit')}</span><div><strong>${escape(item.token)}</strong><small>${escape(item.new)} <span aria-hidden="true">·</span> ${t(item.mode)}</small></div><time datetime="${escape(item.time)}">${dateLabel(item.time)}</time></div>`).join('')}</div>` : `<div class="empty-state"><span class="empty-icon">${icon('clock')}</span><h3>${t('noEdits')}</h3><p>${t('noEditsDescription')}</p><a href="#/tokens" class="text-link">${t('exploreTokens')}${icon('arrowRight')}</a></div>`}</section><section class="card status-card"><div class="card-heading"><h2>${t('runtimeStatus')}</h2>${icon('wifi')}</div><div class="status-item"><span>${t('online')}</span><span class="badge"><i class="status-dot ${navigator.onLine ? '' : 'is-offline'}"></i>${t(navigator.onLine ? 'online' : 'offline')}</span></div><div class="status-item"><span>PWA</span><strong>${t(state.installed ? 'installed' : 'browserMode')}</strong></div><div class="status-item"><span>${t('version')}</span><strong>${escape(VERSION)}</strong></div><p class="status-note">${t(state.updateAvailable ? 'updateReady' : navigator.serviceWorker?.controller ? 'serviceReady' : 'servicePending')}</p><a class="button button-block" href="#/settings/pwa">${t('manageUpdates')}${icon('arrowRight')}</a></section></div><section class="quick-links"><a href="#/tokens"><span class="quick-icon">${icon('tokens')}</span><div><h3>${t('foundations')}</h3><p>${t('tokensDescription')}</p></div>${icon('arrowRight')}</a><a href="#/components"><span class="quick-icon">${icon('components')}</span><div><h3>${t('library')}</h3><p>${t('componentsDescription')}</p></div>${icon('arrowRight')}</a></section>`;
   main.insertAdjacentHTML('beforeend', '<section class="card info-card"><div><h2>Appearance</h2><p>Compare three design kits with the same reference screens.</p><a class="button" href="#/kits">Explore design kits</a></div></section>');
-  const chartCard = document.createElement('section'); chartCard.className = 'card learn-card'; chartCard.append(createChart({ type: 'line', title: 'Mock customer growth — demonstration data', labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], series: [{ name: 'Mock customers', values: [18, 24, 23, 36, 42] }, { name: 'Mock trials', values: [8, 12, 10, 18, 20] }] })); main.append(chartCard);
+  const chartCard = document.createElement('section'); chartCard.className = 'card learn-card'; chartCard.append(createChart({ headingLevel: 2, type: 'line', title: 'Mock customer growth — demonstration data', labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], series: [{ name: 'Mock customers', values: [18, 24, 23, 36, 42] }, { name: 'Mock trials', values: [8, 12, 10, 18, 20] }] })); main.append(chartCard);
 }
 function tokenPreview(group, name, value) {
   if (group === 'Color') return `<span class="token-swatch" style="background:${escape(value)}"></span>`;
@@ -457,6 +462,21 @@ function renderSettings(main) {
   const content = main.querySelector('#settings-content');
   if (section === 'pwa') { renderPWA(content); return; }
   if (section === 'about') content.innerHTML = `<section class="card about-card"><span class="brand-mark about-mark">${icon('logo')}</span><h2>Forma</h2><p>${t('aboutDescription')}</p><div class="version-grid"><div><span>${t('version')}</span><strong id="app-version">${escape(VERSION)}</strong></div><div><span>${t('build')}</span><code id="app-build">${escape(BUILD)}</code></div></div><p class="technology-label">${icon('code')}${t('technology')}</p></section><section class="card info-card">${icon('shield')}<div><h2>${t('localData')}</h2><p>${t('localDataDescription')}</p></div></section>`;
+  if (section === 'about') {
+    const developer = document.createElement('section');
+    developer.className = 'card info-card';
+    developer.innerHTML = '<div><h2>Developer accessibility tools</h2><p>Checks the current DOM. This is a development aid, not a replacement for keyboard and screen-reader testing.</p><button class="button" type="button">Run accessibility self-check</button><p role="status" aria-live="polite"></p><ul aria-label="Accessibility self-check results"></ul></div>';
+    content.append(developer);
+    developer.querySelector('button').onclick = () => {
+      const violations = checkAccessibility();
+      developer.querySelector('[role="status"]').textContent = `${violations.length} accessibility violations found.`;
+      developer.querySelector('ul').replaceChildren(...(violations.length ? violations.map(violation => {
+        const item = document.createElement('li');
+        item.textContent = `${violation.rule}: ${violation.message}${violation.selector ? ` (${violation.selector})` : ''}`;
+        return item;
+      }) : [Object.assign(document.createElement('li'), { textContent: 'No violations found in the current DOM.' })]));
+    };
+  }
   if (section === 'general') content.innerHTML = `<section class="card settings-card"><div class="card-heading"><h2>${t('preferences')}</h2>${icon('settings')}</div>${settingRow('landingPage', 'landingDescription', `<button class="button preference-menu" data-pref-menu="landingPage" aria-haspopup="menu" aria-expanded="false">${t(prefs.landingPage.slice(1))}${icon('chevronDown')}</button>`)}${settingRow('density', 'densityDescription', choice('density', [['comfortable', 'comfortable'], ['compact', 'compact']]))}${settingRow('pageSize', 'pageSizeDescription', `<button class="button preference-menu" data-pref-menu="pageSize" aria-haspopup="menu" aria-expanded="false">${prefs.pageSize}${icon('chevronDown')}</button>`)}</section>`;
   if (section === 'appearance') content.innerHTML = `<section class="card settings-card"><div class="card-heading"><h2>${t('appearanceTitle')}</h2>${icon('sun')}</div>${settingRow('theme', 'themeDescription', choice('theme', [['light', 'light'], ['dark', 'dark'], ['system', 'system']]))}${settingRow('density', 'densityDescription', choice('density', [['comfortable', 'comfortable'], ['compact', 'compact']]))}${settingRow('panel', 'panelDescription', choice('panel', [['expanded', 'expanded'], ['collapsed', 'collapsed']]))}${settingRow('reducedMotion', 'reducedMotionDescription', `<button class="preference-switch ${prefs.reducedMotion ? 'is-on' : ''}" role="switch" aria-checked="${prefs.reducedMotion}" aria-label="${escape(t('reducedMotion'))}" id="motion-toggle"><span></span></button>`)}</section>`;
   if (section === 'appearance') content.insertAdjacentHTML('beforeend', `<section class="card settings-card"><div class="card-heading"><h2>Palette</h2><span>Accent only · light and dark</span></div><div class="palette-picker">${palettes.map(name => `<button class="button" data-pref="palette" data-value="${name}" aria-pressed="${prefs.palette === name}"><span class="palette-dot palette-${name}" aria-hidden="true"></span>${label(name)}</button>`).join('')}</div></section><section class="card settings-card"><div class="card-heading"><h2>Design kit</h2><a href="#/kits">Compare reference screens</a></div><div class="kit-picker">${kitNames.map(name => `<button class="button" data-pref="kit" data-value="${name}" aria-pressed="${prefs.kit === name}"><span class="kit-preview" aria-hidden="true"></span><strong>${label(name)}</strong><small>${name === 'enterprise' ? 'Solid surfaces · balanced workspace' : name === 'liquid' ? 'Glass chrome · readable solid content' : 'Compact operations · tabular numbers'}</small></button>`).join('')}</div></section>`);
@@ -496,7 +516,29 @@ function renderSettings(main) {
   });
   content.querySelector('#motion-toggle')?.addEventListener('click', () => { savePreference('reducedMotion', !prefs.reducedMotion); render(); });
 }
-function renderNotFound(main) { main.innerHTML = `<div class="empty-state not-found">${icon('search')}<h1>${t('notFound')}</h1><p>${t('notFoundDescription')}</p><a class="button button-primary" href="#/overview">${t('goHome')}</a></div>`; }
+function renderNotFoundUpdate(main) {
+  const prompt = main?.querySelector('[data-not-found-update]');
+  if (!prompt) return;
+  const state = getPWAState();
+  if (!state.updateAvailable) { prompt.replaceChildren(); return; }
+  if (!prompt.firstElementChild) {
+    const message = document.createElement('p');
+    message.textContent = 'A newer version is available - ';
+    const action = document.createElement('button');
+    action.type = 'button';
+    action.className = 'button button-primary';
+    action.textContent = 'Update now';
+    action.addEventListener('click', applyUpdate);
+    message.append(action);
+    prompt.append(message);
+  }
+  prompt.querySelector('button').disabled = state.updating;
+}
+function renderNotFound(main) {
+  main.innerHTML = `<div class="empty-state not-found">${icon('search')}<h1>${t('notFound')}</h1><p>${t('notFoundDescription')}</p><div data-not-found-update role="status" aria-live="polite"></div><div class="page-actions"><button class="button" type="button" data-not-found-search>Search pages, components, tokens</button><a class="button button-primary" href="#/overview">${t('goHome')}</a></div></div>`;
+  main.querySelector('[data-not-found-search]').addEventListener('click', () => commandPalette.open());
+  renderNotFoundUpdate(main);
+}
 function render() {
   document.querySelector('.app-menu')?.remove();
   // Shell-only changes must not reconstruct a mounted product editor or its guard.
@@ -517,7 +559,11 @@ function render() {
 }
 mediaTheme.addEventListener('change', () => { if (prefs.theme === 'system') applyPreferences(); });
 tablet.addEventListener('change', applyPreferences);
-window.addEventListener('pwa:state', () => { if (route?.module === 'overview') renderOverview(document.querySelector('#main-content')); });
+window.addEventListener('pwa:state', () => {
+  const main = document.querySelector('#main-content');
+  if (route?.module === 'overview') renderOverview(main);
+  else renderNotFoundUpdate(main);
+});
 
 document.addEventListener('keydown', event => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); commandPalette.open(); } });
 function notificationItems() {
@@ -531,6 +577,7 @@ function updateNotifications() {
   const count = notificationItems().filter(item => item.run).length;
   const badge = document.querySelector('#notification-count');
   if (badge) { badge.textContent = count || ''; badge.hidden = !count; }
+  document.querySelector('#notification-menu')?.setAttribute('aria-label', count ? `${count} Notifications` : 'Notifications');
 }
 window.addEventListener('pwa:state', updateNotifications);
 window.addEventListener('app:dirty', updateNotifications);
@@ -541,7 +588,11 @@ async function start() {
     if (!response.ok) throw new Error(`Token request failed (${response.status})`);
     tokens = await response.json();
     sanitizeOverrides(); applyOverrides();
-    router = createRouter(next => { route = next; render(); }, { landing: prefs.landingPage, beforeNavigate: window.resolveDirty });
+    router = createRouter(next => {
+      route = next;
+      render();
+      if (document.querySelector('[data-not-found-update]')) checkForUpdates();
+    }, { landing: prefs.landingPage, beforeNavigate: window.resolveDirty });
     initPWA();
   } catch (error) {
     root.innerHTML = `<main class="boot-state"><h1>${getLanguage() === 'zh' ? '工作区无法启动' : 'Unable to start workspace'}</h1><p>${escape(error.message)}</p><button class="button" id="retry-start">${getLanguage() === 'zh' ? '重试' : 'Try again'}</button></main>`;

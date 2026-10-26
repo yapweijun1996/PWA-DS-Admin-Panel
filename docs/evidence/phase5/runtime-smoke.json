@@ -1,0 +1,51 @@
+{
+  "offline": [
+    {
+      "path": "/examples/erp/inventory",
+      "online": false,
+      "controlled": true,
+      "heading": "Inventory overview",
+      "disclosure": true,
+      "version": "Forma · Design systemv0.6.0"
+    },
+    {
+      "path": "/examples/crm/pipeline",
+      "online": false,
+      "controlled": true,
+      "heading": "Sales pipeline",
+      "disclosure": true,
+      "version": "Forma · Design systemv0.6.0"
+    },
+    {
+      "path": "/examples/school/gradebook",
+      "online": false,
+      "controlled": true,
+      "heading": "Gradebook",
+      "disclosure": true,
+      "version": "Forma · Design systemv0.6.0"
+    }
+  ],
+  "update": {
+    "kept": {
+      "scoreText": "89Unsaved",
+      "waiting": true,
+      "dirty": true
+    },
+    "activation": {
+      "build": "20261026155447510",
+      "reloads": 1,
+      "loader": "seen",
+      "controlled": true
+    },
+    "after": {
+      "score": "88",
+      "dirtyCell": false,
+      "dirtyMarkerHidden": true,
+      "saveDisabled": true,
+      "waiting": false,
+      "controlled": true,
+      "loader": "seen"
+    },
+    "note": "Activation run observed these kept/activation facts, but its exact textContent assertion included the hidden Unsaved marker. A separate final DOM read confirmed the restored score and clean state without repeating activation."
+  }
+}

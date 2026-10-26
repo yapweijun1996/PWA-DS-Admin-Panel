@@ -1,6 +1,7 @@
-.erp-example {
+.erp-example,
+.erp-screen {
   display: grid;
-  gap: var(--space-6);
+  gap: var(--page-section-gap);
   min-width: 0;
 }
 .erp-example > *,
@@ -15,19 +16,23 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  gap: var(--page-toolbar-gap);
 }
 .erp-heading {
   justify-content: space-between;
   align-items: flex-start;
-  margin-block-end: var(--space-4);
+  gap: var(--page-header-gap);
+  margin: 0;
 }
 .erp-heading > div:first-child {
   flex: 1 1 18rem;
   min-width: 0;
 }
 .erp-heading h1 {
-  margin-block: 0 var(--space-2);
+  margin: 0;
+}
+.erp-heading p {
+  margin: var(--page-subtitle-gap) 0 0;
 }
 .erp-nav .ds-button[aria-current="page"] {
   background: var(--accent-soft);
@@ -104,7 +109,6 @@
   font-variant-numeric: tabular-nums;
 }
 @media (max-width: 767px) {
-  .erp-example { gap: var(--space-4); }
   .erp-date-fields,
   .erp-stock-list li { grid-template-columns: minmax(0, 1fr); }
   .erp-example .erp-nav { width: 100%; }

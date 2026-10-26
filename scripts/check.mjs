@@ -4,6 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { generate, buildArtifacts } from './build-tokens.mjs';
 import { contrastMatrix } from './contrast.mjs';
 import { validateMetadata } from '../components/metadata.js';
+import { generateRegistryDoc } from './build-registry-doc.mjs';
 
 const requiredComponents = ['button', 'input', 'select', 'checkbox', 'tag', 'tabs', 'table', 'modal', 'toast', 'tooltip', 'popover'];
 const rawColor = /#[\da-f]{3,8}\b|\brgba?\s*\(|\bhsla?\s*\(/i;
@@ -48,7 +49,7 @@ export async function checkProject(root = fileURLToPath(new URL('../', import.me
   const files = [];
   async function walk(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
-      if (['.git', 'node_modules'].includes(entry.name)) continue;
+      if (['.git', 'node_modules', 'dist-kit', 'dist-kits'].includes(entry.name)) continue;
       const path = join(directory, entry.name);
       if (entry.isDirectory()) await walk(path);
       else if (entry.isFile() && /\.(?:css|js|mjs|cjs|html|json)$/i.test(entry.name)) files.push(path);
@@ -102,6 +103,9 @@ export async function checkProject(root = fileURLToPath(new URL('../', import.me
     const { registry } = await import(`${pathToFileURL(join(root, 'components/registry.js')).href}?check=${Date.now()}`);
     errors.push(...validateMetadata(registry));
     errors.push(...validateRegistryLabels(registry));
+    let registryDoc;
+    try { registryDoc = await readFile(join(root, 'docs/COMPONENT_REGISTRY.md'), 'utf8'); } catch {}
+    if (registryDoc !== generateRegistryDoc(registry)) errors.push('docs/COMPONENT_REGISTRY.md: generated registry is missing or stale; run npm run docs:registry.');
   } catch (error) { errors.push(`Component registry: ${error.message}`); }
   return errors;
 }

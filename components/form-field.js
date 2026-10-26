@@ -8,6 +8,10 @@ export function createFormField({ label, control, hint = '', error = '', require
   const errorNode = element('small', { id: uniqueId('field-error'), className: 'component-error', 'aria-live': 'polite' });
   const originalDescriptions = (target.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
   const labelNode = element('label', { for: target.id }, label, required ? element('span', {}, ' (required)') : null);
+  if (target.classList.contains('ds-select-trigger')) {
+    labelNode.id = uniqueId('field-label');
+    target.setAttribute('aria-labelledby', `${labelNode.id} ${target.id}-value`);
+  }
   if (required) { target.setAttribute('aria-required', 'true'); if ('required' in target) target.required = true; }
   const root = element('div', { className: 'ds-form-field' }, labelNode, control, hintNode, errorNode);
   function setError(message = '') {

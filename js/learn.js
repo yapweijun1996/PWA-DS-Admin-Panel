@@ -155,7 +155,7 @@ function guidelines(panel) {
   const chart = el('section', { className: 'card learn-card learn-wide' }, el('h2', {}, 'What do you want to show?'));
   const recommendation = el('p', { role: 'status' }), example = el('div');
   function choose(type) { recommendation.textContent = `Recommended: ${type} — ${chartChoices.find(row => row[0] === type)[1]}. Mock example.`; example.replaceChildren(createChart({ type, title: 'Mock chart recommendation', labels: ['Jan', 'Feb', 'Mar', 'Apr'], series: [{ name: 'Mock customers', values: [12, 18, 15, 26] }, { name: 'Mock trials', values: [8, 11, 9, 14] }] })); }
-  const picker = customSelect({ label: 'What do you want to show?', value: 'line', options: chartChoices.map(([value, label]) => ({ value, label })), onChange: choose });
+  const picker = customSelect({ label: 'Choose a chart by purpose', value: 'line', options: chartChoices.map(([value, label]) => ({ value, label })), onChange: choose });
   const chartList = el('ul', { className: 'learn-chart-choices' }, ...chartChoices.map(([name, reason]) => el('li', {}, chartChoiceIcon(name), el('div', {}, el('strong', {}, name === 'stacked' ? 'Stacked bar' : name[0].toUpperCase() + name.slice(1)), el('span', {}, reason)))));
   chart.append(el('div', { className: 'component-field' }, el('label', { for: picker.id }, 'Choose a chart by purpose'), picker.element), recommendation, example, chartList); grid.append(chart); choose('line');
   grid.append(el('header', { className: 'learn-section-heading learn-wide' }, el('h2', {}, 'Layout templates'), el('p', {}, 'Live L5 templates composed from the same shared layouts used by the Design kits showcase. All example records are mock.')));
@@ -192,7 +192,7 @@ function listingPattern(preview) {
   function update() {
     const matches = mockAccounts.filter(account => `${account.name} ${account.status} ${account.owner}`.toLowerCase().includes(search.value.trim().toLowerCase()));
     const visible = matches.slice((page - 1) * pageSize, page * pageSize);
-    const body = el('tbody', {}, ...visible.map(account => el('tr', { 'aria-label': `View ${account.name} mock details` }, el('td', {}, el('strong', {}, account.name)), el('td', {}, accountStatus(account)), el('td', {}, account.owner))));
+    const body = el('tbody', {}, ...visible.map(account => el('tr', {}, el('td', {}, el('strong', {}, account.name)), el('td', {}, accountStatus(account)), el('td', {}, account.owner))));
     if (!visible.length) body.append(el('tr', {}, el('td', { colspan: '3' }, 'No mock customers match your search.')));
     results.replaceChildren(createTable({ caption: 'Mock customers · Select a row for details', header: el('tr', {}, ...['Customer', 'Status', 'Owner'].map(label => el('th', { scope: 'col' }, label))), body, className: 'learn-compact-table', onRowActivate: visible.length ? index => {
       const account = visible[index];
@@ -242,11 +242,11 @@ function dashboardPattern(preview) {
   const canvas = el('div');
   let periodValue = 'month';
   let variant = 'bento';
-  const period = customSelect({ label: 'Mock dashboard period', value: periodValue, options: [{ value: 'month', label: 'This month' }, { value: 'quarter', label: 'This quarter' }], onChange(value) { periodValue = value; update(); } });
+  const period = customSelect({ label: 'Reporting period', value: periodValue, options: [{ value: 'month', label: 'This month' }, { value: 'quarter', label: 'This quarter' }], onChange(value) { periodValue = value; update(); } });
   const layoutChoice = customSelect({ label: 'Dashboard layout variant', value: variant, options: [{ value: 'grid', label: 'Balanced 12-column grid' }, { value: 'bento', label: 'Bento' }], onChange(value) { variant = value; update(); } });
   function update() {
     const quarterly = periodValue === 'quarter';
-    const trend = createChart({ type: 'line', title: `Mock customer trend · ${quarterly ? 'quarter' : 'month'}`, labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], series: [{ name: 'Customers', values: quarterly ? [26, 34, 42, 54] : [12, 18, 15, 26] }] });
+    const trend = createChart({ headingLevel: 4, type: 'line', title: `Mock customer trend · ${quarterly ? 'quarter' : 'month'}`, labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], series: [{ name: 'Customers', values: quarterly ? [26, 34, 42, 54] : [12, 18, 15, 26] }] });
     canvas.replaceChildren(createDashboardLayout({ variant, header: el('h3', {}, 'Mock customer dashboard'), metrics: [
       createKpiCard({ label: 'Mock customers', value: quarterly ? '54' : '26', trend: quarterly ? '+28' : '+8' }),
       createKpiCard({ label: 'Mock active accounts', value: quarterly ? '42' : '20', trend: 'Healthy', trendTone: 'success' }),

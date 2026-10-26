@@ -14,6 +14,9 @@
   --muted: #475569;
   --border: #64748b;
   --border-subtle: #e2e8f0;
+  --contrast-text: #020617;
+  --contrast-muted: #1e293b;
+  --contrast-border: #334155;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
   --accent-text: #1d4ed8;
@@ -84,6 +87,13 @@
   --topbar-height: 56px;
   --content-max-width: 1600px;
   --content-gap: 24px;
+  --page-header-gap: 16px;
+  --page-subtitle-gap: 8px;
+  --page-section-gap: 24px;
+  --page-toolbar-gap: 12px;
+  --table-cell-padding: 16px;
+  --table-cell-padding-block: 16px;
+  --table-header-padding-block: 12px;
   --control-height: 44px;
   --border-width: 1px;
   --breakpoint-phone: 768px;
@@ -114,6 +124,9 @@
   --muted: #cbd5e1;
   --border: #94a3b8;
   --border-subtle: #334155;
+  --contrast-text: #ffffff;
+  --contrast-muted: #f1f5f9;
+  --contrast-border: #e2e8f0;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
   --accent-text: #93c5fd;
@@ -184,6 +197,13 @@
   --topbar-height: 56px;
   --content-max-width: 1600px;
   --content-gap: 24px;
+  --page-header-gap: 16px;
+  --page-subtitle-gap: 8px;
+  --page-section-gap: 24px;
+  --page-toolbar-gap: 12px;
+  --table-cell-padding: 16px;
+  --table-cell-padding-block: 16px;
+  --table-header-padding-block: 12px;
   --control-height: 44px;
   --border-width: 1px;
   --breakpoint-phone: 768px;

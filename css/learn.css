@@ -1,9 +1,9 @@
 .learn-page { min-width: 0; }
-.learn-heading { margin-block-end: var(--space-7); }
-.learn-heading p { font-size: var(--font-size-sm); margin-block-start: var(--space-2); }
+.learn-heading { margin-block-end: var(--page-section-gap); }
+.learn-heading p { font-size: var(--font-size-sm); margin-block-start: var(--page-subtitle-gap); }
 .learn-tabs { gap: var(--space-1); flex-wrap: nowrap; overflow-x: auto; }
 .learn-tabs .ds-tab { white-space: nowrap; }
-.learn-panel { display: grid; gap: var(--space-5); padding-block: var(--space-6); min-width: 0; }
+.learn-panel { display: grid; gap: var(--space-5); padding-block: var(--page-section-gap); min-width: 0; }
 .learn-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--content-gap); align-items: start; min-width: 0; }
 .learn-card { padding: var(--space-5); min-width: 0; overflow-wrap: anywhere; }
 .learn-card h2 { font-size: var(--font-size-lg); margin: 0; }
@@ -12,7 +12,7 @@
 .learn-card > ul > li + li, .learn-card > ol > li + li { margin-block-start: var(--space-2); }
 .learn-card-heading { display: flex; align-items: center; gap: var(--space-3); }
 .learn-demo { padding-block: var(--space-4); min-width: 0; }
-.learn-filters { display: flex; align-items: end; gap: var(--space-3); flex-wrap: wrap; }
+.learn-filters { display: flex; align-items: end; gap: var(--page-toolbar-gap); flex-wrap: wrap; }
 .learn-filters > .component-field:first-child { flex: 1; min-width: 0; }
 .learn-filters > .component-field:last-child { flex: 0 1 calc(var(--space-12) * 5); }
 .learn-count { margin: 0; color: var(--muted); font-size: var(--font-size-sm); }
@@ -32,8 +32,8 @@
 .learn-feedback { margin: 0; color: var(--muted); font-size: var(--font-size-xs); line-height: 1.65; }
 .learn-pattern-results { min-width: 0; border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; }
 .learn-compact-table { min-width: 0; font-size: var(--font-size-xs); }
-.learn-compact-table th, .learn-compact-table td { padding: var(--space-3); }
-.learn-compact-table th { font-size: var(--font-size-xs); }
+.learn-compact-table td { padding: var(--table-cell-padding-block) var(--table-cell-padding); }
+.learn-compact-table th { padding: var(--table-header-padding-block) var(--table-cell-padding); font-size: var(--font-size-xs); }
 .learn-compact-table td:first-child { color: var(--text); }
 .learn-pattern .ds-pagination { padding: 0; }
 .learn-pattern .ds-pagination-controls { gap: var(--space-1); }
@@ -76,7 +76,6 @@
 .learn-workflows .ds-bulk-action-toolbar[hidden], .learn-workflows [hidden] { display: none; }
 @media (min-width: 1600px) { .learn-grid:not(:has(.learn-pattern-card)) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 767px) {
-  .learn-heading { margin-block-end: var(--space-6); }
   .learn-heading p { font-size: var(--font-size-sm); }
   .learn-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
   .learn-panel { gap: var(--space-4); }

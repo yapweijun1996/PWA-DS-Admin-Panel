@@ -3,14 +3,20 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--page-header-gap);
 }
 .school-page-heading > div {
   min-width: 0;
 }
+.school-page-heading h1 {
+  margin: 0;
+}
+.school-page-heading p {
+  margin: var(--page-subtitle-gap) 0 0;
+}
 .school-example {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--page-section-gap);
   min-width: 0;
 }
 .school-example > div,
@@ -28,7 +34,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: end;
-  gap: var(--space-3);
+  gap: var(--page-toolbar-gap);
   min-width: 0;
 }
 .school-toolbar > .ds-combobox,
@@ -41,7 +47,7 @@
   flex: 1 1 auto;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--page-toolbar-gap);
 }
 .school-navigation a {
   display: inline-flex;
@@ -104,9 +110,6 @@
   .school-toolbar > .ds-date-picker {
     flex-basis: 100%;
     width: 100%;
-  }
-  .school-navigation {
-    gap: var(--space-1);
   }
   .school-navigation a {
     padding-inline: var(--space-2);
