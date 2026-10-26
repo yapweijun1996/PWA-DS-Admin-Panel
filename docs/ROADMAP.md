@@ -117,3 +117,4 @@ working, documented, tested, versioned — not mockups.
   - Settings > Appearance: Kit picker with live preview (one click switches whole app, persisted, applied before first paint).
   - Showcase route `#/kits`: the SAME three reference screens (Dashboard with KPI + charts, Customers listing with filters + table + detail panel, Form) rendered in each kit, side-by-side switcher, so the owner can compare and choose.
   - `check.mjs` contrast matrix runs per kit x theme x palette; kit admission rule (no component edits) enforced by a test that diffs component files.
+- 2026-10-26 (owner APPROVED): the three Design Kits `liquid`, `enterprise` (default), `ops` exactly as defined above. No further confirmation needed; build after Phase 1 is merged and deployed.
