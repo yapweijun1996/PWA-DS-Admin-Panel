@@ -2,6 +2,12 @@
 
 All notable changes are documented here. Format follows Keep a Changelog; versions follow semantic versioning.
 
+## [0.6.3]
+### Changed
+- Phone top bar hides the breadcrumb row (brand, actions and search only); the page title and bottom navigation show location.
+### Fixed
+- Spacing under the playground "Live preview" heading.
+
 ## [0.6.2]
 ### Fixed
 - Examples overview: spacing between card text and the Explore button.

@@ -40,7 +40,7 @@
  .context-panel, [data-panel="collapsed"] .context-panel { display: none; }
  .topbar { flex-wrap: wrap; height: auto; min-height: var(--topbar-height); padding-bottom: var(--space-2, 8px); gap: var(--space-2, 8px); }
  .topbar .brand { min-width: 0; margin-right: auto; }
- .topbar .breadcrumbs { display: flex; order: 2; flex-basis: 100%; }
+ .topbar .breadcrumbs { display: none; }
  .topbar-actions { gap: 0; }
  .topbar-actions .language-button { display: none; }
  .global-search { order: 3; max-width: none; flex-basis: 100%; }
