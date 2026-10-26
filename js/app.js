@@ -4,7 +4,7 @@ import { initPWA, renderPWA, getPWAState, checkForUpdates, applyUpdate } from '.
 import { VERSION, BUILD } from './build-info.js';
 import { createRouter } from './router.js';
 import { t, setLanguage, getLanguage } from './i18n.js';
-import { icon } from './icons.js';
+import { icon, componentIcons, settingsIcons } from './icons.js';
 import { renderShowcase } from './kits-showcase.js';
 import { renderLearn } from './learn.js';
 import { createChart } from '../components/chart.js';
@@ -253,13 +253,12 @@ function renderShell() {
   search.onkeydown = event => { if (event.key === 'Enter' || event.key === 'ArrowDown') { event.preventDefault(); commandPalette.open(search.value); } };
   updateNotifications();
   document.querySelector('#notification-menu').onclick = event => menu(event.currentTarget, notificationItems());
-  document.querySelector('#mobile-more').onclick = () => dialog(t('more'), `<nav class="sheet-links">${settingsSections.map(section => `<a class="context-link" href="#/settings/${section}">${icon(section === 'pwa' ? 'download' : section === 'about' ? 'info' : 'settings')}${t(section)}${icon('chevronRight')}</a>`).join('')}</nav>`, [], { className: 'mobile-sheet', onClose: close => close() }).layer.querySelectorAll('a').forEach(link => link.addEventListener('click', () => activeDialog?.close()));
-  document.querySelector('#mobile-more').addEventListener('click', () => {
-    const link = document.createElement('a'); link.className = 'context-link'; link.href = '#/kits'; link.textContent = 'Design kits'; link.onclick = () => activeDialog?.close();
-    document.querySelector('.sheet-links')?.prepend(link);
-    const guideLink = document.createElement('a'); guideLink.className = 'context-link'; guideLink.href = '#/learn'; guideLink.textContent = 'Guide'; guideLink.onclick = () => activeDialog?.close(); document.querySelector('.sheet-links')?.prepend(guideLink);
-    const examplesLink = document.createElement('a'); examplesLink.className = 'context-link'; examplesLink.href = '#/examples'; examplesLink.textContent = 'Examples'; examplesLink.onclick = () => activeDialog?.close(); document.querySelector('.sheet-links')?.prepend(examplesLink);
-  });
+  document.querySelector('#mobile-more').onclick = () => {
+    const sheetLink = (href, name, label) => `<a class="context-link" href="${href}">${icon(name)}<span>${escape(label)}</span>${icon('chevronRight')}</a>`;
+    const explore = [['#/learn', 'learn', 'Guide'], ['#/examples', 'examples', 'Examples'], ['#/kits', 'kits', 'Design kits']].map(([href, name, label]) => sheetLink(href, name, label)).join('');
+    const settings = settingsSections.map(section => sheetLink(`#/settings/${section}`, settingsIcons[section], t(section))).join('');
+    dialog(t('more'), `<nav class="sheet-links">${explore}<div class="sheet-divider" role="separator"></div>${settings}</nav>`, [], { className: 'mobile-sheet', onClose: close => close() }).layer.querySelectorAll('a').forEach(link => link.addEventListener('click', () => activeDialog?.close()));
+  };
 }
 function menu(anchor, items) {
   document.querySelector('.app-menu')?.remove();
@@ -301,7 +300,7 @@ function renderContext() {
       return `<div class="component-nav-group"><button class="context-link component-nav-toggle" aria-expanded="${expanded}" aria-controls="component-category-${index}">${icon('chevronRight')}<span>${escape(category)}</span><span class="nav-count">${entries.length}</span></button><div id="component-category-${index}"${expanded ? '' : ' hidden'}>${entries.map(entry => `<a class="context-link ${route.params.name === entry.name ? 'active' : ''}"${route.params.name === entry.name ? ' aria-current="page"' : ''} href="#/components/${encodeURIComponent(entry.name)}"><span>${escape(componentLabel(entry))}</span></a>`).join('')}</div></div>`;
     }).join('');
   }
-  if (current === 'settings') links = settingsSections.map(section => `<a class="context-link ${route.section === section ? 'active' : ''}" href="#/settings/${section}">${icon(section === 'pwa' ? 'download' : section === 'about' ? 'info' : section === 'appearance' ? 'sun' : 'settings')}${t(section)}</a>`).join('');
+  if (current === 'settings') links = settingsSections.map(section => `<a class="context-link ${route.section === section ? 'active' : ''}" href="#/settings/${section}">${icon(settingsIcons[section])}${t(section)}</a>`).join('');
   const section = (title, names) => `<div class="context-label">${title}</div>${names.map(name => `<a class="context-link ${current === name ? 'active' : ''}" href="${name === 'settings' ? '#/settings/general' : `#/${name}`}">${icon(name)}<span class="nav-label">${name === 'kits' ? 'Design kits' : t(name)}</span>${name === 'components' ? `<span class="nav-count">${registry.length}</span>` : ''}</a>${current === name ? `<div class="nested-nav">${links}</div>` : ''}`).join('')}`;
   document.querySelector('.context-panel').innerHTML = `<button class="icon-button" id="sidebar-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button><div class="context-content">${section('Main', ['overview', 'tokens', 'components', 'kits'])}${section('System', ['settings'])}</div><button class="context-bottom" id="sidebar-account"><span class="avatar">DS</span><span class="nav-label"><strong>${t('localWorkspace')}</strong><small>${t('localData')}</small></span></button>`;
   const guideLink = document.createElement('a'); guideLink.className = `context-link${current === 'learn' ? ' active' : ''}`; guideLink.href = '#/learn'; guideLink.innerHTML = `${icon('learn')}<span class="nav-label">Guide</span>`; document.querySelector('.context-content .context-label')?.after(guideLink);
@@ -452,7 +451,7 @@ function componentIllustration(name) {
   if (name === 'checkbox') return `<span class="illustration-check">${icon('check')}</span><span>${getLanguage() === 'zh' ? '保持统一' : 'Keep it consistent'}</span>`;
   if (name === 'tag' || name === 'pill') return `<span class="badge"><i class="status-dot"></i>${getLanguage() === 'zh' ? '已发布' : 'Published'}</span>`;
   if (name === 'tabs') return `<span class="illustration-tabs"><b>${t('overview')}</b><span>${t('settings')}</span></span>`;
-  return `<span class="illustration-generic">${icon(name === 'table' ? 'overview' : name === 'modal' ? 'panel' : name === 'toast' ? 'check' : name === 'tooltip' ? 'info' : 'more')}</span>`;
+  return `<span class="illustration-generic">${icon(componentIcons[name] || 'components')}</span>`;
 }
 function settingRow(title, description, control) { return `<div class="setting-row"><div><h3>${t(title)}</h3><p>${t(description)}</p></div><div class="setting-control">${control}</div></div>`; }
 function choice(key, choices) { return `<div class="segmented-control" role="group" aria-label="${escape(t(key))}">${choices.map(([value, title]) => `<button data-pref="${key}" data-value="${escape(value)}" class="${String(prefs[key]) === String(value) ? 'active' : ''}" aria-pressed="${String(prefs[key]) === String(value)}">${escape(t(title))}</button>`).join('')}</div>`; }

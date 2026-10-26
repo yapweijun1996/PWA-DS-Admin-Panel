@@ -2,6 +2,13 @@
 
 All notable changes are documented here. Format follows Keep a Changelog; versions follow semantic versioning.
 
+## [0.6.1] — Mobile polish
+### Fixed
+- Phone "More" sheet: bottom-anchored full-width sheet, one data-driven list with an icon on every row, divider between Explore and Settings; removed the post-hoc link injection.
+- Distinct icons for Settings sections (General, Appearance, About, PWA) and for all 71 component tiles (previously a generic dots icon).
+### Added
+- ~45 SVG icons plus `componentIcons` / `settingsIcons` maps in `js/icons.js`, and `tests/icons.test.mjs` which fails on unknown icon names, unmapped components and duplicate settings icons.
+
 ## [0.6.0] — Phase 5
 ### Added
 - Dependency-free kit export CLI (`--kit`, `--palette`, `--out`) and `npm run export:kits`, with selected axes, both themes, shared component modules/styles, icons, pre-paint boot snippet, deterministic SHA-256 manifest and standalone consumer demo.
