@@ -1,0 +1,2 @@
+.ds-textarea { resize: vertical; min-height: calc(var(--space-12) * 2); }
+.ds-textarea-counter { text-align: end; color: var(--muted); font-variant-numeric: tabular-nums; }

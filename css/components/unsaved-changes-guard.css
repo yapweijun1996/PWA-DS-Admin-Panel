@@ -1,0 +1,4 @@
+.ds-unsaved-guard-demo, .ds-unsaved-guard-message { display: grid; gap: var(--space-3); min-width: 0; }
+.ds-unsaved-guard-message p { margin: 0; overflow-wrap: anywhere; }
+.ds-unsaved-guard-error { color: var(--danger-text); }
+.ds-unsaved-guard-error:empty { display: none; }

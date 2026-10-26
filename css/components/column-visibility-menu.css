@@ -1,0 +1,6 @@
+.ds-column-visibility-menu { display: inline-flex; max-width: 100%; }
+.ds-column-visibility-popover .ds-menu-item { gap: var(--space-2); overflow-wrap: anywhere; }
+.ds-column-visibility-table-wrap { max-width: 100%; overflow: auto; margin-block: var(--space-3); }
+.ds-column-visibility-demo { width: 100%; border-collapse: collapse; }
+.ds-column-visibility-demo caption { padding: var(--space-2); text-align: start; color: var(--muted); }
+.ds-column-visibility-demo th, .ds-column-visibility-demo td { padding: var(--space-3); border-bottom: 1px solid var(--color-border-subtle); text-align: start; }

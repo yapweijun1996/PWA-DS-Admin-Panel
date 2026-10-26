@@ -3,8 +3,7 @@
   background-image: radial-gradient(ellipse at 8% 4%, var(--ambient-start), transparent 72%), radial-gradient(ellipse at 98% 78%, var(--ambient-end), transparent 76%);
   background-attachment: fixed;
 }
-[data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer),
-[data-kit="liquid"] #global-results {
+[data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer) {
   background: var(--surface-glass);
   -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(var(--surface-saturation));
   backdrop-filter: blur(var(--surface-blur)) saturate(var(--surface-saturation));
@@ -47,7 +46,7 @@
 /* Floating layers spend the content and sidebar blur budget, leaving room
    for a toast too. Large dialogs replace shell blur; nested panels replace
    their parent blur. */
-[data-kit="liquid"] body:has(:is(.app-menu, .ds-popover-menu, .ds-select-options, #global-results):not([hidden]), .ds-toast-region > .ds-toast) :is(.main-column, .context-panel),
+[data-kit="liquid"] body:has(:is(.app-menu, .ds-popover-menu, .ds-select-options):not([hidden]), .ds-toast-region > .ds-toast) :is(.main-column, .context-panel),
 [data-kit="liquid"] body:has(:is(.dialog-backdrop, .ds-modal-backdrop, .ds-drawer-backdrop):not([hidden])) :is(.topbar, .context-panel, .main-column),
 [data-kit="liquid"] :is(.ds-modal, .app-dialog):has(:is(.ds-popover-menu, .ds-select-options):not([hidden])) {
   background: var(--surface);
@@ -61,7 +60,7 @@
 }
 @media (prefers-reduced-transparency: reduce) {
   [data-kit="liquid"] body { background: var(--bg); }
-  [data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .main-column, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer, #global-results, .card, .ds-card, .ds-kpi-card, .welcome-card) {
+  [data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .main-column, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer, .card, .ds-card, .ds-kpi-card, .welcome-card) {
     background: var(--surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -70,7 +69,7 @@
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   [data-kit="liquid"] body { background: var(--bg); }
-  [data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .main-column, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer, #global-results, .card, .ds-card, .ds-kpi-card, .welcome-card) {
+  [data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .main-column, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer, .card, .ds-card, .ds-kpi-card, .welcome-card) {
     background: var(--surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;

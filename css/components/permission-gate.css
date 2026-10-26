@@ -1,0 +1,4 @@
+.ds-permission-gate { display: grid; gap: var(--space-2); min-width: 0; }
+.ds-permission-gate-content { display: flex; flex-wrap: wrap; gap: var(--space-2); min-width: 0; }
+.ds-permission-gate-content[hidden], .ds-permission-gate-reason[hidden] { display: none; }
+.ds-permission-gate-reason { margin: 0; color: var(--muted); font-size: var(--font-size-sm); overflow-wrap: anywhere; }

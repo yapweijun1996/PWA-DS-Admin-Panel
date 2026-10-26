@@ -1,0 +1,6 @@
+.ds-split-button { display: inline-flex; align-items: stretch; max-inline-size: 100%; gap: var(--space-1); }
+.ds-split-button-primary { min-inline-size: 0; min-block-size: var(--space-11); overflow-wrap: anywhere; border-start-end-radius: 0; border-end-end-radius: 0; }
+.ds-split-button > .ds-popover { flex: 0 0 auto; }
+.ds-split-button-toggle { min-inline-size: var(--space-11); min-block-size: var(--space-11); padding-inline: var(--space-2); border-start-start-radius: 0; border-end-start-radius: 0; }
+.ds-split-button-chevron { display: inline-flex; }
+.ds-split-button-chevron .icon { inline-size: var(--space-4); block-size: var(--space-4); }

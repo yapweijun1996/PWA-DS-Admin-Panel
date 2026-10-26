@@ -1,0 +1,19 @@
+.ds-import-wizard { display: grid; width: 100%; min-width: 0; gap: var(--space-4); }
+.ds-import-wizard [hidden] { display: none; }
+.ds-import-notice { margin: 0; padding: var(--space-3); border: 1px solid var(--color-border-subtle); border-radius: var(--radius); background: var(--bg); color: var(--muted); overflow-wrap: anywhere; }
+.ds-import-panel, .ds-import-source { display: grid; gap: var(--space-4); min-width: 0; }
+.ds-import-panel h3, .ds-import-panel p { margin: 0; }
+.ds-import-panel h3:focus-visible { outline: 2px solid var(--accent); outline-offset: var(--space-1); }
+.ds-import-mapping { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: var(--space-4); min-width: 0; }
+.ds-import-mapping .ds-select { min-width: 0; }
+.ds-import-actions { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
+.ds-import-actions .ds-button { min-height: 44px; }
+.ds-import-table-scroll { max-width: 100%; overflow: auto; border: 1px solid var(--color-border-subtle); border-radius: var(--radius); }
+.ds-import-table-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: var(--space-1); }
+.ds-import-table { width: 100%; border-collapse: collapse; background: var(--surface); }
+.ds-import-table caption { padding: var(--space-3); text-align: start; font-weight: 600; }
+.ds-import-table th, .ds-import-table td { text-align: start; vertical-align: top; padding: var(--space-3); border-block-start: 1px solid var(--color-border-subtle); overflow-wrap: anywhere; min-width: 8ch; }
+.ds-import-table th { color: var(--muted); background: var(--bg); }
+.ds-import-table td { white-space: pre-wrap; }
+.ds-import-demo-results { display: grid; gap: var(--space-2); padding-inline-start: var(--space-4); overflow-wrap: anywhere; }
+@media (max-width: 767px) { .ds-import-mapping { grid-template-columns: minmax(0, 1fr); } .ds-import-actions { flex-direction: column; align-items: stretch; } .ds-import-wizard input, .ds-import-wizard textarea, .ds-import-wizard button { font-size: 16px; } }

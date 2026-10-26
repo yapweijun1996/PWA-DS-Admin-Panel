@@ -1,0 +1,5 @@
+@import url('./date-picker.css');
+
+.ds-date-range-picker .ds-date-picker-trigger { align-items: flex-start; }
+.ds-date-range-picker .ds-date-picker-icon { align-self: center; }
+.ds-date-range-picker .ds-date-picker-hint { line-height: 1.5; }

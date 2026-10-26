@@ -28,6 +28,45 @@ import { render as renderPagination } from './pagination.js';
 import { render as renderCombobox, guide as comboboxGuide } from './combobox.js';
 import { render as renderChart, guide as chartGuide } from './chart.js';
 import { render as renderMasonry, guide as masonryGuide } from './masonry.js';
+import * as textarea from './textarea.js';
+import * as numberInput from './number-input.js';
+import * as currencyInput from './currency-input.js';
+import * as radioGroup from './radio-group.js';
+import * as formField from './form-field.js';
+import * as formSection from './form-section.js';
+import * as fileUpload from './file-upload.js';
+import * as dragDropZone from './drag-drop-zone.js';
+import * as datePicker from './date-picker.js';
+import * as dateRangePicker from './date-range-picker.js';
+import * as iconButton from './icon-button.js';
+import * as buttonGroup from './button-group.js';
+import * as splitButton from './split-button.js';
+import * as dropdownButton from './dropdown-button.js';
+import * as commandPalette from './command-palette.js';
+import * as timeline from './timeline.js';
+import * as auditTimeline from './audit-timeline.js';
+import * as treeView from './tree-view.js';
+import * as stepper from './stepper.js';
+import * as confirmDialog from './confirm-dialog.js';
+import * as skeleton from './skeleton.js';
+import * as spinner from './spinner.js';
+import * as emptyState from './empty-state.js';
+import * as errorState from './error-state.js';
+import * as permissionState from './permission-state.js';
+import * as permissionGate from './permission-gate.js';
+import * as unsavedChangesGuard from './unsaved-changes-guard.js';
+import * as bulkActionToolbar from './bulk-action-toolbar.js';
+import * as columnVisibilityMenu from './column-visibility-menu.js';
+import * as savedViewSelector from './saved-view-selector.js';
+import * as filterBuilder from './filter-builder.js';
+import * as importWizard from './import-wizard.js';
+import * as exportDialog from './export-dialog.js';
+import * as masterDetailLayout from './master-detail-layout.js';
+import * as workspaceLayout from './workspace-layout.js';
+import * as dashboardLayout from './dashboard-layout.js';
+import * as listingLayout from './listing-layout.js';
+import * as formLayout from './form-layout.js';
+import * as detailLayout from './detail-layout.js';
 
 const guides = {
   button: {
@@ -109,12 +148,12 @@ const guides = {
   },
   tabs: {
     purpose: 'Switch between related local content panels while preserving page context.',
-    props: ['Tab labels, active tab, disabled tabs, panel content; use ds-tabs, ds-tab and ds-tab-panel markup.'],
-    variants: ['Underline tabs with selected and disabled states.'],
+    props: ['createTabs({items:[{label,content,disabled?}], label, active=0, variant="underline", orientation="horizontal", fullWidth=false, onChange}) returns a DOM node; content accepts shared component nodes or arrays.'],
+    variants: ['Underline or segmented; horizontal or vertical; optional full width.'],
     states: ['Selected, hover, focus, disabled.'],
-    keyboard: ['Left/Right Arrow move and activate; Home/End jump; Tab enters the active tab or panel.'],
+    keyboard: ['Left/Right (horizontal) or Up/Down (vertical) move and activate, skipping disabled tabs; Home/End jump; Tab enters the active tab or panel.'],
     accessibility: ['Use tablist/tab/tabpanel roles, aria-selected and aria-controls; only the active tab is in the tab sequence.'],
-    example: '<div role="tablist" class="ds-tabs" aria-label="Customer views">…</div>',
+    example: 'createTabs({label:"Customer views", items:[{label:"Details",content:details},{label:"Activity",content:timeline}]})',
     do: ['Label the tab list and connect each tab to its panel.'],
     dont: ['Do not use tabs as unrelated page navigation.']
   },
@@ -335,9 +374,48 @@ for (const guide of Object.values(guides)) {
 }
 
 export const registry = [
+  { name: 'dashboard-layout', label: 'Dashboard layout', category: 'Layouts', render: dashboardLayout.render, guide: dashboardLayout.guide },
+  { name: 'listing-layout', label: 'Listing layout', category: 'Layouts', render: listingLayout.render, guide: listingLayout.guide },
+  { name: 'form-layout', label: 'Form layout', category: 'Layouts', render: formLayout.render, guide: formLayout.guide },
+  { name: 'detail-layout', label: 'Detail layout', category: 'Layouts', render: detailLayout.render, guide: detailLayout.guide },
+  { name: 'master-detail-layout', label: 'Master detail layout', category: 'Layouts', render: masterDetailLayout.render, guide: masterDetailLayout.guide },
+  { name: 'workspace-layout', label: 'Workspace layout', category: 'Layouts', render: workspaceLayout.render, guide: workspaceLayout.guide },
+  { name: 'filter-builder', label: 'Filter builder', category: 'Enterprise', render: filterBuilder.render, guide: filterBuilder.guide },
+  { name: 'import-wizard', label: 'Import wizard', category: 'Enterprise', render: importWizard.render, guide: importWizard.guide },
+  { name: 'export-dialog', label: 'Export dialog', category: 'Enterprise', render: exportDialog.render, guide: exportDialog.guide },
+  { name: 'permission-gate', label: 'Permission gate', category: 'Enterprise', render: permissionGate.render, guide: permissionGate.guide },
+  { name: 'unsaved-changes-guard', label: 'Unsaved changes guard', category: 'Enterprise', render: unsavedChangesGuard.render, guide: unsavedChangesGuard.guide },
+  { name: 'bulk-action-toolbar', label: 'Bulk action toolbar', category: 'Enterprise', render: bulkActionToolbar.render, guide: bulkActionToolbar.guide },
+  { name: 'column-visibility-menu', label: 'Column visibility menu', category: 'Enterprise', render: columnVisibilityMenu.render, guide: columnVisibilityMenu.guide },
+  { name: 'saved-view-selector', label: 'Saved view selector', category: 'Enterprise', render: savedViewSelector.render, guide: savedViewSelector.guide },
+  { name: 'timeline', label: 'Timeline', category: 'Data display', render: timeline.render, guide: timeline.guide },
+  { name: 'audit-timeline', label: 'Audit timeline', category: 'Data display', render: auditTimeline.render, guide: auditTimeline.guide },
+  { name: 'tree-view', label: 'Tree view', category: 'Data display', render: treeView.render, guide: treeView.guide },
+  { name: 'stepper', label: 'Stepper', category: 'Navigation', render: stepper.render, guide: stepper.guide },
+  { name: 'confirm-dialog', label: 'Confirm dialog', category: 'Feedback', render: confirmDialog.render, guide: confirmDialog.guide },
+  { name: 'skeleton', label: 'Skeleton', category: 'Feedback', render: skeleton.render, guide: skeleton.guide },
+  { name: 'spinner', label: 'Spinner', category: 'Feedback', render: spinner.render, guide: spinner.guide },
+  { name: 'empty-state', label: 'Empty state', category: 'Feedback', render: emptyState.render, guide: emptyState.guide },
+  { name: 'error-state', label: 'Error state', category: 'Feedback', render: errorState.render, guide: errorState.guide },
+  { name: 'permission-state', label: 'Permission state', category: 'Feedback', render: permissionState.render, guide: permissionState.guide },
+  { name: 'command-palette', label: 'Command palette', category: 'Navigation', render: commandPalette.render, guide: commandPalette.guide },
+  { name: 'icon-button', label: 'Icon button', category: 'Actions', render: iconButton.render, guide: iconButton.guide },
+  { name: 'button-group', label: 'Button group', category: 'Actions', render: buttonGroup.render, guide: buttonGroup.guide },
+  { name: 'split-button', label: 'Split button', category: 'Actions', render: splitButton.render, guide: splitButton.guide },
+  { name: 'dropdown-button', label: 'Dropdown button', category: 'Actions', render: dropdownButton.render, guide: dropdownButton.guide },
+  { name: 'date-picker', label: 'Date picker', category: 'Forms', render: datePicker.render, guide: datePicker.guide },
+  { name: 'date-range-picker', label: 'Date range picker', category: 'Forms', render: dateRangePicker.render, guide: dateRangePicker.guide },
+  { name: 'textarea', label: 'Text area', category: 'Forms', render: textarea.render, guide: textarea.guide },
+  { name: 'number-input', label: 'Number input', category: 'Forms', render: numberInput.render, guide: numberInput.guide },
+  { name: 'currency-input', label: 'Currency input', category: 'Forms', render: currencyInput.render, guide: currencyInput.guide },
+  { name: 'radio-group', label: 'Radio group', category: 'Forms', render: radioGroup.render, guide: radioGroup.guide },
+  { name: 'form-field', label: 'Form field', category: 'Forms', render: formField.render, guide: formField.guide },
+  { name: 'form-section', label: 'Form section', category: 'Forms', render: formSection.render, guide: formSection.guide },
+  { name: 'file-upload', label: 'File upload', category: 'Forms', render: fileUpload.render, guide: fileUpload.guide },
+  { name: 'drag-drop-zone', label: 'Drag and drop zone', category: 'Forms', render: dragDropZone.render, guide: dragDropZone.guide },
   { name: 'combobox', label: 'Combobox', category: 'Forms', render: renderCombobox, guide: comboboxGuide },
   { name: 'chart', label: 'Charts', category: 'Charts', render: renderChart, guide: chartGuide },
-  { name: 'masonry', label: 'Masonry layout', category: 'Data display', render: renderMasonry, guide: masonryGuide },
+  { name: 'masonry', label: 'Masonry layout', category: 'Layouts', render: renderMasonry, guide: masonryGuide },
   { name: 'button', get label() { return text('Button', '按钮'); }, render: renderButton, guide: guides.button },
   { name: 'input', get label() { return text('Input', '输入框'); }, render: renderInput, guide: guides.input },
   { name: 'select', get label() { return text('Select', '选择器'); }, render: renderSelect, guide: guides.select },
@@ -353,16 +431,16 @@ export const registry = [
   { name: 'popover', get label() { return text('Popover menu', '弹出菜单'); }, render: renderPopover, guide: guides.popover },
   { name: 'breadcrumbs', get label() { return text('Breadcrumbs', '面包屑导航'); }, render: renderBreadcrumbs, guide: guides.breadcrumbs },
   { name: 'card', get label() { return text('Card', '卡片'); }, render: renderCard, guide: guides.card },
-  { name: 'kpi-card', get label() { return text('KpiCard', '指标卡片'); }, render: renderKpiCard, guide: guides['kpi-card'] },
+  { name: 'kpi-card', get label() { return text('KPI card', '指标卡片'); }, render: renderKpiCard, guide: guides['kpi-card'] },
   { name: 'badge', get label() { return text('Badge', '徽章'); }, render: renderBadge, guide: guides.badge },
-  { name: 'filter-chip', get label() { return text('FilterChip', '筛选标签'); }, render: renderFilterChip, guide: guides['filter-chip'] },
+  { name: 'filter-chip', get label() { return text('Filter chip', '筛选标签'); }, render: renderFilterChip, guide: guides['filter-chip'] },
   { name: 'avatar', get label() { return text('Avatar', '头像'); }, render: renderAvatar, guide: guides.avatar },
-  { name: 'avatar-stack', get label() { return text('AvatarStack', '头像组'); }, render: renderAvatarStack, guide: guides['avatar-stack'] },
-  { name: 'progress-bar', get label() { return text('ProgressBar', '进度条'); }, render: renderProgressBar, guide: guides['progress-bar'] },
+  { name: 'avatar-stack', get label() { return text('Avatar stack', '头像组'); }, render: renderAvatarStack, guide: guides['avatar-stack'] },
+  { name: 'progress-bar', get label() { return text('Progress bar', '进度条'); }, render: renderProgressBar, guide: guides['progress-bar'] },
   { name: 'alert', get label() { return text('Alert', '提示'); }, render: renderAlert, guide: guides.alert },
   { name: 'drawer', get label() { return text('Drawer', '抽屉面板'); }, render: renderDrawer, guide: guides.drawer },
-  { name: 'detail-panel', get label() { return text('DetailPanel', '详情面板'); }, render: renderDetailPanel, guide: guides['detail-panel'] },
-  { name: 'description-list', get label() { return text('DescriptionList', '描述列表'); }, render: renderDescriptionList, guide: guides['description-list'] },
+  { name: 'detail-panel', get label() { return text('Detail panel', '详情面板'); }, render: renderDetailPanel, guide: guides['detail-panel'] },
+  { name: 'description-list', get label() { return text('Description list', '描述列表'); }, render: renderDescriptionList, guide: guides['description-list'] },
   { name: 'pagination', get label() { return text('Pagination', '分页'); }, render: renderPagination, guide: guides.pagination }
 ];
 

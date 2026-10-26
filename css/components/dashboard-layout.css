@@ -1,0 +1,13 @@
+.ds-dashboard-layout { display: grid; gap: var(--space-6); width: 100%; min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.ds-dashboard-layout > *, .ds-dashboard-layout-cell { min-width: 0; max-width: 100%; }
+.ds-dashboard-layout-header, .ds-dashboard-layout-footer { display: grid; gap: var(--space-4); }
+.ds-dashboard-layout-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+.ds-dashboard-layout-metrics > * { min-width: 0; }
+.ds-dashboard-layout-metrics > :only-child { grid-column: 1 / -1; }
+.ds-dashboard-layout-content { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-4); align-items: stretch; }
+.ds-dashboard-layout-cell { grid-column: span var(--dashboard-span, 6); grid-row: span var(--dashboard-row-span, 1); }
+.ds-dashboard-layout-cell > * { max-width: 100%; }
+.ds-dashboard-layout-bento .ds-dashboard-layout-cell { grid-column: span var(--dashboard-span, 4); }
+.ds-dashboard-layout-bento .ds-dashboard-layout-cell:first-child { grid-column: span var(--dashboard-span, 8); }
+@media (min-width: 768px) and (max-width: 1023px) { .ds-dashboard-layout-cell, .ds-dashboard-layout-bento .ds-dashboard-layout-cell, .ds-dashboard-layout-bento .ds-dashboard-layout-cell:first-child { grid-column: span max(6, var(--dashboard-span, 6)); } }
+@media (max-width: 767px) { .ds-dashboard-layout { gap: var(--space-4); } .ds-dashboard-layout-metrics, .ds-dashboard-layout-content { grid-template-columns: minmax(0, 1fr); } .ds-dashboard-layout-cell, .ds-dashboard-layout-bento .ds-dashboard-layout-cell, .ds-dashboard-layout-bento .ds-dashboard-layout-cell:first-child { grid-column: 1; grid-row: auto; } }

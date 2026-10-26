@@ -1,0 +1,4 @@
+.ds-button-group { display: inline-flex; align-items: stretch; gap: var(--space-1); max-inline-size: 100%; overflow-x: auto; padding: var(--space-1); border-radius: var(--radius); }
+.ds-button-group > .ds-button { flex: 0 0 auto; min-block-size: var(--space-11); }
+.ds-button-group[aria-orientation="vertical"] { flex-direction: column; }
+.ds-button-group [aria-checked="true"] { color: var(--accent-text); background: var(--accent-soft); border-color: var(--accent); }

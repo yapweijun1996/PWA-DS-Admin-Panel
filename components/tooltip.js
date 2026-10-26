@@ -1,9 +1,10 @@
 import { element, text, playground, textControl, choiceControl, statePreview, statusMessage, button, uniqueId, escapeHTML, onDetach } from './playground.js';
 
-function createTooltip({ label, content, placement, onToggle = () => {} }) {
+export function createTooltip({ label, content, placement = 'top', trigger: suppliedTrigger, onToggle = () => {} }) {
   const id = uniqueId('tooltip');
   let pointerWasOpen = false;
-  const trigger = button(label, event => setOpen(event.detail > 0 ? !pointerWasOpen : tooltip.hidden), 'secondary', { 'aria-describedby': id });
+  const trigger = suppliedTrigger || button(label, event => setOpen(event.detail > 0 ? !pointerWasOpen : tooltip.hidden), 'secondary');
+  trigger.setAttribute('aria-describedby', [trigger.getAttribute('aria-describedby'), id].filter(Boolean).join(' '));
   const tooltip = element('span', { id, className: 'ds-tooltip', role: 'tooltip', hidden: true }, content);
   const root = element('span', { className: 'ds-tooltip-wrap' }, trigger, tooltip);
   let listening = false;
@@ -21,7 +22,7 @@ function createTooltip({ label, content, placement, onToggle = () => {} }) {
   }
   function setOpen(open) {
     tooltip.hidden = !open;
-    trigger.setAttribute('aria-expanded', String(open));
+    if (!suppliedTrigger) trigger.setAttribute('aria-expanded', String(open));
     if (open) {
       position();
       if (!listening) { window.addEventListener('resize', position); window.addEventListener('scroll', position, true); listening = true; }
@@ -37,7 +38,7 @@ function createTooltip({ label, content, placement, onToggle = () => {} }) {
   root.addEventListener('focusout', event => { if (!root.contains(event.relatedTarget)) setOpen(false); });
   root.addEventListener('keydown', event => { if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); setOpen(false); } });
   onDetach(root, () => setOpen(false));
-  return { element: root, close: () => setOpen(false) };
+  return { element: root, trigger, close: () => setOpen(false) };
 }
 
 export function render(container) {

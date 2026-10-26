@@ -1,0 +1,9 @@
+.ds-bulk-action-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); min-width: 0; }
+.ds-bulk-action-toolbar[hidden] { display: none; }
+.ds-bulk-count { font-weight: 600; font-variant-numeric: tabular-nums; }
+.ds-bulk-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.ds-bulk-controls .ds-button { min-height: 44px; }
+.ds-bulk-feedback { color: var(--muted); overflow-wrap: anywhere; }
+.ds-bulk-feedback:empty { display: none; }
+.ds-bulk-demo-list { display: grid; gap: var(--space-2); margin-block-end: var(--space-3); }
+.ds-bulk-demo-row { display: flex; align-items: center; gap: var(--space-2); min-height: 44px; overflow-wrap: anywhere; }

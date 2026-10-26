@@ -1,0 +1,10 @@
+.ds-saved-view-selector, .ds-saved-view-form { display: grid; gap: var(--space-3); min-width: 0; }
+.ds-saved-view-controls { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); }
+.ds-saved-view-controls .ds-button { min-height: 44px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ds-saved-view-menu { min-width: 0; max-width: 100%; }
+.ds-saved-view-form p { margin: 0; }
+.ds-saved-view-error { color: var(--danger-text); }
+.ds-saved-view-error:empty, .ds-saved-view-feedback:empty { display: none; }
+.ds-saved-view-demo-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--space-3); margin-block-end: var(--space-3); }
+.ds-saved-view-results { display: grid; gap: var(--space-2); padding-inline-start: var(--space-5); overflow-wrap: anywhere; }
+@media (max-width: 767px) { .ds-saved-view-form .ds-input { font-size: 16px; min-height: 44px; } }

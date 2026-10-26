@@ -1,0 +1,3 @@
+@import './empty-state.css';
+.ds-error-state h3 { color: var(--danger-text); }
+.ds-error-state[aria-busy="true"] { cursor: progress; }

@@ -1,4 +1,4 @@
-export const categories = ['Actions', 'Forms', 'Data display', 'Navigation', 'Feedback', 'Charts'];
+export const categories = ['Actions', 'Forms', 'Data display', 'Navigation', 'Feedback', 'Charts', 'Layouts', 'Enterprise'];
 export function validateMetadata(entries) {
   const errors = [];
   for (const entry of entries) {

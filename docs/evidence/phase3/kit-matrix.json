@@ -1,0 +1,421 @@
+{
+  "screenshots": [
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Dashboard",
+      "file": "enterprise-light-1440-dashboard.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customers",
+      "file": "enterprise-light-1440-customers.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customer form",
+      "file": "enterprise-light-1440-form.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Dashboard",
+      "file": "enterprise-dark-1440-dashboard.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customers",
+      "file": "enterprise-dark-1440-customers.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customer form",
+      "file": "enterprise-dark-1440-form.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Dashboard",
+      "file": "liquid-light-1440-dashboard.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customers",
+      "file": "liquid-light-1440-customers.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customer form",
+      "file": "liquid-light-1440-form.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Dashboard",
+      "file": "liquid-dark-1440-dashboard.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customers",
+      "file": "liquid-dark-1440-customers.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customer form",
+      "file": "liquid-dark-1440-form.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Dashboard",
+      "file": "ops-light-1440-dashboard.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customers",
+      "file": "ops-light-1440-customers.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customer form",
+      "file": "ops-light-1440-form.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Dashboard",
+      "file": "ops-dark-1440-dashboard.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customers",
+      "file": "ops-dark-1440-customers.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "screen": "Customer form",
+      "file": "ops-dark-1440-form.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Dashboard",
+      "file": "enterprise-light-390-dashboard.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customers",
+      "file": "enterprise-light-390-customers.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customer form",
+      "file": "enterprise-light-390-form.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Dashboard",
+      "file": "enterprise-dark-390-dashboard.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customers",
+      "file": "enterprise-dark-390-customers.png"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customer form",
+      "file": "enterprise-dark-390-form.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Dashboard",
+      "file": "liquid-light-390-dashboard.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customers",
+      "file": "liquid-light-390-customers.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customer form",
+      "file": "liquid-light-390-form.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Dashboard",
+      "file": "liquid-dark-390-dashboard.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customers",
+      "file": "liquid-dark-390-customers.png"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customer form",
+      "file": "liquid-dark-390-form.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Dashboard",
+      "file": "ops-light-390-dashboard.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customers",
+      "file": "ops-light-390-customers.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customer form",
+      "file": "ops-light-390-form.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Dashboard",
+      "file": "ops-dark-390-dashboard.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customers",
+      "file": "ops-dark-390-customers.png"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "screen": "Customer form",
+      "file": "ops-dark-390-form.png"
+    }
+  ],
+  "tablet": [
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Dashboard"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customers"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customer form"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Dashboard"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customers"
+    },
+    {
+      "kit": "enterprise",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customer form"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Dashboard"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customers"
+    },
+    {
+      "kit": "liquid",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customer form"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Dashboard"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customers"
+    },
+    {
+      "kit": "liquid",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customer form"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Dashboard"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customers"
+    },
+    {
+      "kit": "ops",
+      "theme": "light",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customer form"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Dashboard"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customers"
+    },
+    {
+      "kit": "ops",
+      "theme": "dark",
+      "width": 768,
+      "scrollWidth": 768,
+      "screen": "Customer form"
+    }
+  ],
+  "consoleErrors": []
+}
