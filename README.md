@@ -17,9 +17,11 @@ Open the localhost URL printed by the server. An optional port is accepted: `nod
 npm run verify
 ```
 
-This generates tokens and PNG icons, stamps the build, runs the source ratchet and executes `node --test tests/`. `npm run check` and `npm test` can also run separately after a build. Generated `css/tokens.css` must not be edited manually. `tokens/tokens.json` is the design-token source; `version.json` is the only manually maintained application version.
+This generates tokens and PNG icons, stamps the build, runs the source ratchet and executes `node --test tests/`. `npm run check` and `npm test` can also run separately after a build. `tokens/primitives.json`, `tokens/semantics.json`, `tokens/palettes.json` and kit manifests are the token sources. `tokens/tokens.json`, `css/tokens.css` and `css/appearance.css` are generated; do not edit them manually. `version.json` is the only manually maintained application version.
 
-The UI includes Overview, token editing with separate light/dark values, component playgrounds, and Settings. Token overrides and preferences live only in this browser's localStorage. Export tokens before clearing browser storage if you need to retain customizations. Mock table records are explicitly labelled and are not a connected backend.
+The UI includes Overview, token editing with separate light/dark values, 26 component playgrounds, Settings > Appearance and `#/kits`. Appearance provides independent theme, eight accent palettes, three design kits and density, persisted before first paint. Enterprise is the default; Liquid adds glass chrome with solid tables/forms and reduced-transparency fallback; Ops is a compact operations rail. The showcase contains working mock dashboard, customer listing/CSV import/detail drawer and guarded form screens. Token overrides and preferences live only in this browser's localStorage. Export tokens before clearing browser storage. Mock records are not a connected backend.
+
+Global search (`Cmd/Ctrl+K`) finds pages, components and tokens. Notifications represent actual pending updates, unsaved changes and the five most recent token edits. `node scripts/contrast.mjs` checks all 48 theme × palette × kit combinations, including conservative glass backdrops; the same matrix runs in the source check.
 
 ## Offline contract
 
@@ -29,9 +31,9 @@ A waiting service worker displays a new-version notification. Only **Update now*
 
 ## Source map
 
-- `tokens/`, `scripts/build-tokens.mjs`, `css/tokens.css`: design-token source and generated CSS.
+- `tokens/`, `kits/`, `scripts/build-tokens.mjs`, `css/tokens.css`, `css/appearance.css`, `css/kits/`: token sources, generated artifacts and kit treatments.
 - `index.html`, `js/`, `css/app.css`: shell, routing, translations and pages.
 - `components/`, `css/components/`: registered component implementations and styles.
 - `manifest.webmanifest`, `sw.js`, `scripts/build-icons.mjs`, `scripts/stamp-build.mjs`: PWA assets and versioning.
 - `scripts/check.mjs`, `tests/`: source-contract checks and unit tests.
-- `docs/SPEC.md`: acceptance contract; `docs/DECISIONS.md`: interpretations; `docs/SUMMARY-phase1.md`: actual execution evidence and limitations.
+- `docs/SPEC.md`, `docs/SPEC-phase2a.md`: acceptance contracts; `docs/DECISIONS.md`: interpretations; `docs/SUMMARY-phase2a.md`: actual execution evidence and limitations.

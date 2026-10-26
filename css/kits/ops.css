@@ -1,0 +1,38 @@
+[data-kit="ops"] :is(.topbar, .context-panel, .sidebar, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-list, .ds-modal, .ds-toast, .ds-drawer, .card, .ds-card, .ds-kpi-card) {
+  background: var(--surface);
+  border-color: var(--color-border-subtle);
+  border-width: var(--border-width);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+[data-kit="ops"] :is(.card, .ds-card, .ds-kpi-card, .ds-modal, .app-dialog, .app-menu, .ds-popover-menu) {
+  border-radius: var(--radius);
+}
+[data-kit="ops"] :is(.button, .ds-button, input, textarea, .ds-select-trigger) {
+  border-radius: var(--control-radius);
+}
+[data-kit="ops"] :is(.metric > strong, .ds-kpi-value, .ds-kpi-card-value, .numeric, [data-numeric], time, code, td:first-child) {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+[data-kit="ops"] :is(table, .ds-table) { font-variant-numeric: tabular-nums; }
+[data-kit="ops"][data-panel="collapsed"] :is(.context-panel, .sidebar) :is(.context-label, .nav-label, .nav-count, .nested-nav) { display: none; }
+[data-kit="ops"][data-panel="collapsed"] .context-content { padding-inline: var(--space-1); }
+[data-kit="ops"][data-panel="collapsed"] .context-link { justify-content: center; padding-inline: var(--space-1); }
+[data-kit="ops"][data-panel="collapsed"] .context-bottom { padding-inline: var(--space-1); justify-content: center; }
+[data-kit="ops"][data-panel="collapsed"] .context-panel > .icon-button { align-self: center; }
+[data-kit="ops"][data-panel="collapsed"] .context-link[aria-label] { position: relative; }
+[data-kit="ops"][data-panel="collapsed"] .context-link[aria-label]:is(:hover, :focus-visible)::after {
+  content: attr(aria-label);
+  position: absolute;
+  inset-inline-start: calc(100% + var(--space-2));
+  z-index: 90;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface);
+  color: var(--text);
+  border: var(--border-width) solid var(--color-border-subtle);
+  border-radius: var(--radius);
+  white-space: nowrap;
+  pointer-events: none;
+}

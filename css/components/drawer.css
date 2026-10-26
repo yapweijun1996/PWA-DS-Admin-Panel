@@ -1,0 +1,11 @@
+@import url('./modal.css');
+.ds-drawer-backdrop { justify-content: flex-end; align-items: stretch; padding: 0; }
+.ds-drawer { display: flex; flex-direction: column; width: min(100%, calc(var(--space-12) * 10)); max-width: none; max-height: 100dvh; min-height: 100dvh; border-radius: var(--radius-xl) 0 0 var(--radius-xl); border-inline-end: 0; }
+.ds-drawer .ds-modal-header { flex: 0 0 auto; padding-top: max(var(--space-5), env(safe-area-inset-top)); }
+.ds-drawer .ds-modal-body { flex: 1; overflow-y: auto; background: var(--surface); }
+.ds-drawer .ds-modal-footer { flex: 0 0 auto; padding-bottom: max(var(--space-4), env(safe-area-inset-bottom)); }
+.ds-detail-panel { min-width: 0; width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); overflow-wrap: anywhere; }
+.ds-detail-panel-header { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); padding: var(--space-4); border-bottom: 1px solid var(--color-border-subtle); }
+.ds-detail-panel-header h3 { margin: 0; font-size: var(--font-size); text-transform: none; letter-spacing: normal; }
+.ds-detail-panel-body { padding: var(--space-4); }
+@media (max-width: 767px) { .ds-drawer { border-radius: 0; width: 100%; } }

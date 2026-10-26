@@ -1,2 +1,2 @@
-.ds-pill { border-radius: 999px; padding-inline: 10px; }
-.ds-pill .ds-tag-remove { border-radius: 999px; }
+.ds-pill { border-radius: var(--radius-pill); padding-inline: var(--space-3); }
+.ds-pill .ds-tag-remove { border-radius: var(--radius-pill); }

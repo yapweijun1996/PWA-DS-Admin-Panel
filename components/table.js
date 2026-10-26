@@ -1,4 +1,25 @@
-import { element, text, playground, toggleControl, customSelect, statePreview, statusMessage, button, openModal, loadingIndicator } from './playground.js';
+import { element, text, playground, toggleControl, customSelect, statePreview, button, openModal, loadingIndicator } from './playground.js';
+import { createPagination } from './pagination.js';
+
+export function createTable({ caption, label = caption, header, body, striped = false, className = '', onRowActivate }) {
+  if (onRowActivate) {
+    [...body.rows].forEach((row, index) => {
+      row.tabIndex = 0;
+      row.addEventListener('click', event => {
+        if (event.target.closest('a, button, input, textarea, label, [role="button"], [role="checkbox"], [role="switch"]')) return;
+        onRowActivate(index, row);
+      });
+      row.addEventListener('keydown', event => {
+        if (event.target !== row || !['Enter', ' '].includes(event.key)) return;
+        event.preventDefault();
+        onRowActivate(index, row);
+      });
+    });
+  }
+  const table = element('table', { className: `ds-table${striped ? ' ds-table-striped' : ''}${className ? ` ${className}` : ''}` },
+    element('caption', { className: 'ds-table-caption' }, caption), element('thead', {}, header), body);
+  return element('div', { className: 'ds-table-scroll', role: 'region', 'aria-label': label, tabindex: '0' }, table);
+}
 
 const mockNames = ['Olivia Rhye', 'Phoenix Baker', 'Lana Steiner', 'Demi Wilkinson', 'Drew Cano', 'Natali Craig', 'Orlando Diggs', 'Andi Lane', 'Kate Morrison', 'Sienna Hewitt', 'Noah Williams', 'Ava Thompson', 'Liam Chen', 'Mia Patel', 'Ethan Brooks', 'Sophia Kim', 'Lucas Martin', 'Amelia Davis', 'Mason Lee', 'Harper Wilson', 'Elijah Garcia', 'Evelyn Wong', 'James Taylor', 'Isabella Clark', 'Benjamin Hall', 'Charlotte Young', 'Henry Scott', 'Grace Lewis', 'Alexander Lim', 'Aria Walker', 'Daniel King', 'Chloe Adams'];
 
@@ -20,13 +41,8 @@ export function render(container) {
   const roleFilter = customSelect({ label: text('Filter by role', '按角色筛选'), value: 'all', options: Object.entries(roleLabels).map(([value, label]) => ({ value, label })), onChange(value) { props.role = value; props.page = 1; updateTable(); } });
   const toolbar = element('div', { className: 'ds-table-toolbar' }, element('div', { className: 'ds-table-search' }, search, clear), statusFilter.element, roleFilter.element);
   const results = element('div', { className: 'ds-table-results' });
-  const summary = statusMessage();
-  const previous = button(text('Previous', '上一页'), () => { props.page -= 1; updateTable(); });
-  const next = button(text('Next', '下一页'), () => { props.page += 1; updateTable(); });
-  const pageLabel = element('span', { className: 'ds-table-page-label', 'aria-live': 'polite' });
-  const size = customSelect({ label: text('Rows per page', '每页行数'), value: String(props.pageSize), options: [5, 10, 20, 25, 50].map(value => ({ value: String(value), label: text(`${value} per page`, `每页 ${value} 行`) })), onChange(value) { props.pageSize = Number(value); props.page = 1; updateTable(); } });
-  const pagination = element('div', { className: 'ds-table-pagination' }, summary, element('div', { className: 'component-row' }, size.element, previous, pageLabel, next));
-  wrapper.append(heading, toolbar, results, pagination);
+  const pagination = createPagination({ total: rows.length, page: props.page, pageSize: props.pageSize, pageSizes: [5, 10, 20, 25, 50], onPageChange(value) { props.page = value; updateTable(); }, onPageSizeChange(value) { props.pageSize = value; props.page = 1; updateTable(); } });
+  wrapper.append(heading, toolbar, results, pagination.element);
   page.preview.append(wrapper);
   const modeOptions = [{ value: 'normal', label: text('Normal', '正常') }, { value: 'loading', label: text('Loading mock data', '模拟加载') }, { value: 'empty', label: text('Empty mock data', '模拟空数据') }, { value: 'error', label: text('Mock error', '模拟错误') }];
   const modeChoice = customSelect({ label: text('Mock state', '模拟状态'), value: 'normal', options: modeOptions, onChange: setMode });
@@ -51,11 +67,7 @@ export function render(container) {
     const pages = Math.max(1, Math.ceil(matching.length / props.pageSize));
     props.page = Math.max(1, Math.min(props.page, pages));
     const visible = matching.slice((props.page - 1) * props.pageSize, props.page * props.pageSize);
-    previous.disabled = props.page <= 1 || props.mode !== 'normal';
-    next.disabled = props.page >= pages || props.mode !== 'normal';
-    size.setDisabled(props.mode !== 'normal');
-    pageLabel.textContent = text(`Page ${props.page} of ${pages}`, `第 ${props.page} 页，共 ${pages} 页`);
-    summary.textContent = props.mode === 'loading' ? text('Mock loading state', '模拟加载状态') : props.mode === 'error' ? text('Mock request failed', '模拟请求失败') : text(`${matching.length ? (props.page - 1) * props.pageSize + 1 : 0}–${Math.min(props.page * props.pageSize, matching.length)} of ${matching.length} mock members`, `${matching.length ? (props.page - 1) * props.pageSize + 1 : 0}–${Math.min(props.page * props.pageSize, matching.length)}，共 ${matching.length} 位模拟成员`);
+    pagination.setState({ total: matching.length, page: props.page, pageSize: props.pageSize, disabled: props.mode !== 'normal' });
     if (props.mode === 'loading') {
       results.replaceChildren(element('div', { className: 'ds-table-state' }, loadingIndicator(text('Loading mock members…', '正在加载模拟成员…')), element('p', {}, text('A deliberate playground state, not a network request.', '这是手动模拟状态，并非真实网络请求。')), button(text('Finish mock loading', '完成模拟加载'), () => setMode('normal'))));
     } else if (props.mode === 'error') {
@@ -74,15 +86,18 @@ export function render(container) {
       const body = element('tbody');
       for (const row of visible) {
         const tone = row.status === 'active' ? 'accent' : 'neutral';
-        const tr = element('tr', { tabindex: '0', 'aria-label': text(`View mock member ${row.name}`, `查看模拟成员 ${row.name}`), onclick: () => openRow(row), onkeydown: event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openRow(row); } } },
+        const tr = element('tr', { 'aria-label': text(`View mock member ${row.name}`, `查看模拟成员 ${row.name}`) },
           element('td', {}, element('div', { className: 'ds-table-member' }, element('span', { className: 'ds-table-avatar', 'aria-hidden': 'true' }, row.name.split(' ').map(part => part[0]).join('')), element('div', {}, element('strong', {}, row.name), props.showEmail ? element('small', {}, row.email) : null))),
           element('td', {}, roleLabels[row.role]),
           element('td', {}, element('span', { className: `ds-tag ds-pill ds-tag-${tone}` }, element('span', { className: 'ds-tag-dot', 'aria-hidden': 'true' }), statusLabels[row.status])),
           element('td', {}, element('time', { datetime: row.joined }, row.joined)));
         body.append(tr);
       }
-      const table = element('table', { className: `ds-table${props.striped ? ' ds-table-striped' : ''}` }, element('caption', { className: 'ds-table-caption' }, text('Mock team members. Rows open member details.', '模拟团队成员。点击行查看成员详情。')), element('thead', {}, header), body);
-      results.replaceChildren(element('div', { className: 'ds-table-scroll', role: 'region', 'aria-label': text('Mock members table', '模拟成员表格'), tabindex: '0' }, table));
+      results.replaceChildren(createTable({
+        caption: text('Mock team members. Rows open member details.', '模拟团队成员。点击行查看成员详情。'),
+        label: text('Mock members table', '模拟成员表格'), header, body, striped: props.striped,
+        onRowActivate: index => openRow(visible[index]),
+      }));
     }
     search.setAttribute('value', props.query);
     page.setSnippet(wrapper.outerHTML.replaceAll('><', '>\n<'));

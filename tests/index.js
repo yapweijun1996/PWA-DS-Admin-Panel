@@ -4,3 +4,5 @@ import './check.test.mjs';
 import './pwa.test.mjs';
 import './contracts.test.mjs';
 import './tooling.test.mjs';
+import './kits.test.mjs';
+import './components.test.mjs';

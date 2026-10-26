@@ -1,11 +1,11 @@
-.ds-table-demo { width: 100%; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.ds-table-demo { width: 100%; min-width: 0; border: 1px solid var(--color-border-subtle); border-radius: var(--radius); background: var(--surface); }
 .ds-table-heading { padding: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .ds-table-heading h4 { margin: 0 0 5px; font-size: 1rem; }
 .ds-table-heading p { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.6; }
 .ds-table-toolbar { padding: 0 20px 20px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .ds-table-search { display: flex; flex: 1 1 280px; min-width: 0; gap: 8px; }
 .ds-table-toolbar > .ds-select { flex: 0 1 155px; }
-.ds-table-results { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); min-width: 0; }
+.ds-table-results { border-top: 1px solid var(--color-border-subtle); border-bottom: 1px solid var(--color-border-subtle); min-width: 0; }
 .ds-table-scroll { overflow-x: auto; max-width: 100%; border-radius: 0; }
 .ds-table-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .ds-table { width: 100%; border-collapse: collapse; text-align: start; font-size: .8rem; min-width: 600px; }
@@ -13,8 +13,8 @@
 .ds-table-sort { padding: 10px 0; min-height: 44px; color: inherit; display: inline-flex; gap: 8px; align-items: center; border: 0; background: transparent; font: inherit; font-weight: 600; cursor: pointer; }
 .ds-table-sort:hover { color: var(--text); }
 .ds-table-sort:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.ds-table td { padding: 15px 20px; border-top: 1px solid var(--border); color: var(--muted); vertical-align: middle; }
-.ds-table tbody tr { cursor: pointer; }
+.ds-table td { padding: 15px 20px; border-top: 1px solid var(--color-border-subtle); color: var(--muted); vertical-align: middle; }
+.ds-table tbody tr { cursor: pointer; border-radius: 0; }
 .ds-table tbody tr:hover, .ds-table tbody tr:focus-visible { background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
 .ds-table tbody tr:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .ds-table-striped tbody tr:nth-child(even) { background: var(--bg); }
@@ -22,7 +22,7 @@
 .ds-table-member { display: flex; align-items: center; gap: 12px; min-width: 205px; }
 .ds-table-member strong { color: var(--text); font-size: .85rem; font-weight: 600; display: block; }
 .ds-table-member small { display: block; color: var(--muted); font-size: .75rem; margin-top: 3px; }
-.ds-table-avatar { width: 34px; height: 34px; display: inline-grid; place-content: center; border: 1px solid var(--border); border-radius: 50%; background: var(--bg); color: var(--muted); font-size: .7rem; font-weight: 600; flex: 0 0 34px; }
+.ds-table-avatar { width: 34px; height: 34px; display: inline-grid; place-content: center; border: 1px solid var(--color-border-subtle); border-radius: 50%; background: var(--bg); color: var(--muted); font-size: .7rem; font-weight: 600; flex: 0 0 34px; }
 .ds-table-pagination { padding: 16px 20px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
 .ds-table-pagination .component-row { gap: 8px; }
 .ds-table-pagination .ds-select { min-width: 130px; }

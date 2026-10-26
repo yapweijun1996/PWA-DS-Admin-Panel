@@ -1,0 +1,3 @@
+/* Badges share the canonical tag and pill styles. */
+@import url('./tag.css');
+@import url('./pill.css');

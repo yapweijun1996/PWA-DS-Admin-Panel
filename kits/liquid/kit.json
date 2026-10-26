@@ -1,0 +1,91 @@
+{
+  "id": "liquid",
+  "name": "Liquid",
+  "description": "Palette-lit glass chrome and softly frosted cards around solid, readable data.",
+  "defaults": {
+    "theme": "light",
+    "palette": "blue",
+    "density": "comfortable"
+  },
+  "layout": {
+    "sidebarWidth": "240px",
+    "sidebarCollapsedWidth": "64px",
+    "topbarHeight": "56px"
+  },
+  "tokens": {
+    "Color": {
+      "muted": {
+        "light": "{color.slate.700}",
+        "dark": "{color.slate.200}"
+      },
+      "border": {
+        "light": "{color.slate.600}",
+        "dark": "{color.slate.300}"
+      },
+      "accent-text": {
+        "light": "var(--accent-950)",
+        "dark": "var(--accent-200)"
+      }
+    },
+    "Radius": {
+      "radius": {
+        "light": "{radius.2xl}",
+        "dark": "{radius.2xl}"
+      },
+      "control-radius": {
+        "light": "{radius.pill}",
+        "dark": "{radius.pill}"
+      },
+      "radius-xl": {
+        "light": "{radius.3xl}",
+        "dark": "{radius.3xl}"
+      }
+    },
+    "Surface": {
+      "surface-alpha": {
+        "light": ".68",
+        "dark": ".72"
+      },
+      "surface-blur": {
+        "light": "24px",
+        "dark": "24px"
+      },
+      "surface-saturation": {
+        "light": "1.15",
+        "dark": "1.15"
+      },
+      "card-alpha": {
+        "light": ".90",
+        "dark": ".90"
+      },
+      "surface-card": {
+        "light": "color-mix(in srgb, var(--surface) calc(var(--card-alpha) * 100%), transparent)",
+        "dark": "color-mix(in srgb, var(--surface) calc(var(--card-alpha) * 100%), transparent)"
+      },
+      "ambient-start": {
+        "light": "color-mix(in srgb, var(--accent-200) 52%, var(--bg))",
+        "dark": "color-mix(in srgb, var(--accent-950) 72%, var(--bg))"
+      },
+      "ambient-end": {
+        "light": "color-mix(in srgb, var(--accent-100) 68%, var(--bg))",
+        "dark": "color-mix(in srgb, var(--accent-900) 36%, var(--bg))"
+      }
+    },
+    "Motion": {
+      "motion-duration": {
+        "light": "260ms",
+        "dark": "260ms"
+      },
+      "motion-easing": {
+        "light": "cubic-bezier(.22, 1, .36, 1)",
+        "dark": "cubic-bezier(.22, 1, .36, 1)"
+      }
+    },
+    "Shadow": {
+      "shadow": {
+        "light": "0 12px 36px color-mix(in srgb, var(--text) 9%, transparent)",
+        "dark": "0 12px 36px color-mix(in srgb, var(--bg) 42%, transparent)"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.ds-alert { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-3) var(--space-4); border: 1px solid currentColor; border-radius: var(--radius-md); color: var(--info-text); background: var(--info-soft); overflow-wrap: anywhere; }
+.ds-alert-success { color: var(--success-text); background: var(--success-soft); }
+.ds-alert-warning { color: var(--warning-text); background: var(--warning-soft); }
+.ds-alert-danger { color: var(--danger-text); background: var(--danger-soft); }
+.ds-alert-icon { display: inline-flex; flex-shrink: 0; margin-top: var(--space-1); }
+.ds-alert-content { flex: 1; min-width: 0; line-height: 1.5; }
+.ds-alert-content strong { display: block; font-size: var(--font-size); }
+.ds-alert-content p { margin: 0; font-size: .85rem; }
+.ds-alert-content strong + p { margin-top: var(--space-1); }
+.ds-alert .ds-alert-dismiss { color: inherit; flex-shrink: 0; padding: 0; min-width: var(--space-8); min-height: var(--space-8); margin: calc(-1 * var(--space-1)); }
+@media (max-width: 767px) { .ds-alert .ds-alert-dismiss { min-width: 44px; min-height: 44px; } }

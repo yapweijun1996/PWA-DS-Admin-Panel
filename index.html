@@ -3,15 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-x5GJCHJUycq/EiDafrk+3BngAQu77SEn60ZGcYi8mi4='; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="theme-color" content="">
   <meta name="description" content="A living design system workspace. Explore components, edit design tokens, and build a consistent interface.">
   <title>Forma — Design system</title>
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icons/icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <script id="appearance-boot">
+    (() => {
+      let prefs = {};
+      try { prefs = JSON.parse(localStorage.getItem('forma.preferences')) || {}; } catch {}
+      const html = document.documentElement;
+      const theme = ['light', 'dark', 'system'].includes(prefs.theme) ? prefs.theme : 'light';
+      html.dataset.theme = theme === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme;
+      html.dataset.themePreference = theme;
+      html.dataset.palette = ['blue','indigo','violet','emerald','teal','rose','orange','slate'].includes(prefs.palette) ? prefs.palette : 'blue';
+      html.dataset.kit = ['enterprise','liquid','ops'].includes(prefs.kit) ? prefs.kit : 'enterprise';
+      html.dataset.density = prefs.density === 'compact' ? 'compact' : 'comfortable';
+      html.dataset.panel = ['expanded', 'collapsed'].includes(prefs.panel) ? prefs.panel : html.dataset.kit === 'ops' || matchMedia('(min-width: 768px) and (max-width: 1024px)').matches ? 'collapsed' : 'expanded';
+    })();
+  </script>
   <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/appearance.css">
   <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/shell.css">
+  <link rel="stylesheet" href="./css/showcase.css">
+  <link rel="stylesheet" href="./css/kits/enterprise.css">
+  <link rel="stylesheet" href="./css/kits/liquid.css">
+  <link rel="stylesheet" href="./css/kits/ops.css">
   <script type="module" src="./js/app.js"></script>
 </head>
 <body>

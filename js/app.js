@@ -4,16 +4,22 @@ import { VERSION, BUILD } from './build-info.js';
 import { createRouter } from './router.js';
 import { t, setLanguage, getLanguage } from './i18n.js';
 import { icon } from './icons.js';
+import { renderShowcase } from './kits-showcase.js';
 
 const storage = {
   read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
   write(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { notify(getLanguage() === 'zh' ? '无法保存到浏览器存储。' : 'Browser storage is unavailable. Changes cannot be persisted.'); return false; } },
 };
-const defaults = { language: 'en', theme: 'light', density: 'comfortable', landingPage: '/overview', pageSize: 10, panel: null, reducedMotion: false };
+const defaults = { language: 'en', theme: 'light', palette: 'blue', kit: 'enterprise', density: 'comfortable', landingPage: '/overview', pageSize: 10, panel: null, reducedMotion: false };
 const storedPreferences = storage.read('forma.preferences', {});
 const prefs = { ...defaults, ...(storedPreferences && typeof storedPreferences === 'object' ? storedPreferences : {}) };
 if (!['light', 'dark', 'system'].includes(prefs.theme)) prefs.theme = 'light';
 if (!['comfortable', 'compact'].includes(prefs.density)) prefs.density = 'comfortable';
+if (!['expanded', 'collapsed'].includes(prefs.panel)) prefs.panel = null;
+const palettes = ['blue', 'indigo', 'violet', 'emerald', 'teal', 'rose', 'orange', 'slate'];
+const kitNames = ['enterprise', 'liquid', 'ops'];
+if (!palettes.includes(prefs.palette)) prefs.palette = 'blue';
+if (!kitNames.includes(prefs.kit)) prefs.kit = 'enterprise';
 if (!['/overview', '/tokens', '/components'].includes(prefs.landingPage)) prefs.landingPage = '/overview';
 if (![5, 10, 20, 50].includes(prefs.pageSize)) prefs.pageSize = 10;
 setLanguage(prefs.language);
@@ -44,7 +50,7 @@ const modules = ['overview', 'tokens', 'components', 'settings'];
 const settingsSections = ['general', 'appearance', 'about', 'pwa'];
 const tokenEntries = () => Object.entries(tokens).flatMap(([group, values]) => Object.entries(values).map(([name, values]) => ({ group, name, values })));
 const tokenValue = (name, mode) => overrides[name]?.[mode] ?? tokenEntries().find(item => item.name === name)?.values[mode];
-const panelOpen = () => prefs.panel === null ? !tablet.matches : prefs.panel === 'expanded';
+const panelOpen = () => prefs.panel === null ? prefs.kit !== 'ops' && !tablet.matches : prefs.panel === 'expanded';
 
 function notify(message) {
   const host = document.querySelector('#notification-root');
@@ -57,15 +63,26 @@ function notify(message) {
 function applyPreferences() {
   const html = document.documentElement;
   html.dataset.theme = prefs.theme === 'system' ? (mediaTheme.matches ? 'dark' : 'light') : prefs.theme;
+  html.dataset.themePreference = prefs.theme;
+  html.dataset.palette = prefs.palette;
+  html.dataset.kit = prefs.kit;
   html.dataset.density = prefs.density;
   html.dataset.reducedMotion = prefs.reducedMotion ? 'true' : 'false';
   html.dataset.panel = panelOpen() ? 'expanded' : 'collapsed';
   applyOverrides();
 }
 function savePreference(key, value) {
+  if (key === 'kit' && value !== prefs.kit) {
+    // Explicit axis choices remain independent; kit defaults apply only to untouched axes.
+    const preset = value === 'ops' ? { theme: 'dark', palette: 'teal', density: 'compact' } : { theme: 'light', palette: 'blue', density: 'comfortable' };
+    for (const axis of ['theme', 'palette', 'density']) if (!prefs[`${axis}Explicit`]) prefs[axis] = preset[axis];
+  }
+  if (['theme', 'palette', 'density'].includes(key)) prefs[`${key}Explicit`] = true;
   prefs[key] = value;
   storage.write('forma.preferences', prefs);
   applyPreferences();
+  const themeIcon = document.querySelector('#theme-menu .icon');
+  if (themeIcon) themeIcon.outerHTML = icon(prefs.theme === 'dark' ? 'moon' : prefs.theme === 'system' ? 'monitor' : 'sun');
   window.dispatchEvent(new CustomEvent('app:preferences', { detail: { ...prefs } }));
 }
 function applyOverrides() {
@@ -88,7 +105,7 @@ function normalizeToken(group, name, raw, mode = editMode) {
     return /^#[a-f\d]{6}$/i.test(value) ? { valid: true, value: value.toLowerCase() } : { valid: false, error: t('invalidColor') };
   }
   if (!value || /[;{}<>]|\/\*|url\s*\(|expression\s*\(|!important/i.test(value) || /#[a-f\d]{3,8}\b|(?:rgb|hsl)a?\s*\(/i.test(value)) return { valid: false, error: t('invalidValue') };
-  const property = group === 'Shadow' ? 'box-shadow' : group === 'Radius' ? 'border-radius' : group === 'Spacing' ? 'padding' : name.includes('family') ? 'font-family' : 'font-size';
+  const property = group === 'Shadow' ? 'box-shadow' : group === 'Radius' ? 'border-radius' : group === 'Spacing' ? 'padding' : group === 'Layout' ? 'width' : group === 'Motion' ? (name.includes('easing') ? 'transition-timing-function' : 'transition-duration') : group === 'Surface' ? (name.endsWith('alpha') ? 'opacity' : name.endsWith('blur') || name.endsWith('saturation') ? 'filter' : 'background') : name.includes('family') || name.includes('mono') || name.includes('numeric') ? 'font-family' : name === 'line-height' ? 'line-height' : 'font-size';
   const expandReferences = (candidate, seen) => candidate.replace(/var\(\s*--([\w-]+)\s*\)/g, (_, reference) => {
     if (seen.has(reference)) throw new Error('Circular token reference');
     const source = tokenEntries().find(item => item.name === reference);
@@ -97,7 +114,8 @@ function normalizeToken(group, name, raw, mode = editMode) {
   });
   let resolved;
   try { resolved = expandReferences(value, new Set([name])); } catch { return { valid: false, error: t('invalidValue') }; }
-  if (/var\s*\(/i.test(resolved) || /^(initial|inherit|unset|revert(?:-layer)?)$/i.test(value) || !CSS.supports(property, resolved)) return { valid: false, error: t('invalidValue') };
+  const candidate = name === 'surface-blur' ? `blur(${resolved})` : name === 'surface-saturation' ? `saturate(${resolved})` : resolved;
+  if (/var\s*\(/i.test(resolved) || /^(initial|inherit|unset|revert(?:-layer)?)$/i.test(value) || !CSS.supports(property, candidate)) return { valid: false, error: t('invalidValue') };
   if (['font-size', 'padding', 'border-radius'].includes(property) && (/^-/.test(resolved) || (property === 'font-size' && parseFloat(resolved) === 0))) return { valid: false, error: t('invalidValue') };
   return { valid: true, value };
 }
@@ -168,6 +186,9 @@ function dialog(title, content, actions, { onClose = () => {}, className = '' } 
   return { layer, close };
 }
 window.resolveDirty = async () => {
+  const handlers = [];
+  window.dispatchEvent(new CustomEvent('app:resolve-dirty', { detail: { handlers } }));
+  for (const handler of handlers) if (!(await handler())) return false;
   if (!window.appDirty) return true;
   if (resolvingDirty) return resolvingDirty;
   resolvingDirty = new Promise(resolve => {
@@ -187,8 +208,8 @@ function navLink(module, mobile = false) {
   return `<a class="${mobile ? 'bottom-tab' : 'rail-link'} ${route?.module === module ? 'active' : ''}" href="${href}" ${route?.module === module ? 'aria-current="page"' : ''} aria-label="${escape(t(module))}">${icon(module)}<span class="${mobile ? '' : 'rail-tooltip'}">${escape(t(module))}</span></a>`;
 }
 function renderShell() {
-  root.innerHTML = `<header class="topbar"><a class="brand" href="#/overview"><span class="brand-mark">${icon('logo')}</span><span>${t('appName')}</span><span class="brand-divider"></span><span class="brand-workspace">${t('workspace')}</span></a><div class="topbar-actions"><button class="language-button" id="language-toggle" aria-label="${escape(t('language'))}">${icon('globe')}<span>${getLanguage() === 'en' ? 'EN' : '中文'}</span></button><button class="icon-button" id="theme-menu" aria-label="${escape(t('theme'))}" aria-haspopup="menu" aria-expanded="false">${icon(prefs.theme === 'dark' ? 'moon' : prefs.theme === 'system' ? 'monitor' : 'sun')}</button><span class="topbar-divider"></span><button class="avatar" id="account-menu" aria-label="${escape(t('account'))}" aria-haspopup="menu" aria-expanded="false">DS</button></div></header>
-    <div class="workspace"><nav class="icon-rail" aria-label="${escape(t('navigation'))}"><div class="rail-main">${modules.map(module => navLink(module)).join('')}</div><button class="rail-link" id="desktop-more" aria-label="${escape(t('more'))}" aria-haspopup="menu" aria-expanded="false">${icon('more')}<span class="rail-tooltip">${t('more')}</span></button></nav><aside class="context-panel" aria-label="${escape(t('contextNavigation'))}"></aside><div class="main-column"><div class="breadcrumb-bar"><div class="breadcrumbs"></div><button class="icon-button panel-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button></div><main id="main-content" tabindex="-1"></main><footer class="workspace-footer"><span>Forma <span aria-hidden="true">·</span> ${t('workspace')}</span><span>v${escape(VERSION)}</span></footer></div></div><nav class="bottom-nav" aria-label="${escape(t('navigation'))}">${modules.slice(0, 3).map(module => navLink(module, true)).join('')}<button class="bottom-tab ${route?.module === 'settings' ? 'active' : ''}" id="mobile-more" aria-haspopup="dialog">${icon('more')}<span>${t('more')}</span></button></nav>`;
+  root.innerHTML = `<header class="topbar"><a class="brand" href="#/overview"><span class="brand-mark">${icon('logo')}</span><span>Forma</span></a><div class="breadcrumbs"></div><div class="global-search"><label class="search-field">${icon('search')}<input id="global-search" type="search" placeholder="Search pages, components, tokens" aria-label="Global search" aria-controls="global-results" autocomplete="off"><kbd>⌘ K</kbd></label><div id="global-results" hidden></div></div><div class="topbar-actions"><button class="icon-button" id="notification-menu" aria-label="Notifications" aria-haspopup="menu" aria-expanded="false">${icon('bell')}<span id="notification-count"></span></button><button class="language-button" id="language-toggle" aria-label="${escape(t('language'))}">${icon('globe')}<span>${getLanguage() === 'en' ? 'EN' : '中文'}</span></button><button class="icon-button" id="theme-menu" aria-label="${escape(t('theme'))}" aria-haspopup="menu" aria-expanded="false">${icon(prefs.theme === 'dark' ? 'moon' : 'sun')}</button><button class="avatar" id="account-menu" aria-label="${escape(t('account'))}" aria-haspopup="menu" aria-expanded="false">DS</button></div></header>
+    <div class="workspace"><aside class="context-panel" aria-label="${escape(t('contextNavigation'))}"></aside><div class="main-column"><main id="main-content" tabindex="-1"></main><footer class="workspace-footer"><span>Forma · ${t('workspace')}</span><span>v${escape(VERSION)}</span></footer></div></div><nav class="bottom-nav" aria-label="${escape(t('navigation'))}">${modules.slice(0, 3).map(module => navLink(module, true)).join('')}<button class="bottom-tab" id="mobile-more" aria-haspopup="dialog">${icon('more')}<span>${t('more')}</span></button></nav>`;
   document.querySelector('.skip-link').textContent = t('skip');
   document.querySelector('#language-toggle').onclick = async () => {
     if (!(await window.resolveDirty())) return;
@@ -200,12 +221,28 @@ function renderShell() {
   document.querySelector('#theme-menu').onclick = event => menu(event.currentTarget, ['light', 'dark', 'system'].map(theme => ({ label: t(theme), icon: theme === 'light' ? 'sun' : theme === 'dark' ? 'moon' : 'monitor', checked: prefs.theme === theme, run: () => { savePreference('theme', theme); render(); } })));
   document.querySelector('#account-menu').onclick = event => menu(event.currentTarget, [
     { label: t('localWorkspace'), description: t('localOnly') },
+    { label: t('language'), icon: 'globe', run: () => document.querySelector('#language-toggle').click() },
+    { label: t('theme'), icon: 'sun', run: () => document.querySelector('#theme-menu').click() },
     { label: t('settings'), icon: 'settings', run: () => { location.hash = '#/settings/general'; } },
     { label: t('about'), icon: 'info', run: () => { location.hash = '#/settings/about'; } },
   ]);
-  document.querySelector('#desktop-more').onclick = event => menu(event.currentTarget, settingsSections.map(section => ({ label: t(section), run: () => { location.hash = `#/settings/${section}`; } })));
+  const search = document.querySelector('#global-search');
+  search.oninput = () => {
+    const query = search.value.trim().toLowerCase();
+    const entries = [...['overview', 'tokens', 'components', 'kits'].map(name => ({ label: label(name), href: `#/${name}` })), ...settingsSections.map(name => ({ label: `Settings / ${label(name)}`, href: `#/settings/${name}` })), ...registry.map(entry => ({ label: entry.label, href: `#/components/${entry.name}` })), ...tokenEntries().map(entry => ({ label: `Token / ${entry.name}`, href: '#/tokens', token: entry.name }))].filter(entry => entry.label.toLowerCase().includes(query)).slice(0, 12);
+    const results = document.querySelector('#global-results');
+    results.hidden = !query;
+    results.innerHTML = entries.length ? entries.map(entry => `<a href="${entry.href}" ${entry.token ? `data-search-token="${escape(entry.token)}"` : ''}>${escape(entry.label)}</a>`).join('') : '<p>No results</p>';
+    results.querySelectorAll('a').forEach(link => link.onclick = () => { if (link.dataset.searchToken) { searchQuery = link.dataset.searchToken; activeGroup = 'all'; if (route.module === 'tokens') render(); } results.hidden = true; });
+  };
+  search.onkeydown = event => { if (event.key === 'Escape') document.querySelector('#global-results').hidden = true; if (event.key === 'ArrowDown' || event.key === 'Enter') { event.preventDefault(); document.querySelector('#global-results a')?.focus(); } };
+  updateNotifications();
+  document.querySelector('#notification-menu').onclick = event => menu(event.currentTarget, notificationItems());
   document.querySelector('#mobile-more').onclick = () => dialog(t('more'), `<nav class="sheet-links">${settingsSections.map(section => `<a class="context-link" href="#/settings/${section}">${icon(section === 'pwa' ? 'download' : section === 'about' ? 'info' : 'settings')}${t(section)}${icon('chevronRight')}</a>`).join('')}</nav>`, [], { className: 'mobile-sheet', onClose: close => close() }).layer.querySelectorAll('a').forEach(link => link.addEventListener('click', () => activeDialog?.close()));
-  document.querySelector('.panel-toggle').onclick = () => { savePreference('panel', panelOpen() ? 'collapsed' : 'expanded'); render(); };
+  document.querySelector('#mobile-more').addEventListener('click', () => {
+    const link = document.createElement('a'); link.className = 'context-link'; link.href = '#/kits'; link.textContent = 'Design kits'; link.onclick = () => activeDialog?.close();
+    document.querySelector('.sheet-links')?.prepend(link);
+  });
 }
 function menu(anchor, items) {
   document.querySelector('.app-menu')?.remove();
@@ -242,11 +279,22 @@ function renderContext() {
   if (current === 'tokens') links = `<button class="context-link ${activeGroup === 'all' ? 'active' : ''}" data-group="all">${icon('tokens')}${t('allTokens')}<span class="nav-count">${tokenEntries().length}</span></button><div class="context-label">${t('foundations')}</div>${Object.keys(tokens).map(group => `<button class="context-link ${activeGroup === group ? 'active' : ''}" data-group="${escape(group)}">${icon(groupIcons[group])}${t(group)}<span class="nav-count">${Object.keys(tokens[group]).length}</span></button>`).join('')}<div class="context-separator"></div><button class="context-link" data-history>${icon('clock')}${t('history')}</button>`;
   if (current === 'components') links = `<a class="context-link ${!route.params.name ? 'active' : ''}" href="#/components">${icon('components')}${t('all')}<span class="nav-count">${registry.length}</span></a><div class="context-label">${t('library')}</div>${registry.map(entry => `<a class="context-link ${route.params.name === entry.name ? 'active' : ''}" href="#/components/${encodeURIComponent(entry.name)}">${icon('components')}<span>${escape(componentLabel(entry))}</span></a>`).join('')}`;
   if (current === 'settings') links = settingsSections.map(section => `<a class="context-link ${route.section === section ? 'active' : ''}" href="#/settings/${section}">${icon(section === 'pwa' ? 'download' : section === 'about' ? 'info' : section === 'appearance' ? 'sun' : 'settings')}${t(section)}</a>`).join('');
-  document.querySelector('.context-panel').innerHTML = `<div class="context-heading"><span>${t(current)}</span><span class="section-mark">${icon(current)}</span></div><div class="context-content">${links}</div><div class="context-bottom"><span class="local-symbol">${icon('shield')}</span><div><strong>${t('localWorkspace')}</strong><small>${t('localData')}</small></div></div>`;
+  const section = (title, names) => `<div class="context-label">${title}</div>${names.map(name => `<a class="context-link ${current === name ? 'active' : ''}" href="${name === 'settings' ? '#/settings/general' : `#/${name}`}" aria-label="${escape(name === 'kits' ? 'Design kits' : t(name))}">${icon(name === 'kits' ? 'components' : name)}<span class="nav-label">${name === 'kits' ? 'Design kits' : t(name)}</span>${name === 'components' ? `<span class="nav-count">${registry.length}</span>` : ''}</a>${current === name ? `<div class="nested-nav">${links}</div>` : ''}`).join('')}`;
+  document.querySelector('.context-panel').innerHTML = `<button class="icon-button" id="sidebar-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button><div class="context-content">${section('Main', ['overview', 'tokens', 'components', 'kits'])}${section('System', ['settings'])}</div><button class="context-bottom" id="sidebar-account"><span class="avatar">DS</span><span class="nav-label"><strong>${t('localWorkspace')}</strong><small>${t('localData')}</small></span></button>`;
+  document.querySelector('#sidebar-toggle').onclick = () => { savePreference('panel', panelOpen() ? 'collapsed' : 'expanded'); render(); };
+  document.querySelector('#sidebar-account').onclick = () => document.querySelector('#account-menu').click();
   document.querySelectorAll('[data-group]').forEach(button => button.onclick = () => { activeGroup = button.dataset.group; render(); });
   document.querySelector('[data-history]')?.addEventListener('click', showHistory);
-  const name = route.params.name ? registry.find(entry => entry.name === route.params.name) : null;
-  document.querySelector('.breadcrumbs').innerHTML = `<span>${t('workspace')}</span>${icon('chevronRight')}<span>${t(current)}</span>${route.section ? `${icon('chevronRight')}<strong>${t(route.section)}</strong>` : name ? `${icon('chevronRight')}<strong>${escape(componentLabel(name))}</strong>` : ''}`;
+  const parentTitle = route.module === 'settings' || route.module === 'components' && route.params.name ? t(route.module) : null;
+  document.querySelector('.breadcrumbs').innerHTML = `<span>${escape(t('workspace'))}</span>${icon('chevronRight')}${parentTitle ? `<span>${escape(parentTitle)}</span>${icon('chevronRight')}` : ''}<strong aria-current="page">${escape(routeTitle())}</strong>`;
+}
+function routeTitle() {
+  if (route.module === 'kits') return 'Design kits';
+  if (route.module === 'components' && route.params.name) {
+    const entry = registry.find(item => item.name === route.params.name);
+    return entry ? componentLabel(entry) : t('notFound');
+  }
+  return t(route.section || route.module);
 }
 function pageHeader(title, description, actions = '') { return `<div class="page-heading"><div><div class="eyebrow">${t('workspace')}</div><h1>${escape(title)}</h1><p>${escape(description)}</p></div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</div>`; }
 function componentLabel(entry) {
@@ -257,12 +305,14 @@ function dateLabel(value) { const date = new Date(value); return Number.isNaN(da
 function renderOverview(main) {
   const state = getPWAState();
   main.innerHTML = `${pageHeader(t('overview'), t('overviewDescription'))}<section class="welcome-card"><div class="welcome-copy"><span class="eyebrow">${t('designFoundation')}</span><h2>${t('welcome')}</h2><p>${t('quickStartDescription')}</p><a class="button button-primary" href="#/tokens">${t('exploreTokens')}${icon('arrowRight')}</a></div><div class="foundation-art" aria-hidden="true"><div class="art-grid"><span></span><span></span><span></span><span></span></div><div class="art-label">Aa <span>↗</span></div><div class="art-line"></div></div></section><section class="metric-grid" aria-label="${escape(t('workspaceOverview'))}">${[{ name: 'tokenCount', value: tokenEntries().length, description: 'tokenMetric', icon: 'tokens' }, { name: 'componentCount', value: registry.length, description: 'componentMetric', icon: 'components' }, { name: 'editCount', value: changeLog.length, description: 'editMetric', icon: 'clock' }, { name: 'version', value: VERSION, description: 'versionMetric', icon: 'code' }].map(metric => `<article class="card metric"><div class="metric-top"><span>${t(metric.name)}</span><span class="metric-icon">${icon(metric.icon)}</span></div><strong>${escape(metric.value)}</strong><small>${t(metric.description)}</small></article>`).join('')}</section><div class="overview-grid"><section class="card recent-card"><div class="card-heading"><h2>${t('recentEdits')}</h2><a href="#/tokens">${t('viewAll')}${icon('arrowRight')}</a></div>${changeLog.length ? `<div class="recent-list">${changeLog.slice(0, 5).map(item => `<div class="recent-item"><span class="recent-icon">${icon('edit')}</span><div><strong>${escape(item.token)}</strong><small>${escape(item.new)} <span aria-hidden="true">·</span> ${t(item.mode)}</small></div><time datetime="${escape(item.time)}">${dateLabel(item.time)}</time></div>`).join('')}</div>` : `<div class="empty-state"><span class="empty-icon">${icon('clock')}</span><h3>${t('noEdits')}</h3><p>${t('noEditsDescription')}</p><a href="#/tokens" class="text-link">${t('exploreTokens')}${icon('arrowRight')}</a></div>`}</section><section class="card status-card"><div class="card-heading"><h2>${t('runtimeStatus')}</h2>${icon('wifi')}</div><div class="status-item"><span>${t('online')}</span><span class="badge"><i class="status-dot ${navigator.onLine ? '' : 'is-offline'}"></i>${t(navigator.onLine ? 'online' : 'offline')}</span></div><div class="status-item"><span>PWA</span><strong>${t(state.installed ? 'installed' : 'browserMode')}</strong></div><div class="status-item"><span>${t('version')}</span><strong>${escape(VERSION)}</strong></div><p class="status-note">${t(state.updateAvailable ? 'updateReady' : navigator.serviceWorker?.controller ? 'serviceReady' : 'servicePending')}</p><a class="button button-block" href="#/settings/pwa">${t('manageUpdates')}${icon('arrowRight')}</a></section></div><section class="quick-links"><a href="#/tokens"><span class="quick-icon">${icon('tokens')}</span><div><h3>${t('foundations')}</h3><p>${t('tokensDescription')}</p></div>${icon('arrowRight')}</a><a href="#/components"><span class="quick-icon">${icon('components')}</span><div><h3>${t('library')}</h3><p>${t('componentsDescription')}</p></div>${icon('arrowRight')}</a></section>`;
+  main.insertAdjacentHTML('beforeend', '<section class="card info-card"><div><h2>Appearance</h2><p>Compare three design kits with the same reference screens.</p><a class="button" href="#/kits">Explore design kits</a></div></section>');
 }
 function tokenPreview(group, name, value) {
   if (group === 'Color') return `<span class="token-swatch" style="background:${escape(value)}"></span>`;
-  if (group === 'Typography') return `<span class="type-preview" style="${name.includes('family') ? 'font-family' : 'font-size'}:${escape(value)}">Aa</span>`;
+  if (group === 'Typography') return `<span class="type-preview" style="${name.includes('family') || name.includes('mono') || name.includes('numeric') ? 'font-family' : name === 'line-height' ? 'line-height' : 'font-size'}:${escape(value)}">Aa</span>`;
   if (group === 'Spacing') return `<span class="space-preview" style="width:${escape(value)}"></span>`;
   if (group === 'Radius') return `<span class="radius-preview" style="border-radius:${escape(value)}"></span>`;
+  if (!['Shadow', 'Color', 'Typography', 'Spacing', 'Radius'].includes(group)) return `<code>${escape(value)}</code>`;
   return `<span class="shadow-preview" style="box-shadow:${escape(value)}"></span>`;
 }
 function renderTokens(main) {
@@ -305,7 +355,7 @@ function resetToken(name) {
 function editToken(group, name) {
   const initial = tokenValue(name, editMode);
   draft = { name, mode: editMode, group, value: initial, valid: true };
-  const editor = dialog(`${t('editToken')} · ${name}`, `<div class="editor-meta"><code>--${escape(name)}</code><span class="badge">${t(editMode)}</span></div><label class="field-label" for="token-value">${t('value')}</label><div class="editor-input-row">${group === 'Color' ? `<input type="color" class="color-picker" id="token-color" value="${escape(initial)}" aria-label="${escape(t('Color'))}">` : ''}<input class="field" id="token-value" value="${escape(initial)}" spellcheck="false" autocomplete="off" aria-describedby="token-error token-preview-help"></div><p class="field-error" id="token-error" role="alert"></p><p class="field-help" id="token-preview-help">${t('livePreview')}</p>`, [
+  const editor = dialog(`${t('editToken')} · ${name}`, `<div class="editor-meta"><code>--${escape(name)}</code><span class="badge">${t(editMode)}</span></div><label class="field-label" for="token-value">${t('value')}</label><div class="editor-input-row">${group === 'Color' && /^#[a-f\d]{6}$/i.test(initial) ? `<input type="color" class="color-picker" id="token-color" value="${escape(initial)}" aria-label="${escape(t('Color'))}">` : ''}<input class="field" id="token-value" value="${escape(initial)}" spellcheck="false" autocomplete="off" aria-describedby="token-error token-preview-help"></div><p class="field-error" id="token-error" role="alert"></p><p class="field-help" id="token-preview-help">${t('livePreview')}</p>`, [
     { label: t('cancel'), run: close => { discardDraft(); close(); } },
     { label: t('save'), primary: true, id: 'save-token', run: close => { if (saveDraft()) { close(); render(); } } },
   ], { onClose: async close => { if (!window.appDirty || await window.resolveDirty()) { discardDraft(); close(); render(); } } });
@@ -316,6 +366,7 @@ function editToken(group, name) {
     const normalized = normalizeToken(group, name, value);
     draft = { name, mode: editMode, group, value: normalized.valid ? normalized.value : value, valid: normalized.valid };
     window.appDirty = value !== initial;
+    updateNotifications();
     input.setAttribute('aria-invalid', String(!normalized.valid));
     editor.layer.querySelector('#token-error').textContent = normalized.error || '';
     editor.layer.querySelector('#save-token').disabled = !normalized.valid;
@@ -373,6 +424,7 @@ function renderSettings(main) {
   if (section === 'about') content.innerHTML = `<section class="card about-card"><span class="brand-mark about-mark">${icon('logo')}</span><h2>Forma</h2><p>${t('aboutDescription')}</p><div class="version-grid"><div><span>${t('version')}</span><strong id="app-version">${escape(VERSION)}</strong></div><div><span>${t('build')}</span><code id="app-build">${escape(BUILD)}</code></div></div><p class="technology-label">${icon('code')}${t('technology')}</p></section><section class="card info-card">${icon('shield')}<div><h2>${t('localData')}</h2><p>${t('localDataDescription')}</p></div></section>`;
   if (section === 'general') content.innerHTML = `<section class="card settings-card"><div class="card-heading"><h2>${t('preferences')}</h2>${icon('settings')}</div>${settingRow('landingPage', 'landingDescription', `<button class="button preference-menu" data-pref-menu="landingPage" aria-haspopup="menu" aria-expanded="false">${t(prefs.landingPage.slice(1))}${icon('chevronDown')}</button>`)}${settingRow('density', 'densityDescription', choice('density', [['comfortable', 'comfortable'], ['compact', 'compact']]))}${settingRow('pageSize', 'pageSizeDescription', `<button class="button preference-menu" data-pref-menu="pageSize" aria-haspopup="menu" aria-expanded="false">${prefs.pageSize}${icon('chevronDown')}</button>`)}</section>`;
   if (section === 'appearance') content.innerHTML = `<section class="card settings-card"><div class="card-heading"><h2>${t('appearanceTitle')}</h2>${icon('sun')}</div>${settingRow('theme', 'themeDescription', choice('theme', [['light', 'light'], ['dark', 'dark'], ['system', 'system']]))}${settingRow('density', 'densityDescription', choice('density', [['comfortable', 'comfortable'], ['compact', 'compact']]))}${settingRow('panel', 'panelDescription', choice('panel', [['expanded', 'expanded'], ['collapsed', 'collapsed']]))}${settingRow('reducedMotion', 'reducedMotionDescription', `<button class="preference-switch ${prefs.reducedMotion ? 'is-on' : ''}" role="switch" aria-checked="${prefs.reducedMotion}" aria-label="${escape(t('reducedMotion'))}" id="motion-toggle"><span></span></button>`)}</section>`;
+  if (section === 'appearance') content.insertAdjacentHTML('beforeend', `<section class="card settings-card"><div class="card-heading"><h2>Palette</h2><span>Accent only · light and dark</span></div><div class="palette-picker">${palettes.map(name => `<button class="button" data-pref="palette" data-value="${name}" aria-pressed="${prefs.palette === name}"><span class="palette-dot palette-${name}" aria-hidden="true"></span>${label(name)}</button>`).join('')}</div></section><section class="card settings-card"><div class="card-heading"><h2>Design kit</h2><a href="#/kits">Compare reference screens</a></div><div class="kit-picker">${kitNames.map(name => `<button class="button" data-pref="kit" data-value="${name}" aria-pressed="${prefs.kit === name}"><span class="kit-preview" aria-hidden="true"></span><strong>${label(name)}</strong><small>${name === 'enterprise' ? 'Solid surfaces · balanced workspace' : name === 'liquid' ? 'Glass chrome · readable solid content' : 'Compact operations · tabular numbers'}</small></button>`).join('')}</div></section>`);
   content.querySelectorAll('[data-pref]').forEach(button => button.onclick = () => { savePreference(button.dataset.pref, button.dataset.value); render(); notify(t('preferencesSaved')); });
   content.querySelectorAll('[data-pref-menu]').forEach(button => button.onclick = () => {
     const key = button.dataset.prefMenu;
@@ -390,13 +442,29 @@ function render() {
   else if (route.module === 'tokens') renderTokens(main);
   else if (route.module === 'components') renderComponents(main);
   else if (route.module === 'settings') renderSettings(main);
+  else if (route.module === 'kits') renderShowcase(main, { prefs, savePreference, resolveDirty: window.resolveDirty, notify });
   else renderNotFound(main);
-  document.title = `${route.params.name ? label(route.params.name) : t(route.section || route.module === 'notFound' && 'notFound' || route.module)} — Forma`;
+  document.title = `${routeTitle()} — Forma`;
 }
 mediaTheme.addEventListener('change', () => { if (prefs.theme === 'system') applyPreferences(); });
 tablet.addEventListener('change', applyPreferences);
 window.addEventListener('pwa:state', () => { if (route?.module === 'overview') renderOverview(document.querySelector('#main-content')); });
 
+document.addEventListener('keydown', event => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); document.querySelector('#global-search')?.focus(); } });
+function notificationItems() {
+  const items = [];
+  if (getPWAState().updateAvailable) items.push({ label: 'Application update available', run: () => { location.hash = '#/settings/pwa'; } });
+  if (window.appDirty) items.push({ label: 'Unsaved changes', run: () => window.resolveDirty() });
+  for (const entry of changeLog.slice(0, 5)) items.push({ label: `Token changed: ${entry.token}`, description: dateLabel(entry.time), run: showHistory });
+  return items.length ? items : [{ label: 'No notifications' }];
+}
+function updateNotifications() {
+  const count = notificationItems().filter(item => item.run).length;
+  const badge = document.querySelector('#notification-count');
+  if (badge) { badge.textContent = count || ''; badge.hidden = !count; }
+}
+window.addEventListener('pwa:state', updateNotifications);
+window.addEventListener('app:dirty', updateNotifications);
 async function start() {
   applyPreferences();
   try {

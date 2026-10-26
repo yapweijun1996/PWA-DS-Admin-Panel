@@ -1,6 +1,6 @@
 import { element, text, playground, textControl, toggleControl, choiceControl, statePreview, statusMessage, button, openModal, copyText, uniqueId, escapeHTML, onDetach } from './playground.js';
 
-function createMenu({ label, placement = 'end', disabled = false, items }) {
+export function createMenu({ label, placement = 'end', disabled = false, items }) {
   const id = uniqueId('menu');
   const menu = element('div', { id, role: 'menu', className: 'ds-popover-menu', 'aria-label': label, hidden: true });
   const trigger = button(label, () => menu.hidden ? open() : close(), 'secondary', { 'aria-haspopup': 'menu', 'aria-controls': id, 'aria-expanded': 'false', disabled });

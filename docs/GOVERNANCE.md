@@ -3,14 +3,14 @@
 Rules for humans and AI coding agents who change this design system.
 
 ## Agent workflow (mandatory)
-1. Read `DESIGN_SYSTEM.md`, `COMPONENT_REGISTRY.md` and `ROADMAP.md` (decision log).
+1. Read `DESIGN_SYSTEM.md`, the canonical `components/registry.js` metadata and `ROADMAP.md` (decision log).
 2. Inspect existing components, tokens and layouts; reuse before creating.
 3. Implement the smallest correct change.
 4. Run `npm run verify`; check UI in a real browser.
 5. Report any deviation from the design system.
 
 ## Agents must not
-- Invent colour, spacing or radius values outside `tokens/tokens.json`.
+- Invent colour, spacing or radius values outside the split token sources or bypass generated token/appearance CSS.
 - Add a second Button, Input, Modal or other duplicate foundational component.
 - Add a UI framework, bundler or runtime dependency without owner approval.
 - Change global tokens to fix a local issue without impact analysis.
@@ -18,7 +18,7 @@ Rules for humans and AI coding agents who change this design system.
 - Push, deploy or change production settings without explicit authorization.
 
 ## Component admission
-1. Search `COMPONENT_REGISTRY.md`.
+1. Search the canonical `components/registry.js` catalog.
 2. Confirm composition or a new variant cannot cover the need.
 3. Write the component spec (purpose, props, variants, states, keyboard, accessibility, responsive, anti-patterns).
 4. Implement, add tests, add the docs page, register it.
