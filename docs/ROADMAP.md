@@ -51,3 +51,17 @@ working, documented, tested, versioned — not mockups.
   - Foundations pages: colour (palette, semantic, contrast pairs), typography scale, spacing, radius, shadow, icons, density, themes.
   - Pattern pages: listing, form, detail, dashboard, workspace, with annotated screenshots-free live examples.
   - `check.mjs` ratchet fails if a registered component has no guide metadata.
+- 2026-10-26 (owner): Sample design received: `docs/design/mockup-ds-components.webp` (a "Design System Components" page). It is the visual reference for "premium" and OVERRIDES the earlier sidebar choice.
+  Superseded: sidebar option A (icon rail + context panel). New: traditional sidebar ~240px (collapsible to a 64px icon rail), grouped sections (Main / Analytics / System) with
+  nested sub-navigation under the active item (e.g. Settings > General, Team Members, Integrations, Design System, Audit Logs), user/account card at the bottom. Top bar ~56px:
+  breadcrumbs left, global search with Cmd+K hint centre, notification bell with count badge, theme toggle, user menu right. Phone behaviour unchanged (bottom tab bar + More sheet).
+  Brand in the mockup ("IDP Studio Pro", "Upgrade to Pro" card) is sample content only; DS ships a neutral brand via the brand-skin token layer.
+  The mockup's page IS the DS Guide layout (`#/learn`): page title + subtitle, tabs "Components / Design Tokens / Guidelines", responsive card grid, each card = icon + title + subtitle + live demo.
+  Extracted spec to build (Phase 2, first item "mockup alignment", done before new components):
+  - Tokens: colour swatches blue (primary), light blue, green, amber, red, purple, slate; Inter; spacing 4/8/12/16/24/32; radius 0/4/8/12/16. Exact hex values are sampled from the image in a real browser (canvas getImageData) and checked for contrast before use.
+  - Buttons: Primary / Secondary(soft blue) / Outline / Ghost / Danger(soft red) x sizes Large / Default / Small.
+  - Badges: Default, Success (Paid, Active), Warning (Pending, Review), Danger (Failed, High), Info (Info, Beta), Neutral (Draft, Archived); soft tinted background + text colour.
+  - Inputs: text with leading icon, select, search, textarea; toggle (enabled/disabled), checkbox (checked/unchecked/indeterminate), radio, switch with label + description.
+  - Tabs (underline), Card with actions, Alerts (success/info/warning/danger with dismiss), Toasts (stacked, title + time, dismiss), Table (row selection checkboxes, status badges, row action menu),
+    Pagination (page buttons + "Showing x to y of z" + rows per page), Breadcrumbs, Modal preview trigger, Empty state (icon, message, action).
+  - Visual language: white cards on light grey app background, 1px soft borders, large radius, soft tinted state colours, generous icon use (Lucide-style, one SSOT).
