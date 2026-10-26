@@ -1,0 +1,9 @@
+.ds-modal-backdrop { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--text) 42%, transparent); padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); }
+.ds-modal { width: 100%; max-width: 500px; max-height: calc(100dvh - 40px); overflow-y: auto; border-radius: calc(var(--radius) + 6px); border: 1px solid var(--border); background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.ds-modal-small { max-width: 380px; }
+.ds-modal-large { max-width: 720px; }
+.ds-modal-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px; border-bottom: 1px solid var(--border); }
+.ds-modal-header h2 { margin: 0; font-size: 1.15rem; line-height: 1.4; overflow-wrap: anywhere; }
+.ds-modal-body { padding: 24px; }
+.ds-modal-footer { padding: 16px 24px; display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; border-top: 1px solid var(--border); background: var(--bg); }
+@media (max-width: 767px) { .ds-modal-header, .ds-modal-body { padding: 16px; } .ds-modal-footer { padding: 16px; } .ds-modal-footer .ds-button { flex: 1; } }

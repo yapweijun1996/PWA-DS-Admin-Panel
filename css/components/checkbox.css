@@ -1,0 +1,9 @@
+.ds-checkbox-label { min-height: 44px; display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-size: .875rem; line-height: 1.5; cursor: pointer; }
+.ds-checkbox { appearance: none; width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 5px; background: var(--surface); display: inline-grid; place-content: center; margin: 0; flex: 0 0 20px; cursor: pointer; }
+.ds-checkbox:checked, .ds-checkbox:indeterminate { background: var(--accent); border-color: var(--accent); }
+.ds-checkbox:checked::after { content: ''; width: 8px; height: 4px; border-inline-start: 2px solid var(--surface); border-block-end: 2px solid var(--surface); transform: translateY(-1px) rotate(-45deg); }
+.ds-checkbox:indeterminate::after { content: ''; width: 9px; height: 2px; background: var(--surface); }
+.ds-checkbox:hover:not(:disabled), .ds-checkbox.is-hover { border-color: var(--accent); }
+.ds-checkbox:focus-visible, .ds-checkbox.is-focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ds-checkbox:disabled { opacity: .45; cursor: not-allowed; }
+.ds-checkbox[aria-invalid="true"], .ds-checkbox.is-error { border-color: var(--danger); }

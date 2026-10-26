@@ -1,0 +1,4 @@
+.ds-tooltip-wrap { display: inline-flex; max-width: 100%; position: relative; }
+.ds-tooltip { position: fixed; z-index: 90; max-width: min(260px, calc(100vw - 16px)); padding: 9px 12px; border-radius: var(--radius); background: var(--text); color: var(--surface); box-shadow: var(--shadow); font-size: .75rem; line-height: 1.6; overflow-wrap: anywhere; text-align: start; }
+.ds-tooltip[hidden] { display: none; }
+.ds-tooltip-demo { display: flex; justify-content: center; padding: 24px 0; }

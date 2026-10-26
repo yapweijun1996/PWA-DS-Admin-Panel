@@ -1,0 +1,7 @@
+.ds-input { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font: inherit; font-size: .875rem; line-height: 1.5; box-sizing: border-box; }
+.ds-input::placeholder { color: var(--muted); opacity: .85; }
+.ds-input:hover:not(:disabled), .ds-input.is-hover { border-color: var(--muted); }
+.ds-input.is-focus { outline: 2px solid var(--accent); outline-offset: 3px; border-color: var(--accent); }
+.ds-input.is-error, .ds-input[aria-invalid="true"] { border-color: var(--danger); }
+.ds-input.is-error:focus-visible { outline-color: var(--danger); }
+@media (max-width: 767px) { .ds-input { font-size: 16px; } }
