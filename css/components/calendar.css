@@ -1,0 +1,41 @@
+.ds-calendar { display: flex; flex-direction: column; gap: var(--space-3); width: 100%; max-width: 100%; min-width: 0; color: var(--text); background: var(--surface); }
+.ds-calendar-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); min-width: 0; }
+.ds-calendar-heading { flex: 1 1 12rem; min-width: 0; margin: 0; font-size: var(--font-size-md); line-height: 1.5; overflow-wrap: anywhere; }
+.ds-calendar-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); min-width: 0; }
+.ds-calendar-controls .ds-button { min-height: 44px; }
+.ds-calendar-controls [aria-pressed="true"] { color: var(--accent-text); background: var(--accent-soft); border-color: var(--accent-text); }
+.ds-calendar-nav { display: inline-flex; justify-content: center; align-items: center; width: 44px; min-width: 44px; padding: var(--space-2); }
+.ds-calendar-scroll { min-width: 0; max-width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+.ds-calendar-grid { width: 100%; min-width: 308px; border-collapse: collapse; table-layout: fixed; color: var(--text); }
+.ds-calendar-grid th { padding: var(--space-2) var(--space-1); color: var(--muted); font-weight: 500; font-size: var(--font-size-sm); overflow-wrap: anywhere; }
+.ds-calendar-grid td { padding: 0; vertical-align: top; border-top: 1px solid var(--border); }
+.ds-calendar-day { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-1); width: 100%; min-width: 44px; min-height: 64px; padding: var(--space-1); border: 0; border-radius: 0; background: var(--surface); color: var(--text); cursor: pointer; font: inherit; font-variant-numeric: tabular-nums; }
+.ds-calendar-day:hover { background: var(--bg); }
+.ds-calendar-day[data-outside="true"] { color: var(--muted); }
+.ds-calendar-day[data-selected="true"] { background: var(--accent-soft); color: var(--accent-text); font-weight: 700; }
+.ds-calendar-day-number { display: inline-flex; align-items: center; justify-content: center; min-width: var(--space-6); line-height: 1.5; }
+.ds-calendar-day[aria-current="date"] .ds-calendar-day-number { border-bottom: 2px solid currentColor; }
+.ds-calendar-day-count { min-height: 1em; color: var(--accent-text); font-size: var(--font-size-xs); font-weight: 600; line-height: 1; }
+.ds-calendar-help { margin: 0; color: var(--muted); font-size: var(--font-size-sm); line-height: 1.5; overflow-wrap: anywhere; }
+.ds-calendar-agenda { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.ds-calendar-agenda-heading { margin: 0; font-size: var(--font-size-sm); overflow-wrap: anywhere; }
+.ds-calendar-agenda-body { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.ds-calendar-event-group { min-width: 0; border-inline-start: 2px solid var(--border); padding-inline-start: var(--space-2); }
+.ds-calendar-event-group[data-selected="true"] { border-inline-start-color: var(--accent-text); }
+.ds-calendar-event-date { margin: 0 0 var(--space-1); color: var(--muted); font-size: var(--font-size-sm); font-weight: 500; overflow-wrap: anywhere; }
+.ds-calendar-events { display: flex; flex-direction: column; gap: var(--space-1); margin: 0; padding: 0; list-style: none; min-width: 0; }
+.ds-calendar-events > li { min-width: 0; }
+.ds-calendar-event { display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: var(--space-2); width: 100%; max-width: 100%; min-width: 0; min-height: 44px; padding: var(--space-2); text-align: start; white-space: normal; }
+.ds-calendar-event-time { flex: 0 1 auto; color: var(--muted); font-size: var(--font-size-sm); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.ds-calendar-event-title { flex: 1 1 8rem; min-width: 0; color: var(--text); overflow-wrap: anywhere; }
+.ds-calendar-event .ds-tag { flex: 0 1 auto; max-width: 100%; white-space: normal; overflow-wrap: anywhere; text-align: start; }
+.ds-calendar-empty { margin: 0; padding: var(--space-3); color: var(--muted); border: 1px dashed var(--border); border-radius: var(--radius); overflow-wrap: anywhere; }
+.ds-calendar-day:focus-visible { z-index: 1; outline: 2px solid var(--focus-ring); outline-offset: -2px; }
+.ds-calendar-controls .ds-button:focus-visible, .ds-calendar-event:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.ds-calendar-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.ds-calendar-demo { width: 100%; min-width: 0; max-width: 100%; }
+@media (max-width: 767px) {
+  .ds-calendar-heading { flex-basis: 100%; }
+  .ds-calendar-day { font-size: 16px; }
+  .ds-calendar-event { gap: var(--space-1) var(--space-2); }
+}

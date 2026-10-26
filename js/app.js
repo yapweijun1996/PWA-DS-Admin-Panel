@@ -10,6 +10,8 @@ import { renderLearn } from './learn.js';
 import { createChart } from '../components/chart.js';
 import { createCommandPalette } from '../components/command-palette.js';
 import { MOCK_PERMISSIONS, getMockPermissions, setMockPermissions } from '../components/permission-gate.js';
+import { exampleRoutes, renderExampleRoute } from './example-routes.js';
+import { createButtonGroup } from '../components/button-group.js';
 
 const storage = {
   read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
@@ -57,6 +59,7 @@ const tokenEntries = () => Object.entries(tokens).flatMap(([group, values]) => O
 const tokenValue = (name, mode) => overrides[name]?.[mode] ?? tokenEntries().find(item => item.name === name)?.values[mode];
 const commandPalette = createCommandPalette({ items: () => [
   { id: 'page:learn', label: 'Guide', category: 'Page', href: '#/learn', keywords: ['documentation', 'patterns'] },
+  ...exampleRoutes.map(entry => ({ id: `page:${entry.path}`, label: entry.title, category: 'Example', href: `#${entry.path}`, keywords: ['mock data', 'examples'] })),
   ...['overview', 'tokens', 'components', 'kits'].map(name => ({ id: `page:${name}`, label: label(name), category: 'Page', href: `#/${name}` })),
   ...settingsSections.map(name => ({ id: `settings:${name}`, label: `Settings / ${label(name)}`, category: 'Page', href: `#/settings/${name}` })),
   ...registry.map(entry => ({ id: `component:${entry.name}`, label: entry.label, category: entry.category, href: `#/components/${entry.name}`, keywords: ['component', entry.category, entry.guide.purpose] })),
@@ -250,6 +253,7 @@ function renderShell() {
     const link = document.createElement('a'); link.className = 'context-link'; link.href = '#/kits'; link.textContent = 'Design kits'; link.onclick = () => activeDialog?.close();
     document.querySelector('.sheet-links')?.prepend(link);
     const guideLink = document.createElement('a'); guideLink.className = 'context-link'; guideLink.href = '#/learn'; guideLink.textContent = 'Guide'; guideLink.onclick = () => activeDialog?.close(); document.querySelector('.sheet-links')?.prepend(guideLink);
+    const examplesLink = document.createElement('a'); examplesLink.className = 'context-link'; examplesLink.href = '#/examples'; examplesLink.textContent = 'Examples'; examplesLink.onclick = () => activeDialog?.close(); document.querySelector('.sheet-links')?.prepend(examplesLink);
   });
 }
 function menu(anchor, items) {
@@ -296,6 +300,12 @@ function renderContext() {
   const section = (title, names) => `<div class="context-label">${title}</div>${names.map(name => `<a class="context-link ${current === name ? 'active' : ''}" href="${name === 'settings' ? '#/settings/general' : `#/${name}`}" aria-label="${escape(name === 'kits' ? 'Design kits' : t(name))}">${icon(name === 'kits' ? 'components' : name)}<span class="nav-label">${name === 'kits' ? 'Design kits' : t(name)}</span>${name === 'components' ? `<span class="nav-count">${registry.length}</span>` : ''}</a>${current === name ? `<div class="nested-nav">${links}</div>` : ''}`).join('')}`;
   document.querySelector('.context-panel').innerHTML = `<button class="icon-button" id="sidebar-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button><div class="context-content">${section('Main', ['overview', 'tokens', 'components', 'kits'])}${section('System', ['settings'])}</div><button class="context-bottom" id="sidebar-account"><span class="avatar">DS</span><span class="nav-label"><strong>${t('localWorkspace')}</strong><small>${t('localData')}</small></span></button>`;
   const guideLink = document.createElement('a'); guideLink.className = `context-link${current === 'learn' ? ' active' : ''}`; guideLink.href = '#/learn'; guideLink.setAttribute('aria-label', 'Guide'); guideLink.innerHTML = `${icon('components')}<span class="nav-label">Guide</span>`; document.querySelector('.context-content .context-label')?.after(guideLink);
+  const examplesNav = document.createElement('div');
+  examplesNav.innerHTML = `<a class="context-link ${current === 'examples' ? 'active' : ''}" href="#/examples" aria-label="Examples">${icon('components')}<span class="nav-label">Examples</span></a>` + ['erp', 'crm', 'school'].map((domain, index) => {
+    const expanded = route.params.domain === domain;
+    return `<div class="component-nav-group"><button class="context-link component-nav-toggle" aria-expanded="${expanded}" aria-controls="example-group-${index}">${icon('chevronRight')}<span>${domain === 'school' ? 'School' : domain.toUpperCase()}</span></button><div id="example-group-${index}"${expanded ? '' : ' hidden'}>${exampleRoutes.filter(entry => entry.path.startsWith(`/examples/${domain}/`)).map(entry => `<a class="context-link${route.path === entry.path ? ' active' : ''}" href="#${entry.path}"><span>${escape(entry.title.split(' / ')[1])}</span></a>`).join('')}</div></div>`;
+  }).join('');
+  document.querySelector('.context-content').append(examplesNav);
   document.querySelector('#sidebar-toggle').onclick = () => { savePreference('panel', panelOpen() ? 'collapsed' : 'expanded'); render(); };
   document.querySelector('#sidebar-account').onclick = () => document.querySelector('#account-menu').click();
   document.querySelectorAll('[data-group]').forEach(button => button.onclick = () => { activeGroup = button.dataset.group; render(); });
@@ -311,6 +321,7 @@ function renderContext() {
 function routeTitle() {
   if (route.module === 'kits') return 'Design kits';
   if (route.module === 'learn') return 'Guide';
+  if (route.module === 'examples') return exampleRoutes.find(entry => entry.path === route.path)?.title || 'Examples';
   if (route.module === 'components' && route.params.name) {
     const entry = registry.find(item => item.name === route.params.name);
     return entry ? componentLabel(entry) : t('notFound');
@@ -452,10 +463,29 @@ function renderSettings(main) {
   if (section === 'general') {
     const permissions = getMockPermissions();
     content.insertAdjacentHTML('beforeend', `<section class="card settings-card"><div class="card-heading"><h2>Mock permissions</h2></div><p>Local demonstration only. These switches do not provide server authorization.</p><div class="component-demo-stack">${MOCK_PERMISSIONS.map(permission => `<label class="ds-checkbox-label"><input class="ds-checkbox" type="checkbox" data-mock-permission="${escape(permission.id)}" ${permissions.includes(permission.id) ? 'checked' : ''}><span>${escape(permission.label)}<small class="muted">${escape(permission.description)}</small></span></label>`).join('')}</div><p role="status" id="mock-permissions-status">Permissions apply to shared PermissionGate examples.</p></section>`);
+    const roleStatus = document.createElement('p');
+    roleStatus.setAttribute('role', 'status');
+    function updateRole() {
+      const selected = getMockPermissions();
+      roleStatus.textContent = `Mock role: ${selected.length === MOCK_PERMISSIONS.length ? 'Administrator' : selected.length === 0 ? 'Viewer' : 'Custom permissions'}. Applies to product examples; not server authorization.`;
+    }
+    const rolePicker = createButtonGroup({ label: 'Switch mock role', items: [
+      { label: 'Administrator', action: () => applyRole(MOCK_PERMISSIONS.map(permission => permission.id)) },
+      { label: 'Viewer', action: () => applyRole([]) }
+    ] });
+    function applyRole(selected) {
+      setMockPermissions(selected);
+      content.querySelectorAll('[data-mock-permission]').forEach(input => { input.checked = selected.includes(input.dataset.mockPermission); });
+      updateRole();
+    }
+    const permissionCard = content.querySelector('#mock-permissions-status').parentElement;
+    permissionCard.querySelector('.component-demo-stack').before(rolePicker.element, roleStatus);
+    updateRole();
     content.querySelectorAll('[data-mock-permission]').forEach(input => input.addEventListener('change', () => {
       const selected = [...content.querySelectorAll('[data-mock-permission]:checked')].map(control => control.dataset.mockPermission);
       setMockPermissions(selected);
       content.querySelector('#mock-permissions-status').textContent = 'Mock permissions updated on this device.';
+      updateRole();
     }));
   }
   content.querySelectorAll('[data-pref]').forEach(button => button.onclick = () => { savePreference(button.dataset.pref, button.dataset.value); render(); notify(t('preferencesSaved')); });
@@ -469,7 +499,11 @@ function renderSettings(main) {
 function renderNotFound(main) { main.innerHTML = `<div class="empty-state not-found">${icon('search')}<h1>${t('notFound')}</h1><p>${t('notFoundDescription')}</p><a class="button button-primary" href="#/overview">${t('goHome')}</a></div>`; }
 function render() {
   document.querySelector('.app-menu')?.remove();
+  // Shell-only changes must not reconstruct a mounted product editor or its guard.
+  const currentMain = document.querySelector('#main-content');
+  const preservedMain = route.module === 'examples' && currentMain?.dataset.examplePath === route.path ? currentMain : null;
   renderShell(); renderContext();
+  if (preservedMain) document.querySelector('#main-content').replaceWith(preservedMain);
   const main = document.querySelector('#main-content');
   if (route.module === 'overview') renderOverview(main);
   else if (route.module === 'tokens') renderTokens(main);
@@ -477,7 +511,8 @@ function render() {
   else if (route.module === 'settings') renderSettings(main);
   else if (route.module === 'kits') renderShowcase(main, { prefs, savePreference, resolveDirty: window.resolveDirty, notify });
   else if (route.module === 'learn') renderLearn(main, tokens);
-  else renderNotFound(main);
+  else if (route.module === 'examples' && !preservedMain) renderExampleRoute(main, route).catch(error => { main.textContent = `Example could not load: ${error.message}`; console.error(error); });
+  else if (route.module !== 'examples') renderNotFound(main);
   document.title = `${routeTitle()} — Forma`;
 }
 mediaTheme.addEventListener('change', () => { if (prefs.theme === 'system') applyPreferences(); });

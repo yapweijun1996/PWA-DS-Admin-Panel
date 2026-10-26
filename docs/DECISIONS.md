@@ -105,3 +105,18 @@
 - A component detail host owns the page title and purpose; standalone playgrounds retain their headers.
 - Calendar and tree marks belong to the icon SSOT; decorative pane borders use the subtle token, not the control-boundary token.
 - Equal-height desktop panes retain compact single-pane navigation on phones; no kit-specific JavaScript or new dependencies are introduced.
+
+## Phase 4
+
+- Product records remain session-local mock data; reset restores seed records after confirmation and does not erase saved filter preferences.
+- `js/example-routes.js` is the sole registration/dispatch exception to the L7 import boundary; domain pure models live under `js/logic/` so external tests never import product modules.
+- ERP tax uses integer cents, per-line half-up rounding and basis-point tax rates; invoice totals never treat invalid edits as valid financial amounts.
+- ERP actions reuse the existing Settings mock permission catalog: customer edit/delete/create/export capabilities map to order approval/cancellation, invoice creation and export, with explanatory UI rather than pretend authorization.
+- Calendar month view shows the selected date's agenda; week view lists the complete week's events. Narrow date grids scroll internally to preserve touch-target size.
+- Example pages use English as required by the Phase 4 contract; the existing shell language preference remains unchanged.
+- Settings adds Administrator (all existing capabilities) and Viewer (none) role presets; individual switches yield Custom permissions. Roles remain local UI demonstrations, not authentication.
+- Shell-only sidebar/theme changes preserve the mounted example main node and its guard rather than reinitializing editor drafts.
+- Grid currency validation owns the raw typed draft independently of CurrencyInput's display formatting; Enter/blur cannot silently round a rejected financial value into a valid amount.
+- CRM date navigation only browses; Add activity opens the event editor. Calendar's built-in view controls are canonical, with the current view retained when filters rebuild the calendar.
+- Late counts as attended; missing grades are excluded from averages and unrounded ties share competition ranks (1, 1, 3). Gradebook computed results use an adjacent shared Table.
+- The attendance guard's Save changes decision already confirms persistence; its callback saves directly rather than stacking a second confirmation modal.

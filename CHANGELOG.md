@@ -2,6 +2,16 @@
 
 All notable changes are documented here. Format follows Keep a Changelog; versions follow semantic versioning.
 
+## [0.5.0] — Phase 4
+### Added
+- Shared Kanban board with pointer drag/drop, keyboard pickup/move/drop/cancel, per-card move menus, WIP counts, value totals and phone column tabs.
+- Shared month/week Calendar reusing DatePicker date math, locale week boundaries, keyboard navigation, today markers and complete event agendas.
+- Shared editable ARIA Data grid with typed editors, retained validation errors, dirty markers, valid-only sum/average footers and consumer-owned unsaved guards.
+- ERP orders/detail, inventory and invoice; CRM customers/360, pipeline and activity calendar; School students/profile, attendance, gradebook and timetable. All compose shared components/layouts with visible mock notices and confirmed reset.
+- Grouped Examples navigation, global command/search entries, reverse-import source gate, and pure behavioral tests for component/domain models.
+### Migration
+- Browser-local mock records are demonstrations, not backend transactions. Pure domain models live under `js/logic/`; only `js/example-routes.js` dispatches into product modules. No dependencies, kit-specific behavior or earlier-phase rewrites.
+
 ## [0.4.0] — Phase 3
 ### Added
 - Ten form components: Textarea, NumberInput, CurrencyInput, RadioGroup, DatePicker, DateRangePicker, FileUpload, DragDropZone, FormField and FormSection.
