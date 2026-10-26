@@ -40,3 +40,40 @@ Lower layers never import from higher layers.
 ## Quality gate
 `npm run verify` = build tokens + `scripts/check.mjs` (ratchet) + `npm test`. A change is not done until it passes, and UI changes are
 also checked in a real browser at 390, 768 and 1440px in light and dark.
+
+## Terminology
+| Term | Meaning in this project |
+|---|---|
+| Design Token | A named value (colour, spacing, radius...) in `tokens/tokens.json`. |
+| Component | One reusable control (Button, Combobox, Chart, Card, Table...). |
+| Layout / Template | A page structure (AppShell, Dashboard, Listing, Form, Detail, Master-Detail, Workspace, Masonry). |
+| Pattern | Components combined for a task (search + filter + table, create/edit, bulk actions). |
+| Design Kit (Preset) | A swappable look: token pack + style layer + optional layout preset. Lives INSIDE the Design System. |
+| Design System | Everything: tokens, appearance axes, foundations, components, layouts, patterns, extensions, docs, governance. |
+
+## Hierarchy (upper layers depend only on lower layers)
+```text
+L1 Design Tokens        tokens/*.json (single source), semantic tokens
+L2 Appearance axes      Theme (light|dark|system), Palette (blue|indigo|violet|emerald...), Style (enterprise|liquid), Design Kit
+L3 Foundations          typography, icons, density, motion, accessibility rules
+L4 Components           Actions, Forms, Data Display (incl. Chart), Navigation, Feedback
+L5 Layouts              AppShell, Dashboard/Bento, Listing, Form, Detail, Master-Detail, Workspace, Masonry
+L6 Patterns             search+filter, create/edit, bulk actions, import/export, unsaved guard, permission gate
+L7 Product extensions   ERP, CRM, School (mock data), IDP (optional)
+L8 Pages                owned by each product
+Cross-cutting           documentation (DS Guide), governance, quality gates, PWA
+```
+
+## Appearance axes
+`<html data-theme data-palette data-style data-kit>` are independent; any combination must work and pass the contrast matrix.
+- Style `enterprise` (default): solid surfaces. Style `liquid`: glass only on top bar, floating toolbars, popovers, modals, toasts.
+- Dense content (tables, forms, invoice/PDF/JSON/code viewers) stays solid in every style.
+- Glass falls back to solid under `prefers-reduced-transparency` or when `backdrop-filter` is unsupported.
+- A Design Kit may not require component code changes; 3 to 5 kits are maintained at a time.
+
+## Required components (owner)
+Chart (own SVG: line, bar, stacked, area, donut, sparkline, with data-table fallback) and Combobox (single and multi, ARIA 1.2) are mandatory.
+The DS Guide page (`#/learn`) renders documentation from the component registry so docs cannot drift from code.
+
+## Visual references
+`docs/design/` holds the owner sample designs (components page, documents listing, customers CRM). They define the target look; see `ROADMAP.md`.
