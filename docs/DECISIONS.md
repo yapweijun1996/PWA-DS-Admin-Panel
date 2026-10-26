@@ -1,0 +1,28 @@
+# Phase 1 interpretation decisions
+
+- Tokens use group → CSS-variable name → `{light, dark}` values; every token has both modes, including identical non-colour values.
+- The minimal initial palette is neutral surfaces/text/borders with emerald accent and a semantic danger colour; typography, spacing, radius and shadow groups each expose editable primitives.
+- Node.js built-ins implement every build/server/test capability; there is no dependency installation step.
+- Browser-local settings and token changes are not server writes; exporting is the portable backup path.
+- System theme is opt-in; first-visit appearance remains Light as required by the specification.
+- The product identity is Forma, a browser-local workspace; the account menu has no fictional authentication actions.
+- Token input previews immediately; Save persists it, Cancel restores saved values, and navigation/update uses Save/Discard/Cancel.
+- Non-colour values use property-specific CSS validation and reject unresolved or circular token references.
+- Token history includes actual edits and resets, capped at the latest 50 entries.
+- The token editing mode is independent of the active application theme.
+- The desktop context panel defaults expanded and tablet panel defaults collapsed until an explicit preference is saved.
+- Clipboard denial exposes selectable CSS rather than claiming successful copying.
+- Build IDs use millisecond timestamps; the version remains sourced only from `version.json`.
+- PNG icon artwork and manifest colours derive from token values; maskable artwork stays within its safe zone.
+- Cache operations are scope-specific; clearing requires connectivity and confirmation, then reloads for a fresh offline copy.
+- PWA localization follows document language and the shell's language-change event.
+- Tests use repository-local temporary fixtures and remove them afterward.
+- The explicit specification's sticky 64px top bar takes precedence over the PWA standard's conditional smart-hiding default.
+- Checkbox/switch and tag/pill have independent registry entries and source/style pairs (13 components total).
+- Playground prop changes are transient examples, not persisted application token edits; the table uses explicitly mock records.
+- The table initializes its page size from General settings and additionally supports 25 rows in its local playground.
+- Toast timers pause while hovered or focused and restart afterward.
+- Copyable component snippets demonstrate markup; the matching ES modules provide interactive behavior.
+- `tests/index.js` supplies the directory entrypoint required by the installed Node runtime while preserving the specified `node --test tests/` command.
+- Registry tests validate exported entries rather than pinning the incidental source syntax of translated label getters.
+- A same-origin CSP allows inline styles for token previews and generated component styles, but disallows inline scripts, plugins and foreign network connections.

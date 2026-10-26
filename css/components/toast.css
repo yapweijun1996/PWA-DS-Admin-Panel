@@ -1,0 +1,12 @@
+.ds-toast-region { position: fixed; z-index: 1200; inset-inline-end: max(24px, env(safe-area-inset-right)); bottom: max(24px, env(safe-area-inset-bottom)); display: grid; gap: 12px; max-width: min(480px, calc(100vw - 32px)); }
+.ds-toast { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); font-size: .8rem; line-height: 1.5; max-width: 100%; overflow-wrap: anywhere; }
+.ds-toast-message { flex: 1; min-width: 0; }
+.ds-toast-dot { width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: var(--muted); }
+.ds-toast-accent .ds-toast-dot { background: var(--accent); }
+.ds-toast-danger .ds-toast-dot { background: var(--danger); }
+.ds-toast .ds-button { padding-inline: 8px; font-size: .75rem; flex-shrink: 0; }
+.ds-toast-sample { width: 100%; }
+.component-state > .ds-toast { width: 300px; }
+.ds-toast.is-hover { border-color: var(--muted); }
+.ds-toast.is-focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 767px) { .ds-toast-region { bottom: calc(80px + env(safe-area-inset-bottom)); inset-inline: 16px; max-width: none; } .ds-toast { flex-wrap: wrap; } .ds-toast-message { flex-basis: calc(100% - 24px); } }

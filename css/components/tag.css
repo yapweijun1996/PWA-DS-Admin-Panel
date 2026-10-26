@@ -1,0 +1,10 @@
+.ds-tag { display: inline-flex; align-items: center; gap: 7px; min-height: 28px; padding: 3px 9px; border: 1px solid var(--border); border-radius: calc(var(--radius) / 2); background: var(--bg); color: var(--muted); font-size: .75rem; line-height: 1.4; font-weight: 600; max-width: 100%; overflow-wrap: anywhere; }
+.ds-tag-accent { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 23%, var(--surface)); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.ds-tag-danger { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 23%, var(--surface)); background: color-mix(in srgb, var(--danger) 8%, var(--surface)); }
+.ds-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: 0 0 6px; }
+.ds-tag-small { font-size: .7rem; padding: 2px 7px; min-height: 24px; }
+.ds-tag-remove { border: 0; background: transparent; color: inherit; width: 32px; min-width: 32px; min-height: 32px; display: inline-grid; place-content: center; margin: -3px -7px -3px 0; border-radius: calc(var(--radius) / 2); cursor: pointer; font: inherit; font-size: 1rem; }
+.ds-tag-remove:hover:not(:disabled), .ds-tag.is-hover .ds-tag-remove { background: color-mix(in srgb, currentColor 12%, transparent); }
+.ds-tag.is-focus .ds-tag-remove { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ds-tag-remove:disabled { opacity: .4; cursor: not-allowed; }
+@media (max-width: 767px) { .ds-tag:has(.ds-tag-remove) { min-height: 44px; } .ds-tag-remove { min-height: 44px; min-width: 44px; } }
