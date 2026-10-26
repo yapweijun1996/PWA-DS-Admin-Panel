@@ -2,6 +2,29 @@
 
 All notable changes are documented here. Format follows Keep a Changelog; versions follow semantic versioning.
 
+## [0.4.0] — Phase 3
+### Added
+- Ten form components: Textarea, NumberInput, CurrencyInput, RadioGroup, DatePicker, DateRangePicker, FileUpload, DragDropZone, FormField and FormSection.
+- IconButton, ButtonGroup, SplitButton and DropdownButton; Timeline, AuditTimeline, TreeView and Stepper; ConfirmDialog, Skeleton, Spinner, EmptyState, ErrorState and PermissionState.
+- Shared CommandPalette with ranked actions/pages/components/tokens, full keyboard navigation and browser-local recents.
+- PermissionGate with Settings-backed mock permissions, reusable UnsavedChangesGuard, BulkActionToolbar, ColumnVisibilityMenu, SavedViewSelector, FilterBuilder, three-step ImportWizard and CSV/JSON ExportDialog.
+- Six reusable layouts: Dashboard/Bento, Listing, Form, Detail, MasterDetail and Workspace. Resizable layouts persist preferred widths and expose separate phone views.
+- Pure logic modules and 38 behavioral unit tests for dates/locales, currency, precision, filters, CSV, command ranking, tree navigation and pane persistence.
+### Changed
+- The catalog contains 68 registered components/layouts with mandatory metadata and live demos. Guidelines includes actual layout templates and seven working workflow patterns.
+- Kit reference screens compose shared layouts, FormField/FormSection, import/export and the extracted unsaved guard without replacing earlier-phase functionality.
+- Top-bar search and Cmd/Ctrl+K share one modal engine instead of a separate results dropdown. Tabs exposes a reusable `createTabs()` factory used by its playground and layout consumers.
+- PWA update/cache actions consult registered dirty-edit owners even when the legacy global dirty flag is false.
+### Fixed
+- Narrow table status pills keep their intrinsic single-line width rather than collapsing into vertical letters; the existing table region handles horizontal scrolling.
+- Registry human labels replace implementation identifiers across navigation, breadcrumbs, Guide and command search; search results include their component category.
+- Components navigation uses eight counted, keyboard-accessible category disclosures, with the active page's category initially expanded.
+- Detail pages show one title and the registry purpose. Date triggers use the shared calendar icon.
+- Workspace and master-detail panes stretch consistently with subtle decorative borders; record trees use shared chevron/file/folder icons.
+### Migration
+- Application version remains manually sourced only from `version.json`; rebuild to regenerate build information and precache all new modules/styles.
+- Command history, saved views, mock permissions and pane preferences are browser-local; mock records remain session-only. No dependencies, backend integration or kit-specific component JavaScript were added.
+
 ## [0.3.0] — Phase 2b
 ### Added
 - Searchable single/multi Combobox with groups, disabled options, removable chips, creation, limits, mock loading and modal/drawer support.

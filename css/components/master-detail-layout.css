@@ -1,0 +1,21 @@
+.ds-master-detail-layout { width: 100%; min-width: 0; color: var(--text); }
+.ds-master-detail-body { display: grid; width: 100%; min-width: 0; grid-template-columns: minmax(0, 1fr) var(--space-3) minmax(0, 2fr); align-items: stretch; }
+.ds-master-detail-list, .ds-master-detail-detail { display: flex; flex-direction: column; min-width: 0; min-height: 360px; overflow: auto; overflow-wrap: anywhere; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); background: var(--surface); }
+.ds-master-detail-list > .ds-card, .ds-master-detail-detail > .ds-card { flex: 1; border: 0; box-shadow: none; }
+.ds-master-detail-list:focus-visible, .ds-master-detail-detail:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.ds-master-detail-separator { min-height: var(--space-11); width: var(--space-3); cursor: col-resize; touch-action: none; position: relative; }
+.ds-master-detail-separator::after { content: ''; position: absolute; top: 0; bottom: 0; left: calc(50% - 1px); width: 2px; background: var(--color-border-subtle); }
+.ds-master-detail-separator:hover::after, .ds-master-detail-separator:focus-visible::after { background: var(--accent); }
+.ds-master-detail-separator:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius-sm); }
+.ds-master-detail-body[data-resizing="true"] { cursor: col-resize; user-select: none; }
+.ds-master-detail-navigation { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-3); }
+.ds-master-detail-back { margin-bottom: var(--space-3); }
+.ds-master-detail-records { display: grid; gap: var(--space-2); }
+.ds-master-detail-records > .ds-button { justify-content: flex-start; width: 100%; }
+.ds-master-detail-layout [hidden] { display: none !important; }
+.ds-master-detail-layout[data-compact="true"] .ds-master-detail-body { display: block; }
+.ds-master-detail-layout[data-compact="true"] .ds-master-detail-list, .ds-master-detail-layout[data-compact="true"] .ds-master-detail-detail { width: 100%; }
+@media (max-width: 767px) {
+  .ds-master-detail-body { display: block; }
+  .ds-master-detail-separator { display: none; }
+}

@@ -1,0 +1,13 @@
+.ds-listing-layout { display: grid; gap: var(--space-6); width: 100%; min-width: 0; max-width: 100%; overflow-wrap: anywhere; container-type: inline-size; }
+.ds-listing-layout > *, .ds-listing-layout-body > *, .ds-listing-layout-main > * { min-width: 0; max-width: 100%; }
+.ds-listing-layout-header, .ds-listing-layout-summary { display: grid; gap: var(--space-4); }
+.ds-listing-layout-toolbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-3); }
+.ds-listing-layout-toolbar > * { min-width: 0; max-width: 100%; }
+.ds-listing-layout-toolbar > .ds-form-field { flex: 1 1 auto; }
+.ds-listing-layout-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+.ds-listing-layout-main { display: grid; min-width: 0; }
+.ds-listing-layout-table { min-width: 0; }
+.ds-listing-layout-pagination { min-width: 0; }
+.ds-listing-layout-detail:empty { display: none; }
+@container (min-width: 960px) { .ds-listing-layout-body:has(> .ds-listing-layout-detail:not(:empty)) { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); } }
+@media (max-width: 767px) { .ds-listing-layout { gap: var(--space-4); } .ds-listing-layout-toolbar > .ds-form-field { flex-basis: 100%; } }

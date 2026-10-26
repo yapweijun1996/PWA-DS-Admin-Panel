@@ -97,3 +97,39 @@ Settings > Appearance changes axes live. `#/kits` compares the same mock dashboa
 `--series-1` through `--series-8` are semantic light/dark categorical colours, independent of accent palettes. Marks meet ≥3:1 against solid surface in every kit/theme/palette. Numbered donut slices and distinct line markers/dashes supplement colour. The Guide exposes live resolved text/surface ratios; the build remains the authoritative full appearance matrix gate.
 
 Masonry is an L5 layout, registered for learning alongside components. CSS columns preserve source and keyboard order; avoid it when cross-column comparison or row ordering matters.
+
+## Phase 3 components and workflows (0.4.0)
+
+The registry contains 68 components/layouts. Each has its own implementation/style pair, complete guide metadata and a working playground; Guide previews reuse those renderers. Forms compose `createFormField({label,control,hint,error,required})` with `setError(message)` and `createFormSection({title,description,content})`. Existing customer forms and learning editors use the same field/error associations.
+Registry `name` is a stable route/implementation ID; required `label` is the human-facing name. The check gate rejects missing labels and code-style identifiers. Sidebar, breadcrumbs, detail headings, Guide cards and command results consume labels; command results also display the registry category. Categories are Actions, Forms, Data display, Navigation, Feedback, Charts, Layouts and Enterprise. Sidebar category buttons expose `aria-expanded` and `aria-controls`; only the current page's group starts expanded. No native details widgets are used.
+
+Detail hosts supply the sole page title and `guide.purpose`; embedded playgrounds omit their redundant title/description while retaining standalone headings in Guide previews. Calendar triggers and tree chevron/file/folder marks use the icon SSOT. Resizable layout panes stretch to a shared minimum height of 360px, with consistent token padding and decorative subtle borders; phone pane switching remains independent of desktop sizing.
+
+
+- DatePicker and DateRangePicker use a shared date-only Gregorian calendar inside the canonical Modal. Values are ISO dates, arithmetic is UTC, display/week start is locale-aware, bounds are inclusive, and disabled days cannot be selected or crossed by a continuous range. Arrow keys move days/weeks; Home/End use locale week boundaries; PageUp/PageDown move months and Shift moves years. Escape retains a partial range and returns focus.
+- NumberInput preserves invalid typed text for correction and validates bounds/step/precision; programmatic values normalize through shared number logic. CurrencyInput uses `Intl`, localized parsing, and blur/Enter formatting. Textarea counters follow native UTF-16 maxlength semantics.
+- FileUpload owns local type/size validation, confirmed removal and a keyboard file chooser. DragDropZone composes it. Progress is explicitly mock and advances by a named button; files are never uploaded.
+- Action components compose Button, Tooltip and Popover rather than duplicate them. TreeView consumes a pure hierarchy/keyboard model. Timelines, Stepper and feedback states communicate status in text as well as visual styling.
+- CommandPalette is the only global search engine. It accepts a command array/getter with stable IDs, ranks exact/prefix/substring/keyword matches, then uses local recency to break ties. Top-bar search and Cmd/Ctrl+K open the same modal, with combobox/listbox active-descendant navigation.
+- PermissionGate subscribes to the mock permission set in Settings > General; hidden/disabled actions retain explanatory reasons. This is not server authorization. UnsavedChangesGuard registers with `app:resolve-dirty` and browser unload, exposes `resolve()`/`destroy()`, and protects local save/discard decisions. PWA actions consult all registered owners.
+- FilterBuilder emits a readable summary and predicate; conditions use AND by default or optional OR. SavedViewSelector stores JSON filter snapshots, not records. BulkActionToolbar follows the actual selected count; ColumnVisibilityMenu prevents hiding the last visible column.
+- ImportWizard parses a file or pasted CSV, maps columns, previews rows and requires explicit local import. Domain consumers validate mapped records before review/mutation. ExportDialog generates CSV/JSON on-device; CSV neutralizes spreadsheet formulas while JSON preserves source values.
+
+Pure models live in `js/logic/`: date, currency, number, filter, CSV, command ranking, tree navigation and layout persistence. They have no DOM dependency. `js/pane-resizer.js` adapts pane logic to DOM events; `js/patterns.js` composes shared workflows without introducing business-specific components.
+
+### Layout slots
+
+| Template / factory | Slots and behavior |
+|---|---|
+| `createDashboardLayout` | `header`, `metrics`, `content`, `footer`; 12 columns, `grid` or `bento`; content nodes or `{element,span,rowSpan}` descriptors. |
+| `createListingLayout` | `header`, `summary`, `toolbar`, `table`, `pagination`, optional `detail`; table/drawer behavior stays with supplied components. |
+| `createFormLayout` | `header`, `notice`, `sections`, sticky `actions`; external submit buttons associate with the supplied native form's ID. `--form-action-offset` accommodates shell overlays. |
+| `createDetailLayout` | `header`, `summary`, `tabs`, `content`, `sidePanel`, `timeline`; optional side panel stacks responsively. |
+| `createMasterDetailLayout` | `list`, `detail`; returns controller with `element`, `widths`, `showList`, `showDetail`, `destroy`; phone list/detail views include Back. |
+| `createWorkspaceLayout` | Three `{label,content}` `panes`; controller includes `element`, `widths`, `showPane`, `destroy`; phone views use accessible tabs. |
+
+Static templates return DOM nodes, preserve supplied nodes/listeners and support optional slots and `className`. Resizable templates accept `storageKey`, preferred `widths`, `minWidths` and optional `maxWidths`. Focusable separators expose current/min/max pixel values; Left/Right changes 10px, Shift changes 40px, Home/End reaches limits. Container fitting never overwrites persisted preferred sizes. Pointer listeners and observers are released on detach. Existing Masonry remains the independent variable-height layout.
+
+`createTabs({items:[{label,content,disabled?}],label,active,variant,orientation,fullWidth,onChange})` is the canonical reusable tabs factory and also powers its playground. Templates and Guide examples use shared components; kit reference screens now compose Dashboard, Listing and Form templates without a separate layout convention.
+
+Guide > Guidelines documents slots with live examples and includes a **Patterns** section: search/filter, create/edit, bulk actions, import/export, saved views, permission-aware actions and unsaved-change protection. Demonstrations are labelled mock, store records only in session memory and confirm destructive actions. Appearance remains independent; no component branches on kit names and no new colour tokens were required.

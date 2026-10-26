@@ -71,3 +71,37 @@
 - Guidelines compose existing shared primitives rather than registry playgrounds or duplicate controls; mock interactions are local, and every pattern includes a usage sentence.
 - Learn reuses page-subtitle/component-field conventions and spacing tokens for title, tabs, toolbar, count and grid; chart-choice guidance uses token-coloured SVG type icons with bold names.
 - Legend regression renders all six types, including updates and donut formatting; visible Chrome evidence covers all Learn tabs and charts in three kits, both themes and both requested widths.
+
+## Phase 3
+
+- Date-only values use strict ISO Gregorian dates and UTC arithmetic; min/max are inclusive, and locale week starts come from Intl with an explicit override available.
+- DatePicker and DateRangePicker share one calendar inside the existing Modal, reusing focus trap, Escape and focus return rather than adding another overlay lifecycle.
+- Continuous ranges cannot cross disabled dates; the first selection emits `{start,end:null}`, Escape preserves it, and an earlier second choice sorts endpoints.
+- NumberInput retains invalid typed text, while programmatic values round/clamp; numeric ties round symmetrically away from zero and stepping avoids decimal drift.
+- CurrencyInput uses Intl formatting and locale-aware separators/digits/accounting parsing; blur/Enter commits formatting and invalid trailing input is rejected.
+- Textarea counters follow native UTF-16 maxlength semantics; upload progress is explicitly mock and advances 25% per named action rather than background timers.
+- DragDropZone delegates validation, selection and confirmed removal to FileUpload; the native file chooser remains the keyboard alternative.
+- Action groups reuse Button; IconButton reuses Tooltip; split/dropdown buttons reuse the existing menu keyboard model.
+- Filter text comparisons are case-insensitive; conditions default to AND with optional OR, and removing a condition confirms its effect without deleting source records.
+- CSV parsing rejects malformed quoting and preserves embedded newline sequences; exports use CRLF and neutralize spreadsheet-formula text, including whitespace-prefixed formulas.
+- Command match strength precedes recency; recent stable IDs break ties and lead empty-query results, with at most eight browser-local entries.
+- Tree navigation stops at boundaries except wrapping typeahead; disabled nodes remain discoverable/focusable but cannot be selected.
+- Layout templates live in registered `components/*-layout.js` pairs so the existing metadata, CSS-loading and precache contracts remain authoritative.
+- Resizable layouts keep preferred widths separate from temporary container fits; impossible pure-model minima scale to available width, while UI layouts switch to separate compact views.
+- Pane separators resize by 10px, Shift by 40px, with Home/End limits; optional per-layout storage keys isolate preferences and unavailable/malformed storage falls back safely.
+- Static layout slots preserve supplied nodes/classes/listeners; showcase adapters retain existing screen styling and use native form-ID association for sticky external Save actions.
+- Tabs exposes a shared factory instead of constructing hidden playgrounds for template consumers.
+- Mock permissions are a catalog of browser-local customer actions in Settings > General, not authentication or backend authorization.
+- UnsavedChangesGuard owns reusable decision/listener lifecycle; PWA actions consult registered guards even when the legacy global dirty flag is false.
+- Customer import uses shared CSV parsing/mapping plus consumer-specific validation before review/import: 1–200 rows, 1 MB, supported region/status, valid domain/email and required identity fields.
+- Saved views persist JSON filter snapshots only; records remain session-only. Command recents, permissions and pane widths are also preference data, never secrets.
+- Guidelines patterns share one mock dataset and canonical editor composition; Guide tab switches resolve dirty edits before replacing editor DOM.
+- Visual review found status pills collapsing into vertical letters in narrow tables; table badges remain single-line and contribute their intrinsic width to the existing internal horizontal scroll region.
+
+## Phase 3 round 1 correction
+
+- Human labels are required registry data, separate from route IDs and exported factory names; do not derive visible titles from class-style identifiers.
+- Component categories are shared between Guide, command results and counted sidebar groups. Only the active category starts expanded; button disclosures preserve native Enter/Space behavior without forbidden details widgets.
+- A component detail host owns the page title and purpose; standalone playgrounds retain their headers.
+- Calendar and tree marks belong to the icon SSOT; decorative pane borders use the subtle token, not the control-boundary token.
+- Equal-height desktop panes retain compact single-pane navigation on phones; no kit-specific JavaScript or new dependencies are introduced.

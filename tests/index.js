@@ -8,3 +8,5 @@ import './kits.test.mjs';
 import './components.test.mjs';
 import './phase2b.test.mjs';
 import './chart.test.mjs';
+import './phase3-date-number.test.mjs';
+import './phase3-workflow.test.mjs';

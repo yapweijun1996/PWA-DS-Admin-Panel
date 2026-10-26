@@ -1,4 +1,5 @@
 import { registry } from '../components/registry.js';
+import { categories } from '../components/metadata.js';
 import { initPWA, renderPWA, getPWAState } from './pwa.js';
 import { VERSION, BUILD } from './build-info.js';
 import { createRouter } from './router.js';
@@ -7,6 +8,8 @@ import { icon } from './icons.js';
 import { renderShowcase } from './kits-showcase.js';
 import { renderLearn } from './learn.js';
 import { createChart } from '../components/chart.js';
+import { createCommandPalette } from '../components/command-palette.js';
+import { MOCK_PERMISSIONS, getMockPermissions, setMockPermissions } from '../components/permission-gate.js';
 
 const storage = {
   read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
@@ -52,6 +55,14 @@ const modules = ['overview', 'tokens', 'components', 'settings'];
 const settingsSections = ['general', 'appearance', 'about', 'pwa'];
 const tokenEntries = () => Object.entries(tokens).flatMap(([group, values]) => Object.entries(values).map(([name, values]) => ({ group, name, values })));
 const tokenValue = (name, mode) => overrides[name]?.[mode] ?? tokenEntries().find(item => item.name === name)?.values[mode];
+const commandPalette = createCommandPalette({ items: () => [
+  { id: 'page:learn', label: 'Guide', category: 'Page', href: '#/learn', keywords: ['documentation', 'patterns'] },
+  ...['overview', 'tokens', 'components', 'kits'].map(name => ({ id: `page:${name}`, label: label(name), category: 'Page', href: `#/${name}` })),
+  ...settingsSections.map(name => ({ id: `settings:${name}`, label: `Settings / ${label(name)}`, category: 'Page', href: `#/settings/${name}` })),
+  ...registry.map(entry => ({ id: `component:${entry.name}`, label: entry.label, category: entry.category, href: `#/components/${entry.name}`, keywords: ['component', entry.category, entry.guide.purpose] })),
+  ...tokenEntries().map(entry => ({ id: `token:${entry.name}`, label: `Token / ${entry.name}`, category: 'Token', action: () => { searchQuery = entry.name; activeGroup = 'all'; if (route.module === 'tokens') render(); else location.hash = '#/tokens'; } })),
+  { id: 'action:theme', label: 'Toggle light / dark theme', category: 'Action', keywords: ['appearance'], action: () => { savePreference('theme', document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'); render(); } }
+] });
 const panelOpen = () => prefs.panel === null ? prefs.kit !== 'ops' && !tablet.matches : prefs.panel === 'expanded';
 
 function notify(message) {
@@ -210,7 +221,7 @@ function navLink(module, mobile = false) {
   return `<a class="${mobile ? 'bottom-tab' : 'rail-link'} ${route?.module === module ? 'active' : ''}" href="${href}" ${route?.module === module ? 'aria-current="page"' : ''} aria-label="${escape(t(module))}">${icon(module)}<span class="${mobile ? '' : 'rail-tooltip'}">${escape(t(module))}</span></a>`;
 }
 function renderShell() {
-  root.innerHTML = `<header class="topbar"><a class="brand" href="#/overview"><span class="brand-mark">${icon('logo')}</span><span>Forma</span></a><div class="breadcrumbs"></div><div class="global-search"><label class="search-field">${icon('search')}<input id="global-search" type="search" placeholder="Search pages, components, tokens" aria-label="Global search" aria-controls="global-results" autocomplete="off"><kbd>⌘ K</kbd></label><div id="global-results" hidden></div></div><div class="topbar-actions"><button class="icon-button" id="notification-menu" aria-label="Notifications" aria-haspopup="menu" aria-expanded="false">${icon('bell')}<span id="notification-count"></span></button><button class="language-button" id="language-toggle" aria-label="${escape(t('language'))}">${icon('globe')}<span>${getLanguage() === 'en' ? 'EN' : '中文'}</span></button><button class="icon-button" id="theme-menu" aria-label="${escape(t('theme'))}" aria-haspopup="menu" aria-expanded="false">${icon(prefs.theme === 'dark' ? 'moon' : 'sun')}</button><button class="avatar" id="account-menu" aria-label="${escape(t('account'))}" aria-haspopup="menu" aria-expanded="false">DS</button></div></header>
+  root.innerHTML = `<header class="topbar"><a class="brand" href="#/overview"><span class="brand-mark">${icon('logo')}</span><span>Forma</span></a><div class="breadcrumbs"></div><div class="global-search"><label class="search-field">${icon('search')}<input id="global-search" type="search" placeholder="Search pages, components, tokens" aria-label="Global search" aria-haspopup="dialog" autocomplete="off"><kbd>⌘ K</kbd></label></div><div class="topbar-actions"><button class="icon-button" id="notification-menu" aria-label="Notifications" aria-haspopup="menu" aria-expanded="false">${icon('bell')}<span id="notification-count"></span></button><button class="language-button" id="language-toggle" aria-label="${escape(t('language'))}">${icon('globe')}<span>${getLanguage() === 'en' ? 'EN' : '中文'}</span></button><button class="icon-button" id="theme-menu" aria-label="${escape(t('theme'))}" aria-haspopup="menu" aria-expanded="false">${icon(prefs.theme === 'dark' ? 'moon' : 'sun')}</button><button class="avatar" id="account-menu" aria-label="${escape(t('account'))}" aria-haspopup="menu" aria-expanded="false">DS</button></div></header>
     <div class="workspace"><aside class="context-panel" aria-label="${escape(t('contextNavigation'))}"></aside><div class="main-column"><main id="main-content" tabindex="-1"></main><footer class="workspace-footer"><span>Forma · ${t('workspace')}</span><span>v${escape(VERSION)}</span></footer></div></div><nav class="bottom-nav" aria-label="${escape(t('navigation'))}">${modules.slice(0, 3).map(module => navLink(module, true)).join('')}<button class="bottom-tab" id="mobile-more" aria-haspopup="dialog">${icon('more')}<span>${t('more')}</span></button></nav>`;
   document.querySelector('.skip-link').textContent = t('skip');
   document.querySelector('#language-toggle').onclick = async () => {
@@ -229,15 +240,9 @@ function renderShell() {
     { label: t('about'), icon: 'info', run: () => { location.hash = '#/settings/about'; } },
   ]);
   const search = document.querySelector('#global-search');
-  search.oninput = () => {
-    const query = search.value.trim().toLowerCase();
-    const entries = [{ label: 'Guide', href: '#/learn' }, ...['overview', 'tokens', 'components', 'kits'].map(name => ({ label: label(name), href: `#/${name}` })), ...settingsSections.map(name => ({ label: `Settings / ${label(name)}`, href: `#/settings/${name}` })), ...registry.map(entry => ({ label: entry.label, href: `#/components/${entry.name}` })), ...tokenEntries().map(entry => ({ label: `Token / ${entry.name}`, href: '#/tokens', token: entry.name }))].filter(entry => entry.label.toLowerCase().includes(query)).slice(0, 12);
-    const results = document.querySelector('#global-results');
-    results.hidden = !query;
-    results.innerHTML = entries.length ? entries.map(entry => `<a href="${entry.href}" ${entry.token ? `data-search-token="${escape(entry.token)}"` : ''}>${escape(entry.label)}</a>`).join('') : '<p>No results</p>';
-    results.querySelectorAll('a').forEach(link => link.onclick = () => { if (link.dataset.searchToken) { searchQuery = link.dataset.searchToken; activeGroup = 'all'; if (route.module === 'tokens') render(); } results.hidden = true; });
-  };
-  search.onkeydown = event => { if (event.key === 'Escape') document.querySelector('#global-results').hidden = true; if (event.key === 'ArrowDown' || event.key === 'Enter') { event.preventDefault(); document.querySelector('#global-results a')?.focus(); } };
+  search.onfocus = () => commandPalette.open(search.value);
+  search.oninput = () => commandPalette.open(search.value);
+  search.onkeydown = event => { if (event.key === 'Enter' || event.key === 'ArrowDown') { event.preventDefault(); commandPalette.open(search.value); } };
   updateNotifications();
   document.querySelector('#notification-menu').onclick = event => menu(event.currentTarget, notificationItems());
   document.querySelector('#mobile-more').onclick = () => dialog(t('more'), `<nav class="sheet-links">${settingsSections.map(section => `<a class="context-link" href="#/settings/${section}">${icon(section === 'pwa' ? 'download' : section === 'about' ? 'info' : 'settings')}${t(section)}${icon('chevronRight')}</a>`).join('')}</nav>`, [], { className: 'mobile-sheet', onClose: close => close() }).layer.querySelectorAll('a').forEach(link => link.addEventListener('click', () => activeDialog?.close()));
@@ -280,7 +285,13 @@ function renderContext() {
   let links = '';
   if (current === 'overview') links = `<a class="context-link active" href="#/overview">${icon('overview')}${t('workspaceOverview')}</a><div class="context-label">${t('quickStart')}</div><a class="context-link" href="#/tokens">${icon('tokens')}${t('exploreTokens')}</a><a class="context-link" href="#/components">${icon('components')}${t('exploreComponents')}</a>`;
   if (current === 'tokens') links = `<button class="context-link ${activeGroup === 'all' ? 'active' : ''}" data-group="all">${icon('tokens')}${t('allTokens')}<span class="nav-count">${tokenEntries().length}</span></button><div class="context-label">${t('foundations')}</div>${Object.keys(tokens).map(group => `<button class="context-link ${activeGroup === group ? 'active' : ''}" data-group="${escape(group)}">${icon(groupIcons[group])}${t(group)}<span class="nav-count">${Object.keys(tokens[group]).length}</span></button>`).join('')}<div class="context-separator"></div><button class="context-link" data-history>${icon('clock')}${t('history')}</button>`;
-  if (current === 'components') links = `<a class="context-link ${!route.params.name ? 'active' : ''}" href="#/components">${icon('components')}${t('all')}<span class="nav-count">${registry.length}</span></a><div class="context-label">${t('library')}</div>${registry.map(entry => `<a class="context-link ${route.params.name === entry.name ? 'active' : ''}" href="#/components/${encodeURIComponent(entry.name)}">${icon('components')}<span>${escape(componentLabel(entry))}</span></a>`).join('')}`;
+  if (current === 'components') {
+    links = `<a class="context-link ${!route.params.name ? 'active' : ''}" href="#/components">${icon('components')}${t('all')}<span class="nav-count">${registry.length}</span></a>` + categories.map((category, index) => {
+      const entries = registry.filter(entry => entry.category === category);
+      const expanded = entries.some(entry => entry.name === route.params.name);
+      return `<div class="component-nav-group"><button class="context-link component-nav-toggle" aria-expanded="${expanded}" aria-controls="component-category-${index}">${icon('chevronRight')}<span>${escape(category)}</span><span class="nav-count">${entries.length}</span></button><div id="component-category-${index}"${expanded ? '' : ' hidden'}>${entries.map(entry => `<a class="context-link ${route.params.name === entry.name ? 'active' : ''}"${route.params.name === entry.name ? ' aria-current="page"' : ''} href="#/components/${encodeURIComponent(entry.name)}"><span>${escape(componentLabel(entry))}</span></a>`).join('')}</div></div>`;
+    }).join('');
+  }
   if (current === 'settings') links = settingsSections.map(section => `<a class="context-link ${route.section === section ? 'active' : ''}" href="#/settings/${section}">${icon(section === 'pwa' ? 'download' : section === 'about' ? 'info' : section === 'appearance' ? 'sun' : 'settings')}${t(section)}</a>`).join('');
   const section = (title, names) => `<div class="context-label">${title}</div>${names.map(name => `<a class="context-link ${current === name ? 'active' : ''}" href="${name === 'settings' ? '#/settings/general' : `#/${name}`}" aria-label="${escape(name === 'kits' ? 'Design kits' : t(name))}">${icon(name === 'kits' ? 'components' : name)}<span class="nav-label">${name === 'kits' ? 'Design kits' : t(name)}</span>${name === 'components' ? `<span class="nav-count">${registry.length}</span>` : ''}</a>${current === name ? `<div class="nested-nav">${links}</div>` : ''}`).join('')}`;
   document.querySelector('.context-panel').innerHTML = `<button class="icon-button" id="sidebar-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button><div class="context-content">${section('Main', ['overview', 'tokens', 'components', 'kits'])}${section('System', ['settings'])}</div><button class="context-bottom" id="sidebar-account"><span class="avatar">DS</span><span class="nav-label"><strong>${t('localWorkspace')}</strong><small>${t('localData')}</small></span></button>`;
@@ -288,6 +299,11 @@ function renderContext() {
   document.querySelector('#sidebar-toggle').onclick = () => { savePreference('panel', panelOpen() ? 'collapsed' : 'expanded'); render(); };
   document.querySelector('#sidebar-account').onclick = () => document.querySelector('#account-menu').click();
   document.querySelectorAll('[data-group]').forEach(button => button.onclick = () => { activeGroup = button.dataset.group; render(); });
+  document.querySelectorAll('.component-nav-toggle').forEach(button => button.onclick = () => {
+    const expanded = button.getAttribute('aria-expanded') !== 'true';
+    button.setAttribute('aria-expanded', String(expanded));
+    document.getElementById(button.getAttribute('aria-controls')).hidden = !expanded;
+  });
   document.querySelector('[data-history]')?.addEventListener('click', showHistory);
   const parentTitle = route.module === 'settings' || route.module === 'components' && route.params.name ? t(route.module) : null;
   document.querySelector('.breadcrumbs').innerHTML = `<span>${escape(t('workspace'))}</span>${icon('chevronRight')}${parentTitle ? `<span>${escape(parentTitle)}</span>${icon('chevronRight')}` : ''}<strong aria-current="page">${escape(routeTitle())}</strong>`;
@@ -405,8 +421,10 @@ function renderComponents(main) {
   const entry = registry.find(item => item.name === route.params.name);
   if (route.params.name && !entry) return renderNotFound(main);
   if (entry) {
-    main.innerHTML = `<a class="back-link" href="#/components">${icon('arrowLeft')}${t('backComponents')}</a>${pageHeader(componentLabel(entry), t('componentsDescription'))}<div id="component-playground"></div>`;
-    entry.render(main.querySelector('#component-playground'));
+    main.innerHTML = `<a class="back-link" href="#/components">${icon('arrowLeft')}${t('backComponents')}</a>${pageHeader(componentLabel(entry), entry.guide.purpose)}<div id="component-playground"></div>`;
+    const playground = main.querySelector('#component-playground');
+    entry.render(playground);
+    playground.querySelector(':scope > .component-playground > .component-heading')?.remove();
     return;
   }
   main.innerHTML = `${pageHeader(t('components'), t('componentsDescription'))}<section class="library-intro"><span class="quick-icon">${icon('components')}</span><div><h2>${t('componentIntro')}</h2><p>${t('componentIntroBody')}</p></div></section><div class="component-grid">${registry.map(entry => `<a class="card component-tile" href="#/components/${encodeURIComponent(entry.name)}"><div class="component-tile-preview" aria-hidden="true">${componentIllustration(entry.name)}</div><div class="component-tile-body"><h2>${escape(componentLabel(entry))}</h2><span>${t('openPlayground')}${icon('arrowRight')}</span></div></a>`).join('')}</div>`;
@@ -431,6 +449,15 @@ function renderSettings(main) {
   if (section === 'general') content.innerHTML = `<section class="card settings-card"><div class="card-heading"><h2>${t('preferences')}</h2>${icon('settings')}</div>${settingRow('landingPage', 'landingDescription', `<button class="button preference-menu" data-pref-menu="landingPage" aria-haspopup="menu" aria-expanded="false">${t(prefs.landingPage.slice(1))}${icon('chevronDown')}</button>`)}${settingRow('density', 'densityDescription', choice('density', [['comfortable', 'comfortable'], ['compact', 'compact']]))}${settingRow('pageSize', 'pageSizeDescription', `<button class="button preference-menu" data-pref-menu="pageSize" aria-haspopup="menu" aria-expanded="false">${prefs.pageSize}${icon('chevronDown')}</button>`)}</section>`;
   if (section === 'appearance') content.innerHTML = `<section class="card settings-card"><div class="card-heading"><h2>${t('appearanceTitle')}</h2>${icon('sun')}</div>${settingRow('theme', 'themeDescription', choice('theme', [['light', 'light'], ['dark', 'dark'], ['system', 'system']]))}${settingRow('density', 'densityDescription', choice('density', [['comfortable', 'comfortable'], ['compact', 'compact']]))}${settingRow('panel', 'panelDescription', choice('panel', [['expanded', 'expanded'], ['collapsed', 'collapsed']]))}${settingRow('reducedMotion', 'reducedMotionDescription', `<button class="preference-switch ${prefs.reducedMotion ? 'is-on' : ''}" role="switch" aria-checked="${prefs.reducedMotion}" aria-label="${escape(t('reducedMotion'))}" id="motion-toggle"><span></span></button>`)}</section>`;
   if (section === 'appearance') content.insertAdjacentHTML('beforeend', `<section class="card settings-card"><div class="card-heading"><h2>Palette</h2><span>Accent only · light and dark</span></div><div class="palette-picker">${palettes.map(name => `<button class="button" data-pref="palette" data-value="${name}" aria-pressed="${prefs.palette === name}"><span class="palette-dot palette-${name}" aria-hidden="true"></span>${label(name)}</button>`).join('')}</div></section><section class="card settings-card"><div class="card-heading"><h2>Design kit</h2><a href="#/kits">Compare reference screens</a></div><div class="kit-picker">${kitNames.map(name => `<button class="button" data-pref="kit" data-value="${name}" aria-pressed="${prefs.kit === name}"><span class="kit-preview" aria-hidden="true"></span><strong>${label(name)}</strong><small>${name === 'enterprise' ? 'Solid surfaces · balanced workspace' : name === 'liquid' ? 'Glass chrome · readable solid content' : 'Compact operations · tabular numbers'}</small></button>`).join('')}</div></section>`);
+  if (section === 'general') {
+    const permissions = getMockPermissions();
+    content.insertAdjacentHTML('beforeend', `<section class="card settings-card"><div class="card-heading"><h2>Mock permissions</h2></div><p>Local demonstration only. These switches do not provide server authorization.</p><div class="component-demo-stack">${MOCK_PERMISSIONS.map(permission => `<label class="ds-checkbox-label"><input class="ds-checkbox" type="checkbox" data-mock-permission="${escape(permission.id)}" ${permissions.includes(permission.id) ? 'checked' : ''}><span>${escape(permission.label)}<small class="muted">${escape(permission.description)}</small></span></label>`).join('')}</div><p role="status" id="mock-permissions-status">Permissions apply to shared PermissionGate examples.</p></section>`);
+    content.querySelectorAll('[data-mock-permission]').forEach(input => input.addEventListener('change', () => {
+      const selected = [...content.querySelectorAll('[data-mock-permission]:checked')].map(control => control.dataset.mockPermission);
+      setMockPermissions(selected);
+      content.querySelector('#mock-permissions-status').textContent = 'Mock permissions updated on this device.';
+    }));
+  }
   content.querySelectorAll('[data-pref]').forEach(button => button.onclick = () => { savePreference(button.dataset.pref, button.dataset.value); render(); notify(t('preferencesSaved')); });
   content.querySelectorAll('[data-pref-menu]').forEach(button => button.onclick = () => {
     const key = button.dataset.prefMenu;
@@ -457,7 +484,7 @@ mediaTheme.addEventListener('change', () => { if (prefs.theme === 'system') appl
 tablet.addEventListener('change', applyPreferences);
 window.addEventListener('pwa:state', () => { if (route?.module === 'overview') renderOverview(document.querySelector('#main-content')); });
 
-document.addEventListener('keydown', event => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); document.querySelector('#global-search')?.focus(); } });
+document.addEventListener('keydown', event => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); commandPalette.open(); } });
 function notificationItems() {
   const items = [];
   if (getPWAState().updateAvailable) items.push({ label: 'Application update available', run: () => { location.hash = '#/settings/pwa'; } });

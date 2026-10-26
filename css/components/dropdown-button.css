@@ -1,0 +1,6 @@
+.ds-dropdown-button { max-inline-size: 100%; }
+.ds-dropdown-button-trigger { max-inline-size: 100%; min-block-size: var(--space-11); gap: var(--space-2); }
+.ds-dropdown-button-label { min-inline-size: 0; overflow-wrap: anywhere; }
+.ds-dropdown-button-icon, .ds-dropdown-button-chevron { display: inline-flex; flex: 0 0 auto; }
+.ds-dropdown-button-icon .icon { inline-size: var(--space-5); block-size: var(--space-5); }
+.ds-dropdown-button-chevron .icon { inline-size: var(--space-4); block-size: var(--space-4); }

@@ -69,9 +69,8 @@ function publish() {
 }
 
 async function resolveEdits() {
-  if (!window.appDirty) return true;
-  if (typeof window.resolveDirty !== 'function') return false;
-  return (await window.resolveDirty()) === true;
+  if (typeof window.resolveDirty === 'function') return (await window.resolveDirty()) === true;
+  return !window.appDirty;
 }
 
 function addStyles() {

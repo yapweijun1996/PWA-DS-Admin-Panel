@@ -14,6 +14,19 @@ export function registryNames(source) {
   return [...source.matchAll(/\bname\s*:\s*['"]([a-z][a-z\d-]*)['"]/g)].map(match => match[1]);
 }
 
+export function validateRegistryLabels(registry) {
+  const errors = [];
+  const codeStyle = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[_`()[\]{}<>]|^[a-z\d]+(?:[-.][a-z\d]+)+$/u;
+  for (const entry of registry) {
+    if (typeof entry.label !== 'string' || !entry.label.trim()) {
+      errors.push(`components/registry.js: ${entry.name} requires a human-readable label.`);
+    } else if (codeStyle.test(entry.label)) {
+      errors.push(`components/registry.js: ${entry.name} label must use human-readable words, not a code identifier.`);
+    }
+  }
+  return errors;
+}
+
 async function exists(path) {
   try { return (await stat(path)).isFile(); } catch { return false; }
 }
@@ -76,6 +89,7 @@ export async function checkProject(root = fileURLToPath(new URL('../', import.me
     }
     const { registry } = await import(`${pathToFileURL(join(root, 'components/registry.js')).href}?check=${Date.now()}`);
     errors.push(...validateMetadata(registry));
+    errors.push(...validateRegistryLabels(registry));
   } catch (error) { errors.push(`Component registry: ${error.message}`); }
   return errors;
 }

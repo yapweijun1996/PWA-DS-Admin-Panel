@@ -1,0 +1,10 @@
+.ds-detail-layout { display: grid; gap: var(--space-6); width: 100%; min-width: 0; max-width: 100%; overflow-wrap: anywhere; container-type: inline-size; }
+.ds-detail-layout > *, .ds-detail-layout-body > * { min-width: 0; max-width: 100%; }
+.ds-detail-layout-header, .ds-detail-layout-tabs, .ds-detail-layout-content, .ds-detail-layout-sidePanel, .ds-detail-layout-timeline { display: grid; gap: var(--space-4); }
+.ds-detail-layout-summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+.ds-detail-layout-summary > * { min-width: 0; }
+.ds-detail-layout-summary > :only-child { grid-column: 1 / -1; }
+.ds-detail-layout-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+.ds-detail-layout-sidePanel:empty { display: none; }
+@container (min-width: 800px) { .ds-detail-layout-body:has(> .ds-detail-layout-content):has(> .ds-detail-layout-sidePanel:not(:empty)) { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); } }
+@media (max-width: 767px) { .ds-detail-layout { gap: var(--space-4); } .ds-detail-layout-summary { grid-template-columns: minmax(0, 1fr); } }

@@ -5,9 +5,6 @@
 .global-search .search-field { width: 100%; }
 .global-search input { min-width: 0; width: 100%; }
 .global-search kbd { white-space: nowrap; color: var(--muted); font-size: var(--font-size-sm, 12px); }
-#global-results { position: absolute; top: 100%; width: 100%; background: var(--surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius); box-shadow: var(--shadow); max-height: 60vh; overflow: auto; }
-#global-results a, #global-results p { display: block; padding: var(--space-3, 12px); }
-#global-results a:hover, #global-results a:focus { background: var(--accent-soft); color: var(--accent-text); }
 .context-panel { width: var(--sidebar-width, 240px); flex-basis: var(--sidebar-width, 240px); overflow-x: visible; }
 .context-panel > .icon-button { margin: var(--space-2, 8px); }
 .context-content { overflow-y: auto; flex: 1; }
@@ -15,6 +12,12 @@
 .context-bottom .avatar { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 44px; overflow: hidden; line-height: 1; }
 .nested-nav { margin-left: var(--space-5, 20px); padding-left: var(--space-2, 8px); border-left: 1px solid var(--color-border-subtle); }
 .nested-nav .context-heading, .nested-nav .context-label { display: none; }
+.component-nav-toggle { width: 100%; text-align: left; gap: var(--space-2); }
+.component-nav-toggle > .icon { transition: transform var(--motion-fast); flex-shrink: 0; }
+.component-nav-toggle[aria-expanded="true"] > .icon { transform: rotate(90deg); }
+.component-nav-group > [id] { padding-left: var(--space-4); }
+.component-nav-group > [hidden] { display: none; }
+.component-nav-group .context-link { min-height: var(--space-11); }
 [data-panel="collapsed"] .context-panel { display: flex; width: var(--sidebar-collapsed-width, 64px); flex-basis: var(--sidebar-collapsed-width, 64px); overflow: visible; }
 [data-panel="collapsed"] .context-content { padding-inline: var(--space-2, 8px); overflow: visible; }
 [data-panel="collapsed"] .context-panel .nested-nav, [data-panel="collapsed"] .context-panel .context-label, [data-panel="collapsed"] .context-panel .nav-count, [data-panel="collapsed"] .context-bottom .nav-label { display: none; }

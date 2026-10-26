@@ -1,0 +1,4 @@
+@import './modal.css';
+.ds-confirm-dialog { display: grid; gap: var(--space-4); min-width: 0; }
+.ds-confirm-dialog p { margin: 0; overflow-wrap: anywhere; }
+.ds-confirm-error { color: var(--danger-text); }

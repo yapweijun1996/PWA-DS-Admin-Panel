@@ -3,11 +3,18 @@ import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
-import { checkProject } from '../scripts/check.mjs';
+import { checkProject, validateRegistryLabels } from '../scripts/check.mjs';
 import { generate } from '../scripts/build-tokens.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const names = ['button', 'input', 'select', 'checkbox', 'tag', 'tabs', 'table', 'modal', 'toast', 'tooltip', 'popover'];
+
+test('registry labels reject missing and implementation identifiers while accepting human names', () => {
+  for (const label of [undefined, '', '  ', 'DatePickerComponent', 'filterBuilder', 'import-wizard', 'file_upload']) {
+    assert.equal(validateRegistryLabels([{ name: 'example', label }]).length, 1, String(label));
+  }
+  assert.deepEqual(validateRegistryLabels(['Date picker', 'Master-detail layout', 'Charts', 'Combobox'].map(label => ({ name: 'example', label }))), []);
+});
 
 async function fixture(context) {
   const directory = await mkdtemp(join(root, '.check-fixture-'));

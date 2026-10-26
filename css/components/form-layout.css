@@ -1,0 +1,9 @@
+.ds-form-layout { display: grid; gap: var(--space-6); width: 100%; min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.ds-form-layout > * { min-width: 0; max-width: 100%; }
+.ds-form-layout-header, .ds-form-layout-notice, .ds-form-layout-sections { display: grid; gap: var(--space-4); }
+.ds-form-layout-sections > form { display: grid; gap: var(--space-6); min-width: 0; }
+.ds-form-layout-sections > *, .ds-form-layout-sections > form > * { min-width: 0; max-width: 100%; }
+.ds-form-layout-actions { position: sticky; bottom: var(--form-action-offset, var(--space-4)); z-index: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm, var(--shadow)); }
+.ds-form-layout-actions > * { min-width: 0; max-width: 100%; }
+.ds-form-layout-actions > .component-feedback { flex: 1 1 auto; margin: 0; }
+@media (max-width: 767px) { .ds-form-layout { gap: var(--space-4); } .ds-form-layout-actions { bottom: var(--form-action-offset, calc(var(--space-12) + var(--space-4) + env(safe-area-inset-bottom, 0px))); gap: var(--space-2); } .ds-form-layout-actions > .component-feedback { flex-basis: 100%; } }

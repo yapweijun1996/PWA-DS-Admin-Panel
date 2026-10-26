@@ -1,0 +1,10 @@
+.ds-tree-view { min-width: 0; width: 100%; color: var(--text); }
+.ds-tree-item { display: flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); overflow-wrap: anywhere; cursor: pointer; }
+.ds-tree-item > :last-child { min-width: 0; }
+.ds-tree-item[aria-selected="true"] { background: var(--bg); color: var(--accent-text); font-weight: 600; }
+.ds-tree-item[aria-disabled="true"] { color: var(--muted); cursor: not-allowed; }
+.ds-tree-item:focus-visible, .ds-tree-view:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ds-tree-disclosure, .ds-tree-record-icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 var(--space-4); width: var(--space-4); height: var(--space-4); color: var(--muted); }
+.ds-tree-disclosure .icon, .ds-tree-record-icon .icon { width: 100%; height: 100%; }
+.ds-tree-item:hover:not([aria-disabled="true"]) { background: var(--accent-soft); }
+.ds-tree-item[aria-selected="true"] .ds-tree-record-icon { color: inherit; }

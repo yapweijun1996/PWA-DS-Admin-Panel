@@ -1,0 +1,5 @@
+.ds-form-field { display: grid; gap: var(--space-2); min-width: 0; width: 100%; color: var(--text); }
+.ds-form-field > label { font-weight: 600; }
+.ds-form-field > small { color: var(--muted); overflow-wrap: anywhere; }
+.ds-form-field > .component-error { color: var(--danger-text); }
+.ds-form-field > [hidden] { display: none; }

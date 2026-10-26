@@ -1,0 +1,5 @@
+.ds-icon-button { min-inline-size: var(--space-11); min-block-size: var(--space-11); padding: var(--space-2); flex: 0 0 auto; }
+.ds-icon-button-glyph { display: inline-flex; align-items: center; justify-content: center; }
+.ds-icon-button-glyph .icon { inline-size: var(--space-5); block-size: var(--space-5); }
+.ds-icon-button.ds-button-large { min-inline-size: calc(var(--space-11) + var(--space-2)); min-block-size: calc(var(--space-11) + var(--space-2)); }
+.ds-icon-button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent-text); border-color: var(--accent); }
