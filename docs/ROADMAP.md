@@ -65,3 +65,15 @@ working, documented, tested, versioned — not mockups.
   - Tabs (underline), Card with actions, Alerts (success/info/warning/danger with dismiss), Toasts (stacked, title + time, dismiss), Table (row selection checkboxes, status badges, row action menu),
     Pagination (page buttons + "Showing x to y of z" + rows per page), Breadcrumbs, Modal preview trigger, Empty state (icon, message, action).
   - Visual language: white cards on light grey app background, 1px soft borders, large radius, soft tinted state colours, generous icon use (Lucide-style, one SSOT).
+- 2026-10-26 (owner): Second sample design: `docs/design/mockup-listing-documents.webp` (Documents listing with detail side panel). Reference for the Listing and Master-Detail templates (Phase 4), same shell as the first mockup.
+  Extracted spec:
+  - Page header: title + one-line description left, ONE dominant primary action right (split button "Upload Documents" with dropdown arrow).
+  - Filter bar in a white card: search input, four filter dropdowns with leading icons (status with colour dot, date, document type, saved views), all same height.
+  - Table card: result count "1-10 of 248", column visibility menu ("Columns") top right; header row with select-all checkbox and sortable column (arrow on Upload Date);
+    columns = ID (blue link), name, type pill (tinted per type), pages, uploaded by, date, status badge with dot, confidence = percentage + progress bar (green high, blue mid, red low), row actions "...".
+    Selected row = light blue tint + checked box. Footer: "Show [10] per page" and numbered pagination with ellipsis, prev/next, active page filled blue.
+  - Right detail panel (drawer-style, ~30% width): title, close X, id + type pill, preview image area, tabs (Details / Extracted Data / Activity), key-value rows with icons (DescriptionList), status badge, confidence bar.
+  - Below the table: two cards side by side. "Bulk Actions" (empty state text + disabled buttons Process / Download / Move / Delete / more) and "Recent Uploads" (list with status badge + relative time, "View All" link).
+  - Sidebar here shows items Main (Dashboard, Documents, Transactions, Customers, Sales, Purchases), Analytics (Reports), System (Settings), plan card "Upgrade to Pro" and company switcher at the bottom.
+  - New components implied: SplitButton, FilterDropdown with icon, SavedViews, ColumnVisibilityMenu, ProgressBar (inline in table), TypePill, DescriptionList, Drawer/DetailPanel, BulkActionToolbar, RecentList, CompanySwitcher.
+  Brand text and "Upgrade to Pro" remain sample content only. Document-processing semantics (confidence, extraction) belong to the optional IDP extension, not the core DS.
