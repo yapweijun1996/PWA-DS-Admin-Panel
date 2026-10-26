@@ -1,0 +1,164 @@
+[
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "enterprise",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "enterprise",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "liquid",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "liquid",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "ops",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  },
+  {
+    "kit": "ops",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "charts": 10,
+    "invalid": false,
+    "summaries": true
+  }
+]

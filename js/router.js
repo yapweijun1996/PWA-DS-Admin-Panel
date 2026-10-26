@@ -8,6 +8,7 @@ export const routes = [
   { path: '/settings/about', module: 'settings', section: 'about' },
   { path: '/settings/pwa', module: 'settings', section: 'pwa' },
   { path: '/kits', module: 'kits' },
+  { path: '/learn', module: 'learn' },
 ];
 
 export function resolveRoute(hash = globalThis.location?.hash || '', landing = '/overview') {

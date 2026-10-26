@@ -2,6 +2,20 @@
 
 All notable changes are documented here. Format follows Keep a Changelog; versions follow semantic versioning.
 
+## [0.3.0] — Phase 2b
+### Added
+- Searchable single/multi Combobox with groups, disabled options, removable chips, creation, limits, mock loading and modal/drawer support.
+- Dependency-free line, grouped bar, stacked bar, area, donut and sparkline charts with focus/hover tooltips, interactive legends, summaries and data tables.
+- Eight light/dark categorical series tokens, checked at 3:1 against solid chart surfaces in all 48 appearance combinations.
+- Registry-generated `#/learn` Guide with Components, Design Tokens and data-driven Guidelines; responsive Masonry layout.
+- Mandatory registry metadata validation and chart domain/summary regression coverage.
+### Changed
+- Overview includes an explicitly mock trend; kit dashboards include KPI sparklines, trend, customer status and plan usage charts.
+- Customer forms and region filters use the shared Combobox. Build discovery automatically precaches the Guide and new components.
+### Fixed
+- Chart legends now distinguish filled chart types from line/sparkline keys; donut keys show matching swatches, slice numbers and formatted values, with six-type regression coverage.
+- Guide layout examples compose shared components with working local interactions, labelled validation, chart-choice icons and consistent token-based header/card spacing.
+
 ## [Unreleased]
 ### Added
 - Phase 2a: primitive/semantic token split, blue/slate default, eight accent palettes and a 48-combination WCAG contrast gate.

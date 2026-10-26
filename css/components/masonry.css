@@ -1,0 +1,8 @@
+.ds-masonry { width: 100%; min-width: 0; columns: 15rem; column-gap: var(--space-4); }
+.ds-masonry-item { display: flow-root; break-inside: avoid; margin: 0 0 var(--space-4); min-width: 0; overflow-wrap: anywhere; }
+.ds-masonry-card { padding: var(--space-4); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); color: var(--text); background: var(--surface); }
+.ds-masonry-card h4 { margin: var(--space-2) 0; font-size: var(--font-size); font-weight: 600; }
+.ds-masonry-card p { margin: 0; line-height: 1.6; font-size: var(--font-size-sm); color: var(--muted); }
+.ds-masonry-eyebrow { color: var(--muted); font-size: var(--font-size-xs); }
+.ds-masonry:empty { min-height: var(--space-12); border: 1px dashed var(--color-border-subtle); border-radius: var(--radius-lg); }
+@media (max-width: 767px) { .ds-masonry { columns: 1; } }

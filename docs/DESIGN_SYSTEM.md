@@ -84,4 +84,16 @@ The DS Guide page (`#/learn`) renders documentation from the component registry 
 
 `components/registry.js` is the canonical component catalog, including guide metadata and live playground renderers; no parallel hand-maintained component catalog is required. New primitives include Breadcrumbs, Card/KpiCard, Badge, FilterChip, Avatar/AvatarStack, ProgressBar, Alert, Drawer, DescriptionList and Pagination. Table and its showcase consumer share responsive table composition and row activation; the existing playground uses the shared pagination control.
 
-Settings > Appearance changes axes live. `#/kits` compares the same mock dashboard, customers and form screens; no charts are included in Phase 2a. Customer imports and saves are session-only demonstrations, not backend integration.
+Settings > Appearance changes axes live. `#/kits` compares the same mock dashboard, customers and form screens. Customer imports and saves are session-only demonstrations, not backend integration.
+
+## Phase 2b Guide and data components
+
+`#/learn` has Components, Design Tokens and Guidelines tabs. Registry entries supply category, purpose, props, variants, states, keyboard, accessibility, do/don't, example and live demo; `components/metadata.js` validates the contract during `scripts/check.mjs`. Existing playground previews are reused rather than copied. Usage sections expose props tables and copyable snippets.
+
+`createCombobox()` supports scalar and array values, grouped options, case-insensitive label/keyword search, removable chips, disabled options, clear, local creation, limits and mock delay. The input owns the active descendant; the popover retains dialog DOM ownership and uses the browser top layer. Searchable region fields preserve country-code values in the showcase.
+
+`createChart()` returns a DOM element with `update()` and `destroy()`. Types are line, bar, stacked, area, donut and sparkline; labels align with each series' `values`. Charts use solid surfaces, generated summaries, focus/hover tooltips, toggleable legends and source-data tables. Donut uses the first series as slices; negative values show explicit guidance without hiding the source table. Signed stacks use separate positive/negative baselines. Resize observers disconnect on removal.
+
+`--series-1` through `--series-8` are semantic light/dark categorical colours, independent of accent palettes. Marks meet ≥3:1 against solid surface in every kit/theme/palette. Numbered donut slices and distinct line markers/dashes supplement colour. The Guide exposes live resolved text/surface ratios; the build remains the authoritative full appearance matrix gate.
+
+Masonry is an L5 layout, registered for learning alongside components. CSS columns preserve source and keyboard order; avoid it when cross-column comparison or row ordering matters.

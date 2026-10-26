@@ -16,7 +16,8 @@ async function fixture(context) {
   const tokens = { Spacing: { space: { light: '16px', dark: '16px' } } };
   await writeFile(join(directory, 'tokens/tokens.json'), JSON.stringify(tokens));
   await writeFile(join(directory, 'css/tokens.css'), generate(tokens));
-  await writeFile(join(directory, 'components/registry.js'), `export const registry = [${names.map(name => `{ name: '${name}', label: '${name}', render() {} }`).join(',')}];`);
+  const guide = { purpose: 'Trigger an action.', props: ['label'], variants: ['standard'], states: ['default'], keyboard: ['Enter activates'], accessibility: ['Accessible name'], do: ['Label actions'], dont: ['Avoid ambiguity'], example: 'button()' };
+  await writeFile(join(directory, 'components/registry.js'), `export const registry = [${names.map(name => `{ name: '${name}', label: '${name}', category: 'Actions', guide: ${JSON.stringify(guide)}, render() {}, demo() {} }`).join(',')}];`);
   for (const name of names) {
     await writeFile(join(directory, `components/${name}.js`), 'export function render() {}\n');
     await writeFile(join(directory, `css/components/${name}.css`), '.demo { color: var(--text); }\n');
@@ -54,4 +55,13 @@ test('check rejects duplicate and absent registry entries', async context => {
   const errors = await checkProject(directory);
   assert.ok(errors.some(error => error.includes('duplicate')));
   assert.ok(errors.some(error => error.includes('missing required')));
+});
+
+test('check fails when a registered component lacks Guide metadata or a live demo', async context => {
+  const directory = await fixture(context);
+  await writeFile(join(directory, 'components/registry.js'), `export const registry = [${names.map(name => `{ name: '${name}', label: '${name}', category: 'Forms', render() {} }`).join(',')}];`);
+  const errors = await checkProject(directory);
+  for (const field of ['purpose', 'props', 'variants', 'states', 'keyboard', 'accessibility', 'live demo']) {
+    assert.ok(errors.some(error => error.includes(field)), `${field}: ${errors.join('; ')}`);
+  }
 });

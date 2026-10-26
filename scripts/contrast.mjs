@@ -96,6 +96,9 @@ export function contrastMatrix(sources) {
           for (const foreground of ['text', 'muted', 'accent-text']) add(appearance, color(foreground), background, 4.5, `${foreground} on ${backgroundName}`);
           for (const foreground of ['focus-ring', 'border']) add(appearance, color(foreground), background, 3, `${foreground} against ${backgroundName}`);
         }
+        for (let index = 1; index <= 8; index++) {
+          add(appearance, color(`series-${index}`), color('surface'), 3, `series-${index} against surface`);
+        }
         add(appearance, sources.primitives.color.white, color('accent'), 4.5, 'white label on accent button');
         add(appearance, color('accent-contrast'), color('accent'), 4.5, 'accent-contrast label on accent button');
         add(appearance, color('accent-text'), color('accent-soft'), 4.5, 'accent-text on accent-soft');

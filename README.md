@@ -19,9 +19,11 @@ npm run verify
 
 This generates tokens and PNG icons, stamps the build, runs the source ratchet and executes `node --test tests/`. `npm run check` and `npm test` can also run separately after a build. `tokens/primitives.json`, `tokens/semantics.json`, `tokens/palettes.json` and kit manifests are the token sources. `tokens/tokens.json`, `css/tokens.css` and `css/appearance.css` are generated; do not edit them manually. `version.json` is the only manually maintained application version.
 
-The UI includes Overview, token editing with separate light/dark values, 26 component playgrounds, Settings > Appearance and `#/kits`. Appearance provides independent theme, eight accent palettes, three design kits and density, persisted before first paint. Enterprise is the default; Liquid adds glass chrome with solid tables/forms and reduced-transparency fallback; Ops is a compact operations rail. The showcase contains working mock dashboard, customer listing/CSV import/detail drawer and guarded form screens. Token overrides and preferences live only in this browser's localStorage. Export tokens before clearing browser storage. Mock records are not a connected backend.
+The UI includes Overview, token editing with separate light/dark values, 29 component playgrounds, the `#/learn` Guide, Settings > Appearance and `#/kits`. Appearance provides independent theme, eight accent palettes, three design kits and density, persisted before first paint. Enterprise is the default; Liquid adds glass chrome with solid tables/forms and reduced-transparency fallback; Ops is a compact operations rail. The showcase contains working mock dashboard charts, customer listing/CSV import/detail drawer and guarded forms with searchable region Comboboxes. Token overrides and preferences live only in this browser's localStorage. Export tokens before clearing browser storage. Mock records are not a connected backend.
 
 Global search (`Cmd/Ctrl+K`) finds pages, components and tokens. Notifications represent actual pending updates, unsaved changes and the five most recent token edits. `node scripts/contrast.mjs` checks all 48 theme × palette × kit combinations, including conservative glass backdrops; the same matrix runs in the source check.
+
+The Guide renders live demos and usage metadata from `components/registry.js`; missing purpose, props, variants, states, keyboard/a11y notes or a demo fails the check. Design Tokens shows current resolved contrast ratios, semantic tokens and primitive scales. Guidelines include component choices, an interactive chart recommender and live layout examples. Every SVG chart has a source-data table, focus/hover tooltip and toggleable legend; semantic series colours have distinct line markers/dashes.
 
 ## Offline contract
 
@@ -36,4 +38,4 @@ A waiting service worker displays a new-version notification. Only **Update now*
 - `components/`, `css/components/`: registered component implementations and styles.
 - `manifest.webmanifest`, `sw.js`, `scripts/build-icons.mjs`, `scripts/stamp-build.mjs`: PWA assets and versioning.
 - `scripts/check.mjs`, `tests/`: source-contract checks and unit tests.
-- `docs/SPEC.md`, `docs/SPEC-phase2a.md`: acceptance contracts; `docs/DECISIONS.md`: interpretations; `docs/SUMMARY-phase2a.md`: actual execution evidence and limitations.
+- `docs/SPEC.md`, `docs/SPEC-phase2a.md`, `docs/SPEC-phase2b.md`: acceptance contracts; `docs/DECISIONS.md`: interpretations; `docs/SUMMARY-phase2b.md`: execution evidence and limitations; `docs/evidence/phase2b/`: real Chrome captures.

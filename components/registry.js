@@ -25,6 +25,9 @@ import { render as renderDrawer } from './drawer.js';
 import { render as renderDetailPanel } from './detail-panel.js';
 import { render as renderDescriptionList } from './description-list.js';
 import { render as renderPagination } from './pagination.js';
+import { render as renderCombobox, guide as comboboxGuide } from './combobox.js';
+import { render as renderChart, guide as chartGuide } from './chart.js';
+import { render as renderMasonry, guide as masonryGuide } from './masonry.js';
 
 const guides = {
   button: {
@@ -332,6 +335,9 @@ for (const guide of Object.values(guides)) {
 }
 
 export const registry = [
+  { name: 'combobox', label: 'Combobox', category: 'Forms', render: renderCombobox, guide: comboboxGuide },
+  { name: 'chart', label: 'Charts', category: 'Charts', render: renderChart, guide: chartGuide },
+  { name: 'masonry', label: 'Masonry layout', category: 'Data display', render: renderMasonry, guide: masonryGuide },
   { name: 'button', get label() { return text('Button', '按钮'); }, render: renderButton, guide: guides.button },
   { name: 'input', get label() { return text('Input', '输入框'); }, render: renderInput, guide: guides.input },
   { name: 'select', get label() { return text('Select', '选择器'); }, render: renderSelect, guide: guides.select },
@@ -361,6 +367,14 @@ export const registry = [
 ];
 
 for (const entry of registry) {
+  if (typeof entry.render !== 'function') throw new Error(`${entry.name}: missing live demo renderer`);
+  entry.category ||= ['button'].includes(entry.name) ? 'Actions' : ['input', 'select', 'checkbox', 'switch'].includes(entry.name) ? 'Forms' : ['tabs', 'breadcrumbs', 'pagination'].includes(entry.name) ? 'Navigation' : ['modal', 'drawer', 'detail-panel', 'toast', 'tooltip', 'popover', 'alert'].includes(entry.name) ? 'Feedback' : 'Data display';
+  entry.demo = container => {
+    const staging = document.createElement('div');
+    render(staging);
+    const preview = staging.querySelector('.component-preview');
+    container.append(...(preview ? [...preview.childNodes] : [...staging.childNodes]));
+  };
   const render = entry.render;
   entry.render = container => {
     render(container);

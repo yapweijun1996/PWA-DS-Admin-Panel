@@ -5,6 +5,8 @@ import { createRouter } from './router.js';
 import { t, setLanguage, getLanguage } from './i18n.js';
 import { icon } from './icons.js';
 import { renderShowcase } from './kits-showcase.js';
+import { renderLearn } from './learn.js';
+import { createChart } from '../components/chart.js';
 
 const storage = {
   read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
@@ -229,7 +231,7 @@ function renderShell() {
   const search = document.querySelector('#global-search');
   search.oninput = () => {
     const query = search.value.trim().toLowerCase();
-    const entries = [...['overview', 'tokens', 'components', 'kits'].map(name => ({ label: label(name), href: `#/${name}` })), ...settingsSections.map(name => ({ label: `Settings / ${label(name)}`, href: `#/settings/${name}` })), ...registry.map(entry => ({ label: entry.label, href: `#/components/${entry.name}` })), ...tokenEntries().map(entry => ({ label: `Token / ${entry.name}`, href: '#/tokens', token: entry.name }))].filter(entry => entry.label.toLowerCase().includes(query)).slice(0, 12);
+    const entries = [{ label: 'Guide', href: '#/learn' }, ...['overview', 'tokens', 'components', 'kits'].map(name => ({ label: label(name), href: `#/${name}` })), ...settingsSections.map(name => ({ label: `Settings / ${label(name)}`, href: `#/settings/${name}` })), ...registry.map(entry => ({ label: entry.label, href: `#/components/${entry.name}` })), ...tokenEntries().map(entry => ({ label: `Token / ${entry.name}`, href: '#/tokens', token: entry.name }))].filter(entry => entry.label.toLowerCase().includes(query)).slice(0, 12);
     const results = document.querySelector('#global-results');
     results.hidden = !query;
     results.innerHTML = entries.length ? entries.map(entry => `<a href="${entry.href}" ${entry.token ? `data-search-token="${escape(entry.token)}"` : ''}>${escape(entry.label)}</a>`).join('') : '<p>No results</p>';
@@ -242,6 +244,7 @@ function renderShell() {
   document.querySelector('#mobile-more').addEventListener('click', () => {
     const link = document.createElement('a'); link.className = 'context-link'; link.href = '#/kits'; link.textContent = 'Design kits'; link.onclick = () => activeDialog?.close();
     document.querySelector('.sheet-links')?.prepend(link);
+    const guideLink = document.createElement('a'); guideLink.className = 'context-link'; guideLink.href = '#/learn'; guideLink.textContent = 'Guide'; guideLink.onclick = () => activeDialog?.close(); document.querySelector('.sheet-links')?.prepend(guideLink);
   });
 }
 function menu(anchor, items) {
@@ -281,6 +284,7 @@ function renderContext() {
   if (current === 'settings') links = settingsSections.map(section => `<a class="context-link ${route.section === section ? 'active' : ''}" href="#/settings/${section}">${icon(section === 'pwa' ? 'download' : section === 'about' ? 'info' : section === 'appearance' ? 'sun' : 'settings')}${t(section)}</a>`).join('');
   const section = (title, names) => `<div class="context-label">${title}</div>${names.map(name => `<a class="context-link ${current === name ? 'active' : ''}" href="${name === 'settings' ? '#/settings/general' : `#/${name}`}" aria-label="${escape(name === 'kits' ? 'Design kits' : t(name))}">${icon(name === 'kits' ? 'components' : name)}<span class="nav-label">${name === 'kits' ? 'Design kits' : t(name)}</span>${name === 'components' ? `<span class="nav-count">${registry.length}</span>` : ''}</a>${current === name ? `<div class="nested-nav">${links}</div>` : ''}`).join('')}`;
   document.querySelector('.context-panel').innerHTML = `<button class="icon-button" id="sidebar-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button><div class="context-content">${section('Main', ['overview', 'tokens', 'components', 'kits'])}${section('System', ['settings'])}</div><button class="context-bottom" id="sidebar-account"><span class="avatar">DS</span><span class="nav-label"><strong>${t('localWorkspace')}</strong><small>${t('localData')}</small></span></button>`;
+  const guideLink = document.createElement('a'); guideLink.className = `context-link${current === 'learn' ? ' active' : ''}`; guideLink.href = '#/learn'; guideLink.setAttribute('aria-label', 'Guide'); guideLink.innerHTML = `${icon('components')}<span class="nav-label">Guide</span>`; document.querySelector('.context-content .context-label')?.after(guideLink);
   document.querySelector('#sidebar-toggle').onclick = () => { savePreference('panel', panelOpen() ? 'collapsed' : 'expanded'); render(); };
   document.querySelector('#sidebar-account').onclick = () => document.querySelector('#account-menu').click();
   document.querySelectorAll('[data-group]').forEach(button => button.onclick = () => { activeGroup = button.dataset.group; render(); });
@@ -290,6 +294,7 @@ function renderContext() {
 }
 function routeTitle() {
   if (route.module === 'kits') return 'Design kits';
+  if (route.module === 'learn') return 'Guide';
   if (route.module === 'components' && route.params.name) {
     const entry = registry.find(item => item.name === route.params.name);
     return entry ? componentLabel(entry) : t('notFound');
@@ -306,6 +311,7 @@ function renderOverview(main) {
   const state = getPWAState();
   main.innerHTML = `${pageHeader(t('overview'), t('overviewDescription'))}<section class="welcome-card"><div class="welcome-copy"><span class="eyebrow">${t('designFoundation')}</span><h2>${t('welcome')}</h2><p>${t('quickStartDescription')}</p><a class="button button-primary" href="#/tokens">${t('exploreTokens')}${icon('arrowRight')}</a></div><div class="foundation-art" aria-hidden="true"><div class="art-grid"><span></span><span></span><span></span><span></span></div><div class="art-label">Aa <span>↗</span></div><div class="art-line"></div></div></section><section class="metric-grid" aria-label="${escape(t('workspaceOverview'))}">${[{ name: 'tokenCount', value: tokenEntries().length, description: 'tokenMetric', icon: 'tokens' }, { name: 'componentCount', value: registry.length, description: 'componentMetric', icon: 'components' }, { name: 'editCount', value: changeLog.length, description: 'editMetric', icon: 'clock' }, { name: 'version', value: VERSION, description: 'versionMetric', icon: 'code' }].map(metric => `<article class="card metric"><div class="metric-top"><span>${t(metric.name)}</span><span class="metric-icon">${icon(metric.icon)}</span></div><strong>${escape(metric.value)}</strong><small>${t(metric.description)}</small></article>`).join('')}</section><div class="overview-grid"><section class="card recent-card"><div class="card-heading"><h2>${t('recentEdits')}</h2><a href="#/tokens">${t('viewAll')}${icon('arrowRight')}</a></div>${changeLog.length ? `<div class="recent-list">${changeLog.slice(0, 5).map(item => `<div class="recent-item"><span class="recent-icon">${icon('edit')}</span><div><strong>${escape(item.token)}</strong><small>${escape(item.new)} <span aria-hidden="true">·</span> ${t(item.mode)}</small></div><time datetime="${escape(item.time)}">${dateLabel(item.time)}</time></div>`).join('')}</div>` : `<div class="empty-state"><span class="empty-icon">${icon('clock')}</span><h3>${t('noEdits')}</h3><p>${t('noEditsDescription')}</p><a href="#/tokens" class="text-link">${t('exploreTokens')}${icon('arrowRight')}</a></div>`}</section><section class="card status-card"><div class="card-heading"><h2>${t('runtimeStatus')}</h2>${icon('wifi')}</div><div class="status-item"><span>${t('online')}</span><span class="badge"><i class="status-dot ${navigator.onLine ? '' : 'is-offline'}"></i>${t(navigator.onLine ? 'online' : 'offline')}</span></div><div class="status-item"><span>PWA</span><strong>${t(state.installed ? 'installed' : 'browserMode')}</strong></div><div class="status-item"><span>${t('version')}</span><strong>${escape(VERSION)}</strong></div><p class="status-note">${t(state.updateAvailable ? 'updateReady' : navigator.serviceWorker?.controller ? 'serviceReady' : 'servicePending')}</p><a class="button button-block" href="#/settings/pwa">${t('manageUpdates')}${icon('arrowRight')}</a></section></div><section class="quick-links"><a href="#/tokens"><span class="quick-icon">${icon('tokens')}</span><div><h3>${t('foundations')}</h3><p>${t('tokensDescription')}</p></div>${icon('arrowRight')}</a><a href="#/components"><span class="quick-icon">${icon('components')}</span><div><h3>${t('library')}</h3><p>${t('componentsDescription')}</p></div>${icon('arrowRight')}</a></section>`;
   main.insertAdjacentHTML('beforeend', '<section class="card info-card"><div><h2>Appearance</h2><p>Compare three design kits with the same reference screens.</p><a class="button" href="#/kits">Explore design kits</a></div></section>');
+  const chartCard = document.createElement('section'); chartCard.className = 'card learn-card'; chartCard.append(createChart({ type: 'line', title: 'Mock customer growth — demonstration data', labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], series: [{ name: 'Mock customers', values: [18, 24, 23, 36, 42] }, { name: 'Mock trials', values: [8, 12, 10, 18, 20] }] })); main.append(chartCard);
 }
 function tokenPreview(group, name, value) {
   if (group === 'Color') return `<span class="token-swatch" style="background:${escape(value)}"></span>`;
@@ -443,6 +449,7 @@ function render() {
   else if (route.module === 'components') renderComponents(main);
   else if (route.module === 'settings') renderSettings(main);
   else if (route.module === 'kits') renderShowcase(main, { prefs, savePreference, resolveDirty: window.resolveDirty, notify });
+  else if (route.module === 'learn') renderLearn(main, tokens);
   else renderNotFound(main);
   document.title = `${routeTitle()} — Forma`;
 }

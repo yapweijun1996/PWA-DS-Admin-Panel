@@ -11,8 +11,16 @@ import { openDrawer } from '../components/drawer.js';
 import { createDescriptionList } from '../components/description-list.js';
 import { createPagination } from '../components/pagination.js';
 import { createTable } from '../components/table.js';
+import { createChart } from '../components/chart.js';
+import { createCombobox } from '../components/combobox.js';
 
 const team = ['Olivia Rhye', 'Phoenix Baker', 'Lana Steiner', 'Demi Wilkinson', 'Drew Cano', 'Andi Lane'].map(name => ({ name }));
+const regionOptions = [
+  { value: 'US', label: 'United States (US)', keywords: ['USA', 'America'], group: 'Americas' },
+  { value: 'AU', label: 'Australia (AU)', keywords: ['Oceania'], group: 'Asia Pacific' },
+  { value: 'SG', label: 'Singapore (SG)', keywords: ['Asia'], group: 'Asia Pacific' },
+  { value: 'GB', label: 'United Kingdom (GB)', keywords: ['UK', 'Britain', 'England'], group: 'Europe' },
+];
 const seeds = [
   ['Catalog', 'catalog.example', 'Content curating app', 'Bring your news into one place', 'US', 78],
   ['Circoole', 'circoole.example', 'Design software', 'A lightweight design workspace', 'AU', 64],
@@ -135,7 +143,7 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
   function kpis() {
     const total = customers.length; const members = customers.reduce((sum, row) => sum + row.members, 0); const active = customers.filter(row => row.status === 'Customer').length;
     return element('div', { className: 'showcase-kpis' },
-      createKpiCard({ label: 'Total customers', value: String(total), trend: `${state.imported} imported this session`, trendTone: 'neutral', menuItems: [{ label: 'How this is calculated', action: () => showMetric('Total customers', total, 'Count of every customer in the mock workspace.') }] }),
+      createKpiCard({ label: 'Total customers', value: String(total), trend: `${state.imported} imported this session`, trendTone: 'neutral', content: createChart({ type: 'sparkline', title: 'Mock customer trend', labels: ['Jan', 'Feb', 'Mar', 'Apr'], series: [{ name: 'Mock customers', values: [5, 8, 9, total] }] }), menuItems: [{ label: 'How this is calculated', action: () => showMetric('Total customers', total, 'Count of every customer in the mock workspace.') }] }),
       createKpiCard({ label: 'Team members', value: String(members), trend: 'Across all mock accounts', trendTone: 'info', menuItems: [{ label: 'How this is calculated', action: () => showMetric('Team members', members, 'Sum of the member counts on all mock accounts.') }] }),
       createKpiCard({ label: 'Active accounts', value: String(active), trend: `${Math.round(active / Math.max(1, total) * 100)}% of customers`, trendTone: 'success', content: createAvatarStack({ users: team, max: 4 }), menuItems: [{ label: 'How this is calculated', action: () => showMetric('Active accounts', active, 'Customers whose status is Customer, excluding Churned accounts.') }] }));
   }
@@ -144,6 +152,10 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
     const accountList = element('div', { className: 'showcase-account-list' }, ...customers.slice(0, 4).map(row => button('', () => openCustomer(row), 'ghost', { className: 'showcase-account-button' })));
     [...accountList.children].forEach((control, index) => { const row = customers[index]; control.append(createAvatar({ name: row.company }), element('span', {}, element('strong', {}, row.company), element('small', {}, row.domain)), createBadge({ label: row.status, tone: row.status === 'Customer' ? 'success' : 'neutral', pill: true })); });
     return element('div', { className: 'showcase-stack' }, pageHeading('Workspace overview', 'A clear picture of your mock customer operations.', [button('View customers', () => switchScreen('customers'), 'primary')]), kpis(),
+      element('div', { className: 'showcase-dashboard-grid' },
+        createCard({ title: 'Customer trend', description: 'Mock monthly counts; not historical account data.', content: createChart({ type: 'line', title: 'Mock monthly customers', labels: ['Jan', 'Feb', 'Mar', 'Apr'], series: [{ name: 'Customers', values: [5, 8, 9, 12] }, { name: 'Trials', values: [2, 4, 3, 6] }] }) }),
+        createCard({ title: 'Customer status', description: 'Current mock workspace.', content: createChart({ type: 'donut', title: 'Mock customer status', labels: ['Customer', 'Churned'], series: [{ name: 'Customers', values: ['Customer', 'Churned'].map(status => customers.filter(row => row.status === status).length) }] }) }),
+        createCard({ title: 'Plan usage', description: 'Current mock workspace.', content: createChart({ type: 'bar', title: 'Mock plan usage', labels: ['Business', 'Enterprise'], series: [{ name: 'Accounts', values: ['Business', 'Enterprise'].map(plan => customers.filter(row => row.plan === plan).length) }] }) })),
       element('div', { className: 'showcase-dashboard-grid' }, createCard({ title: 'Recent activity', description: 'Actions performed in this mock workspace.', content: recent }),
         createCard({ title: 'Customer accounts', description: 'Open an account to inspect its details.', content: accountList })),
       createCard({ title: state.imported ? 'Your import is ready' : 'Bring your customers together', content: element('div', { className: 'showcase-empty' }, element('span', { className: 'showcase-empty-symbol', 'aria-hidden': 'true' }, '↥'), element('h3', {}, state.imported ? `${state.imported} mock customers imported` : 'No imported customers yet'), element('p', {}, 'Import a CSV to explore a real local workflow. Your file stays in this browser session; nothing is uploaded.'), button('Import customers', openImport, 'secondary')) }));
@@ -165,7 +177,7 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
     const results = element('div'); const chips = element('div', { className: 'showcase-filter-chips' });
     const selectedSummary = element('span', { role: 'status', 'aria-live': 'polite' });
     const search = element('input', { className: 'ds-input', type: 'search', placeholder: 'Search customers…', 'aria-label': 'Search mock customers', value: state.query, oninput: event => { state.query = event.target.value; state.page = 1; update(); } });
-    const region = customSelect({ label: 'Filter customer region', value: state.region, options: [{ value: 'all', label: 'All regions' }, ...['US', 'AU', 'GB', 'SG'].map(value => ({ value, label: value }))], onChange: value => { state.region = value; state.page = 1; update(); } });
+    const region = createCombobox({ label: 'Filter customer region', hideLabel: true, clearable: false, value: state.region, options: [{ value: 'all', label: 'All regions' }, ...regionOptions], onChange: value => { state.region = value; state.page = 1; update(); } });
     const statusTabs = element('div', { className: 'ds-tab-list', role: 'tablist', 'aria-label': 'Customer status' });
     const resultId = uniqueId('customer-results'); results.id = resultId; results.setAttribute('role', 'tabpanel');
     const statusButtons = [];
@@ -254,7 +266,7 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
       fields.set(name, { control, error });
       return element('div', { className: 'showcase-field' }, element('label', { for: control.id }, label, required ? ' *' : ''), control, hint ? element('small', { id: `${id}-${name}-hint` }, hint) : null, error);
     }
-    const region = customSelect({ label: 'Customer region', value: state.draft.region, options: ['US', 'AU', 'GB', 'SG'].map(value => ({ value, label: value })), onChange: value => { state.draft.region = value; markDirty(); updateFormStatus(); } });
+    const region = createCombobox({ label: 'Region', clearable: false, required: true, value: state.draft.region, options: regionOptions, onChange: value => { state.draft.region = value; markDirty(); updateFormStatus(); } });
     const plan = customSelect({ label: 'Customer plan', value: state.draft.plan, options: ['Starter', 'Business', 'Enterprise'].map(value => ({ value, label: value })), onChange: value => { state.draft.plan = value; markDirty(); updateFormStatus(); } });
     const formStatus = element('p', { className: 'showcase-form-status', role: 'status', 'aria-live': 'polite' });
     const validationSummary = element('div', { className: 'showcase-validation-summary', role: 'alert', hidden: true, tabindex: '-1' });
@@ -264,7 +276,7 @@ export function renderShowcase(main, { prefs = {}, savePreference = () => {}, re
     form.append(validationSummary,
       section('Company information', 'The account details visible in your customer directory.', [inputField('company', 'Company name'), inputField('domain', 'Company domain', { hint: 'Use a domain without https://, for example studio.example.' })]),
       section('Primary contact', 'Who should the team contact about this account?', [inputField('contact', 'Full name'), inputField('email', 'Email address', { type: 'email' })]),
-      section('Account preferences', 'Choose the account region, plan and communication preference.', [element('div', { className: 'showcase-field' }, element('label', { for: region.id }, 'Region'), region.element), element('div', { className: 'showcase-field' }, element('label', { for: plan.id }, 'Plan'), plan.element), element('label', { className: 'ds-checkbox-label showcase-wide-field' }, element('input', { type: 'checkbox', className: 'ds-checkbox', checked: state.draft.updates, onchange: event => { state.draft.updates = event.target.checked; markDirty(); updateFormStatus(); } }), 'Receive account updates (mock preference only)')]),
+      section('Account preferences', 'Choose the account region, plan and communication preference.', [element('div', { className: 'showcase-field' }, region.element), element('div', { className: 'showcase-field' }, element('label', { for: plan.id }, 'Plan'), plan.element), element('label', { className: 'ds-checkbox-label showcase-wide-field' }, element('input', { type: 'checkbox', className: 'ds-checkbox', checked: state.draft.updates, onchange: event => { state.draft.updates = event.target.checked; markDirty(); updateFormStatus(); } }), 'Receive account updates (mock preference only)')]),
       section('Additional notes', 'Context for your team. Do not enter real personal or sensitive information.', [inputField('notes', 'Internal notes', { required: false, multiline: true })]),
       element('footer', { className: 'showcase-form-footer' }, formStatus, element('div', { className: 'showcase-actions' }, button('Cancel', async () => { if (!isDirty() || await (resolveAppDirty ? resolveAppDirty() : resolveFormDirty())) { state.screen = 'customers'; drawScreen(); } }), save)));
     form.showErrors = errors => {
