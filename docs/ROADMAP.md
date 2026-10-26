@@ -43,3 +43,11 @@ working, documented, tested, versioned — not mockups.
 - 2026-10-26 (owner): MUST have Chart and Combobox. Manager decision: both are the FIRST items of Phase 2 (Phase 1 scope is frozen while OMP builds it).
   - Combobox: searchable single + multi select, ARIA 1.2 combobox/listbox pattern, full keyboard (arrows, Enter, Escape, type-ahead), async/option groups, empty and loading states, no native select.
   - Charts: own dependency-free SVG components (line, bar, stacked bar, area, donut, sparkline), colours only from tokens (categorical palette tokens, light/dark validated for contrast), tooltip + legend, responsive, reduced-motion aware, and an accessible data-table fallback for every chart. No chart library (keeps no-dependency rule and licence risk at zero).
+- 2026-10-26 (owner): MUST have an SSOT Design System preview and learning page, to learn the DS knowledge (combobox, chart types, and so on).
+  Manager decision: route `#/learn` ("DS Guide"), Phase 2 deliverable, built so it cannot drift from the code:
+  - Content is rendered FROM `components/registry.js` metadata (purpose, props, variants, states, keyboard, a11y, do/don't, example). No hand-copied duplicate docs.
+  - Live demos use the real components (the same code the apps ship), with playground controls and a copyable snippet.
+  - Choosing guides (decision help): Select vs Combobox vs MultiSelect vs Radio; chart type chooser (line = trend over time, bar = compare categories, stacked bar = parts across categories, area = volume over time, donut = share of a whole with few slices, sparkline = tiny trend in a table/KPI); modal vs drawer vs popover; table vs card list.
+  - Foundations pages: colour (palette, semantic, contrast pairs), typography scale, spacing, radius, shadow, icons, density, themes.
+  - Pattern pages: listing, form, detail, dashboard, workspace, with annotated screenshots-free live examples.
+  - `check.mjs` ratchet fails if a registered component has no guide metadata.
