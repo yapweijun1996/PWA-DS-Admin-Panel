@@ -38,3 +38,5 @@ working, documented, tested, versioned — not mockups.
 ## Owner decisions log
 - 2026-10-26: Owner approved NO React and NO Vite. Stack stays vanilla HTML/CSS/ES Modules. Manager has authority on remaining open choices.
 - 2026-10-26 (manager): sidebar = icon rail + context panel (option A); top bar 64px; owner primary blue + slate neutrals.
+- 2026-10-26 (owner): "Premium" = visual quality, driven by image mockups the owner will provide later. Phase 6 design direction waits for those mockups; until then use the owner spec tokens.
+- 2026-10-26 (owner): Target products = ERP, CRM, School system (generic admin panel, not IDP-specific). Consequences: IDP extension (Phase 5) becomes optional; add ERP / CRM / School example extensions with mock data in Phase 5; add brand-skin token layer (accent + logo override without touching components) and EN/中文 i18n as first-class in Phase 2.
