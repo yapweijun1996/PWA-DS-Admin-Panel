@@ -2,6 +2,10 @@
 
 All notable changes are documented here. Format follows Keep a Changelog; versions follow semantic versioning.
 
+## [0.6.2]
+### Fixed
+- Examples overview: spacing between card text and the Explore button.
+
 ## [0.6.1] — Mobile polish
 ### Fixed
 - Phone "More" sheet: bottom-anchored full-width sheet, one data-driven list with an icon on every row, divider between Explore and Settings; removed the post-hoc link injection.

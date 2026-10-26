@@ -11,6 +11,6 @@ export function render(container) {
       ['erp', 'ERP', 'Review orders, track stock and prepare invoices.'],
       ['crm', 'CRM', 'Manage customer relationships, pipeline and activities.'],
       ['school', 'School', 'Manage students, attendance, grades and lessons.']
-    ].map(([domain, title, description]) => ({ span: 4, element: createCard({ headingLevel: 2, title, content: element('div', {}, element('p', {}, description), element('a', { className: 'ds-button ds-button-primary', href: `#/examples/${domain}` }, `Explore ${title}`)) }) }))
+    ].map(([domain, title, description]) => ({ span: 4, element: createCard({ headingLevel: 2, title, content: element('div', { className: 'example-domain-card' }, element('p', {}, description), element('a', { className: 'ds-button ds-button-primary', href: `#/examples/${domain}` }, `Explore ${title}`)) }) }))
   }));
 }
