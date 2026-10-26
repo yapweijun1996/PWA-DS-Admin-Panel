@@ -34,3 +34,7 @@ this file maps the rest of the owner spec onto later phases.
 ## Definition of done (owner)
 Independent agents can build ERP / CRM / IDP pages from the same tokens, components, patterns without inconsistency;
 working, documented, tested, versioned — not mockups.
+
+## Owner decisions log
+- 2026-10-26: Owner approved NO React and NO Vite. Stack stays vanilla HTML/CSS/ES Modules. Manager has authority on remaining open choices.
+- 2026-10-26 (manager): sidebar = icon rail + context panel (option A); top bar 64px; owner primary blue + slate neutrals.
