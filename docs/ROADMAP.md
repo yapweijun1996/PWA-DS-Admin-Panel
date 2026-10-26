@@ -99,3 +99,9 @@ working, documented, tested, versioned — not mockups.
     two-line about text, avatar stack with +N, thin usage bar, footer Previous / "Page 1 of 10" / Next. Phone view: top bar with menu icon, stacked KPI cards, full-width search + "Edit filters", horizontally scrollable tabs, compact table.
     Accent here is indigo-blue: palette presets include both this indigo and the earlier blue.
   - New components from mockup 3: AvatarStack, FilterChip (removable), KpiCard with trend pill, CountPill (nav counts), UserCard menu, Logo/Avatar cell, usage ProgressBar.
+- 2026-10-26 (owner idea, manager decision: YES, as "Design Kits"): many selectable looks for new projects without forking the design system.
+  - ONE core (components, behaviour, accessibility, layouts) + MANY kits. A kit = token pack (palette scales, typography, radius, shadow, density) + style layer (surface treatment) + optional layout preset (sidebar vs top navigation, default density).
+  - A project selects a kit with one setting (`data-kit="enterprise|liquid|..."`), never copies or edits components. Axes theme (light/dark) and palette stay independent of the kit.
+  - Admission rule for a kit: passes the theme x palette x style contrast matrix, passes `check.mjs`, and needs ZERO component code changes. A look that needs different component structure (e.g. neo-brutalism shapes) is out of scope.
+  - Limit: 3-5 kits maintained at a time (each kit multiplies QA). Initial kits: `enterprise` (default), `liquid`; candidates: `compact-ops` (dense dark), `school-friendly` (warmer, larger targets).
+  - Delivery to projects (Phase 6): `scripts/export-kit.mjs --kit <name>` produces a versioned static bundle (css + js + icons + docs link) that a project copies in or loads from the published Pages URL; semantic versioning and CHANGELOG migration notes apply.
