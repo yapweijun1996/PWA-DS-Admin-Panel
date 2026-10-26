@@ -13,7 +13,7 @@ Stack: vanilla HTML, CSS custom properties, ES Modules. No framework, no bundler
 7. **Data integrity**: destructive and financial actions are explicit and reviewable.
 
 ## Tokens
-- Source: `tokens/tokens.json`. Generated: `css/tokens.css` via `node scripts/build-tokens.mjs`. Never edit the generated file.
+- Sources: `tokens/primitives.json` (scales), `tokens/semantics.json` (light/dark roles), `tokens/palettes.json` (accent-only presets), `kits/<id>/kit.json` (surface/layout overrides). `scripts/build-tokens.mjs` generates `tokens/tokens.json` for the editor, `css/tokens.css` for base semantics and `css/appearance.css` for axes. Never edit generated artifacts.
 - Components consume **semantic** tokens (`--color-surface`, `--color-text-primary`), not palette values.
 - Dark theme overrides semantic tokens only; components never carry theme-specific colours.
 - Spacing is a 4px scale (`space-1` = 4px ... `space-12` = 48px). Radius: sm 4, md 6, lg 8, xl 12.
@@ -21,8 +21,8 @@ Stack: vanilla HTML, CSS custom properties, ES Modules. No framework, no bundler
 - Every token change must keep light/dark parity (enforced by tests).
 
 ## Layout
-- Top bar 64px, sticky, opaque. Icon rail 64px plus context panel ~260px; the toggle collapses only the panel.
-- Phones (<768px): bottom tab bar and a More sheet. Tablet 768-1024px is its own breakpoint.
+- Sticky 56px top bar with breadcrumbs, working global search, real notification menu, theme and account controls. One grouped 240px sidebar with active nested navigation and a persisted 64px collapsed rail.
+- Phones (<768px): bottom tab bar and More sheet. Tablet defaults to the collapsed sidebar. Ops uses a 56px rail and 48px top bar.
 - Default theme is Light. Density: Comfortable or Compact (token-driven).
 - Content max width 1600px; full-width option for data-heavy workspaces.
 
@@ -44,7 +44,7 @@ also checked in a real browser at 390, 768 and 1440px in light and dark.
 ## Terminology
 | Term | Meaning in this project |
 |---|---|
-| Design Token | A named value (colour, spacing, radius...) in `tokens/tokens.json`. |
+| Design Token | A named primitive or semantic value in the split `tokens/` sources; generated grouped values feed the editor. |
 | Component | One reusable control (Button, Combobox, Chart, Card, Table...). |
 | Layout / Template | A page structure (AppShell, Dashboard, Listing, Form, Detail, Master-Detail, Workspace, Masonry). |
 | Pattern | Components combined for a task (search + filter + table, create/edit, bulk actions). |
@@ -54,7 +54,7 @@ also checked in a real browser at 390, 768 and 1440px in light and dark.
 ## Hierarchy (upper layers depend only on lower layers)
 ```text
 L1 Design Tokens        tokens/*.json (single source), semantic tokens
-L2 Appearance axes      Theme (light|dark|system), Palette (blue|indigo|violet|emerald...), Style (enterprise|liquid), Design Kit
+L2 Appearance axes      Theme (light|dark|system), Palette (eight presets), Design Kit (enterprise|liquid|ops), Density
 L3 Foundations          typography, icons, density, motion, accessibility rules
 L4 Components           Actions, Forms, Data Display (incl. Chart), Navigation, Feedback
 L5 Layouts              AppShell, Dashboard/Bento, Listing, Form, Detail, Master-Detail, Workspace, Masonry
@@ -65,11 +65,13 @@ Cross-cutting           documentation (DS Guide), governance, quality gates, PWA
 ```
 
 ## Appearance axes
-`<html data-theme data-palette data-style data-kit>` are independent; any combination must work and pass the contrast matrix.
-- Style `enterprise` (default): solid surfaces. Style `liquid`: glass only on top bar, floating toolbars, popovers, modals, toasts.
-- Dense content (tables, forms, invoice/PDF/JSON/code viewers) stays solid in every style.
-- Glass falls back to solid under `prefers-reduced-transparency` or when `backdrop-filter` is unsupported.
-- A Design Kit may not require component code changes; 3 to 5 kits are maintained at a time.
+`<html data-theme data-palette data-kit data-density>` are independent. The theme preference (`light|dark|system`) is stored separately and resolved to light/dark for CSS. A CSP-hashed inline boot script applies saved values before styles load.
+- Enterprise: solid surfaces, balanced spacing, 240px sidebar, 56px top bar, blue default.
+- Liquid: palette-derived ambient backdrop and glass chrome, menus, dialogs, drawers and toasts; dense content stays solid. Glass falls back to solid under reduced transparency or missing backdrop-filter support, and large overlays suspend chrome blur.
+- Ops: compact dark-first operations preset, teal default, 56px rail, 48px top bar, tabular monospaced values. Light remains supported.
+- Kit defaults apply only to axes without an explicit user selection. Kit changes never require component JavaScript branches.
+- `scripts/contrast.mjs` checks all 48 theme × palette × kit combinations: primary/muted/accent/status text ≥4.5, white accent-button labels ≥4.5, control borders/focus rings ≥3, including worst-case glass backdrop checks. Decorative `--color-border-subtle` lines are excluded from control-boundary requirements; thresholds are never lowered.
+- Color literals are confined to token sources and generated outputs. Use `--accent` for fills, `--accent-text` for foreground text, `--accent-contrast` for button labels and status `*-text` roles for status text.
 
 ## Required components (owner)
 Chart (own SVG: line, bar, stacked, area, donut, sparkline, with data-table fallback) and Combobox (single and multi, ARIA 1.2) are mandatory.
@@ -77,3 +79,9 @@ The DS Guide page (`#/learn`) renders documentation from the component registry 
 
 ## Visual references
 `docs/design/` holds the owner sample designs (components page, documents listing, customers CRM). They define the target look; see `ROADMAP.md`.
+
+## Phase 2a surfaces and component documentation
+
+`components/registry.js` is the canonical component catalog, including guide metadata and live playground renderers; no parallel hand-maintained component catalog is required. New primitives include Breadcrumbs, Card/KpiCard, Badge, FilterChip, Avatar/AvatarStack, ProgressBar, Alert, Drawer, DescriptionList and Pagination. Table and its showcase consumer share responsive table composition and row activation; the existing playground uses the shared pagination control.
+
+Settings > Appearance changes axes live. `#/kits` compares the same mock dashboard, customers and form screens; no charts are included in Phase 2a. Customer imports and saves are session-only demonstrations, not backend integration.

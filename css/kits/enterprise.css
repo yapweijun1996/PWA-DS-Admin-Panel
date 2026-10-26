@@ -1,0 +1,11 @@
+[data-kit="enterprise"] :is(.topbar, .context-panel, .sidebar, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-list, .ds-modal, .ds-toast, .ds-drawer) {
+  background: var(--surface);
+  border-color: var(--color-border-subtle);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+[data-kit="enterprise"] :is(.card, .ds-card, .ds-kpi-card) {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}

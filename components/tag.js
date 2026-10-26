@@ -1,5 +1,15 @@
 import { element, text, playground, textControl, toggleControl, choiceControl, statePreview, statusMessage, escapeHTML, button } from './playground.js';
 
+export const tagTones = ['neutral', 'accent', 'success', 'warning', 'danger', 'info'];
+
+export function createTag({ label, tone = 'neutral', dot = false, pill = false, size = 'medium', onRemove, disabled = false }) {
+  const tag = element('span', { className: `ds-tag${pill ? ' ds-pill' : ''} ds-tag-${tagTones.includes(tone) ? tone : 'neutral'} ds-tag-${size === 'small' ? 'small' : 'medium'}` });
+  if (dot) tag.append(element('span', { className: 'ds-tag-dot', 'aria-hidden': 'true' }));
+  tag.append(element('span', {}, label));
+  if (onRemove) tag.append(element('button', { type: 'button', className: 'ds-tag-remove', disabled, 'aria-label': text(`Remove ${label}`, `移除${label}`), onclick: event => { event.stopPropagation(); onRemove(event); } }, element('span', { 'aria-hidden': 'true' }, '×')));
+  return tag;
+}
+
 export function render(container) { renderTag(container); }
 
 export function renderTag(container, pill = false) {
@@ -11,10 +21,8 @@ export function renderTag(container, pill = false) {
   const restore = button(text('Restore tag', '恢复标签'), () => { removed = false; feedback.textContent = text('Tag restored.', '标签已恢复。'); update(); });
   page.preview.append(element('div', { className: 'component-demo-stack' }, display, feedback));
   function makeTag(extra = '', disabled = props.disabled, onRemove = () => { removed = true; feedback.textContent = text('Tag removed.', '标签已移除。'); update(); }) {
-    const tag = element('span', { className: `ds-tag${pill ? ' ds-pill' : ''} ds-tag-${props.tone} ds-tag-${props.size} ${extra}` });
-    if (props.dot) tag.append(element('span', { className: 'ds-tag-dot', 'aria-hidden': 'true' }));
-    tag.append(element('span', {}, props.label));
-    if (props.removable) tag.append(element('button', { type: 'button', className: 'ds-tag-remove', disabled, 'aria-label': text(`Remove ${props.label}`, `移除${props.label}`), onclick: onRemove }, element('span', { 'aria-hidden': 'true' }, '×')));
+    const tag = createTag({ ...props, pill, onRemove: props.removable ? onRemove : undefined, disabled });
+    if (extra) tag.classList.add(extra);
     return tag;
   }
   function update() {
@@ -31,6 +39,13 @@ export function renderTag(container, pill = false) {
     );
   }
   function eventDismiss(event) { feedback.textContent = text('Example dismissed. Change a prop to restore the state examples.', '示例已移除。更改属性可恢复状态示例。'); event.currentTarget.closest('.ds-tag').remove(); }
-  page.controls.append(textControl(text('Label', '标签文字'), props.label, value => { props.label = value; update(); }), choiceControl(text('Tone', '色调'), props.tone, [{ value: 'neutral', label: text('Neutral', '中性') }, { value: 'accent', label: text('Accent', '强调') }, { value: 'danger', label: text('Danger', '危险') }], value => { props.tone = value; update(); }), choiceControl(text('Size', '大小'), props.size, [{ value: 'medium', label: text('Medium', '中') }, { value: 'small', label: text('Small', '小') }], value => { props.size = value; update(); }), toggleControl(text('Status dot', '状态点'), true, value => { props.dot = value; update(); }), toggleControl(text('Removable', '可移除'), true, value => { props.removable = value; removed = false; update(); }), toggleControl(text('Disable dismissal', '禁用移除'), false, value => { props.disabled = value; update(); }));
+  page.controls.append(
+    textControl(text('Label', '标签文字'), props.label, value => { props.label = value; update(); }),
+    choiceControl(text('Tone', '色调'), props.tone, tagTones.map(value => ({ value, label: value })), value => { props.tone = value; update(); }),
+    choiceControl(text('Size', '大小'), props.size, [{ value: 'medium', label: text('Medium', '中') }, { value: 'small', label: text('Small', '小') }], value => { props.size = value; update(); }),
+    toggleControl(text('Status dot', '状态点'), true, value => { props.dot = value; update(); }),
+    toggleControl(text('Removable', '可移除'), true, value => { props.removable = value; removed = false; update(); }),
+    toggleControl(text('Disable dismissal', '禁用移除'), false, value => { props.disabled = value; update(); })
+  );
   update();
 }

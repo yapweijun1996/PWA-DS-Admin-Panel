@@ -1,0 +1,67 @@
+{
+  "id": "ops",
+  "name": "Operations",
+  "description": "Dense, crisp operations workspace with tabular numerals.",
+  "defaults": {
+    "theme": "dark",
+    "palette": "teal",
+    "density": "compact"
+  },
+  "layout": {
+    "sidebarWidth": "240px",
+    "sidebarCollapsedWidth": "56px",
+    "topbarHeight": "48px"
+  },
+  "tokens": {
+    "Radius": {
+      "radius": {
+        "light": "{radius.sm}",
+        "dark": "{radius.sm}"
+      },
+      "control-radius": {
+        "light": "{radius.sm}",
+        "dark": "{radius.sm}"
+      },
+      "radius-lg": {
+        "light": "{radius.md}",
+        "dark": "{radius.md}"
+      },
+      "radius-xl": {
+        "light": "{radius.md}",
+        "dark": "{radius.md}"
+      }
+    },
+    "Typography": {
+      "font-numeric": {
+        "light": "{type.mono}",
+        "dark": "{type.mono}"
+      }
+    },
+    "Surface": {
+      "surface-alpha": {
+        "light": "1",
+        "dark": "1"
+      },
+      "surface-blur": {
+        "light": "0px",
+        "dark": "0px"
+      },
+      "surface-saturation": {
+        "light": "1",
+        "dark": "1"
+      }
+    },
+    "Shadow": {
+      "shadow": {
+        "light": "none",
+        "dark": "none"
+      }
+    },
+    "Motion": {
+      "motion-duration": {
+        "light": "120ms",
+        "dark": "120ms"
+      }
+    }
+  }
+}

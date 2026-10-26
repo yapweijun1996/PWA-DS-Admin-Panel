@@ -1,0 +1,86 @@
+[data-kit="liquid"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(ellipse at 8% 4%, var(--ambient-start), transparent 72%), radial-gradient(ellipse at 98% 78%, var(--ambient-end), transparent 76%);
+  background-attachment: fixed;
+}
+[data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer),
+[data-kit="liquid"] #global-results {
+  background: var(--surface-glass);
+  -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(var(--surface-saturation));
+  backdrop-filter: blur(var(--surface-blur)) saturate(var(--surface-saturation));
+  border-color: var(--color-border-subtle);
+  box-shadow: inset 0 1px 0 var(--surface-highlight), inset 1px 0 0 var(--surface-highlight), var(--shadow);
+}
+/* One shared content backdrop keeps cards within the three-large-layer budget. */
+[data-kit="liquid"] :is(.topbar, .context-panel, .main-column) {
+  -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(var(--surface-saturation));
+  backdrop-filter: blur(var(--surface-blur)) saturate(var(--surface-saturation));
+}
+[data-kit="liquid"] :is(.bottom-nav, .app-dialog.mobile-sheet) {
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  --surface-alpha: .94;
+  -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(var(--surface-saturation));
+  backdrop-filter: blur(var(--surface-blur)) saturate(var(--surface-saturation));
+}
+[data-kit="liquid"] :is(.app-menu, .app-dialog, .ds-popover-menu, .ds-modal, .ds-toast) {
+  border-radius: var(--radius-xl);
+}
+[data-kit="liquid"] :is(.button, .ds-button, .segmented-control, .filter-chip, .ds-filter-chip) {
+  border-radius: var(--control-radius);
+  transition-duration: var(--motion-duration);
+  transition-timing-function: var(--motion-easing);
+}
+[data-kit="liquid"] :is(.card, .ds-card, .ds-kpi-card, .welcome-card) {
+  background: var(--surface-card);
+  border-color: var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: inset 0 1px 0 var(--surface-highlight), inset 1px 0 0 var(--surface-highlight), var(--shadow);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+/* Dense content retains opaque surfaces and semantic control boundaries. */
+[data-kit="liquid"] :is(.table-card, .ds-table, .ds-table-container, table, form, .form-section, .detail-viewer, .ds-detail-panel, pre, .ds-description-list, .dialog-body, .ds-modal-body, .ds-drawer .ds-modal-body, .search-field, .ds-input, .ds-select-trigger, input, textarea) {
+  background: var(--surface);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+/* Floating layers spend the content and sidebar blur budget, leaving room
+   for a toast too. Large dialogs replace shell blur; nested panels replace
+   their parent blur. */
+[data-kit="liquid"] body:has(:is(.app-menu, .ds-popover-menu, .ds-select-options, #global-results):not([hidden]), .ds-toast-region > .ds-toast) :is(.main-column, .context-panel),
+[data-kit="liquid"] body:has(:is(.dialog-backdrop, .ds-modal-backdrop, .ds-drawer-backdrop):not([hidden])) :is(.topbar, .context-panel, .main-column),
+[data-kit="liquid"] :is(.ds-modal, .app-dialog):has(:is(.ds-popover-menu, .ds-select-options):not([hidden])) {
+  background: var(--surface);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+[data-kit="liquid"] .ds-toast-region > .ds-toast:not(:first-child) {
+  background: var(--surface);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@media (prefers-reduced-transparency: reduce) {
+  [data-kit="liquid"] body { background: var(--bg); }
+  [data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .main-column, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer, #global-results, .card, .ds-card, .ds-kpi-card, .welcome-card) {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: var(--shadow-sm);
+  }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  [data-kit="liquid"] body { background: var(--bg); }
+  [data-kit="liquid"] :is(.topbar, .context-panel, .bottom-nav, .main-column, .app-menu, .app-dialog, .ds-popover-menu, .ds-select-options, .ds-modal, .ds-toast, .ds-drawer, #global-results, .card, .ds-card, .ds-kpi-card, .welcome-card) {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: var(--shadow-sm);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-kit="liquid"] *, [data-kit="liquid"] *::before, [data-kit="liquid"] *::after {
+    animation-duration: .01ms;
+    transition-duration: .01ms;
+    scroll-behavior: auto;
+  }
+}

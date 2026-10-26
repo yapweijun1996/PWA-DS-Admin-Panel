@@ -1,0 +1,47 @@
+{
+  "id": "enterprise",
+  "name": "Enterprise",
+  "description": "Solid, balanced surfaces for everyday business work.",
+  "defaults": {
+    "theme": "light",
+    "palette": "blue",
+    "density": "comfortable"
+  },
+  "layout": {
+    "sidebarWidth": "240px",
+    "sidebarCollapsedWidth": "64px",
+    "topbarHeight": "56px"
+  },
+  "tokens": {
+    "Radius": {
+      "radius": {
+        "light": "{radius.lg}",
+        "dark": "{radius.lg}"
+      },
+      "control-radius": {
+        "light": "{radius.md}",
+        "dark": "{radius.md}"
+      }
+    },
+    "Surface": {
+      "surface-alpha": {
+        "light": "1",
+        "dark": "1"
+      },
+      "surface-blur": {
+        "light": "0px",
+        "dark": "0px"
+      },
+      "surface-saturation": {
+        "light": "1",
+        "dark": "1"
+      }
+    },
+    "Shadow": {
+      "shadow": {
+        "light": "0 4px 16px color-mix(in srgb, var(--text) 8%, transparent)",
+        "dark": "0 4px 16px color-mix(in srgb, var(--text) 8%, transparent)"
+      }
+    }
+  }
+}

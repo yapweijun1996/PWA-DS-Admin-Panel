@@ -1,0 +1,20 @@
+[
+  {
+    "id": "enterprise",
+    "name": "Enterprise",
+    "description": "Solid, balanced surfaces for everyday business work.",
+    "path": "kits/enterprise/kit.json"
+  },
+  {
+    "id": "liquid",
+    "name": "Liquid",
+    "description": "Expressive glass chrome around solid, readable content.",
+    "path": "kits/liquid/kit.json"
+  },
+  {
+    "id": "ops",
+    "name": "Operations",
+    "description": "Dense, crisp operations workspace with tabular numerals.",
+    "path": "kits/ops/kit.json"
+  }
+]

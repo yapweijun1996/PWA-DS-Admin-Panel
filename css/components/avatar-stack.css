@@ -1,0 +1,7 @@
+@import url('./avatar.css');
+.ds-avatar-stack { display: inline-flex; align-items: center; margin: 0; padding: 0; list-style: none; isolation: isolate; }
+.ds-avatar-stack li { display: inline-flex; }
+.ds-avatar-stack li + li { margin-inline-start: calc(-1 * var(--space-2)); }
+.ds-avatar-stack .ds-avatar { border: 2px solid var(--surface); }
+.ds-avatar-overflow { background: var(--bg); color: var(--muted); }
+.ds-avatar-stack-empty { color: var(--muted); font-size: .85rem; }

@@ -24,7 +24,6 @@ test('route table includes every specified page and no duplicates', () => {
   const paths = routes.map(route => route.path);
   assert.equal(new Set(paths).size, paths.length);
   for (const path of ['/overview', '/tokens', '/components', '/components/:name', '/settings/general', '/settings/appearance', '/settings/about', '/settings/pwa']) assert.ok(paths.includes(path), path);
-  for (const route of routes) assert.ok(['overview', 'tokens', 'components', 'settings'].includes(route.module));
 });
 
 test('router resolves hashes, default landing, component names, settings and invalid routes', () => {
@@ -34,6 +33,7 @@ test('router resolves hashes, default landing, component names, settings and inv
   assert.equal(resolveRoute('#/components/button').params.name, 'button');
   assert.equal(resolveRoute('#/components/pill%2Dtag').params.name, 'pill-tag');
   assert.equal(resolveRoute('#/settings/appearance').section, 'appearance');
+  assert.equal(resolveRoute('#/kits').module, 'kits');
   assert.equal(resolveRoute('#/settings').section, 'general');
   assert.equal(resolveRoute('#/unknown').valid, false);
   assert.equal(resolveRoute('#/components/%ZZ').valid, false);

@@ -1,0 +1,10 @@
+.ds-pagination { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); width: 100%; padding: var(--space-4); color: var(--muted); font-size: .8rem; }
+.ds-pagination-summary { font-variant-numeric: tabular-nums; }
+.ds-pagination-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.ds-pagination-controls > .ds-select { width: auto; min-width: calc(var(--space-12) * 2); }
+.ds-pagination-pages { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-1); }
+.ds-pagination-page { padding-inline: var(--space-2); min-width: var(--space-8); font-variant-numeric: tabular-nums; }
+.ds-pagination-page-label { display: none; font-variant-numeric: tabular-nums; }
+.ds-pagination-ellipsis { padding-inline: var(--space-1); }
+.component-preview > .ds-pagination-demo { width: 100%; }
+@media (max-width: 767px) { .ds-pagination { padding: var(--space-3); } .ds-pagination-controls { width: 100%; justify-content: space-between; } .ds-pagination-controls > .ds-select { flex-basis: 100%; } .ds-pagination-pages { display: none; } .ds-pagination-page-label { display: inline; } }

@@ -67,6 +67,18 @@ export function playground(container, { title, description }) {
   return { preview, controls, states, section, setSnippet(value) { code.textContent = value; copyStatus.textContent = ''; } };
 }
 
+export function renderGuide(guide) {
+  const section = element('section', { className: 'component-panel component-guide' }, element('h3', {}, text('Usage guide', '使用指南')), element('p', {}, guide.purpose));
+  const labels = { props: text('Props / API', '属性 / API'), variants: text('Variants', '样式'), tokens: text('Tokens', '设计令牌'), states: text('States', '状态'), keyboard: text('Keyboard', '键盘操作'), accessibility: text('Accessibility', '无障碍'), responsive: text('Responsive rules', '响应式规则'), do: text('Do', '推荐'), dont: text('Avoid', '避免') };
+  const grid = element('div', { className: 'component-guide-grid' });
+  for (const [key, label] of Object.entries(labels)) {
+    const values = Array.isArray(guide[key]) ? guide[key] : [guide[key]];
+    grid.append(element('section', {}, element('h4', {}, label), element('ul', {}, ...values.filter(Boolean).map(value => element('li', {}, value)))));
+  }
+  section.append(grid, element('h4', {}, text('Example', '示例')), element('pre', { className: 'component-code', tabindex: '0' }, element('code', {}, guide.example)));
+  return section;
+}
+
 export async function copyText(value) {
   if (navigator.clipboard && window.isSecureContext) {
     try { await navigator.clipboard.writeText(value); return; } catch { /* Use the local selection fallback. */ }
