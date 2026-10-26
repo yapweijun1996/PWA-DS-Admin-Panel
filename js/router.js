@@ -1,3 +1,5 @@
+import { exampleRoutes } from './example-routes.js';
+
 export const routes = [
   { path: '/overview', module: 'overview' },
   { path: '/tokens', module: 'tokens' },
@@ -9,12 +11,20 @@ export const routes = [
   { path: '/settings/pwa', module: 'settings', section: 'pwa' },
   { path: '/kits', module: 'kits' },
   { path: '/learn', module: 'learn' },
+  ...exampleRoutes.map(route => ({ ...route, module: 'examples' })),
 ];
 
 export function resolveRoute(hash = globalThis.location?.hash || '', landing = '/overview') {
   const path = String(hash).replace(/^#/, '').replace(/\/$/, '') || landing;
   const exact = routes.find(route => route.path === path);
-  if (exact) return { ...exact, params: {}, valid: true };
+  if (exact && exact.module !== 'examples') return { ...exact, params: {}, valid: true };
+  const example = /^\/examples\/(erp|crm|school)(?:\/([^/]+))?(?:\/([^/]+))?$/.exec(path);
+  if (example) {
+    const [, domain, screen, id] = example;
+    const allowed = { erp: ['orders', 'order', 'inventory', 'invoice'], crm: ['customers', 'customer', 'pipeline', 'calendar'], school: ['students', 'student', 'attendance', 'gradebook', 'timetable'] };
+    if (!screen || allowed[domain].includes(screen)) return { path, module: 'examples', params: { domain, screen, id }, valid: true };
+  }
+  if (path === '/examples') return { path, module: 'examples', params: {}, valid: true };
   if (/^\/components\/[^/]+$/.test(path)) {
     let name;
     try { name = decodeURIComponent(path.split('/')[2]); } catch { return { path, module: 'notFound', params: {}, valid: false }; }

@@ -27,6 +27,17 @@ export function validateRegistryLabels(registry) {
   return errors;
 }
 
+export function exampleImportViolations(source, local) {
+  if (/^(?:js|css)\/examples\//.test(local) || local === 'js/example-routes.js') return [];
+  const errors = [];
+  const imports = /(?:\b(?:import|export)\s+(?:[^'";]*?\s+from\s*)?|\bimport\s*\(\s*|@import\s+(?:url\(\s*)?)['"]([^'"]+)['"]/g;
+  for (const match of source.matchAll(imports)) {
+    const target = relative('/', resolve('/', local, '..', match[1])).split('\\').join('/');
+    if (/^(?:js|css)\/examples\//.test(target)) errors.push(`${local}: lower layers must not import product examples (${match[1]}).`);
+  }
+  return errors;
+}
+
 async function exists(path) {
   try { return (await stat(path)).isFile(); } catch { return false; }
 }
@@ -47,6 +58,7 @@ export async function checkProject(root = fileURLToPath(new URL('../', import.me
   for (const path of files) {
     const local = relative(root, path).split('\\').join('/');
     const source = await readFile(path, 'utf8');
+    errors.push(...exampleImportViolations(source, local));
     if (/\.(?:css|js|mjs|cjs)$/i.test(path) && !['css/tokens.css', 'css/appearance.css'].includes(local) && rawColor.test(source)) errors.push(`${local}: raw colour literal; use a design token.`);
     if (local.startsWith('kits/') && /\.json$/i.test(path) && rawColor.test(source)) errors.push(`${local}: raw colour literal; reference a token primitive.`);
     if (/^(?:kits|css\/kits)\//.test(local) && /\.(?:js|mjs|cjs)$/i.test(path)) errors.push(`${local}: design kits may not contain JavaScript.`);

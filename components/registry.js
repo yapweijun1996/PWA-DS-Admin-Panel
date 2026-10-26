@@ -67,6 +67,9 @@ import * as dashboardLayout from './dashboard-layout.js';
 import * as listingLayout from './listing-layout.js';
 import * as formLayout from './form-layout.js';
 import * as detailLayout from './detail-layout.js';
+import * as kanban from './kanban.js';
+import * as calendar from './calendar.js';
+import * as dataGrid from './data-grid.js';
 
 const guides = {
   button: {
@@ -374,6 +377,9 @@ for (const guide of Object.values(guides)) {
 }
 
 export const registry = [
+  { name: 'kanban', label: 'Kanban board', category: 'Data display', render: kanban.render, guide: kanban.guide },
+  { name: 'calendar', label: 'Calendar', category: 'Data display', render: calendar.render, guide: calendar.guide },
+  { name: 'data-grid', label: 'Data grid', category: 'Data display', render: dataGrid.render, guide: dataGrid.guide },
   { name: 'dashboard-layout', label: 'Dashboard layout', category: 'Layouts', render: dashboardLayout.render, guide: dashboardLayout.guide },
   { name: 'listing-layout', label: 'Listing layout', category: 'Layouts', render: listingLayout.render, guide: listingLayout.guide },
   { name: 'form-layout', label: 'Form layout', category: 'Layouts', render: formLayout.render, guide: formLayout.guide },
