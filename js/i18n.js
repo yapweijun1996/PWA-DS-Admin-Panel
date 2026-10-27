@@ -1,3 +1,5 @@
+import { zhMessages, zhKeepEnglish } from './i18n/zh/index.js';
+import { createMatcher, spaceLatin } from './i18n/match.js';
 export const translations = {
   en: {
     appName: 'Forma', workspace: 'Design system', overview: 'Overview', tokens: 'Tokens', components: 'Components', settings: 'Settings', more: 'More',
@@ -21,5 +23,26 @@ export const translations = {
 export const locales = ['en', 'zh'];
 let language = 'en';
 export function getLanguage() { return language; }
+// BCP 47 tag for Intl formatting of user-facing dates and numbers that are not tied to an explicit locale prop.
+export function locale() { return language === 'zh' ? 'zh-CN' : 'en-GB'; }
 export function setLanguage(value) { language = locales.includes(value) ? value : 'en'; if (globalThis.document) document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'; }
-export function t(key) { return translations[language][key] ?? translations.en[key] ?? key; }
+// Long-tail UI text is keyed by its English source text (`t('Choose a date')`, `t('{count} items', { count })`).
+// English is the fallback, so only js/i18n/zh/*.js carry translations; `{name}` placeholders must match on both sides.
+function interpolate(template, vars) {
+  if (!vars) return template;
+  const filled = template.replace(/\{(\w+)\}/g, (match, name) => (name in vars ? String(vars[name]) : match));
+  return language === 'zh' ? spaceLatin(filled) : filled;
+}
+export function t(key, vars) {
+  const template = translations[language]?.[key] ?? (language === 'zh' ? zhMessages[key] : undefined) ?? translations.en[key] ?? key;
+  return interpolate(template, vars);
+}
+
+let matcher;
+// Translates already-rendered English text (exact message, then templates). Components use it for data labels (for example combobox options) so filtering matches what users see.
+export function localizeText(text) {
+  if (language !== 'zh') return text;
+  matcher ??= createMatcher(zhMessages, { keep: zhKeepEnglish });
+  return matcher.translate(text);
+}
+export { spaceLatin };

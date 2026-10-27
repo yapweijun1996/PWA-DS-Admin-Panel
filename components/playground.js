@@ -1,3 +1,4 @@
+import { t, getLanguage, localizeText, spaceLatin } from '../js/i18n.js';
 let nextId = 0;
 const detachCallbacks = new Map();
 let detachObserver;
@@ -15,8 +16,13 @@ export function onDetach(node, cleanup) {
   }
 }
 
+// Chrome text: `text('Usage guide')` translates through the shared message dictionary. A legacy (english, chinese) pair is
+// only a fallback for strings the dictionary does not know yet, so data labels inside it never override a dictionary template.
 export function text(english, chinese) {
-  return typeof document !== 'undefined' && document.documentElement.lang.toLowerCase().startsWith('zh') ? chinese : english;
+  if (getLanguage() !== 'zh') return english;
+  const local = localizeText(english);
+  if (local !== english || chinese === undefined) return local;
+  return spaceLatin(chinese);
 }
 
 export function element(tag, attributes = {}, ...children) {
@@ -68,12 +74,12 @@ export function playground(container, { title, description }) {
 }
 
 export function renderGuide(guide, { headingLevel = 3 } = {}) {
-  const section = element('section', { className: 'component-panel component-guide' }, element(`h${headingLevel}`, {}, text('Usage guide', '使用指南')), element('p', {}, guide.purpose));
+  const section = element('section', { className: 'component-panel component-guide' }, element(`h${headingLevel}`, {}, text('Usage guide', '使用指南')), element('p', {}, t(guide.purpose)));
   const labels = { props: text('Props / API', '属性 / API'), variants: text('Variants', '样式'), tokens: text('Tokens', '设计令牌'), states: text('States', '状态'), keyboard: text('Keyboard', '键盘操作'), accessibility: text('Accessibility', '无障碍'), responsive: text('Responsive rules', '响应式规则'), do: text('Do', '推荐'), dont: text('Avoid', '避免') };
   const grid = element('div', { className: 'component-guide-grid' });
   for (const [key, label] of Object.entries(labels)) {
     const values = Array.isArray(guide[key]) ? guide[key] : [guide[key]];
-    grid.append(element('section', {}, element(`h${Math.min(6, headingLevel + 1)}`, {}, label), element('ul', {}, ...values.filter(Boolean).map(value => element('li', {}, value)))));
+    grid.append(element('section', {}, element(`h${Math.min(6, headingLevel + 1)}`, {}, label), element('ul', {}, ...values.filter(Boolean).map(value => element('li', {}, t(value))))));
   }
   section.append(grid, element(`h${Math.min(6, headingLevel + 1)}`, {}, text('Example', '示例')), element('pre', { className: 'component-code', tabindex: '0' }, element('code', {}, guide.example)));
   return section;

@@ -98,7 +98,7 @@ Local storage holds appearance/preferences, token overrides/history, command rec
 
 ## Governance and contributing
 
-Start with [DESIGN_SYSTEM](docs/DESIGN_SYSTEM.md), [GOVERNANCE](docs/GOVERNANCE.md), the [component registry](docs/COMPONENT_REGISTRY.md) and [ROADMAP](docs/ROADMAP.md). Reuse existing components/layouts before adding one; preserve semantic-token styling, lower-layer dependency direction, relative URLs and kit-independent behavior. No framework, bundler or runtime dependency is required or added by this project.
+Start with [DESIGN_SYSTEM](docs/DESIGN_SYSTEM.md), [GOVERNANCE](docs/GOVERNANCE.md), the [component registry](docs/COMPONENT_REGISTRY.md), [I18N](docs/I18N.md) (English/Chinese text and the coverage scans) and [ROADMAP](docs/ROADMAP.md). Reuse existing components/layouts before adding one; preserve semantic-token styling, lower-layer dependency direction, relative URLs and kit-independent behavior. No framework, bundler or runtime dependency is required or added by this project.
 
 Follow the [accessibility requirements](docs/ACCESSIBILITY.md): keyboard operation, visible focus, persistent labels, contrast, chart tables and reduced-motion support. New components need complete registry metadata and a live demo; changing their metadata regenerates both Guide content and the static registry document. Run `npm run verify`, then inspect affected UI in a real browser across kits, both themes and phone/tablet/desktop widths. Automated checks alone are not an accessibility certification.
 

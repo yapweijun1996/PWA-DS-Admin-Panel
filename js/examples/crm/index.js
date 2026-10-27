@@ -140,7 +140,7 @@ export function render(container, { screen = 'customers', id = 'CRM-001' } = {})
   function pipelineScreen() {
     const summaries = stageSummary(data.deals); const totals = element('div', { className: 'crm-stage-totals', 'aria-live': 'polite' });
     const chart = createChart({ type: 'donut', title: 'Mock deals by stage', labels: stages, series: [{ name: 'Deals', values: summaries.map(item => item.count) }], loading: state.demo === 'loading' });
-    function updateTotals() { const summary = stageSummary(data.deals); totals.replaceChildren(...summary.map(item => createCard({ headingLevel: 2, title: item.stage, content: stack(element('strong', {}, money(item.value)), element('span', {}, `${item.count} mock deals`)) }))); chart.update({ series: [{ name: 'Deals', values: summary.map(item => item.count) }] }); }
+    function updateTotals() { const summary = stageSummary(data.deals); totals.replaceChildren(...summary.map(item => createCard({ headingLevel: 2, title: item.stage, content: stack(element('strong', {}, money(item.value)), element('span', {}, `${item.count} mock ${item.count === 1 ? 'deal' : 'deals'}`)) }))); chart.update({ series: [{ name: 'Deals', values: summary.map(item => item.count) }] }); }
     const board = listState('deals', data.deals.length, () => createKanban({ headingLevel: 2, columns: stages.map(stage => ({ id: stage, label: stage })),
     cards: data.deals.map(deal => ({ ...deal })), formatValue: money,
     onChange: cards => {

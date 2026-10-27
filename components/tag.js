@@ -1,4 +1,5 @@
 import { element, text, playground, textControl, toggleControl, choiceControl, statePreview, statusMessage, escapeHTML, button } from './playground.js';
+import { localizeText } from '../js/i18n.js';
 
 export const tagTones = ['neutral', 'accent', 'success', 'warning', 'danger', 'info'];
 
@@ -6,7 +7,7 @@ export function createTag({ label, tone = 'neutral', dot = false, pill = false, 
   const tag = element('span', { className: `ds-tag${pill ? ' ds-pill' : ''} ds-tag-${tagTones.includes(tone) ? tone : 'neutral'} ds-tag-${size === 'small' ? 'small' : 'medium'}` });
   if (dot) tag.append(element('span', { className: 'ds-tag-dot', 'aria-hidden': 'true' }));
   tag.append(element('span', {}, label));
-  if (onRemove) tag.append(element('button', { type: 'button', className: 'ds-tag-remove', disabled, 'aria-label': text(`Remove ${label}`, `移除${label}`), onclick: event => { event.stopPropagation(); onRemove(event); } }, element('span', { 'aria-hidden': 'true' }, '×')));
+  if (onRemove) tag.append(element('button', { type: 'button', className: 'ds-tag-remove', disabled, 'aria-label': text(`Remove ${localizeText(label)}`, `移除${localizeText(label)}`), onclick: event => { event.stopPropagation(); onRemove(event); } }, element('span', { 'aria-hidden': 'true' }, '×')));
   return tag;
 }
 

@@ -20,7 +20,7 @@
 .component-nav-group .context-link { min-height: var(--space-11); }
 [data-panel="collapsed"] .context-panel { display: flex; width: var(--sidebar-collapsed-width, 64px); flex-basis: var(--sidebar-collapsed-width, 64px); overflow: visible; }
 [data-panel="collapsed"] .context-content { padding-inline: var(--space-2, 8px); overflow: visible; }
-[data-panel="collapsed"] .context-panel .nested-nav, [data-panel="collapsed"] .context-panel .context-label, [data-panel="collapsed"] .context-panel .nav-count, [data-panel="collapsed"] .context-bottom .nav-label { display: none; }
+[data-panel="collapsed"] .context-panel .nested-nav, [data-panel="collapsed"] .context-panel .component-nav-group, [data-panel="collapsed"] .context-panel .context-label, [data-panel="collapsed"] .context-panel .nav-count, [data-panel="collapsed"] .context-bottom .nav-label { display: none; }
 [data-panel="collapsed"] .context-panel .context-link { position: relative; justify-content: center; padding-inline: 0; }
 /* Keep collapsed labels in the accessibility tree; reveal the tooltip on focus. */
 [data-panel="collapsed"] .context-panel .context-link .nav-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

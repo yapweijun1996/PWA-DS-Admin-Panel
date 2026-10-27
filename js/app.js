@@ -3,7 +3,8 @@ import { categories } from '../components/metadata.js';
 import { initPWA, renderPWA, getPWAState, checkForUpdates, applyUpdate } from './pwa.js';
 import { VERSION, BUILD } from './build-info.js';
 import { createRouter } from './router.js';
-import { t, setLanguage, getLanguage } from './i18n.js';
+import { t, setLanguage, getLanguage, localizeText } from './i18n.js';
+import { startLocalizer } from './localize.js';
 import { icon, componentIcons, settingsIcons } from './icons.js';
 import { renderShowcase } from './kits-showcase.js';
 import { renderLearn } from './learn.js';
@@ -31,6 +32,7 @@ if (!kitNames.includes(prefs.kit)) prefs.kit = 'enterprise';
 if (!['/overview', '/tokens', '/components'].includes(prefs.landingPage)) prefs.landingPage = '/overview';
 if (![5, 10, 20, 50].includes(prefs.pageSize)) prefs.pageSize = 10;
 setLanguage(prefs.language);
+startLocalizer();
 const mediaTheme = matchMedia('(prefers-color-scheme: dark)');
 const tablet = matchMedia('(min-width: 768px) and (max-width: 1024px)');
 let tokens = {};
@@ -302,7 +304,7 @@ function renderContext() {
   }
   if (current === 'settings') links = settingsSections.map(section => `<a class="context-link ${route.section === section ? 'active' : ''}" href="#/settings/${section}">${icon(settingsIcons[section])}${t(section)}</a>`).join('');
   const section = (title, names) => `<div class="context-label">${title}</div>${names.map(name => `<a class="context-link ${current === name ? 'active' : ''}" href="${name === 'settings' ? '#/settings/general' : `#/${name}`}">${icon(name)}<span class="nav-label">${name === 'kits' ? 'Design kits' : t(name)}</span>${name === 'components' ? `<span class="nav-count">${registry.length}</span>` : ''}</a>${current === name ? `<div class="nested-nav">${links}</div>` : ''}`).join('')}`;
-  document.querySelector('.context-panel').innerHTML = `<button class="icon-button" id="sidebar-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button><div class="context-content">${section('Main', ['overview', 'tokens', 'components', 'kits'])}${section('System', ['settings'])}</div><button class="context-bottom" id="sidebar-account"><span class="avatar">DS</span><span class="nav-label"><strong>${t('localWorkspace')}</strong><small>${t('localData')}</small></span></button>`;
+  document.querySelector('.context-panel').innerHTML = `<button class="icon-button" id="sidebar-toggle" aria-label="${escape(t(panelOpen() ? 'collapse' : 'expand'))}" aria-expanded="${panelOpen()}">${icon('panel')}</button><div class="context-content">${section('Main', ['overview', 'tokens', 'components', 'kits'])}${section('System', ['settings'])}</div><button class="context-bottom" id="sidebar-account"><span class="avatar">DS</span><span class="nav-label"><strong>${t('localWorkspace')}</strong><small translate="no">Forma v${escape(VERSION)}</small></span></button>`;
   const guideLink = document.createElement('a'); guideLink.className = `context-link${current === 'learn' ? ' active' : ''}`; guideLink.href = '#/learn'; guideLink.innerHTML = `${icon('learn')}<span class="nav-label">Guide</span>`; document.querySelector('.context-content .context-label')?.after(guideLink);
   const examplesNav = document.createElement('div');
   examplesNav.innerHTML = `<a class="context-link ${current === 'examples' ? 'active' : ''}" href="#/examples">${icon('examples')}<span class="nav-label">Examples</span></a>` + ['erp', 'crm', 'school'].map((domain, index) => {
@@ -323,9 +325,9 @@ function renderContext() {
   document.querySelector('.breadcrumbs').innerHTML = `<span>${escape(t('workspace'))}</span>${icon('chevronRight')}${parentTitle ? `<span>${escape(parentTitle)}</span>${icon('chevronRight')}` : ''}<strong aria-current="page">${escape(routeTitle())}</strong>`;
 }
 function routeTitle() {
-  if (route.module === 'kits') return 'Design kits';
-  if (route.module === 'learn') return 'Guide';
-  if (route.module === 'examples') return exampleRoutes.find(entry => entry.path === route.path)?.title || 'Examples';
+  if (route.module === 'kits') return t('Design kits');
+  if (route.module === 'learn') return t('Guide');
+  if (route.module === 'examples') return (exampleRoutes.find(entry => entry.path === route.path)?.title || 'Examples').split(' / ').map(part => t(part)).join(' / ');
   if (route.module === 'components' && route.params.name) {
     const entry = registry.find(item => item.name === route.params.name);
     return entry ? componentLabel(entry) : t('notFound');
@@ -335,7 +337,7 @@ function routeTitle() {
 function pageHeader(title, description, actions = '') { return `<div class="page-heading"><div><div class="eyebrow">${t('workspace')}</div><h1>${escape(title)}</h1><p>${escape(description)}</p></div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</div>`; }
 function componentLabel(entry) {
   const chinese = { button: '按钮', input: '输入框', select: '选择器', checkbox: '复选框', switch: '开关', tag: '标签', pill: '胶囊标签', tabs: '选项卡', table: '表格', modal: '对话框', toast: '消息提示', tooltip: '工具提示', popover: '弹出菜单' };
-  return getLanguage() === 'zh' ? chinese[entry.name] || entry.label : entry.label;
+  return getLanguage() === 'zh' ? chinese[entry.name] || localizeText(entry.label) : entry.label;
 }
 function dateLabel(value) { const date = new Date(value); return Number.isNaN(date.getTime()) ? '—' : new Intl.DateTimeFormat(getLanguage() === 'zh' ? 'zh-CN' : 'en', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(date); }
 function renderOverview(main) {
@@ -542,10 +544,11 @@ function render() {
   document.querySelector('.app-menu')?.remove();
   // Shell-only changes must not reconstruct a mounted product editor or its guard.
   const currentMain = document.querySelector('#main-content');
-  const preservedMain = route.module === 'examples' && currentMain?.dataset.examplePath === route.path ? currentMain : null;
+  const preservedMain = route.module === 'examples' && currentMain?.dataset.examplePath === route.path && currentMain.dataset.language === getLanguage() ? currentMain : null; // a language switch rebuilds the example so its text follows the new language
   renderShell(); renderContext();
   if (preservedMain) document.querySelector('#main-content').replaceWith(preservedMain);
   const main = document.querySelector('#main-content');
+  main.dataset.language = getLanguage();
   if (route.module === 'overview') renderOverview(main);
   else if (route.module === 'tokens') renderTokens(main);
   else if (route.module === 'components') renderComponents(main);

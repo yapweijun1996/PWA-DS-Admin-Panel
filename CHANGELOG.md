@@ -2,6 +2,20 @@
 
 All notable changes are documented here. Format follows Keep a Changelog; versions follow semantic versioning.
 
+## [0.7.0] — Complete Chinese UI
+### Added
+- Full Simplified Chinese coverage: shell, components, Guide, kits and the ERP/CRM/School examples, including dialogs, menus, chart summaries and accessible labels (about 2,400 strings; previously only the shell was translated).
+- Runtime localizer (`js/localize.js`, `js/i18n/match.js`): translates rendered text and `aria-label`/`placeholder`/`title`/`alt` through English-source-keyed dictionaries in `js/i18n/zh/`, with `{name}` templates, typed date placeholders and `translate="no"` opt-out. `t(key, vars)` now accepts English source text and variables; `localizeText()` and `locale()` are exported.
+- Sidebar account footer shows the app version (`Forma v0.7.0`).
+- Dev tools `scripts/i18n-scan.mjs`, `i18n-sweep.mjs`, `i18n-shell-sweep.mjs`, `i18n-full.mjs` (leftover-English scans of every route, menus, dialogs and drawers) and `docs/I18N.md`; tests for dictionary integrity, the matcher and module syntax.
+### Changed
+- Combobox option labels are localized when created, so typing filters what users see.
+- Chart spoken summaries and table captions are built from translatable templates (`js/i18n/zh/charts.js`) instead of per-chart sentences.
+- Skeleton playground line options read `1 line`, `3 lines`, `5 lines`; the CRM pipeline shows `1 mock deal` for a single deal.
+- Collapsed icon rail hides the example and component groups instead of wrapping their labels character by character.
+- Document and breadcrumb titles of the Guide, Kits and Examples routes follow the language.
+- Kit export bundles the i18n modules with components.
+
 ## [0.6.3]
 ### Changed
 - Phone top bar hides the breadcrumb row (brand, actions and search only); the page title and bottom navigation show location.

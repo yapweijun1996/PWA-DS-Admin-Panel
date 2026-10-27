@@ -204,7 +204,7 @@ function harness({ app = false, waiting = false, installing = false, controlled 
     registry: [], categories: [], exampleRoutes: [],
     icon: () => '<svg class="icon"></svg>',
     t: key => ({ notFound: 'Page not found', notFoundDescription: 'This page does not exist.', goHome: 'Go home' })[key] || key,
-    setLanguage() {}, getLanguage: () => 'en',
+    setLanguage() {}, getLanguage: () => 'en', startLocalizer() {},
     createCommandPalette: () => ({ open: query => searchOpens.push(query) }),
   };
   sandbox.window = sandbox;

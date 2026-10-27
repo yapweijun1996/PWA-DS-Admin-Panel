@@ -27,3 +27,6 @@ Label-in-name comparison lowercases, collapses whitespace and strips punctuation
 
 Shared title components accept `headingLevel`; choose it from the document context, not visual size. Preserve visible control wording in accessible names, including selected values and navigation/notification counts; decorative glyphs must be explicitly hidden instead of replacing a text label.
 
+
+## Language
+The UI language switch (English / 中文) changes `lang` on the document and translates accessible names (`aria-label`, `placeholder`, `title`, `alt`) together with visible text through the same dictionaries, so the label-in-name rule holds in both languages. Text that must not be translated (code, IDs) carries `translate="no"`. See `docs/I18N.md`.

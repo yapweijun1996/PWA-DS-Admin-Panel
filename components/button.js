@@ -1,4 +1,5 @@
 import { element, text, playground, textControl, toggleControl, choiceControl, statePreview, statusMessage, escapeHTML, loadingIndicator } from './playground.js';
+import { localizeText } from '../js/i18n.js';
 
 export function render(container) {
   const page = playground(container, { title: text('Button', '按钮'), description: text('Clear actions with primary, secondary, quiet, and destructive treatments. Loading prevents duplicate actions.', '提供主要、次要、简洁和危险操作样式。加载状态可避免重复操作。') });
@@ -22,7 +23,7 @@ export function render(container) {
     toggleControl(text('Loading', '加载中'), false, value => { props.loading = value; update(); })
   );
   for (const [label, extra, disabled] of [[text('Default', '默认'), '', false], [text('Hover', '悬停'), 'is-hover', false], [text('Focus', '聚焦'), 'is-focus', false], [text('Disabled', '禁用'), '', true]]) {
-    const sample = element('button', { type: 'button', className: `ds-button ds-button-primary ${extra}`, disabled, onclick: () => { feedback.textContent = text(`${label} action completed.`, `${label}操作已完成。`); } }, text('Save', '保存'));
+    const sample = element('button', { type: 'button', className: `ds-button ds-button-primary ${extra}`, disabled, onclick: () => { feedback.textContent = text(`${localizeText(label)} action completed.`, `${localizeText(label)}操作已完成。`); } }, text('Save', '保存'));
     page.states.append(statePreview(label, sample));
   }
   page.states.append(statePreview(text('Loading', '加载中'), element('button', { type: 'button', className: 'ds-button ds-button-primary', disabled: true, 'aria-busy': 'true' }, loadingIndicator(text('Saving', '保存中')))));

@@ -1,3 +1,4 @@
+import { t, localizeText } from '../js/i18n.js';
 import { element, text, playground, choiceControl, textControl, toggleControl, statePreview, button, uniqueId, onDetach, loadingIndicator } from './playground.js';
 import { createTable } from './table.js';
 
@@ -29,17 +30,21 @@ export function niceTicks(minimum, maximum, count = 5) {
   return Array.from({ length: intervals + 1 }, (_, index) => Number((low + index * step).toPrecision(12)));
 }
 
+// Spoken summary of a chart. Sentence structure goes through t() (templates in js/i18n/zh/charts.js); titles and series names are data labels.
 export function chartSummary({ type = 'line', title = 'Chart', labels = [], series = [], formatValue = defaultFormat, loading = false }) {
-  if (loading) return `${title}. ${type} chart. Loading data.`;
+  const heading = localizeText(title);
+  const kind = t(`${type} chart`);
+  if (loading) return t('{title}. {kind}. Loading data.', { title: heading, kind });
   const parts = series.map((item, index) => {
+    const name = item.name ? localizeText(item.name) : t('Series {n}', { n: index + 1 });
     const values = labels.map((_, position) => item.values?.[position]).filter(finite);
-    if (!values.length) return `${item.name || `Series ${index + 1}`}: no data`;
+    if (!values.length) return t('{name}: no data', { name });
     const first = values[0];
     const last = values.at(-1);
     const trend = last > first ? 'increasing' : last < first ? 'decreasing' : 'unchanged';
-    return `${item.name || `Series ${index + 1}`}: minimum ${formatValue(Math.min(...values))}, maximum ${formatValue(Math.max(...values))}, ${trend} from ${formatValue(first)} to ${formatValue(last)}`;
+    return t(`{name}: minimum {min}, maximum {max}, ${trend} from {first} to {last}`, { name, min: formatValue(Math.min(...values)), max: formatValue(Math.max(...values)), first: formatValue(first), last: formatValue(last) });
   });
-  return `${title}. ${type} chart. ${labels.length} categories. ${parts.length ? parts.join('; ') : 'No data'}.`;
+  return t('{title}. {kind}. {count} categories. {summary}.', { title: heading, kind, count: labels.length, summary: parts.length ? parts.join(t('; ')) : t('No data') });
 }
 
 function markerShape(index, x, y, radius = 4) {
@@ -142,7 +147,7 @@ export function createChart(options = {}) {
   function updateTable(labels, series) {
     const header = element('tr', {}, element('th', { scope: 'col' }, text('Category', '类别')), ...series.map(item => element('th', { scope: 'col' }, item.name)));
     const body = element('tbody', {}, ...labels.map((label, position) => element('tr', {}, element('th', { scope: 'row' }, label), ...series.map(item => element('td', {}, item.values[position] === null ? text('No data', '无数据') : format(item.values[position]))))));
-    tableRegion.replaceChildren(createTable({ caption: `${props.title} — ${text('complete source data (including hidden series)', '完整源数据（包含隐藏系列）')}`, header, body }));
+    tableRegion.replaceChildren(createTable({ caption: `${localizeText(props.title)} — ${text('complete source data (including hidden series)', '完整源数据（包含隐藏系列）')}`, header, body }));
   }
   function updateLegend(labels, series) {
     legend.replaceChildren();

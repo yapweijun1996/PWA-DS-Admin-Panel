@@ -68,7 +68,7 @@ async function componentModules(root, files) {
   for (let index = 0; index < queue.length; index += 1) {
     const path = queue[index];
     if (files.has(path)) continue;
-    if (!/^(?:components\/[\w-]+\.js|js\/(?:icons|pane-resizer)\.js|js\/logic\/[\w-]+\.js)$/.test(path)) {
+    if (!/^(?:components\/[\w-]+\.js|js\/(?:icons|pane-resizer|i18n)\.js|js\/i18n\/(?:match|zh\/[\w-]+)\.js|js\/logic\/[\w-]+\.js)$/.test(path)) {
       throw new Error(`Component dependency is outside the shared library: ${path}`);
     }
     const bytes = await sourceFile(root, path);

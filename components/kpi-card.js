@@ -1,4 +1,5 @@
 import { element, text, playground, textControl, choiceControl, statePreview, statusMessage } from './playground.js';
+import { localizeText } from '../js/i18n.js';
 import { createCard } from './card.js';
 import { createBadge } from './badge.js';
 import { createMenu } from './popover.js';
@@ -7,9 +8,9 @@ import { icon } from '../js/icons.js';
 export function createKpiCard({ label, value, trend, trendTone = 'success', menuItems = [], content, headingLevel = 3 } = {}) {
   let menu;
   if (menuItems.length) {
-    menu = createMenu({ label: text(`Actions for ${label}`, `${label}的操作`), items: menuItems });
+    menu = createMenu({ label: text(`Actions for ${localizeText(label)}`, `${localizeText(label)}的操作`), items: menuItems });
     menu.trigger.className = 'ds-button ds-button-ghost ds-kpi-menu';
-    menu.trigger.setAttribute('aria-label', text(`Actions for ${label}`, `${label}的操作`));
+    menu.trigger.setAttribute('aria-label', text(`Actions for ${localizeText(label)}`, `${localizeText(label)}的操作`));
     menu.trigger.innerHTML = icon('more');
   }
   const body = element('div', { className: 'ds-kpi-value-row' }, element('strong', { className: 'ds-kpi-value' }, value), trend ? createBadge({ label: trend, tone: trendTone, pill: true }) : null);

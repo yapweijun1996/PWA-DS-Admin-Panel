@@ -1,4 +1,5 @@
 import { element, text, playground, toggleControl, customSelect, statePreview, button, openModal, loadingIndicator } from './playground.js';
+import { localizeText } from '../js/i18n.js';
 import { createPagination } from './pagination.js';
 
 export function createTable({ caption, label = caption, header, body, striped = false, className = '', onRowActivate }) {
@@ -79,7 +80,7 @@ export function render(container) {
       const header = element('tr');
       for (const column of columns) {
         const active = props.sort === column.key;
-        header.append(element('th', { scope: 'col', 'aria-sort': active ? props.direction === 'asc' ? 'ascending' : 'descending' : 'none' }, element('button', { type: 'button', className: 'ds-table-sort', 'aria-label': text(`Sort by ${column.label}`, `按${column.label}排序`), onclick: event => {
+        header.append(element('th', { scope: 'col', 'aria-sort': active ? props.direction === 'asc' ? 'ascending' : 'descending' : 'none' }, element('button', { type: 'button', className: 'ds-table-sort', 'aria-label': text(`Sort by ${localizeText(column.label)}`, `按${localizeText(column.label)}排序`), onclick: event => {
           props.direction = props.sort === column.key && props.direction === 'asc' ? 'desc' : 'asc'; props.sort = column.key; props.page = 1; updateTable(); results.querySelector(`[data-sort="${column.key}"]`)?.focus();
         }, 'data-sort': column.key }, column.label, element('span', { 'aria-hidden': 'true' }, active ? props.direction === 'asc' ? ' ↑' : ' ↓' : ' ↕'))));
       }

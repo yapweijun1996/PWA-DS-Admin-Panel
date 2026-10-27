@@ -21,3 +21,5 @@ import './phase5-update.test.mjs';
 import './phase5-export.test.mjs';
 import './phase5-a11y.test.mjs';
 import './icons.test.mjs';
+import './i18n.test.mjs';
+import './syntax.test.mjs';

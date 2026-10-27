@@ -18,6 +18,6 @@ export function createSkeleton({ lines = 3, label = 'Loading content', avatar = 
 export function render(container) {
   const page = playground(container, { title: 'Skeleton', description: guide.purpose }); let lines = 3; let avatar = true;
   function update() { const view = createSkeleton({ lines, avatar, label: 'Loading mock customer preview' }); page.preview.replaceChildren(view); page.setSnippet(view.outerHTML); }
-  page.controls.append(choiceControl('Lines', '3', [{value:'1',label:'One'},{value:'3',label:'Three'},{value:'5',label:'Five'}], value => { lines = Number(value); update(); }), toggleControl('Avatar placeholder', avatar, value => { avatar = value; update(); }));
+  page.controls.append(choiceControl('Lines', '3', [{value:'1',label:'1 line'},{value:'3',label:'3 lines'},{value:'5',label:'5 lines'}], value => { lines = Number(value); update(); }), toggleControl('Avatar placeholder', avatar, value => { avatar = value; update(); }));
   page.states.append(statePreview('Text only', createSkeleton({lines:2}))); update();
 }

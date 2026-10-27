@@ -1,4 +1,5 @@
 import { element, text, playground, textControl, toggleControl, statePreview, statusMessage, escapeHTML, uniqueId } from './playground.js';
+import { localizeText } from '../js/i18n.js';
 
 export function render(container) {
   const page = playground(container, { title: text('Checkbox', '复选框'), description: text('Explicit multi-selection with checked, unchecked, and mixed states. The full label is a generous click target.', '支持选中、未选中和部分选中状态。整个标签均可点击。') });
@@ -24,7 +25,7 @@ export function render(container) {
   const mixedControl = toggleControl(text('Indeterminate', '部分选中'), false, value => { props.indeterminate = value; update(); });
   page.controls.append(textControl(text('Label', '标签'), props.label, value => { props.label = value; update(); }), checkedControl, mixedControl, toggleControl(text('Disabled', '禁用'), false, value => { props.disabled = value; update(); }), toggleControl(text('Error', '错误'), false, value => { props.error = value; update(); }));
   for (const [name, checked, disabled, mixed, extra] of [[text('Default', '默认'), false, false, false, ''], [text('Hover', '悬停'), false, false, false, 'is-hover'], [text('Focus', '聚焦'), false, false, false, 'is-focus'], [text('Checked', '选中'), true, false, false, ''], [text('Mixed', '部分选中'), false, false, true, ''], [text('Disabled', '禁用'), true, true, false, ''], [text('Error', '错误'), false, false, false, 'is-error']]) {
-    const sample = element('input', { type: 'checkbox', className: `ds-checkbox ${extra}`, checked, disabled, 'aria-invalid': String(extra === 'is-error'), onchange: event => { feedback.textContent = text(`${name}: ${event.target.checked ? 'checked' : 'unchecked'}`, `${name}：${event.target.checked ? '已选中' : '未选中'}`); } });
+    const sample = element('input', { type: 'checkbox', className: `ds-checkbox ${extra}`, checked, disabled, 'aria-invalid': String(extra === 'is-error'), onchange: event => { feedback.textContent = text(`${localizeText(name)}: ${event.target.checked ? 'checked' : 'unchecked'}`, `${localizeText(name)}：${event.target.checked ? '已选中' : '未选中'}`); } });
     sample.indeterminate = mixed;
     page.states.append(statePreview(name, element('label', { className: 'ds-checkbox-label' }, sample, element('span', {}, text('Option', '选项')))));
   }

@@ -1,11 +1,12 @@
 import { element, uniqueId, onDetach, playground, textControl, toggleControl, statePreview, statusMessage, button, openModal, loadingIndicator } from './playground.js';
 import { openDrawer } from './drawer.js';
 import { icon } from '../js/icons.js';
+import { localizeText } from '../js/i18n.js';
 
 function flattenOptions(options, group = '') {
   return options.flatMap(option => Array.isArray(option.options)
     ? flattenOptions(option.options, option.label)
-    : [{ ...option, label: String(option.label ?? option.value), group: option.group || group }]);
+    : [{ ...option, label: localizeText(String(option.label ?? option.value)), group: option.group || group }]);
 }
 
 export function createCombobox({ label = 'Choose an option', options = [], value, multiple = false, onChange = () => {}, placeholder = 'Search options…', disabled = false, clearable = true, maxSelected = Infinity, creatable = false, asyncDelay = 0, loading = false, error = '', hint = '', required = false, hideLabel = false, name } = {}) {
